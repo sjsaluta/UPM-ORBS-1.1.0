@@ -21,6 +21,7 @@ class Building(models.Model):
 
     def __str__(self):
         return self.name
+
 class Term(models.Model):
     academicyear = models.CharField(max_length=10)
 
@@ -44,4 +45,4 @@ class Schedule(models.Model):
     date_end = models.DateField()
 
     def __str__(self):
-        return "Schedule" + self.id
+        return "Schedule " + self.id

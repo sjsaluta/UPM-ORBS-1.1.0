@@ -10,6 +10,7 @@ from UPM.models import *
 
 # Create your models here.
 class AuthUser(AbstractUser):
+    """creates user_types for all users"""
     FACULTY = 1
     STAFF = 2
     OCS = 3
@@ -36,6 +37,9 @@ class Faculty(models.Model):
     class Meta:
         verbose_name_plural = "Faculties"
 
+    def __str__(self):
+        return self.first_name+" "+self.last_name+" <"+ self.email+">"
+
 class OCS(models.Model):
     user = models.ForeignKey(AuthUser,on_delete=models.CASCADE,null=True)
     first_name=models.CharField(max_length=300,null=True)
@@ -46,6 +50,9 @@ class OCS(models.Model):
     class Meta:
         verbose_name_plural = "College Secretaries"
 
+    def __str__(self):
+        return self.first_name+" "+self.last_name+" <"+ self.email+">"
+
 class Staff(models.Model):
     user = models.ForeignKey(AuthUser,on_delete=models.CASCADE,null=True)
     first_name=models.CharField(max_length=300,null=True)
@@ -53,6 +60,9 @@ class Staff(models.Model):
     email=models.EmailField(max_length=50,null=True)
     college = models.ForeignKey(College,on_delete=models.CASCADE,null=True)
     dept = models.ForeignKey(Department,on_delete=models.CASCADE,null=True)
+    
+    def __str__(self):
+        return self.first_name+" "+self.last_name+" <"+ self.email+">"
 
 class ADPD(models.Model):
     user = models.ForeignKey(AuthUser,on_delete=models.CASCADE,null=True)
@@ -62,4 +72,7 @@ class ADPD(models.Model):
 
     class Meta:
         verbose_name_plural = "ADPDs"
+
+    def __str__(self):
+        return self.first_name+" "+self.last_name+" <"+ self.email+">"
 
