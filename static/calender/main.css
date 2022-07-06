@@ -1,18 +1,19 @@
 
 /* classes attached to <body> */
-
+/* TODO: make fc-event selector work when calender in shadow DOM */
 .fc-not-allowed,
 .fc-not-allowed .fc-event { /* override events' custom cursors */
   cursor: not-allowed;
 }
 
+/* TODO: not attached to body. attached to specific els. move */
 .fc-unselectable {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: #009688;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .fc {
   /* layout of immediate children */
@@ -176,7 +177,7 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
             user-select: none;
     background-color: transparent;
     border: 1px solid transparent;
-    padding: 2px 5px;
+    padding: 0.4em 0.65em;
     font-size: 1em;
     line-height: 1.5;
     border-radius: 0.25em;
@@ -199,27 +200,26 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 .fc .fc-button-primary {
     color: #fff;
     color: var(--fc-button-text-color, #fff);
-    background-color: #009688 !important;
-    background-color: var(--fc-button-bg-color, #fff);
-    border-color: #fff;
-    border-color: var(--fc-button-border-color, #fff);
-    text-transform: uppercase;
+    background-color: #2C3E50;
+    background-color: var(--fc-button-bg-color, #2C3E50);
+    border-color: #2C3E50;
+    border-color: var(--fc-button-border-color, #2C3E50);
   }
 .fc .fc-button-primary:hover {
     color: #fff;
     color: var(--fc-button-text-color, #fff);
-    background-color: #009688;
-    background-color: var(--fc-button-hover-bg-color, #fff);
-    border-color: #fff;
-    border-color: var(--fc-button-hover-border-color, #fff);
+    background-color: #1e2b37;
+    background-color: var(--fc-button-hover-bg-color, #1e2b37);
+    border-color: #1a252f;
+    border-color: var(--fc-button-hover-border-color, #1a252f);
   }
 .fc .fc-button-primary:disabled { /* not DRY */
     color: #fff;
     color: var(--fc-button-text-color, #fff);
-    background-color: #009688;
-    background-color: var(--fc-button-bg-color, #fff);
-    border-color: #fff;
-    border-color: var(--fc-button-border-color, #fff); /* overrides :hover */
+    background-color: #2C3E50;
+    background-color: var(--fc-button-bg-color, #2C3E50);
+    border-color: #2C3E50;
+    border-color: var(--fc-button-border-color, #2C3E50); /* overrides :hover */
   }
 .fc .fc-button-primary:focus {
     box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
@@ -228,10 +228,10 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
   .fc .fc-button-primary:not(:disabled).fc-button-active {
     color: #fff;
     color: var(--fc-button-text-color, #fff);
-    background-color: #009688;
-    background-color: var(--fc-button-active-bg-color, #fff);
-    border-color: #fff;
-    border-color: var(--fc-button-active-border-color, #fff);
+    background-color: #1a252f;
+    background-color: var(--fc-button-active-bg-color, #1a252f);
+    border-color: #151e27;
+    border-color: var(--fc-button-active-border-color, #151e27);
   }
 .fc .fc-button-primary:not(:disabled):active:focus,
   .fc .fc-button-primary:not(:disabled).fc-button-active:focus {
@@ -530,14 +530,17 @@ a.fc-event:hover {
       bottom: -20px;
     }
 /* selecting (always TOUCH) */
+/* OR, focused by tab-index */
+/* (TODO: maybe not the best focus-styling for .fc-daygrid-dot-event) */
 /* ---------------------------------------------------------------------------------------------------- */
-.fc-event-selected {
+.fc-event-selected,
+.fc-event:focus {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
 
   /* expand hit area (subclasses should expand) */
 
 }
-.fc-event-selected:before {
+.fc-event-selected:before, .fc-event:focus:before {
     content: "";
     position: absolute;
     z-index: 3;
@@ -546,12 +549,13 @@ a.fc-event:hover {
     right: 0;
     bottom: 0;
   }
-.fc-event-selected {
+.fc-event-selected,
+.fc-event:focus {
 
   /* dimmer effect */
 
 }
-.fc-event-selected:after {
+.fc-event-selected:after, .fc-event:focus:after {
     content: "";
     background: rgba(0, 0, 0, 0.25);
     background: var(--fc-event-selected-overlay-color, rgba(0, 0, 0, 0.25));
@@ -630,29 +634,29 @@ A HORIZONTAL event
 .fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end {
   cursor: w-resize;
   left: -4px;
-  left: calc(var(--fc-event-resizer-thickness, 8px) / -2);
+  left: calc(-0.5 * var(--fc-event-resizer-thickness, 8px));
 }
 .fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end,
 .fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start {
   cursor: e-resize;
   right: -4px;
-  right: calc(var(--fc-event-resizer-thickness, 8px) / -2);
+  right: calc(-0.5 * var(--fc-event-resizer-thickness, 8px));
 }
 /* resizers for TOUCH */
 .fc-h-event.fc-event-selected .fc-event-resizer {
   top: 50%;
   margin-top: -4px;
-  margin-top: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);
+  margin-top: calc(-0.5 * var(--fc-event-resizer-dot-total-width, 8px));
 }
 .fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-start,
 .fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-end {
   left: -4px;
-  left: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);
+  left: calc(-0.5 * var(--fc-event-resizer-dot-total-width, 8px));
 }
 .fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-end,
 .fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-start {
   right: -4px;
-  right: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);
+  right: calc(-0.5 * var(--fc-event-resizer-dot-total-width, 8px));
 }
 .fc .fc-popover {
     position: absolute;
@@ -1135,14 +1139,14 @@ A VERTICAL event
     min-height: 100%; /* liquid-hack is below */
     position: relative;
   }
-.fc-liquid-hack .fc-timegrid-col-frame {
+.fc-media-screen.fc-liquid-hack .fc-timegrid-col-frame {
   height: auto;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  }
+    }
 .fc-media-screen .fc-timegrid-cols {
     position: absolute; /* no z-index. children will decide and go above slots */
     top: 0;
@@ -1359,6 +1363,23 @@ A VERTICAL event
       background: #fff;
       background: var(--fc-page-bg-color, #fff); /* for when headers are styled to be transparent and sticky */
     }
+.fc {
+
+  /* only exists for aria reasons, hide for non-screen-readers */
+
+}
+.fc .fc-list-table thead {
+    position: absolute;
+    left: -10000px;
+  }
+.fc {
+
+  /* the table's border-style:hidden gets confused by hidden thead. force-hide top border of first cell */
+
+}
+.fc .fc-list-table tbody > tr:first-child th {
+    border-top: 0;
+  }
 .fc .fc-list-table th {
     padding: 0; /* uses an inner-wrapper instead... */
   }
@@ -1443,3 +1464,32 @@ A VERTICAL event
   .fc-theme-bootstrap a:not([href]) {
     color: inherit; /* natural color for navlinks */
   }
+
+
+
+  .fc-theme-bootstrap5 a:not([href]) {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+.fc-theme-bootstrap5 .fc-list,
+  .fc-theme-bootstrap5 .fc-scrollgrid,
+  .fc-theme-bootstrap5 td,
+  .fc-theme-bootstrap5 th {
+    border: 1px solid var(--bs-gray-400);
+  }
+
+.fc-theme-bootstrap5 {
+
+  /* HACK: reapply core styles after highe-precedence border statement above */
+}
+
+.fc-theme-bootstrap5 .fc-scrollgrid {
+    border-right-width: 0;
+    border-bottom-width: 0;
+  }
+
+.fc-theme-bootstrap5-shaded {
+  background-color: var(--bs-gray-200);
+}
+

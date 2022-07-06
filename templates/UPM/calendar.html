@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Calendar View{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+<link rel="stylesheet" href="{% static 'calender/main.css' %}?{% now 'U' %}">
+{% endblock extracss %}
+
+{% block content %}
+<div class = "container-fluid">
+  <h2 class="py-4 px-4">Calendar View</h2>
+  <div class="col-md-10 ms-5 ps-5 ">
+      <div id="calendar"></div>
+  </div>
+  <div class="modal fade" id="exampleModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <p id="faculty"></p>
+            <p id="activity"></p>
+            <p id="start"></p>
+            <p id="end"></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-red" id="edit">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+{% endblock content %}
+
+{% block extrascripts %}
+<script src="{% static 'calender/main.js' %}?{% now 'U' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var today = new Date();
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+       
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'timeGridWeek,dayGridMonth,timeGridDay'
+        },
+        themeSystem: 'standard',
+        initialView: 'timeGridWeek',
+        initialDate: today,
+        navLinks: true, // can click day/week names to navigate views
+        selectable: true,
+        selectMirror: true,
+        select: function(arg) {
+          console.log('clicked')
+          var modal = document.getElementById('eventModal')
+          modal.style.display = 'block'
+          calendar.unselect()
+        },
+        // THIS KEY WON'T WORK IN PRODUCTION!!!
+        // To make your own Google API key, follow the directions here:
+        // http://fullcalendar.io/docs/google_calendar/
+        // googleCalendarApiKey: 'AIzaSyCqCxjjLtjbtkX37aOtWB8OfwBLy_6QuYk',
+
+        // bangladesh Holidays
+        // events: 'bn.bd#holiday@group.v.calendar.google.com',
+        
+        editable: true,
+        dayMaxEvents: true, // allow "more" link when too many events
+        events: [
+          {% for book in booking %}
+            {
+              "id":"{{book.id}}",
+              "title": "{{book.subject}}",
+              "start": '{{book.start_time|date:"Y-m-d H:i:s"}}',
+              "end": '{{book.end_time|date:"Y-m-d H:i:s"}}',
+              "extendedProps":{
+                "faculty" :'{{book.getFullName}}',
+                "approved":'{{book.isApproved}}',
+                "activity":'{{book.activity}}'
+              },
+              
+            },
+          {% endfor %}
+        ],
+        eventClick: function(info) {
+          console.log('modal', info);
+          let approve;
+          if(info.event.extendedProps.approved === 'False'){
+            approve = 'No';
+          }
+          else{
+            approve = 'Yes';
+          }
+          $('#exampleModalLabel').text(info.event.title)
+          $('#faculty').text('Faculty: ' + info.event.extendedProps.faculty)
+          $('#activity').text('Activity: ' + info.event.extendedProps.activity)
+          $('#exampleModal').modal('show')
+          $('#edit').click(function(){
+            location.href = "{% url 'dashBoardPage' %}"
+          })               
+        },
+        /*events: [
+          {
+            title: 'All Day Event',
+            start: '2022-06-26'
+          },
+          {
+            groupId: 999,
+            title: 'Repeating Event',
+            start: '2022-06-16T16:00:00'
+          },
+          {
+            title: 'Conference',
+            start: '2022-06-11',
+            end: '2022-06-13'
+          },
+          {
+            title: 'Click for Google',
+            url: 'http://google.com/',
+            start: '2022-06-28'
+          }
+        ]*/
+      });
+
+      calendar.render();
+    });
+   /* const closeBtn1 = document.getElementById('modalClose1');
+    const closeBtn2 = document.getElementById('modalClose2');
+    closeBtn1.addEventListener('click',()=>{
+      const eventModal = document.getElementById('eventModal')
+      eventModal.style.display = 'none';
+    });
+    closeBtn2.addEventListener('click',()=>{
+      const eventModal = document.getElementById('eventModal')
+      eventModal.style.display = 'none';
+    });*/
+</script>
+
+{% endblock extrascripts %}

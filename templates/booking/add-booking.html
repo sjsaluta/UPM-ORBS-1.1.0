@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Add Term{% endblock title %}
+{% block title %}Book a Room{% endblock title %}
 {% load crispy_forms_tags %}
 
 {% block extracss %}
@@ -40,15 +40,17 @@
                         <div class="mb-3">
                             {{form.end_time | as_crispy_field}}
                         </div>
-                        <div class="mb-3">
-                            {{form.date | as_crispy_field}}
-                        </div>
+
                     </div>
-                    <div class="col-4 pe-4">
-                        <div class="mb-3" id="college">
+                    <div class="col-3 pe-4">
+                        <div class="mb-3">
                             {{form.numofstudents | as_crispy_field}}   
                         </div>
+                        <div class="mb-3">
+                            {{form.activity | as_crispy_field}}   
+                        </div>
                     </div>
+                    
                 </div> 
                 <div class="row justify-content-start mt-3 ms-15">
                     <div class="col col-sm-auto">

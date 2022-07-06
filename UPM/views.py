@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout ,update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from . forms import *
+from bookingapp.models import *
 # Create your views here.
 
 def indexPage(request):
@@ -56,3 +57,8 @@ def addRoom(request):
             form.save()
     context={'form':form}
     return render(request,"UPM/add-room.html",context)
+
+def calendarView(request):
+    booking = Booking.objects.filter(room_id=1)
+    context={'booking':booking}
+    return render(request,"UPM/calendar.html",context)

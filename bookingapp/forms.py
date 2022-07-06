@@ -12,7 +12,7 @@ class AddBooking(ModelForm):
     
     class Meta:
         model = Booking
-        fields = ['room','faculty','subject','start_time','end_time','numofstudents','date']
+        fields = ['room','faculty','subject','start_time','end_time','numofstudents','activity']
 
         labels={
             'numofstudents':'Number of Students',

@@ -25,4 +25,5 @@ urlpatterns = [
    path('add-dept/',views.addDept, name='addDept'),
    path('add-build/',views.addBuild, name='addBuild'),
    path('add-room/',views.addRoom, name='addRoom'),
+   path('room/calendar',views.calendarView, name='calendarView')
 ]
