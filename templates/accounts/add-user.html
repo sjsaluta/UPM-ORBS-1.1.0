@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add User{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+<style>
+    #f{
+        display: none;
+    }
+    #college{
+        display: none;
+    }
+    #dept{
+        display: none;
+    }
+</style>
+{% endblock extracss %}
+
+{% block content %}
+
+<div class = "container w-70">
+    <h2 class="py-4 px-4">Add User</h2>
+    <div class = "row bg-light shadow-sm border ">
+        <div class = "col my-4 px-5">
+            {% if form.errors %}
+                
+            {% endif %}
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label">User Type</label>
+                        <select class="form-select" id="role" name="role" onChange="update()">
+                            <option value="none" selected disabled hidden>Select an Role</option>
+                            <option value="faculty">Faculty</option>
+                            <option value="staff">Staff</option>
+                            <option value="ocs">OCS</option>
+                            <option value="adpd">ADPD</option>
+                        </select>
+                    </div>
+                    
+                    
+                </div>
+                <div class="row">
+                    <div class="col my-3">
+                        <button class="btn btn-success" id="show">Next</button>
+                    </div>
+                </div>
+            {% if form.errors %}
+                <div class ="row" > 
+            {% else %}
+                <div class ="row" id="f" > 
+            {% endif %}
+                    <div class="row">
+                        <div class="col-4 pe-4">
+                            <div class="mb-3">
+                                {{form.first_name | as_crispy_field}}   
+                            </div>
+                            <div class="mb-3">
+                                {{form.last_name | as_crispy_field}}
+                            </div>
+                            <div class="mb-3">
+                                {{form.username| as_crispy_field}}
+                            </div>
+                        </div>
+                        
+                        <div class="col-4 pe-4">
+                            <div class="mb-3">
+                                {{form.email | as_crispy_field}}   
+                            </div>
+                            <div class="mb-3">
+                                {{form.password1 | as_crispy_field}}
+                            </div>
+                            <div class="mb-3">
+                                {{form.password2 | as_crispy_field}}
+                            </div> 
+                        </div>
+                        <div class="col-4 pe-4">
+                            <div class="mb-3" id="college">
+                                {{form.college | as_crispy_field}}   
+                            </div>
+                            <div class="mb-3" id="dept">
+                                {{form.department | as_crispy_field}}
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row justify-content-center mt-3 ms-15">
+                        <div class="col col-sm-auto">
+                            <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Save changes</button>
+                        </div>
+                    </div>
+                </div>   
+            </form>
+        </div>
+    </div>
+    
+    
+</div>
+
+
+
+
+{% endblock content %}
+
+{% block extrascripts %}
+<script>
+    function update(){
+        const btn = document.getElementById('show');
+
+        // variables to control the display of forms
+        const select = document.getElementById('role');
+        const college = document.getElementById('college');
+        const dept = document.getElementById('dept');
+        const option = select.options[select.selectedIndex].value;
+
+        const form = document.getElementById('f');
+
+        // show form if role is not empty 
+        if (option !== 'none'){
+            btn.addEventListener('click', () => {
+                form.style.display = 'block';
+                if (option !== 'adpd'){
+                    college.style.display = 'block';
+                    if(option !== 'ocs'){
+                        dept.style.display = 'block';            
+                    }
+                    else{
+                        dept.style.display = 'none';
+                    }
+                }
+                else{
+                    college.style.display = 'none';
+                    dept.style.display = 'none';
+                }
+            });  
+        }
+    }
+    
+</script>
+
+{% endblock extrascripts %}

@@ -17,6 +17,7 @@ class Booking(models.Model):
     date_created = models.DateTimeField(auto_now_add=True,blank=True)
     start_time = models.DateTimeField(null=True)
     end_time = models.DateTimeField(null=True)
+    date = models.DateField(null=True)
     isRecurring = models.BooleanField(default=False)
     numofstudents = models.IntegerField(null=True)
 

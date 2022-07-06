@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add Term{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+<style>
+    #date{
+        display: none;
+    }
+</style>
+{% endblock extracss %}
+
+{% block content %}
+<div class = "container w-70">
+    <h2 class="py-4 px-4">Add College</h2>
+    <div class = "row bg-light shadow-sm border ">
+        <div class = "col my-4 px-5">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-8">
+                        {{form.name | as_crispy_field}}
+                        <div class="col">
+                            <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Save changes</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                    
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
+
+{% block extrascripts %}
+<script>
+    const btn = document.getElementById('show');
+    const form = document.getElementById('date');
+    var txt = document.getElementById('id_academicyear').val;
+
+    
+    btn.addEventListener('click', () => {
+        form.style.display = 'block';
+    });   
+    
+    
+</script>
+
+{% endblock extrascripts %}

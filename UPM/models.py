@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import *
 
 # Create your models here.
 
@@ -24,7 +25,9 @@ class Building(models.Model):
 
 class Term(models.Model):
     academicyear = models.CharField(max_length=10)
-
+    date_start = models.DateField(null=True)
+    date_end = models.DateField(null=True)
+    
     def __str__(self):
         return self.academicyear
 
@@ -39,10 +42,22 @@ class Room(models.Model):
         return self.name
 
 class Schedule(models.Model):
+    DAYS_OF_WEEK = (
+        (1, 'Monday'),
+        (2, 'Tuesday'),
+        (3, 'Wednesday'),
+        (4, 'Thursday'),
+        (5, 'Friday'),
+    )
+
     term = models.ForeignKey(Term,on_delete=models.CASCADE,null=True)
     room = models.ForeignKey(Room,on_delete=models.CASCADE,null=True)
-    date_start = models.DateField()
-    date_end = models.DateField()
+    faculty = models.ForeignKey("accounts.Faculty",on_delete=models.CASCADE,null=True)
+    subject = models.CharField(max_length=200,null=True)
+    time_start=models.DateTimeField(null=True)
+    time_end=models.DateTimeField(null=True)
+    dayofweek = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK,null=True)
+    
 
     def __str__(self):
         return "Schedule " + self.id
