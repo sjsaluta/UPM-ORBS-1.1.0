@@ -15,33 +15,27 @@
     <body>
         <div class="wrapper d-flex align-items-stretch">
             <nav id="sidebar" class="active">
-                <h1><a href="{% url 'indexPage' %}" class="logo">UPM</a></h1>
-                <h1 class="name">Online Booking System</h1>
+                <h1><a href="{% url 'indexPage' %}" class="logo ">UPM</a></h1>
+                <h1 class="name">Room Booking</h1>
                 <ul class="list-unstyled components mb-5">
                     <li class="active">
-                        <a href="#"><i class="fa fa-home"></i> <span class="link_label">Home</span></a>
+                        <a href="{% url 'dashBoardPage' %}"><i class="fa fa-home"></i> <span class="link_label">Dashboard</span></a>
                     </li>
-                    <li class="nav-item dropdown">
-                        
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-home"></i> <span class="link_label">Dropdown</span>
-                        </a>
-                        <ul class="dropdown-menu text-dark" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item text-dark" href="#">Action</a></li>
-                          <li><a class="dropdown-item text-dark" href="#">Another action</a></li>
-                          <li><hr class="dropdown-divider text-dark"></li>
-                          <li><a class="dropdown-item text-dark" href="#">Something else here</a></li>
-                        </ul>
-                      </li>
+                    {% if request.user.user_type == none %}
                     <li>
-                        <a href="#"><i class="fa fa-sticky-note"></i> <span class="link_label">Blog</span></a>
+                        <a data-bs-toggle="collapse" href="#collapseOptions" role="button" aria-expanded="false" aria-controls="collapseOptions" ><i class="fa fa-cogs"></i> <span class="link_label">Administrator</span></a>
+                        <div class="collapse" id="collapseOptions">
+                            <a class='ms-3'>Manage Users</a>
+                        <div>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="#"><i class="fa fa-calendar"></i> <span class="link_label">Booking</span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-cogs"></i> <span class="link_label">Services</span></a>
+                        <a href="#"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-paper-plane"></i> <span class="link_label">Contacts</span></a>
-                    </li>
+                    {% endif %}
                 </ul>
 
             </nav>
@@ -62,21 +56,15 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="nav navbar-nav ml-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">About</a>
-                                </li>
-                                <li class="nav-item dropdown">
+                                <span class="fw-bold mt-2">User: {{request.user}}</span>
+                                <li class="nav-item dropdown me-3 pe-3">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                      Dropdown
+                                      Account
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                      <li><a class="dropdown-item" href="#">Action</a></li>
-                                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                                      <li><a class="dropdown-item" href="#">Profile</a></li>
                                       <li><hr class="dropdown-divider"></li>
-                                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                      <li><a class="dropdown-item" href="{% url 'logout' %}"">Logout</a></li>
                                     </ul>
                                 </li>
                             </ul>

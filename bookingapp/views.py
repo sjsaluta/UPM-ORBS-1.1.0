@@ -21,6 +21,9 @@ def addBooking(request):
             book.booker = user
             if(user.user_type == 1):
                 book.faculty=user
+                book.booker=user
+            else:
+                book.booker=user
             book.save()
     
     context={'form':form,'user':user}
