@@ -8213,8 +8213,8 @@ h1, h2, h3, h4, h5,
   width: 100%; }
 
 #sidebar {
-  min-width: 230px;
-  max-width: 230px;
+  min-width: 260px;
+  max-width: 260px;
   background: #800000;
   color: #fff;
   -webkit-transition: all 0.3s;
@@ -8227,7 +8227,7 @@ h1, h2, h3, h4, h5,
     #sidebar.active ul.components {
       margin-top: 50px; }  
       #sidebar.active ul.components li {
-        margin-top: 0px;
+        margin-top: 20px;
         font-size: 14px; }
         #sidebar.active ul.components li .link_label {
           display: none; 
@@ -8237,7 +8237,10 @@ h1, h2, h3, h4, h5,
           #sidebar.active ul.components li a i{
             margin-right: 0;
             display: block;
-            font-size: 24px; }
+            font-size: 30px; }
+            #sidebar.active ul.components li a i.sub{
+              font-size: 15px;
+            }
           #sidebar.active ul.components li a span {
             margin-right: 0;
             display: block;
@@ -8258,7 +8261,7 @@ h1, h2, h3, h4, h5,
     color: #fff;
     font-weight: 900;
     padding: 0 20px;
-    margin-left:40px;
+    margin-left:50px;
     -webkit-transition: 0.1s;
     -o-transition: 0.1s;
     transition: 0.1s; }
@@ -8272,7 +8275,7 @@ h1, h2, h3, h4, h5,
     font-family: "Poppins";
     font-size: 18px;
     font-weight: 900;
-    margin-left: 22px;
+    margin-left: 30px;
     color: white;
     -webkit-transition: all 0.25s ease;
     -o-transition: all 0.25s ease;
@@ -8295,7 +8298,7 @@ h1, h2, h3, h4, h5,
         -o-transition: none;
         transition: none; } }
   #sidebar ul li {
-    margin-top: 10px;
+    margin-top: 30px;
     font-size: 16px; }
     #sidebar ul li > ul {
       margin-left: 10px; }
@@ -8306,6 +8309,9 @@ h1, h2, h3, h4, h5,
       display: block;
       color: white;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+      #sidebar ul li a.sub {
+        margin-top: 10px;
+      }
       #sidebar ul li i{
         margin-right: 15px; 
         font-size: 25px;}

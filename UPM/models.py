@@ -23,16 +23,10 @@ class Building(models.Model):
     def __str__(self):
         return self.name
 
-class Term(models.Model):
-    academicyear = models.CharField(max_length=10)
-    date_start = models.DateField(null=True)
-    date_end = models.DateField(null=True)
-    
-    def __str__(self):
-        return self.academicyear
 
 class Room(models.Model):
     name = models.CharField(max_length=300,null=True)
+    
     college = models.ForeignKey(College,on_delete=models.CASCADE,null=True)
     building = models.ForeignKey(Building, on_delete=models.CASCADE, null=True)
     isAvailable = models.BooleanField(default=True)
@@ -40,6 +34,14 @@ class Room(models.Model):
 
     def __str__(self):
         return self.name
+
+class Term(models.Model):
+    academicyear = models.CharField(max_length=10)
+    room = models.ManyToManyField(Room, related_name="room_term")
+    date_start = models.DateField(null=True)
+    date_end = models.DateField(null=True)
+    def __str__(self):
+        return self.academicyear
 
 class Schedule(models.Model):
     DAYS_OF_WEEK = (

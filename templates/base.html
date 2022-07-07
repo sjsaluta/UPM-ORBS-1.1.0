@@ -23,14 +23,17 @@
                     </li>
                     {% if request.user.user_type == none %}
                     <li>
-                        <a data-bs-toggle="collapse" href="#collapseOptions" role="button" aria-expanded="false" aria-controls="collapseOptions" ><i class="fa fa-cogs"></i> <span class="link_label">Administrator</span></a>
+                        <a data-bs-toggle="collapse" href="#collapseOptions" role="button" aria-expanded="false" aria-controls="collapseOptions" id="clps"><i class="fa fa-cogs"></i> <span class="link_label">Administrator</span></a>
                         <div class="collapse" id="collapseOptions">
-                            <a class='ms-3'>Manage Users</a>
+                            <a class='sub ms-4' href="#"><i class="sub fa fa-user"></i><span class="link_label ms-2">Manage Users</span></a>
+                            <a class='sub ms-4' href="#"><i class="sub fa-solid fa-school"></i></i><span class="link_label">Manage Colleges</span></a>
+                            <a class='sub ms-4' href="#"><i class="sub fa-solid fa-door-closed"></i><span class="link_label ms-1">Manage Rooms</span></a>
+                            <a class='sub ms-4' href="#"><i class="sub fa fa-calendar"></i><span class="link_label ms-2">Manage Terms</span></a>
                         <div>
                     </li>
                     {% else %}
                     <li>
-                        <a href="#"><i class="fa fa-calendar"></i> <span class="link_label">Booking</span></a>
+                        <a href="#"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-1">Booking</span></a>
                     </li>
                     <li>
                         <a href="#"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
@@ -82,6 +85,8 @@
                 
             </div>
 		</div>
+        <script>
+        </script>
         {% include 'script_modules.html' %}  
         {% block extrascripts %}
         {% endblock extrascripts %}
