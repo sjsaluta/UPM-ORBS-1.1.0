@@ -8262,6 +8262,7 @@ h1, h2, h3, h4, h5,
     font-weight: 900;
     padding: 0 20px;
     margin-left:50px;
+    padding-top: 30px;
     -webkit-transition: 0.1s;
     -o-transition: 0.1s;
     transition: 0.1s; }
