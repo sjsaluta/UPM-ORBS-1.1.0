@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'accounts',
     'UPM',
     'crispy_forms',
-    'multiselectfield',
 ]
 
 AUTH_USER_MODEL = 'accounts.AuthUser'

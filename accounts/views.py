@@ -70,3 +70,7 @@ def AddUserPage(request):
     
     return render(request,"accounts/add-user.html", context)
 
+def manageUsers(request):
+    users = AuthUser.objects.all()
+    context={'users':users}
+    return render(request,"accounts/users.html",context)
