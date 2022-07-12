@@ -11,14 +11,16 @@
   <ol class="breadcrumb mt-3 ms-4 bg-body">
     <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
     <li class="breadcrumb-item"><a href="#" class="text-dark">Room</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Calendar</li>
+    <li class="breadcrumb-item active" aria-current="page">{{room.name}} Calendar</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}
 
 {% block content %}
 <div class = "container-fluid">
-  <h2 class="py-4 px-4 ms-4">Calendar View</h2>
+  <h2 class="pt-4 px-4 ms-4">{{room.name}}</h2>
+  <h5 class="px-4 ms-4">Calendar View</h5>
+  <h4 class="pb-4 px-4 ms-4 text-center">A.Y. {{term.academicyear}}</h5>
   <div class="col-md-11 ms-5 ps-5 ">
       <div id="calendar"></div>
   </div>
@@ -147,27 +149,6 @@
           location.href = "{% url 'dashBoardPage' %}"
         })               
       },
-      /*events: [
-        {
-          title: 'All Day Event',
-          start: '2022-06-26'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2022-06-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2022-06-11',
-          end: '2022-06-13'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2022-06-28'
-        }
-      ]*/
     });
 
     calendar.render();

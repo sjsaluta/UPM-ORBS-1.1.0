@@ -22,5 +22,5 @@ urlpatterns = [
    path('add-user/', views.AddUserPage, name='AddUserPage'),
    path('login/',views.loginPage, name='loginPage'),
    path('logout/', views.logOutPage, name="logout"),
-   path('',views.manageUsers,name='manageUsers'),
+   path('manage/',views.manageUsers,name='manageUsers'),
 ]

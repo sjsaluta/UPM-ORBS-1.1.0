@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Manage Colleges{% endblock title %}
+{% block title %}Manage Terms{% endblock title %}
 {% load crispy_forms_tags %}
 
 {% block extracss %}
@@ -9,30 +9,40 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb mt-3 ms-4 bg-body">
     <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Manage Colleges</li>
+    <li class="breadcrumb-item active" aria-current="page">Manage Terms</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}
 
 {% block content %}
 <div class = "container-fluid">
-    <h2 class="py-4 px-4">Manage Colleges</h2>
+    <h2 class="py-4 px-4">Manage Term</h2>
     <div class = 'text-right'>
-      <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'addCollege' %}"><i class="fa-solid fa-plus"></i> Add College</a>
+      <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'addTerm' %}"><i class="fa-solid fa-plus"></i> Add Term</a>
     </div>
 
-    {% for college in colleges %}
+    {% for term in terms %}
     <div class="row border bg-white p-3 mb-3">
-      
-      <div class="col align-self-center">
-          <a href="{% url 'adminCollegeView' college.slug %}"><h5>{{college.name}}</h5></a>
-      </div>
-
-          <div class="col-auto align-self-end text-end">
-              <!-- <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deletePopup"><i class="fa-solid fa-trash"></i> Delete</button> -->
-              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#archivePopup"><i class="fa-solid fa-box-archive"></i> Archive</button>
-          </div>
-      </div>
+        <div class="col align-self-center">
+            <a href="{% url 'termView' term.slug %}"><h5>Term {{term.academicyear}}</h5></a>
+        </div>
+        <div class="col-auto align-self-center text-end pe-5">
+            <!-- <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deletePopup"><i class="fa-solid fa-trash"></i> Delete</button> -->
+            {%if term.isActivated %}
+            <h5><span class="badge bg-primary text-wrap">
+                Active
+            </span></h5>
+            {%else%}
+            <h5><span class="badge bg-secondary text-wrap">
+                Inactive
+            </span></h5>
+            {%endif%}
+        </div>
+        <div class="col-auto align-self-end text-end">
+            <!-- <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deletePopup"><i class="fa-solid fa-trash"></i> Delete</button> -->
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#archivePopup"><i class="fa-solid fa-box-archive"></i> Archive</button>
+        </div>
+    </div>
 
       <!-- popup for archive -->
       <div class="modal" id="archivePopup" tab-index="-1">
@@ -47,6 +57,7 @@
                   </div>
                   <div class="modal-footer">
                       <!-- link to archive here -->
+                      
                       <a class="btn btn-danger" href="#"><i class="fa-solid fa-box-archive"></i> Archive</a>
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
                   </div>

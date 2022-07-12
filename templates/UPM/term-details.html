@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Manage Rooms{% endblock title %}
+{% block title %}Term {{term.academicyear}}{% endblock title %}
 {% load crispy_forms_tags %}
 
 {% block extracss %}
@@ -9,17 +9,35 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb mt-3 ms-4 bg-body">
     <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'manageTerm' %}" class="text-dark">Manage Term</a></li>
    
-    <li class="breadcrumb-item active" aria-current="page">Manage Rooms</li>
+    <li class="breadcrumb-item active" aria-current="page">Term {{term.academicyear}}</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}
 
 {% block content %}
 <div class = "container w-auto">
-    <h2 class="pt-4">Manage Rooms</h2>
+    <h2 class="pt-4">Term {{term.academicyear}}</h2>
+    <h5 class="pb-1">{{term.date_start}}-{{term.date_end}}</h5>
+    {% if term.isActivated %}
+    <h6 class="pb-4">Active</h6>
+    {% else %}
+    <h6 class="pb-4">Inactive</h6>
+    {% endif %}
     <div class = 'row'>
-        <div class = 'colalign-self-end text-end'>
+        <div class ="col">
+            <form method='POST'>
+                {% csrf_token %}
+                {% if not term.isActivated %}
+                <input class = "btn btn-success ms-4 mb-2" type="submit" value="Activate" name="activate">
+                {% elif term.isActivated  %}
+                <input class = "btn btn-outline-success ms-4 mb-2" type="submit" value="Deactivate" name="deactivate">
+                {% endif %}
+            </form>
+        </div>
+        <div class = 'col align-self-end text-end'>
+            
             <button class='btn btn-warning mb-2 mx-4' data-bs-toggle="modal" data-bs-target="#addTermRoom"><i class="fa-solid fa-plus"></i> Add Room</button>
         </div>
     </div>
@@ -31,7 +49,6 @@
                 <th scope="col">Building</th>
                 <th scope="col">College</th>
                 <th scope="col"></th>
-                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -40,8 +57,7 @@
                 <td>{{room.name}}</td>
                 <td>{{room.building}}</td>
                 <td>{{room.college}}</td>
-                <td><a class='btn btn-secondary btn-sm' href = {% url 'calendarView' room.slug %}><i class="fa-solid fa-calendar-day"></i> Go to Calendar</a></td>
-                <td><button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup"> Remove </button></td>
+                <td><button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup"> Remove</td>
               </tr>
               <div class="modal" id="deletePopup" tab-index="-1">
                 <div class="modal-dialog modal-dialog-centered">
@@ -75,14 +91,13 @@
                                 <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
-                                <label class="form-label">User Type</label>
-                                <select class="form-select" id="role" name="role" onChange="update()">
-                                    <option value="none" selected disabled hidden>Select an Role</option>
-                                    <option value="faculty">Faculty</option>
-                                    <option value="staff">Staff</option>
-                                    <option value="ocs">OCS</option>
-                                    <option value="adpd">ADPD</option>
-                                </select>
+                                {% for rm in rms %}
+                                <div class = 'col'>
+                                    <input  class="form-check-input ms-1" type="checkbox" name="rooms" value="{{rm.slug}}">
+                                    <label  class="form-check-label ms-4">{{rm}}</label>
+                                </div>
+                                {% endfor %}
+                                
                             </div>
                             <div class="modal-footer">
                                 <!-- link to archive here -->
@@ -104,7 +119,4 @@
 {% endblock content %}
 
 {% block extrascripts %}
-<script>
-    function update()
-</script>
 {% endblock extrascripts %}

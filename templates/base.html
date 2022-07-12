@@ -19,16 +19,16 @@
                 <h1 class="name">Room Booking</h1>
                 <ul class="list-unstyled components mb-5">
                     <li class="active">
-                        <a href="{% url 'dashBoardPage' %}"><i class="fa fa-home"></i> <span class="link_label">Dashboard</span></a>
+                        <a href="{% url 'dashBoardPage' %}"><i class="fa fa-home"></i> <span class="link_label">Home</span></a>
                     </li>
                     {% if request.user.user_type == none %}
                     <li>
                         <a data-bs-toggle="collapse" href="#collapseOptions" role="button" aria-expanded="false" aria-controls="collapseOptions" id="clps"><i class="fa fa-cogs"></i> <span class="link_label">Administrator</span></a>
                         <div class="collapse" id="collapseOptions">
-                            <a class='sub ms-4' href="#"><i class="sub fa fa-user"></i><span class="link_label ms-2">Manage Users</span></a>
-                            <a class='sub ms-4' href="#"><i class="sub fa-solid fa-school"></i></i><span class="link_label">Manage Colleges</span></a>
-                            <a class='sub ms-4' href="#"><i class="sub fa-solid fa-door-closed"></i><span class="link_label ms-1">Manage Rooms</span></a>
-                            <a class='sub ms-4' href="#"><i class="sub fa fa-calendar"></i><span class="link_label ms-2">Manage Terms</span></a>
+                            <a class='sub ms-4' href="{% url 'manageUsers' %}"><i class="sub fa fa-user"></i><span class="link_label ms-2">Manage Users</span></a>
+                            <a class='sub ms-4' href="{% url 'manageCollege' %}"><i class="sub fa-solid fa-school"></i></i><span class="link_label">Manage Colleges</span></a>
+                            <a class='sub ms-4' href="{% url 'manageRooms' %}"><i class="sub fa-solid fa-door-closed"></i><span class="link_label ms-1">Manage Rooms</span></a>
+                            <a class='sub ms-4' href="{% url 'manageTerm' %}"><i class="sub fa fa-calendar"></i><span class="link_label ms-2">Manage Terms</span></a>
                         <div>
                     </li>
                     {% else %}

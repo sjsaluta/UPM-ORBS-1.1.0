@@ -39,5 +39,10 @@ class AddDept(ModelForm):
 class AddRoom(ModelForm):
     class Meta:
         model = Room
-        fields = ['name','college','building','capacity']
+        fields = ['name','capacity']
+
+class AddTermRoom(ModelForm):
+    class Meta:
+        model = Term
+        fields = ['room']
 

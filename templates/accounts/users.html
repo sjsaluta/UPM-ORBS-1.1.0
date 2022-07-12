@@ -1,41 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Add Room{% endblock title %}
+{% block title %}Manage Users{% endblock title %}
 {% load crispy_forms_tags %}
 
 {% block extracss %}
 {% endblock extracss %}
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mt-3 ms-4 bg-body">
+    <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Manage Users</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
 
 {% block content %}
-<div class = "container w-70">
+<div class = "container-fluid">
     <h2 class="py-4 px-4">Manage Users</h2>
+    <div class = 'text-right'>
+      <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'AddUserPage' %}"><i class="fa-solid fa-plus"></i> Add User</a>
+    </div>
+
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
+          {% for user in users %}
           <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.username}}</td>
+            <td>{{user.get_full_name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.get_user_type_display}}</td>
+            <td><button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup"> Delete</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          <div class="modal" id="deletePopup" tab-index="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Delete User</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete user '{{user.username}}'?</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- link to archive here -->
+                    <a class="btn btn-danger" href="#">Delete</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
         </tbody>
       </table>
 </div>

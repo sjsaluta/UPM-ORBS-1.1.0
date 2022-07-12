@@ -18,12 +18,22 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-   path('', views.indexPage, name='indexPage'),
-   path('dashboard/',views.dashBoardPage, name='dashBoardPage'),
-   path('add-term/',views.addTerm, name='addTerm'),
-   path('add-college/',views.addCollege, name='addCollege'),
-   path('add-dept/',views.addDept, name='addDept'),
-   path('add-build/',views.addBuild, name='addBuild'),
-   path('add-room/',views.addRoom, name='addRoom'),
-   path('room/calendar',views.calendarView, name='calendarView')
+    path('', views.indexPage, name='indexPage'),
+    path('dashboard/',views.dashBoardPage, name='dashBoardPage'),
+
+    #admin pages
+    path('manage-term/',views.manageTerm, name='manageTerm'),
+    path('manage-term/add-term/',views.addTerm, name='addTerm'),
+    path('manage-term/<slug:slug>/',views.termView, name='termView'),
+    path('manage-college/',views.manageCollege, name='manageCollege'),
+    path('manage-college/add-college/',views.addCollege, name='addCollege'),
+    path('manage-college/<slug:slug>/',views.collegeView, name='adminCollegeView'), 
+    path('manage-college/<slug:slug>/add-dept/',views.addDept, name='addDept'),
+    path('manage-college/<slug:slug>/add-build/',views.addBuild, name='addBuild'), 
+    path('manage-college/<slug:c>/<slug:b>/',views.buildingView,name='adminBuildingView'),
+    path('manage-college/<slug:c>/<slug:b>/add-room/',views.addBuildRoom, name='addBuildRoom'),
+    path('manage-room/',views.manageRooms, name='manageRooms'), 
+    path('manage-room/add-room/',views.addRoom, name='addRoom'),
+   
+    path('room/<slug:slug>/calendar-view',views.calendarView, name='calendarView'),
 ]
