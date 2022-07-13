@@ -159,7 +159,7 @@ def calendarView(request, slug):
 
     form = AddBookFrCal()
     if request.method == "POST":
-        form = AddBookFrCal(request.post)
+        form = AddBookFrCal(request.POST)
         if form.is_valid():
             book = form.save(False)
             book.room = room

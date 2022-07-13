@@ -60,21 +60,23 @@
           <h5 class="modal-title ms-1" id="exampleModalLabel"><i class="fa-solid fa-calendar"></i> Book Now</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-
-        <div class="modal-body">
-          {{form.subject | as_crispy_field}}
-          {% if request.user.user_type != 1 %}
-              {{form.faculty | as_crispy_field}}
-          {% endif %}
-          {{form.start_time | as_crispy_field}}
-          {{form.end_time | as_crispy_field}}
-          {{form.numofstudents | as_crispy_field}}
-          {{form.activity | as_crispy_field}}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" id="edit">Edit</button>
-        </div>
+        <form method="POST">
+          {% csrf_token %}
+          <div class="modal-body">
+            {{form.subject | as_crispy_field}}
+            {% if request.user.user_type != 1 %}
+                {{form.faculty | as_crispy_field}}
+            {% endif %}
+            {{form.start_time | as_crispy_field}}
+            {{form.end_time | as_crispy_field}}
+            {{form.numofstudents | as_crispy_field}}
+            {{form.activity | as_crispy_field}}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal" id="edit">Submit</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

@@ -15,11 +15,13 @@ class AuthUser(AbstractUser):
     STAFF = 2
     OCS = 3
     ADPD = 4
+    AO = 5
     USER_TYPE_CHOICES = (
         (FACULTY, 'faculty'),
         (STAFF, 'staff'),
         (OCS, 'ocs'),
         (ADPD, 'adpd'),
+        (AO,'ao')
     )
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
@@ -67,12 +69,21 @@ class Staff(models.Model):
 
 class ADPD(models.Model):
     user = models.OneToOneField(AuthUser,on_delete=models.CASCADE,null=True)
-    first_name=models.CharField(max_length=300,null=True)
-    last_name=models.CharField(max_length=300,null=True)
-    email=models.EmailField(max_length=50,null=True)
+    college = models.ForeignKey("UPM.College",on_delete=models.CASCADE,null=True)
 
     class Meta:
         verbose_name_plural = "ADPDs"
+
+    def __str__(self):
+        name = AuthUser.get_full_name(self.user)
+        return name + ' <' + self.user.email + '>'
+
+class AO(models.Model):
+    user = models.OneToOneField(AuthUser,on_delete=models.CASCADE,null=True)
+    college = models.ForeignKey("UPM.College",on_delete=models.CASCADE,null=True)
+
+    class Meta:
+        verbose_name_plural = "Administrative Officers"
 
     def __str__(self):
         name = AuthUser.get_full_name(self.user)

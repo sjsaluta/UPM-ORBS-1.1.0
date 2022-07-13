@@ -35,6 +35,7 @@
                 <th scope="col">Room</th>
                 <th scope="col">Building</th>
                 <th scope="col">College</th>
+                <th scope="col">Capacity</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
@@ -45,6 +46,7 @@
                 <td>{{room.name}}</td>
                 <td>{{room.building}}</td>
                 <td>{{room.college}}</td>
+                <td>{{room.college}}</td>
                 <td><a class='btn btn-secondary btn-sm' href = {% url 'calendarView' room.slug %}><i class="fa-solid fa-calendar-day"></i> Go to Calendar</a></td>
                 <td><button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup"> Remove </button></td>
               </tr>
@@ -52,11 +54,11 @@
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                        <h5>Delete User</h5>
+                        <h5>Remove</h5>
                         <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to delete user '{{user.username}}'?</p>
+                        <p>Are you sure you want to remove room '{{room.name}}'?</p>
                     </div>
                     <div class="modal-footer">
                         <!-- link to archive here -->
@@ -72,7 +74,7 @@
             {% endfor %}
                 <form method = "POST">
                     {% csrf_token %}
-                    <div class="modal" id="addTermRoom" tab-index="-1">
+                    <div class="modal fade" id="addTermRoom" tab-index="-1">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">

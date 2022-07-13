@@ -10,7 +10,9 @@ class Booking(models.Model):
     faculty =  models.ForeignKey(Faculty,on_delete=models.CASCADE,null=True)
     approver =  models.ForeignKey(ADPD,on_delete=models.CASCADE,null=True,blank=True)
     booker = models.ForeignKey(AuthUser,on_delete=models.CASCADE,null=True,blank=True)
-    subject = models.CharField(max_length=300, null=True)
+    dept_or_office = models.CharField(max_length=300,null=True,blank=True)
+    organization = models.CharField(max_length=300,null=True,blank=True)
+    subject = models.CharField(max_length=300, null=True,blank=True)
     activity = models.CharField(max_length=300,null=True)
     isApproved = models.BooleanField(default=False)
     date_approved = models.DateField(null=True,blank=True)
@@ -18,6 +20,8 @@ class Booking(models.Model):
     start_time = models.DateTimeField(null=True)
     end_time = models.DateTimeField(null=True)
     numofstudents = models.IntegerField(null=True)
+    equipments = models.TextField(null=True, blank=True)
+    remarks = models.TextField(null=True, blank=True)
 
     def getFullName(self):
         return self.faculty.user.first_name +' ' + self.faculty.user.last_name + ' (' + self.faculty.user.email + ')'

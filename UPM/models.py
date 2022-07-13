@@ -47,8 +47,14 @@ class Building(models.Model):
 
 
 class Room(models.Model):
+    TYPES = (
+        (1,"Room"),
+        (2,"Theatre"),
+    )
+
     name = models.CharField(max_length=300,null=True, unique=True)
     slug = models.SlugField(null=True)
+    room_type =models.PositiveSmallIntegerField(choices=TYPES,null=True)
     college = models.ForeignKey(College,on_delete=models.CASCADE,null=True)
     building = models.ForeignKey(Building, on_delete=models.CASCADE, null=True)
     isAvailable = models.BooleanField(default=True)
