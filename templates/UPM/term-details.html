@@ -96,8 +96,9 @@
                                     <input  class="form-check-input ms-1" type="checkbox" name="rooms" value="{{rm.slug}}">
                                     <label  class="form-check-label ms-4">{{rm}}</label>
                                 </div>
+                                {%empty%}
+                                 <p>There are no more rooms available</p>
                                 {% endfor %}
-                                
                             </div>
                             <div class="modal-footer">
                                 <!-- link to archive here -->

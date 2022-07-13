@@ -4,6 +4,11 @@
 {% load crispy_forms_tags %}
 
 {% block extracss %}
+<style>
+  #name_cap{
+    display: none;
+  }
+</style>
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
@@ -71,18 +76,16 @@
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5>Add Rooms to Term</h5>
+                                <h5>Add Rooms</h5>
                                 <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
-                                <label class="form-label">User Type</label>
-                                <select class="form-select" id="role" name="role" onChange="update()">
-                                    <option value="none" selected disabled hidden>Select an Role</option>
-                                    <option value="faculty">Faculty</option>
-                                    <option value="staff">Staff</option>
-                                    <option value="ocs">OCS</option>
-                                    <option value="adpd">ADPD</option>
-                                </select>
+                                {{form.college_select | as_crispy_field}}
+                                {{form.build_select | as_crispy_field}}
+                                <div id="name_cap">
+                                  {{form.name | as_crispy_field}}
+                                  {{form.capacity | as_crispy_field}}
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <!-- link to archive here -->
@@ -105,6 +108,44 @@
 
 {% block extrascripts %}
 <script>
-    function update()
+    $('#id_college_select').change(function() {populateBuild(this)});
+    $('#id_build_select').change(function(){
+      console.log("success")
+      $('#name_cap').css("display","block")});
+    //$('#id_description').addClass('descriptions');
+    build = {{ form.build | safe }}
+    college = {{ form.colleges | safe}};
+    console.log(build)
+    populateCollege();
+    $("#id_build_select").empty();
+    $("#id_build_select").append('<option value="" disabled selected>Select college first</option>');
+    function populateCollege() {
+        $('#id_college_select').empty();
+        $("#id_college_select").append('<option value="" disabled selected>Select college</option>');
+        $.each(college, function(v) {
+            $('#id_college_select')
+                .append($("<option></option>")
+                .attr("value", college[v])
+                .text(college[v]));
+        });
+    }
+
+    function populateBuild(event) {
+        col = $("#id_college_select option:selected").text();
+        $("#id_build_select").empty();
+        $("#id_build_select").append('<option value="" disabled selected>Select building</option>');
+        for (let [c, cbuild] of Object.entries(build)) {
+            if (c == col) {
+                //alert(b);
+                for (build in cbuild) {
+                    $('#id_build_select')
+                        .append($("<option></option>")
+                            .attr("value", cbuild[build])
+                            .text(cbuild[build]));
+                }
+            }
+        }
+    }
+    
 </script>
 {% endblock extrascripts %}

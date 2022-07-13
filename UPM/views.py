@@ -1,9 +1,11 @@
+from distutils.command.build import build
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout ,update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from . forms import *
+from bookingapp.forms import *
 from bookingapp.models import *
 # Create your views here.
 
@@ -33,20 +35,21 @@ def termView(request, slug):
             if room == rm:
                 room_exclude.append(rm)
     room_term = Room.objects.exclude(name__in=room_exclude)
+    print(room_term)
     if request.method == "POST":
         room = request.POST.getlist('rooms')
         for rm in room:
             if Room.objects.all().exists():
                 rm = Room.objects.get(slug=rm)
                 term.room.add(rm)
-    
-    if request.method == "POST":
+                return redirect(reverse('termView',kwargs={'slug':slug}))          
         if request.POST.get("activate"):
             term.isActivated=True
             term.save()
-        else:
+        elif request.POST.get("deactivate"):
             term.isActivated=False
             term.save()
+        
     context ={'term':term,'rooms':rooms,'rms':room_term}
     return render(request,"UPM/term-details.html",context)
 
@@ -128,7 +131,20 @@ def addBuildRoom(request,c,b):
 #manage rooms
 def manageRooms(request):
     rooms=Room.objects.all()
-    context={'rooms':rooms}
+    form = ColBuildForm()
+
+    if request.method == "POST":
+        form = ColBuildForm(request.POST)
+        if form.is_valid():
+            room = form.cleaned_data.get
+            col_selected = College.objects.filter(name=room('college_select'))
+            build_selected = Building.objects.filter(name=room('build_select'))
+            r = form.save(False)
+            r.building = build_selected[0]
+            r.college = col_selected[0]
+            r.save()
+
+    context={'rooms':rooms,'form':form}
     return render(request,"UPM/room.html",context)
 
 ##### User Views #####
@@ -140,8 +156,23 @@ def calendarView(request, slug):
     for t in terms:
         if t.isActivated:
             term = t
+
+    form = AddBookFrCal()
+    if request.method == "POST":
+        form = AddBookFrCal(request.post)
+        if form.is_valid():
+            book = form.save(False)
+            book.room = room
+            if(request.user.user_type == 1):
+                book.faculty=request.user
+                book.booker=request.user
+            else:
+                book.booker=request.user
+            book.save()
+
     booking = Booking.objects.filter(room_id=room.id)
-    context={'booking':booking,'room':room,'term':term}
+
+    context={'booking':booking,'room':room,'term':term,'form':form}
     return render(request,"UPM/calendar.html",context)
 
 

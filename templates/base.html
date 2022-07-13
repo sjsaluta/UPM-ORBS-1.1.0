@@ -44,7 +44,7 @@
             </nav>
 
                 <!-- Page Content  -->
-            <div id="content" class="p-4 p-md-5 ">
+            <div id="content" class="p-4 p-md-5 bg-body">
 
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border">
                     <div class="container-fluid">
@@ -59,7 +59,7 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="nav navbar-nav ml-auto">
-                                <span class="fw-bold mt-2">User: {{request.user}}</span>
+                                <span class="fw-bolder mt-2">User: {{request.user}}</span>
                                 <li class="nav-item dropdown me-3 pe-3">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                       Account
@@ -67,7 +67,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                       <li><a class="dropdown-item" href="#">Profile</a></li>
                                       <li><hr class="dropdown-divider"></li>
-                                      <li><a class="dropdown-item" href="{% url 'logout' %}"">Logout</a></li>
+                                      <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                                     </ul>
                                 </li>
                             </ul>

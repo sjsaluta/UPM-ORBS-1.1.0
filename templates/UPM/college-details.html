@@ -22,8 +22,8 @@
         <div class = 'col align-self-center'>
             <form method='POST'>
                 {%csrf_token%}
-                <input class = "btn btn-secondary mb-4" type="submit" value="Department" name="dept" />
-                <input class = "btn btn-secondary mb-4 ms-2" type="submit" value="Buildings" name="build" />
+                <input class = "btn btn-success mb-4" type="submit" value="Department" name="dept" id="d"/>
+                <input class = "btn btn-secondary mb-4 ms-2" type="submit" value="Buildings" name="build" id="b" />
             </form>
         </div>
         <div class = 'col-auto align-self-end text-end'>
@@ -80,4 +80,16 @@
 {% endblock content %}
 
 {% block extrascripts %}
+<script>
+    
+    if("{{view}}" === 'dept'){
+        console.log('yes')
+        $("#d").css("background-color","#28a745");
+        $("#b").css("background-color","#6c757d");
+    }
+    else{
+        $("#b").css("background-color","#28a745");
+        $("#d").css("background-color","#6c757d");
+    }
+</script>
 {% endblock extrascripts %}

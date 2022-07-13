@@ -18,7 +18,6 @@ def addBooking(request):
 
         if form.is_valid():
             book=form.save(False)
-            book.booker = user
             if(user.user_type == 1):
                 book.faculty=user
                 book.booker=user

@@ -20,15 +20,22 @@
 <div class = "container-fluid">
   <h2 class="pt-4 px-4 ms-4">{{room.name}}</h2>
   <h5 class="px-4 ms-4">Calendar View</h5>
-  <h4 class="pb-4 px-4 ms-4 text-center">A.Y. {{term.academicyear}}</h5>
-  <div class="col-md-11 ms-5 ps-5 ">
-      <div id="calendar"></div>
+  <div class = "row justify-content-end">
+    <div class = "col-5">
+      <h4 class="pb-4">A.Y. {{term.academicyear}}</h5>
+    </div>  
+    <div class = "col-2 ms-4">
+      <a class='btn btn-warning mb-2' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book"><i class="fa-solid fa-calendar"></i> Book Now</a>
+    </div> 
+  </div>  
+  <div class="col-md-11 ms-4 ps-6 ">
+      <div class=""id="calendar"></div>
   </div>
   <div class="modal fade" id="exampleModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title ms-1" id="exampleModalLabel"></h5>
+          <h5 class="modal-title ms-1" id="exampleModalLabel">Booking Details</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -38,6 +45,31 @@
             <p id="start"></p>
             <p id="end"></p>
           </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" id="edit">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="book">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title ms-1" id="exampleModalLabel"><i class="fa-solid fa-calendar"></i> Book Now</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          {{form.subject | as_crispy_field}}
+          {% if request.user.user_type != 1 %}
+              {{form.faculty | as_crispy_field}}
+          {% endif %}
+          {{form.start_time | as_crispy_field}}
+          {{form.end_time | as_crispy_field}}
+          {{form.numofstudents | as_crispy_field}}
+          {{form.activity | as_crispy_field}}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -75,7 +107,13 @@
         center: 'title',
         right: 'timeGridWeek,dayGridMonth,timeGridDay'
       },
-      weekends: false,
+
+      initialView: 'timeGridWeek',
+      hiddenDays:[0],
+      validRange: {
+        start: "{{term.date_start|date:'Y-m-d'}}",
+        end: "{{term.date_end|date:'Y-m-d'}}",
+      },
       height: 'auto',
       slotMinTime: "05:00:00",
       slotMaxTime: "21:00:00",
@@ -91,15 +129,14 @@
       },
       
       themeSystem: 'standard',
-      initialView: 'timeGridWeek',
+      
       initialDate: today,
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
       select: function(arg) {
         console.log('clicked')
-        var modal = document.getElementById('eventModal')
-        modal.style.display = 'block'
+        $("#book").modal("show")
         calendar.unselect()
       },
       // THIS KEY WON'T WORK IN PRODUCTION!!!

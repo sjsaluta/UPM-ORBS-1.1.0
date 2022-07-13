@@ -6,6 +6,7 @@ from django.core.validators import EmailValidator
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from .models import *
+import json
 
 class AddTerm(ModelForm):
     date_start = forms.DateField(widget=forms.NumberInput(attrs={'type': 'date'}))
@@ -46,3 +47,25 @@ class AddTermRoom(ModelForm):
         model = Term
         fields = ['room']
 
+class ColBuildForm(ModelForm):
+
+    dbuild = {}
+    list_build = []
+    for build in Building.objects.all():
+        if build.college.name in dbuild:
+            dbuild[build.college.name].append(build.name)
+        else:
+            dbuild[build.college.name] = [build.name]
+        list_build.append((build.name,build.name))
+
+    colleges = [str(college) for college in College.objects.all()]
+
+    college_select = forms.ChoiceField(choices=([(college, college) for college in colleges]))
+    build_select = forms.ChoiceField(choices=(list_build))
+
+    colleges = json.dumps(colleges)
+    build = json.dumps(dbuild)
+
+    class Meta:
+        model = Room
+        fields = ('college_select', 'build_select','name','capacity')

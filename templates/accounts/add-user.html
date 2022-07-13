@@ -38,7 +38,14 @@
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-md-4">
-                        
+                        <label class="form-label">User Type</label>
+                        <select class="form-select" id="role" name="role" onChange="update()">
+                            <option value="none" selected disabled hidden>Select an Role</option>
+                            <option value="faculty">Faculty</option>
+                            <option value="staff">Staff</option>
+                            <option value="ocs">OCS</option>
+                            <option value="adpd">ADPD</option>
+                        </select>
                     </div>
                     
                     
@@ -51,14 +58,7 @@
             {% if form.errors %}
                 <div class ="row" > 
             {% else %}
-                <div class ="row" id="f" > <label class="form-label">User Type</label>
-                        <select class="form-select" id="role" name="role" onChange="update()">
-                            <option value="none" selected disabled hidden>Select an Role</option>
-                            <option value="faculty">Faculty</option>
-                            <option value="staff">Staff</option>
-                            <option value="ocs">OCS</option>
-                            <option value="adpd">ADPD</option>
-                        </select>
+                <div class ="row" id="f" > 
             {% endif %}
                     <div class="row">
                         <div class="col-4 pe-4">
@@ -105,9 +105,6 @@
     
     
 </div>
-
-
-
 
 {% endblock content %}
 
