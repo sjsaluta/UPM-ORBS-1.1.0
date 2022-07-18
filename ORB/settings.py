@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'accounts',
     'UPM',
     'crispy_forms',
+    'django_filters',
+    'django_extensions',
 ]
 
 AUTH_USER_MODEL = 'accounts.AuthUser'

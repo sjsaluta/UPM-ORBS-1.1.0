@@ -46,7 +46,7 @@
                 <td>{{room.name}}</td>
                 <td>{{room.building}}</td>
                 <td>{{room.college}}</td>
-                <td>{{room.college}}</td>
+                <td>{{room.capacity}}</td>
                 <td><a class='btn btn-secondary btn-sm' href = {% url 'calendarView' room.slug %}><i class="fa-solid fa-calendar-day"></i> Go to Calendar</a></td>
                 <td><button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup"> Remove </button></td>
               </tr>
@@ -68,38 +68,35 @@
                   </div>
                 </div>
               </div> 
-                
-                
-                
             {% endfor %}
-                <form method = "POST">
-                    {% csrf_token %}
-                    <div class="modal fade" id="addTermRoom" tab-index="-1">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5>Add Rooms</h5>
-                                <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                {{form.college_select | as_crispy_field}}
-                                {{form.build_select | as_crispy_field}}
-                                <div id="name_cap">
-                                  {{form.name | as_crispy_field}}
-                                  {{form.capacity | as_crispy_field}}
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <!-- link to archive here -->
-                                <button class="btn btn-success" type='submit'>Add</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div> 
-                </form>
             </tbody>
           </table>
+          <form method = "POST">
+              {% csrf_token %}
+              <div class="modal fade" id="addTermRoom" tab-index="-1">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5>Add Rooms</h5>
+                          <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                      </div>
+                      <div class="modal-body">
+                          {{form.college_select | as_crispy_field}}
+                          {{form.build_select | as_crispy_field}}
+                          <div id="name_cap">
+                            {{form.name | as_crispy_field}}
+                            {{form.capacity | as_crispy_field}}
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <!-- link to archive here -->
+                          <button class="btn btn-success" type='submit'>Add</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
+                      </div>
+                  </div>
+                  </div>
+              </div> 
+          </form>
        
     </div>
 </div>
@@ -119,7 +116,6 @@
     college = {{ form.colleges | safe}};
     console.log(build)
     populateCollege();
-    $("#id_build_select").empty();
     $("#id_build_select").append('<option value="" disabled selected>Select college first</option>');
     function populateCollege() {
         $('#id_college_select').empty();

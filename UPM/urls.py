@@ -35,5 +35,6 @@ urlpatterns = [
     path('manage-room/',views.manageRooms, name='manageRooms'), 
     path('manage-room/add-room/',views.addRoom, name='addRoom'),
    
-    path('room/<slug:slug>/calendar-view',views.calendarView, name='calendarView'),
+    path('rooms/',views.roomView,name='roomView'),
+    path('rooms/<slug:slug>/calendar-view',views.calendarView, name='calendarView'),
 ]

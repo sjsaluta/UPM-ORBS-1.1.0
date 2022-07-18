@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout ,update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+
+from UPM.filters import RoomFilter
 from . forms import *
 from bookingapp.forms import *
 from bookingapp.models import *
@@ -201,3 +203,12 @@ def buildingView(request,c,b):
     context={'rooms':room,'building':building,'college':college}
     return render(request,'UPM/building-details.html',context)
 
+def roomView(request):
+    rooms = Room.objects.all()
+    rfilter= RoomFilter(request.GET,queryset=rooms)
+    build = Building.objects.all()
+    college = College.objects.all()
+    rooms = rfilter.qs
+
+    context={'rooms':rooms,'filter':rfilter,'building':build,'colleges':college}
+    return render(request,'UPM/room-view.html',context)

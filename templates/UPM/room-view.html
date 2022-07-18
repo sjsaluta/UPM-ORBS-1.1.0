@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}View Rooms{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+{% endblock extracss %}
+
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mt-3 ms-4 bg-body">
+    <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
+   
+    <li class="breadcrumb-item active" aria-current="page">Rooms</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class = "container-xl px-4 pb-2">
+    <h2 class="py-4">View Rooms</h2>
+    <div class = 'row h-100 '>
+        <div class = "col-sm-3 vh-75 " >
+            <div class = 'p-3 vh-75 shadow-sm border bg-light'>
+                <h5 class='mb-5'>Filter by:</h5>
+                <form method = "GET">
+                    {{filter.form | crispy}}
+                    <button class = "btn btn-info w-100 mt-3" type = 'submit'>Filter</button>
+                </form>
+            </div>
+        </div>
+        <div class = "col-sm-9 h-100 ">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Room</th>
+                    <th scope="col">Building</th>
+                    <th scope="col">College</th>
+                    <th scope="col">Capacity</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for room in rooms %}
+                  <tr>
+                    <td>{{room.name}}</td>
+                    <td>{{room.building}}</td>
+                    <td>{{room.college}}</td>
+                    <td>{{room.capacity}}</td>
+                    <td><a class='btn btn-secondary btn-sm' href = {% url 'calendarView' room.slug %}><i class="fa-solid fa-calendar-day"></i> View Schedule</a></td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
+
+{% block extrascripts %}
+<script>
+    var $options=$('#id_building option').clone();
+    $('#id_college').change(function() {console.log('yes');$('#id_building').empty();$('#id_building').html( $options.clone());populateBuild(this);});
+    populateBuild()
+    function populateBuild(event) {
+        if (!$('#id_college').val()){
+            console.log('empty')
+             $('#id_building').html( $options.clone());
+        }
+        else{
+            col = $("#id_college option:selected").text();
+            {% for college in colleges%}
+                if ('{{college}}' == col) {
+                    //alert(b);
+                    console.log('true')
+                    
+                       
+                        {% for build in college.building_set.all %}   
+                            {% for b in building %}
+                                if('{{b}}'!= '{{build}}'){                              
+                                    $('#id_building option[value="{{b.id}}"]').remove();
+                                }
+                            {%endfor%}
+                        {% endfor %}
+                }
+            {% endfor %}    
+        }
+        
+    }
+</script>
+{% endblock extrascripts %}

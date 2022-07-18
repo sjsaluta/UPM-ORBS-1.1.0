@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Bookings{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+{% endblock extracss %}
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mt-3 ms-4 bg-body">
+    <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class = "container w-70">
+    <h2 class="py-4 px-4">Booking Number {{booking.id}}</h2>
+    <div class= "row px-4 pb-3 justify-content-between">
+      <div class="col-6 ">
+      <h4>Requested By: {{booking.booker}}</h4>
+      {% if booking.isApproved%}
+        <h5>Approved: Yes</h5>
+      {% else %}
+        <h5>Approved: No</h5>
+      {% endif %}
+      <h5>Date Filed: {{booking.date_created|date:"Y-m-d"}}</h5>
+      </div>
+      {% if booking.dept_or_office %}
+        <div class= 'col-4'>
+          <h5>Dept/Office: {{booking.dept_or_office}}</h5>
+          <h5>Subject: {{booking.subject}}</h5>
+         
+        </div>
+      {% else %}
+        <div class= 'col-4'>
+          <h5>Organization: {{booking.organization}}</h5>
+          <h5>Adviser: {{booking.faculty}}</h5>
+        </div>
+      {% endif %}
+    </div>
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Room</th>
+            <th scope="col">Activity</th>
+            <th scope="col">Equipments Needed</th>
+            <th scope="col">No. of Participants</th>
+            <th scope="col">Remarks/Changes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class = "py-5">{{date}}</td>
+            <td class = "py-5">{{time}}</td>
+            <td class = "py-5">{{booking.room}}</td>
+            <td class = "py-5">{{booking.activity}}</td>
+            <td class = "py-5">{{booking.equipments}}</td>
+            <td class = "py-5">{{booking.numofstudents}}</td>
+            <td class = "py-5">{{booking.remarks}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class= 'row'>
+        <div class = 'col-4'>
+          {% if not booking.isApproved %}
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal">
+            Approve
+          </button>
+          {% else %}
+          <h6 class='px-4'>Approved by: {{booking.approver}}</h6>
+          <h6 class='px-4'>Date approved: {{booking.date_approved}}</h6>
+          {% endif %}
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="approveModalLabel">Booking Approval</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Approve this booking?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method='POST'>
+                  {% csrf_token %}
+                  <input class = "btn btn-success" type="submit" value="Approve" name="approve">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</div>
+
+
+
+{% endblock content %}
+
+{% block extrascripts %}
+{% endblock extrascripts %}
