@@ -69,3 +69,9 @@ class ColBuildForm(ModelForm):
     class Meta:
         model = Room
         fields = ('college_select', 'build_select','name','capacity')
+
+class UploadForm(ModelForm):
+
+    class Meta:
+        model= ScheduleFile
+        fields = ('term','file')

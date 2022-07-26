@@ -18,70 +18,79 @@ from datetime import datetime
 def indexPage(request):
     return redirect(dashBoardPage)
 
+def uploadPage(request):
+    form = UploadForm()
+    ocs = OCS.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            f = form.save(False)
+            f.ocs=ocs
+            f.college=ocs.college
+            f.save()
+            df = pd.read_csv(f.file.name).iloc[7:,[0,1,2,4,5,6,7,8,9]]
+            df.columns=['Class No.','Course Title','Subject','Section','Component','Schedule','Room','Instructor','Class Capacity']
+            df = df[df["Room"].str.contains("TBA") == False]
+            cn = df['Class No.'].tolist()
+            ct = df['Course Title'].tolist()
+            sub = df['Subject'].tolist()
+            sec = df["Section"].tolist()
+            com = df['Component'].tolist()
+            rm = df['Room'].tolist()
+            ins = df['Instructor'].tolist()
+            cap = df['Class Capacity'].tolist()
+            time = df["Schedule"]
+
+            x=re.findall(r'\s(\d{2}\:\d{2}\s?(?:AM|PM|am|pm)\s?\-\s?\d{2}\:\d{2}\s?(?:AM|PM|am|pm))',time.to_string())
+            start_time = []
+            end_time = []
+            for i in x:
+                tf = i.split(' - ')
+                start_time.append(tf[0])
+                end_time.append(tf[1])
+                y=re.findall(r"\bM\w*|\bT\w*|\bW\w*|\bS\w*|\bF\w*",time.to_string())
+
+            term = Term.objects.get(slug = '2022-2023')
+            for i in range(len(df)):
+                r = rm[i]
+                r=r.replace(" ","")
+                room = Room.objects.get(name=r)
+                days= ''
+                day = re.findall("M|TH|T|W|F|S",y[i])
+                for ds in range(len(day)):
+                    if day[ds] == 'M':
+                        day[ds]='1'
+                    elif day[ds] == 'T':
+                        day[ds]='2'
+                    elif day[ds] == 'W':
+                        day[ds]='3'
+                    elif day[ds] == 'TH':
+                        day[ds]='4'
+                    elif day[ds] == 'F':
+                        day[ds]='5'
+                    elif day[ds] == 'S':
+                        day[ds]='6'
+                for d in day:
+                    days += d
+                st = datetime.strptime(start_time[i],"%I:%M %p").time()
+                et = datetime.strptime(end_time[i],"%I:%M %p").time()
+                Schedule.objects.create(
+                    schedfile = f.file.name,
+                    room=room,
+                    faculty=ins[i],
+                    coursetitle=ct[i],
+                    classnum=cn[i],
+                    component=com[i],
+                    subject=sub[i],
+                    section=sec[i],
+                    capacity=cap[i],
+                    time_start=st,
+                    time_end=et,
+                    dayofweek=days
+                    )
+    return render(request,'UPM/upload.html')
 @login_required(login_url='loginPage')
 def dashBoardPage(request):
-    df = pd.read_csv('SS 18-19 CAS SCHEDULE OF CLASSES as of November 26, 2018.xlsx - DAC.csv').iloc[7:,[0,1,2,4,5,6,7,8,9]]
-    df.columns=['Class No.','Course Title','Subject','Section','Component','Schedule','Room','Instructor','Class Capacity']
-    df = df[df["Room"].str.contains("TBA") == False]
-    cn = df['Class No.'].tolist()
-    ct = df['Course Title'].tolist()
-    sub = df['Subject'].tolist()
-    sec = df["Section"].tolist()
-    com = df['Component'].tolist()
-    rm = df['Room'].tolist()
-    ins = df['Instructor'].tolist()
-    cap = df['Class Capacity'].tolist()
-    time = df["Schedule"]
-
-    x=re.findall(r'\s(\d{2}\:\d{2}\s?(?:AM|PM|am|pm)\s?\-\s?\d{2}\:\d{2}\s?(?:AM|PM|am|pm))',time.to_string())
-    start_time = []
-    end_time = []
-    for i in x:
-        tf = i.split(' - ')
-        start_time.append(tf[0])
-        end_time.append(tf[1])
-        y=re.findall(r"\bM\w*|\bT\w*|\bW\w*|\bS\w*|\bF\w*",time.to_string())
-
-    term = Term.objects.get(slug = '2022-2023')
-    if request.POST.get('upload'):
-        for i in range(len(df)):
-            r = rm[i]
-            r=r.replace(" ","")
-            room = Room.objects.get(name=r)
-            days= ''
-            day = re.findall("M|TH|T|W|F|S",y[i])
-            for y in range(len(day)):
-                if day[y] == 'M':
-                    day[y]='1'
-                elif day[y] == 'T':
-                    day[y]='2'
-                elif day[y] == 'W':
-                    day[y]='3'
-                elif day[y] == 'TH':
-                    day[y]='4'
-                elif day[y] == 'F':
-                    day[y]='5'
-                elif day[y] == 'S':
-                    day[y]='6'
-            for d in day:
-                days += d
-            st = datetime.strptime(start_time[i],"%I:%M %p").time()
-            et = datetime.strptime(end_time[i],"%I:%M %p").time()
-            Schedule.objects.create(
-                term=term,
-                room=room,
-                faculty=ins[i],
-                coursetitle=ct[i],
-                classnum=cn[i],
-                component=com[i],
-                subject=sub[i],
-                section=sec[i],
-                capacity=cap[i],
-                time_start=st,
-                time_end=et,
-                dayofweek=days
-                )
-
         
     return render(request,"UPM/dashboard.html")
 
@@ -235,7 +244,8 @@ def calendarView(request, slug):
     for t in terms:
         if t.isActivated:
             term = t
-    schedule = Schedule.objects.filter(room=room,term=term)
+    schedfile = ScheduleFile.objects.get(term=term)
+    schedule = Schedule.objects.filter(room=room,schedfile=schedfile)
     form = AddBookFrCal()
     if request.method == "POST":
         form = AddBookFrCal(request.POST)

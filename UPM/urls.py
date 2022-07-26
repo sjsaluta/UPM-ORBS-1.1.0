@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = [
     path('', views.indexPage, name='indexPage'),
     path('dashboard/',views.dashBoardPage, name='dashBoardPage'),
@@ -37,4 +40,8 @@ urlpatterns = [
    
     path('rooms/',views.roomView,name='roomView'),
     path('rooms/<slug:slug>/calendar-view',views.calendarView, name='calendarView'),
+
+    path('upload/',views.uploadPage,name='uploadPage')
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -8,4 +8,5 @@ admin.site.register(Building)
 admin.site.register(Room)
 admin.site.register(Term)
 admin.site.register(Schedule)
+admin.site.register(ScheduleFile)
 

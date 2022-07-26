@@ -83,8 +83,17 @@ class Term(models.Model):
             self.slug = slugify('term'+self.name)
         return super().save(*args, **kwargs)
 
-class Schedule(models.Model):
+class ScheduleFile(models.Model):
     term = models.ForeignKey(Term,on_delete=models.CASCADE,null=True)
+    college = models.OneToOneField(College,on_delete=models.CASCADE,null=True)
+    ocs = models.ForeignKey('accounts.OCS', on_delete=models.CASCADE,null=True)
+    file = models.FileField()
+
+    def __str__(self):
+        return str(self.file)
+
+class Schedule(models.Model):
+    schedfile = models.ForeignKey(ScheduleFile,on_delete=models.CASCADE,null=True)
     room = models.ForeignKey(Room,on_delete=models.CASCADE,null=True)
     faculty = models.CharField(max_length=200,null=True)
     coursetitle= models.CharField(max_length=200,null=True)
@@ -99,7 +108,7 @@ class Schedule(models.Model):
     
 
     def __str__(self):
-        return self.coursetitle
+        return self.coursetitle + ' - ' + self.section  + ' - ('+ self.component + ')'
 
     def getDays(self):
         arr=[]
