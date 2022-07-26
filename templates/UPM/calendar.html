@@ -150,7 +150,7 @@
       // events: 'bn.bd#holiday@group.v.calendar.google.com',
       
       
-      dayMaxEvents: true, // allow "more" link when too many events
+      dayMaxEvents: false, // allow "more" link when too many events
       events: [
         {% for book in booking %}
           {
@@ -166,23 +166,32 @@
             
           },
         {% endfor %}
+        {% for s in sched %}
+          {
+            "title": "{{s.coursetitle}}({{s.component}}) ",
+            "startTime": '{{s.time_start|date:"H:i"}}',
+            "endTime": '{{s.time_end|date:"H:i"}}',
+            "daysOfWeek":'{{s.getDays}}',
+            "color":"brown"
+          },
+        {% endfor %}
       ],
             
       eventClick: function(info) {
         console.log('modal', info);
-        let approve;
+        /*let approve;
         if(info.event.extendedProps.approved === 'False'){
           approve = 'No';
         }
         else{
           approve = 'Yes';
-        }
+        }*/
         
         $('#exampleModalLabel').text('Subject: ' + info.event.title)
-        $('#faculty').text('Faculty: ' + info.event.extendedProps.faculty)
+       /* $('#faculty').text('Faculty: ' + info.event.extendedProps.faculty)
         $('#activity').text('Activity: ' + info.event.extendedProps.activity)
         $('#start').text('Start: ' + formatAMPM(info.event.start) )
-        $('#end').text('End: ' + formatAMPM(info.event.end))
+        $('#end').text('End: ' + formatAMPM(info.event.end))*/
         $('#exampleModal').modal('show')
         $('#edit').click(function(){
           location.href = "{% url 'dashBoardPage' %}"

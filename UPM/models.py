@@ -57,7 +57,6 @@ class Room(models.Model):
     room_type =models.PositiveSmallIntegerField(choices=TYPES,null=True)
     college = models.ForeignKey(College,on_delete=models.CASCADE,null=True)
     building = models.ForeignKey(Building, on_delete=models.CASCADE, null=True)
-    isAvailable = models.BooleanField(default=True)
     capacity = models.IntegerField()
 
     def __str__(self):
@@ -85,22 +84,25 @@ class Term(models.Model):
         return super().save(*args, **kwargs)
 
 class Schedule(models.Model):
-    DAYS_OF_WEEK = (
-        (1, 'Monday'),
-        (2, 'Tuesday'),
-        (3, 'Wednesday'),
-        (4, 'Thursday'),
-        (5, 'Friday'),
-    )
-
     term = models.ForeignKey(Term,on_delete=models.CASCADE,null=True)
     room = models.ForeignKey(Room,on_delete=models.CASCADE,null=True)
-    faculty = models.ForeignKey("accounts.Faculty",on_delete=models.CASCADE,null=True)
+    faculty = models.CharField(max_length=200,null=True)
+    coursetitle= models.CharField(max_length=200,null=True)
+    classnum = models.IntegerField(null=True)
+    component = models.CharField(max_length=10,null=True)
+    section = models.CharField(max_length=10,null=True)
     subject = models.CharField(max_length=200,null=True)
-    time_start=models.DateTimeField(null=True)
-    time_end=models.DateTimeField(null=True)
-    dayofweek = models.PositiveSmallIntegerField(choices=DAYS_OF_WEEK,null=True)
+    capacity= models.IntegerField(null=True)
+    time_start= models.TimeField(null=True)
+    time_end= models.TimeField(null=True)
+    dayofweek = models.CharField(max_length=10,null=True)
     
 
     def __str__(self):
-        return "Schedule " + self.id
+        return self.coursetitle
+
+    def getDays(self):
+        arr=[]
+        arr[:0]=self.dayofweek
+        arr = [int(i) for i in arr]
+        return arr

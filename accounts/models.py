@@ -49,6 +49,7 @@ class Faculty(models.Model):
 class OCS(models.Model):
     user = models.OneToOneField(AuthUser,on_delete=models.CASCADE,null=True)
     college = models.ForeignKey("UPM.College",on_delete=models.CASCADE,null=True)
+    
 
     class Meta:
         verbose_name_plural = "College Secretaries"
@@ -56,7 +57,10 @@ class OCS(models.Model):
     def __str__(self):
         name = AuthUser.get_full_name(self.user)
         return name + ' <' + self.user.email + '>'
-
+class File(models.Model):
+    ocs = models.ForeignKey(OCS,on_delete=models.CASCADE,null=True)
+    file = models.FileField(upload_to="schedules/")
+    
 class Staff(models.Model):
     user = models.OneToOneField(AuthUser,on_delete=models.CASCADE,null=True)
 

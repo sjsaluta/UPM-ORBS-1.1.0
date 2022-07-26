@@ -11,6 +11,7 @@ from datetime import date
 
 # Create your views here.
 
+@login_required(login_url='loginPage')
 def addBooking(request):
     form = AddBooking()
     user = request.user
@@ -30,11 +31,13 @@ def addBooking(request):
 
     return render(request,'booking/add-booking.html',context)
 
+@login_required(login_url='loginPage')
 def viewBookings(request):
     bookings = Booking.objects.all()
     context={'bookings':bookings}
     return render(request, 'booking/booking.html',context)
 
+@login_required(login_url='loginPage')
 def bookingDetails(request,pk):
     booking = Booking.objects.get(id=pk)
     d = booking.start_time.strftime("%Y/%m/%d") + ' - ' + booking.end_time.strftime("%Y/%m/%d")

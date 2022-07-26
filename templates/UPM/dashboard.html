@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+{% endblock extracss %}
+{% block breadcrumb %}
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class = "container w-auto">
+    <form method='POST'>
+        {% csrf_token %}
+        <input class = "btn btn-success" type="submit" value="Upload" name="upload">
+      </form>
+</div>
+
+
+
+{% endblock content %}
+
+{% block extrascripts %}
+{% endblock extrascripts %}

@@ -31,6 +31,7 @@ def logOutPage(request):
     logout(request)
     return redirect('loginPage')
 
+@login_required(login_url='loginPage')
 def AddUserPage(request):
     add = False #add new fields
     form = CreateUserForm()
@@ -70,6 +71,7 @@ def AddUserPage(request):
     
     return render(request,"accounts/add-user.html", context)
 
+@login_required(login_url='loginPage')
 def manageUsers(request):
     users = AuthUser.objects.exclude(username='admin')
     context={'users':users}
