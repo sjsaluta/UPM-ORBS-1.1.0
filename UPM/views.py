@@ -21,6 +21,7 @@ def indexPage(request):
 def uploadPage(request):
     form = UploadForm()
     ocs = OCS.objects.get(user=request.user)
+    
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -28,7 +29,11 @@ def uploadPage(request):
             f.ocs=ocs
             f.college=ocs.college
             f.save()
-            df = pd.read_csv(f.file.name).iloc[7:,[0,1,2,4,5,6,7,8,9]]
+
+            ''' The next lines parse the data from csv to Schedule Model'''
+
+            file = ScheduleFile.objects.get(file = f.file.name)
+            df = pd.read_csv('media/'+f.file.name).iloc[7:,[0,1,2,4,5,6,7,8,9]]
             df.columns=['Class No.','Course Title','Subject','Section','Component','Schedule','Room','Instructor','Class Capacity']
             df = df[df["Room"].str.contains("TBA") == False]
             cn = df['Class No.'].tolist()
@@ -74,8 +79,9 @@ def uploadPage(request):
                     days += d
                 st = datetime.strptime(start_time[i],"%I:%M %p").time()
                 et = datetime.strptime(end_time[i],"%I:%M %p").time()
+                
                 Schedule.objects.create(
-                    schedfile = f.file.name,
+                    schedfile = file,
                     room=room,
                     faculty=ins[i],
                     coursetitle=ct[i],
@@ -88,7 +94,12 @@ def uploadPage(request):
                     time_end=et,
                     dayofweek=days
                     )
-    return render(request,'UPM/upload.html')
+
+            ''' endline '''    
+
+    context={'form':form}
+    return render(request,'UPM/upload.html',context)
+
 @login_required(login_url='loginPage')
 def dashBoardPage(request):
         
@@ -298,6 +309,7 @@ def roomView(request):
     build = Building.objects.all()
     college = College.objects.all()
     rooms = rfilter.qs
+    bcount = Building.objects.filter(college=college)
 
-    context={'rooms':rooms,'filter':rfilter,'building':build,'colleges':college}
+    context={'rooms':rooms,'filter':rfilter,'building':build,'colleges':college,'range':(0,)}
     return render(request,'UPM/room-view.html',context)

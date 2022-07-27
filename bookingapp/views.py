@@ -33,7 +33,10 @@ def addBooking(request):
 
 @login_required(login_url='loginPage')
 def viewBookings(request):
-    bookings = Booking.objects.all()
+    if request.user.user_type is 1 or request.user.user_type is 2:
+        bookings = Booking.objects.filter(booker=request.user)
+    else:
+        bookings = Booking.objects.all()
     context={'bookings':bookings}
     return render(request, 'booking/booking.html',context)
 

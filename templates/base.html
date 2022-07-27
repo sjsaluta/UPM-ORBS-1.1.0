@@ -32,12 +32,23 @@
                         <div>
                     </li>
                     {% else %}
-                    <li>
-                        <a href="#"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-1">Booking</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
-                    </li>
+                        {% if request.user.user_type != 3 %}
+                        <li>
+                            <a href="{% url 'viewBookings' %}"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-1">Bookings</span></a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label"> Upload</span></a>
+                        </li>
+                        {%endif%}
+                        {% if request.user.user_type == 1 or request.user.user_type == 2 %}
+                        <li>
+                            <a href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
+                        </li>
+                       {% endif %}
+                        
+                        
+                        
                     {% endif %}
                 </ul>
 
