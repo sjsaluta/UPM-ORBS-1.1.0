@@ -80,7 +80,7 @@
                        
                         {% for build in college.building_set.all %}   
                             {% for b in building %}
-                                if('{{b}}'!= '{{build}}'){                              
+                                if('{{b.college}}'!= '{{build.college}}'){                              
                                     $('#id_building option[value="{{b.id}}"]').remove();
                                 }
                             {%endfor%}

@@ -45,6 +45,7 @@
                             <option value="staff">Staff</option>
                             <option value="ocs">OCS</option>
                             <option value="adpd">ADPD</option>
+                            <option value="ao">AO</option>
                         </select>
                     </div>
                     
@@ -125,7 +126,7 @@
         if (option !== 'none'){
             btn.addEventListener('click', () => {
                 form.style.display = 'block';
-                if (option !== 'adpd'){
+                if (option !== 'adpd' && option !== 'ao'){
                     college.style.display = 'block';
                     if(option !== 'ocs'){
                         dept.style.display = 'block';            

@@ -21,10 +21,10 @@ def addBooking(request):
         if form.is_valid():
             book=form.save(False)
             if(user.user_type == 1):
-                book.faculty=user
-                book.booker=user
+                book.faculty= Faculty.objects.get(user=user)
+                book.booker= user
             else:
-                book.booker=user
+                book.booker = user
             book.save()
     
     context={'form':form,'user':user}
@@ -33,7 +33,7 @@ def addBooking(request):
 
 @login_required(login_url='loginPage')
 def viewBookings(request):
-    if request.user.user_type is 1 or request.user.user_type is 2:
+    if request.user.user_type == 1 or request.user.user_type == 2:
         bookings = Booking.objects.filter(booker=request.user)
     else:
         bookings = Booking.objects.all()
@@ -43,15 +43,22 @@ def viewBookings(request):
 @login_required(login_url='loginPage')
 def bookingDetails(request,pk):
     booking = Booking.objects.get(id=pk)
-    d = booking.start_time.strftime("%Y/%m/%d") + ' - ' + booking.end_time.strftime("%Y/%m/%d")
+    d = booking.start_time.strftime("%Y/%m/%d")
     time = booking.start_time.strftime("%I:%M%p") + '-' + booking.end_time.strftime("%I:%M%p")
 
+    form = AddBooking(instance=booking)
     if request.POST.get("approve"):
         booking.isApproved=True
         booking.date_approved=date.today()
         if request.user.user_type is 5:
             booking.approver = request.user
         booking.save()
+    
+    if request.method == "POST":
+        form = AddBooking(request.POST,instance=booking)
+        
+        if form.is_valid():
+            form.save()
 
-    context={'booking':booking,'date':d,'time':time}
+    context={'booking':booking,'date':d,'time':time,'form':form}
     return render(request,'booking/booking-details.html',context)

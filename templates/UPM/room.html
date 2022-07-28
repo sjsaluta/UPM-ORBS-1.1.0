@@ -48,9 +48,9 @@
                 <td>{{room.college}}</td>
                 <td>{{room.capacity}}</td>
                 <td><a class='btn btn-secondary btn-sm' href = {% url 'calendarView' room.slug %}><i class="fa-solid fa-calendar-day"></i> Go to Calendar</a></td>
-                <td><button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup"> Remove </button></td>
+                <td><button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup{{room.id}}"> Remove </button></td>
               </tr>
-              <div class="modal" id="deletePopup" tab-index="-1">
+              <div class="modal fade" id="deletePopup{{room.id}}" tab-index="-1">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -62,7 +62,7 @@
                     </div>
                     <div class="modal-footer">
                         <!-- link to archive here -->
-                        <a class="btn btn-danger" href="#">Delete</a>
+                        <a class="btn btn-danger" href="{% url 'deleteRoom' room.id%}">Delete</a>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
                     </div>
                   </div>
@@ -81,8 +81,8 @@
                           <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
                       </div>
                       <div class="modal-body">
-                          {{form.college_select | as_crispy_field}}
-                          {{form.build_select | as_crispy_field}}
+                          {{form.college | as_crispy_field}}
+                          {{form.building| as_crispy_field}}
                           <div id="name_cap">
                             {{form.name | as_crispy_field}}
                             {{form.capacity | as_crispy_field}}
@@ -107,43 +107,40 @@
 
 {% block extrascripts %}
 <script>
-    $('#id_college_select').change(function() {populateBuild(this)});
-    $('#id_build_select').change(function(){
-      console.log("success")
-      $('#name_cap').css("display","block")});
-    //$('#id_description').addClass('descriptions');
-    build = {{ form.build | safe }}
-    college = {{ form.colleges | safe}};
-    console.log(build)
-    populateCollege();
-    $("#id_build_select").append('<option value="" disabled selected>Select college first</option>');
-    function populateCollege() {
-        $('#id_college_select').empty();
-        $("#id_college_select").append('<option value="" disabled selected>Select college</option>');
-        $.each(college, function(v) {
-            $('#id_college_select')
-                .append($("<option></option>")
-                .attr("value", college[v])
-                .text(college[v]));
-        });
-    }
-
-    function populateBuild(event) {
-        col = $("#id_college_select option:selected").text();
-        $("#id_build_select").empty();
-        $("#id_build_select").append('<option value="" disabled selected>Select building</option>');
-        for (let [c, cbuild] of Object.entries(build)) {
-            if (c == col) {
-                //alert(b);
-                for (build in cbuild) {
-                    $('#id_build_select')
-                        .append($("<option></option>")
-                            .attr("value", cbuild[build])
-                            .text(cbuild[build]));
-                }
-            }
-        }
-    }
+  var $options=$('#id_building option').clone();
+  $('#id_college').change(function() {
+    console.log('yes');$('#id_building').empty();$('#id_building').html( $options.clone());populateBuild(this);
+  });
+  $('#id_building').change(function(){
+    console.log("success")
+    $('#name_cap').css("display","block")
+  });
+  populateBuild()
+  function populateBuild(event) {
+      if (!$('#id_college').val()){
+          console.log('empty')
+           $('#id_building').html( $options.clone());
+      }
+      else{
+          col = $("#id_college option:selected").text();
+          {% for college in colleges%}
+              if ('{{college}}' == col) {
+                  //alert(b);
+                  console.log('true')
+                  
+                     
+                      {% for build in college.building_set.all %}   
+                          {% for b in building %}
+                              if('{{b.college}}'!= '{{build.college}}'){                              
+                                  $('#id_building option[value="{{b.id}}"]').remove();
+                              }
+                          {%endfor%}
+                      {% endfor %}
+              }
+          {% endfor %}    
+      }
+      
+  }
     
 </script>
 {% endblock extrascripts %}

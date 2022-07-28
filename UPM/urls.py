@@ -22,7 +22,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.indexPage, name='indexPage'),
-    path('dashboard/',views.dashBoardPage, name='dashBoardPage'),
+    path('home/',views.dashBoardPage, name='dashBoardPage'),
 
     #admin pages
     path('manage-term/',views.manageTerm, name='manageTerm'),
@@ -37,6 +37,7 @@ urlpatterns = [
     path('manage-college/<slug:c>/<slug:b>/add-room/',views.addBuildRoom, name='addBuildRoom'),
     path('manage-room/',views.manageRooms, name='manageRooms'), 
     path('manage-room/add-room/',views.addRoom, name='addRoom'),
+    path('manage-room/delete/<int:pk>/',views.deleteRoom,name='deleteRoom'),
    
     path('rooms/',views.roomView,name='roomView'),
     path('rooms/<slug:slug>/calendar-view',views.calendarView, name='calendarView'),

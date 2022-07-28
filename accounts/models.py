@@ -17,11 +17,11 @@ class AuthUser(AbstractUser):
     ADPD = 4
     AO = 5
     USER_TYPE_CHOICES = (
-        (FACULTY, 'faculty'),
-        (STAFF, 'staff'),
-        (OCS, 'ocs'),
-        (ADPD, 'adpd'),
-        (AO,'ao')
+        (FACULTY, 'Faculty'),
+        (STAFF, 'Staff'),
+        (OCS, 'OCS'),
+        (ADPD, 'ADPD'),
+        (AO,'AO')
     )
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
@@ -33,6 +33,9 @@ class AuthUser(AbstractUser):
     user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES,null=True)
     def __str__(self):
         return self.username
+
+    def getFullName(self):
+        return self.first_name +' ' + self.last_name + ' (' + self.email + ')'
 
 class Faculty(models.Model):
     user = models.OneToOneField(AuthUser,on_delete=models.CASCADE,null=True)

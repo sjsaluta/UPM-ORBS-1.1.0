@@ -7,7 +7,7 @@ from UPM.models import *
 
 class Booking(models.Model):
     room = models.ForeignKey(Room,on_delete=models.CASCADE,null=True)
-    faculty =  models.ForeignKey(Faculty,on_delete=models.CASCADE,null=True)
+    faculty =  models.ForeignKey(Faculty,on_delete=models.CASCADE,null=True,blank = True)
     approver =  models.ForeignKey(AO,on_delete=models.CASCADE,null=True,blank=True)
     booker = models.ForeignKey(AuthUser,on_delete=models.CASCADE,null=True,blank=True)
     dept_or_office = models.CharField(max_length=300,null=True,blank=True)

@@ -17,10 +17,29 @@
 {% block content %}
 <div class = "container-fluid">
     <h2 class="py-4 px-4">Manage Users</h2>
+      <form method="POST" action="">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4 ">
+                <label class="form-label">User Type</label>
+                <select class="form-select" id="role" name="role">
+                    <option value="none">--------</option>
+                    <option value="faculty">Faculty</option>
+                    <option value="staff">Staff</option>
+                    <option value="ocs">OCS</option>
+                    <option value="adpd">ADPD</option>
+                    <option value="ao">AO</option>
+                </select>
+                
+            </div>
+            <div class="col-md-4 mt-4 pt-2">
+              <button type="submit" class='btn btn-success'> Filter</button>
+            </div>
+        </div>
+    </div>
     <div class = 'text-right'>
       <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'AddUserPage' %}"><i class="fa-solid fa-plus"></i> Add User</a>
     </div>
-
     <table class="table">
         <thead>
           <tr>
@@ -40,9 +59,9 @@
             <td>{{user.get_full_name}}</td>
             <td>{{user.email}}</td>
             <td>{{user.get_user_type_display}}</td>
-            <td><button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup"> Delete</td>
+            <td><button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup{{user.id}}"> Delete</td>
           </tr>
-          <div class="modal" id="deletePopup" tab-index="-1">
+          <div class="modal" id="deletePopup{{user.id}}" tab-index="-1">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
@@ -54,7 +73,7 @@
                 </div>
                 <div class="modal-footer">
                     <!-- link to archive here -->
-                    <a class="btn btn-danger" href="#">Delete</a>
+                    <a class="btn btn-danger" href="{% url 'deleteUser' user.id %}">Delete</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
                 </div>
               </div>

@@ -23,4 +23,5 @@ urlpatterns = [
    path('login/',views.loginPage, name='loginPage'),
    path('logout/', views.logOutPage, name="logout"),
    path('manage/',views.manageUsers,name='manageUsers'),
+   path('delete/<int:pk>/',views.deleteUser,name='deleteUser')
 ]

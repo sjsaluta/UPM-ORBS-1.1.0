@@ -47,8 +47,10 @@ def AddUserPage(request):
             ut=2
         elif role == 'ocs':
             ut=3
-        else:
+        elif role == 'adpd':
             ut=4
+        else:
+            ut=5
 
         #adds user to database if form is valid
         if form.is_valid():
@@ -63,8 +65,10 @@ def AddUserPage(request):
                 Staff.objects.create(user=user,college=user.college,dept=user.department)
             elif ut == 3:
                 OCS.objects.create(user=user,college=user.college)
-            else:
+            elif ut == 4:
                 ADPD.objects.create(user=user)
+            else:
+                AO.objects.create(user=user)
 
     context = {'form': form,'add':add,'ut':ut}  
     
@@ -74,5 +78,22 @@ def AddUserPage(request):
 @login_required(login_url='loginPage')
 def manageUsers(request):
     users = AuthUser.objects.exclude(username='admin')
+    if request.method =="POST":
+        role = request.POST.get('role')
+        if role == 'faculty':
+            users = AuthUser.objects.filter(user_type=1)
+        elif role == 'staff':
+            users = AuthUser.objects.filter(user_type=2)
+        elif role == 'ocs':
+            users = AuthUser.objects.filter(user_type=3)
+        elif role == 'adpd':
+            users = AuthUser.objects.filter(user_type=4)
+        elif role == 'ao':
+            users = AuthUser.objects.filter(user_type=5)
     context={'users':users}
     return render(request,"accounts/users.html",context)
+
+def deleteUser(request,pk):
+    user = AuthUser.objects.get(id=pk)
+    user.delete()
+    return redirect('manageUsers')

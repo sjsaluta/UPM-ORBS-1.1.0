@@ -159,9 +159,7 @@
             "start": '{{book.start_time|date:"Y-m-d H:i:s"}}',
             "end": '{{book.end_time|date:"Y-m-d H:i:s"}}',
             "extendedProps":{
-              "faculty" :'{{book.getFullName}}',
-              "approved":'{{book.isApproved}}',
-              "activity":'{{book.activity}}'
+              "type" :'booking',
             },
             
           },
@@ -178,24 +176,29 @@
       ],
             
       eventClick: function(info) {
-        console.log('modal', info);
-        /*let approve;
-        if(info.event.extendedProps.approved === 'False'){
-          approve = 'No';
+
+        if(info.event.extendedProps.type == 'booking'){
+          {% for book in booking %}
+
+            if ({{book.id}}== info.event.id){
+              location.href = "{% url 'bookingDetails' book.id %}"
+            }
+
+          {% endfor %}
         }
         else{
-          approve = 'Yes';
-        }*/
-        
-        $('#exampleModalLabel').text('Subject: ' + info.event.title)
-       /* $('#faculty').text('Faculty: ' + info.event.extendedProps.faculty)
-        $('#activity').text('Activity: ' + info.event.extendedProps.activity)
-        $('#start').text('Start: ' + formatAMPM(info.event.start) )
-        $('#end').text('End: ' + formatAMPM(info.event.end))*/
-        $('#exampleModal').modal('show')
-        $('#edit').click(function(){
-          location.href = "{% url 'dashBoardPage' %}"
-        })               
+          $('#exampleModalLabel').text('Subject: ' + info.event.title)
+        /* $('#faculty').text('Faculty: ' + info.event.extendedProps.faculty)
+          $('#activity').text('Activity: ' + info.event.extendedProps.activity)
+          $('#start').text('Start: ' + formatAMPM(info.event.start) )
+          $('#end').text('End: ' + formatAMPM(info.event.end))*/
+          $('#exampleModal').modal('show')
+          $('#edit').click(function(){
+            location.href = "{% url 'dashBoardPage' %}"
+          }) 
+        }
+
+                      
       },
     });
 

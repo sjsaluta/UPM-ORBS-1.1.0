@@ -231,6 +231,8 @@ def addBuildRoom(request,c,b):
 def manageRooms(request):
     rooms=Room.objects.all()
     form = ColBuildForm()
+    build = Building.objects.all()
+    college = College.objects.all()
 
     if request.method == "POST":
         form = ColBuildForm(request.POST)
@@ -243,8 +245,13 @@ def manageRooms(request):
             r.college = col_selected[0]
             r.save()
 
-    context={'rooms':rooms,'form':form}
+    context={'rooms':rooms,'form':form,'colleges':college,'building':build}
     return render(request,"UPM/room.html",context)
+
+def deleteRoom(request,pk):
+    room = Room.objects.get(id=pk)
+    room.remove()
+    return redirect('manageRooms')
 
 ##### User Views #####
 @login_required(login_url='loginPage')
@@ -255,8 +262,10 @@ def calendarView(request, slug):
     for t in terms:
         if t.isActivated:
             term = t
-    schedfile = ScheduleFile.objects.get(term=term)
-    schedule = Schedule.objects.filter(room=room,schedfile=schedfile)
+            schedfile = ScheduleFile.objects.get(term=term)
+            schedule = Schedule.objects.filter(room=room,schedfile=schedfile)
+
+    schedule = Schedule.objects.filter(room=room)
     form = AddBookFrCal()
     if request.method == "POST":
         form = AddBookFrCal(request.POST)
@@ -264,7 +273,7 @@ def calendarView(request, slug):
             book = form.save(False)
             book.room = room
             if(request.user.user_type == 1):
-                book.faculty=request.user
+                book.faculty= Faculty.objects.get(user=request.user)
                 book.booker=request.user
             else:
                 book.booker=request.user
@@ -299,6 +308,7 @@ def buildingView(request,c,b):
     college = College.objects.get(slug=c)
     building= Building.objects.get(slug=b)
     room = Room.objects.filter(building=building).order_by('name')
+
     context={'rooms':room,'building':building,'college':college}
     return render(request,'UPM/building-details.html',context)
 
@@ -309,7 +319,6 @@ def roomView(request):
     build = Building.objects.all()
     college = College.objects.all()
     rooms = rfilter.qs
-    bcount = Building.objects.filter(college=college)
 
-    context={'rooms':rooms,'filter':rfilter,'building':build,'colleges':college,'range':(0,)}
+    context={'rooms':rooms,'filter':rfilter,'building':build,'colleges':college}
     return render(request,'UPM/room-view.html',context)

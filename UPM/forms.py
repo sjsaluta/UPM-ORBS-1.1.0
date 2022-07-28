@@ -68,7 +68,7 @@ class ColBuildForm(ModelForm):
 
     class Meta:
         model = Room
-        fields = ('college_select', 'build_select','name','capacity')
+        fields = ('college','building','name','capacity')
 
 class UploadForm(ModelForm):
 

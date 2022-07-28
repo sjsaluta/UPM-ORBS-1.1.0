@@ -19,7 +19,7 @@
     <h2 class="py-4 px-4">Booking Number {{booking.id}}</h2>
     <div class= "row px-4 pb-3 justify-content-between">
       <div class="col-6 ">
-      <h4>Requested By: {{booking.booker}}</h4>
+      <h4>Requested By: {{booking.booker.getFullName}}</h4>
       {% if booking.isApproved%}
         <h5>Approved: Yes</h5>
       {% else %}
@@ -65,6 +65,8 @@
         </tbody>
       </table>
       <div class= 'row'>
+      {% if request.user.user_type == 4 or request.user.user_type == 5 %}
+      
         <div class = 'col-4'>
           {% if not booking.isApproved %}
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal">
@@ -75,8 +77,21 @@
           <h6 class='px-4'>Date approved: {{booking.date_approved}}</h6>
           {% endif %}
         </div>
-        
-        <!-- Modal -->
+      {% elif request.user == booking.booker %}
+      <div class = 'col-4'>
+        {% if booking.isApproved %}
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal" disabled>
+          Edit
+        </button> 
+        <p>Already approved. Unable to edit.</p>
+        {% else %}
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal">
+          Edit
+        </button> 
+        {%endif%}  
+      </div>
+      {% endif %}
+        <!-- Modal for approval -->
         <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -92,6 +107,36 @@
                 <form method='POST'>
                   {% csrf_token %}
                   <input class = "btn btn-success" type="submit" value="Approve" name="approve">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal for editing -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="approveModalLabel">Booking Edit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="modal-body">
+                    {{form.subject | as_crispy_field}}
+                    {% if request.user.user_type != 1 %}
+                        {{form.faculty | as_crispy_field}}
+                    {% endif %}
+                    {{form.start_time | as_crispy_field}}
+                    {{form.end_time | as_crispy_field}}
+                    {{form.numofstudents | as_crispy_field}}
+                    {{form.activity | as_crispy_field}}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal" id="edit">Edit</button>
+                  </div>
                 </form>
               </div>
             </div>
