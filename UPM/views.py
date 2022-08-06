@@ -1,11 +1,16 @@
 from distutils.command.build import build
+from multiprocessing import context
+from django.http import HttpResponseRedirect, JsonResponse
+from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout ,update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.urls import reverse_lazy
 
 from UPM.filters import RoomFilter
+from bookingapp.views import viewBookings
 from . forms import *
 from bookingapp.forms import *
 from bookingapp.models import *
@@ -16,7 +21,7 @@ from datetime import datetime
 # Create your views here.
 
 def indexPage(request):
-    return redirect(dashBoardPage)
+    return redirect(viewBookings)
 
 def uploadPage(request):
     form = UploadForm()
@@ -100,10 +105,7 @@ def uploadPage(request):
     context={'form':form}
     return render(request,'UPM/upload.html',context)
 
-@login_required(login_url='loginPage')
-def dashBoardPage(request):
-        
-    return render(request,"UPM/dashboard.html")
+
 
 #### Admin Views #####
 
@@ -151,6 +153,7 @@ def addTerm(request):
         form = AddTerm(request.POST)
         if form.is_valid():
             form.save()
+        return redirect('manageTerm')
     context={'form':form}
     return render(request,"UPM/add-term.html",context)
 
@@ -168,6 +171,7 @@ def addCollege(request):
         form = AddCollege(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('manageCollege')
     context={'form':form}
     return render(request,"UPM/add-college.html",context)
 
@@ -181,6 +185,7 @@ def addDept(request,slug):
             dept = form.save(False)
             dept.college = college
             dept.save()
+            return redirect(reverse('adminCollegeView',kwargs={'slug':slug}))  
     context={'form':form}
     return render(request,"UPM/add-dept.html",context)
 
@@ -194,6 +199,7 @@ def addBuild(request,slug):
             build = form.save(False)
             build.college = college
             build.save()
+            return redirect(reverse('adminCollegeView',kwargs={'slug':slug}))  
 
     context={'form':form}
     return render(request,"UPM/add-build.html",context)
@@ -209,6 +215,8 @@ def addRoom(request):
     context={'form':form,'frbuild':frbuild}
     return render(request,"UPM/add-room.html",context)
 
+
+
 @login_required(login_url='loginPage')
 def addBuildRoom(request,c,b):
     frbuild = True
@@ -222,7 +230,7 @@ def addBuildRoom(request,c,b):
             room.college = college
             room.building = building
             room.save()
-            return redirect(reverse('adminBuildingView',kwargs={"c": college.slug,"b":building.slug}))
+            return redirect(reverse('adminBuildingView',kwargs={"c": c,"b":b}))
     context={'form':form,'frbuild':frbuild}
     return render(request,"UPM/add-room.html",context)
     
@@ -235,23 +243,47 @@ def manageRooms(request):
     college = College.objects.all()
 
     if request.method == "POST":
-        form = ColBuildForm(request.POST)
-        if form.is_valid():
-            room = form.cleaned_data.get
-            col_selected = College.objects.filter(name=room('college_select'))
-            build_selected = Building.objects.filter(name=room('build_select'))
-            r = form.save(False)
-            r.building = build_selected[0]
-            r.college = col_selected[0]
-            r.save()
 
+        form = ColBuildForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            
     context={'rooms':rooms,'form':form,'colleges':college,'building':build}
     return render(request,"UPM/room.html",context)
 
 def deleteRoom(request,pk):
     room = Room.objects.get(id=pk)
-    room.remove()
+    room.delete()
     return redirect('manageRooms')
+
+def editRoom(request,slug):
+    room = Room.objects.get(slug=slug)
+    
+    if request.method == "POST":
+        form = ColBuildForm(request.POST, instance=room)
+
+        if form.is_valid():
+            form.save()
+
+        return HttpResponseRedirect(reverse_lazy('manageRooms'))
+    else:
+        form = ColBuildForm(instance=room)
+        
+        context = {'form':form}
+        return render(request,'UPM/edit-room.html',context)
+
+def rooms(request):
+    data = dict()
+    if request.method == 'GET':
+        rooms = Room.objects.all()
+        data['table'] = render_to_string(
+            'UPM/room-table.html',
+            {'rooms': rooms},
+            request=request
+        )
+        return JsonResponse(data)
+
 
 ##### User Views #####
 @login_required(login_url='loginPage')
@@ -262,8 +294,10 @@ def calendarView(request, slug):
     for t in terms:
         if t.isActivated:
             term = t
-            schedfile = ScheduleFile.objects.get(term=term)
-            schedule = Schedule.objects.filter(room=room,schedfile=schedfile)
+            if ScheduleFile.objects.filter(term=term).exists():
+                schedfile = ScheduleFile.objects.get(term=term)
+                schedule = Schedule.objects.filter(room=room,schedfile=schedfile)
+            
 
     schedule = Schedule.objects.filter(room=room)
     form = AddBookFrCal()

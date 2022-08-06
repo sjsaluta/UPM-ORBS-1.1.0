@@ -40,33 +40,12 @@
         </div>
       {% endif %}
     </div>
-    <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
-            <th scope="col">Room</th>
-            <th scope="col">Activity</th>
-            <th scope="col">Equipments Needed</th>
-            <th scope="col">No. of Participants</th>
-            <th scope="col">Remarks/Changes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class = "py-5">{{date}}</td>
-            <td class = "py-5">{{time}}</td>
-            <td class = "py-5">{{booking.room}}</td>
-            <td class = "py-5">{{booking.activity}}</td>
-            <td class = "py-5">{{booking.equipments}}</td>
-            <td class = "py-5">{{booking.numofstudents}}</td>
-            <td class = "py-5">{{booking.remarks}}</td>
-          </tr>
-        </tbody>
-      </table>
+
+   {% include 'booking/booking-table.html' %}
+
       <div class= 'row'>
-      {% if request.user.user_type == 4 or request.user.user_type == 5 %}
-      
+
+      {% if request.user.user_type == 5 %}
         <div class = 'col-4'>
           {% if not booking.isApproved %}
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal">
@@ -77,20 +56,21 @@
           <h6 class='px-4'>Date approved: {{booking.date_approved}}</h6>
           {% endif %}
         </div>
+
       {% elif request.user == booking.booker %}
       <div class = 'col-4'>
         {% if booking.isApproved %}
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal" disabled>
-          Edit
+        <button type="button" class="btn btn-success" disabled>
+          <i class="fa-solid fa-pen-to-square"></i> Edit
         </button> 
         <p>Already approved. Unable to edit.</p>
         {% else %}
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal">
-          Edit
-        </button> 
+        <button type="button" class="update bs-modal btn btn-sm btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i> Edit </button>
         {%endif%}  
       </div>
+
       {% endif %}
+
         <!-- Modal for approval -->
         <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
@@ -112,37 +92,15 @@
             </div>
           </div>
         </div>
+
         <!-- Modal for editing -->
-        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
+        <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+          <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="approveModalLabel">Booking Edit</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form method="POST">
-                  {% csrf_token %}
-                  <div class="modal-body">
-                    {{form.subject | as_crispy_field}}
-                    {% if request.user.user_type != 1 %}
-                        {{form.faculty | as_crispy_field}}
-                    {% endif %}
-                    {{form.start_time | as_crispy_field}}
-                    {{form.end_time | as_crispy_field}}
-                    {{form.numofstudents | as_crispy_field}}
-                    {{form.activity | as_crispy_field}}
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal" id="edit">Edit</button>
-                  </div>
-                </form>
-              </div>
+            
             </div>
           </div>
         </div>
-      </div>
 
 </div>
 
@@ -151,4 +109,21 @@
 {% endblock content %}
 
 {% block extrascripts %}
+<script>
+$(function(){
+
+    function updateBookingModalForm() {
+
+      $('.update').modalForm({
+        formURL: "{% url 'editBooking' booking.id%}",
+      });
+    }
+    updateBookingModalForm();
+
+    function reinstantiateModalForms(){
+      updateBookingModalForm();
+    }
+})
+
+</script>
 {% endblock extrascripts %}

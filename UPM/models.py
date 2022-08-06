@@ -80,7 +80,7 @@ class Term(models.Model):
 
     def save(self, *args, **kwargs):  # new
         if not self.slug:
-            self.slug = slugify('term'+self.name)
+            self.slug = slugify('term ' + self.academicyear)
         return super().save(*args, **kwargs)
 
 class ScheduleFile(models.Model):

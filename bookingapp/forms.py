@@ -33,12 +33,13 @@ class AddBooking(ModelForm):
 class AddBookFrCal(ModelForm):
     class Meta:
         model = Booking
-        fields = ['faculty','subject','start_time','end_time','numofstudents','activity']
+        fields = ['faculty','subject','start_time','end_time','numofstudents','activity','equipments','dept_or_office','organization']
 
         labels={
             'numofstudents':'Number of Students',
             'start_time':'Start Time',
             'end_time':'End Time',
+            'dept_or_office':'Dept/Office'
         }
         widgets={
             "start_time": DateInput(
@@ -50,3 +51,8 @@ class AddBookFrCal(ModelForm):
                 format="%Y-%m-%dT%H:%M",
             ), 
         }
+
+class RemarksForm(ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['remarks']

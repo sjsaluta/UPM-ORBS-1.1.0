@@ -1,0 +1,28 @@
+<table id='user-table' class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{u.username}}</td>
+        <td>{{u.get_full_name}}</td>
+        <td>{{u.email}}</td>
+        <td>{{u.get_user_type_display}}</td>
+        <td>
+            <button type="button" class="update bs-modal btn btn-sm btn-warning btn-sm" data-form-url="{% url 'editUser' u.id %}"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button type="button" class="pass bs-modal btn btn-sm btn-secondary btn-sm" data-form-url="{% url 'changePass' u.id %}"><i class="fa-solid fa-key"></i></button>
+            <button type="button" class="delete bs-modal btn btn-sm btn-danger btn-sm" data-form-url="{% url 'deleteUser' u.id %}"><i class="fa-solid fa-trash-can"></i> </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>

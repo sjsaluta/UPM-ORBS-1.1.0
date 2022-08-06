@@ -19,5 +19,7 @@ from . import views
 urlpatterns = [
     path('add-booking/', views.addBooking, name='addBooking'),
     path('', views.viewBookings, name='viewBookings'),
-    path('<int:pk>/', views.bookingDetails, name='bookingDetails')
+    path('<int:pk>/', views.bookingDetails, name='bookingDetails'),
+    path('edit/<int:pk>/',views.editBooking, name='editBooking'),
+    path('<int:pk>/bookings/',views.bookings)
 ]

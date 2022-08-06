@@ -30,17 +30,17 @@ class AddCollege(ModelForm):
 class AddBuild(ModelForm):
     class Meta:
         model = Building
-        fields = ['name','college']
+        fields = ['name']
 
 class AddDept(ModelForm):
     class Meta:
         model = Department
-        fields = ['name','college']
+        fields = ['name']
 
 class AddRoom(ModelForm):
     class Meta:
         model = Room
-        fields = ['name','capacity']
+        fields = ['name','capacity','room_type']
 
 class AddTermRoom(ModelForm):
     class Meta:
@@ -49,26 +49,9 @@ class AddTermRoom(ModelForm):
 
 class ColBuildForm(ModelForm):
 
-    dbuild = {}
-    list_build = []
-    for build in Building.objects.all():
-        if build.college.name in dbuild:
-            dbuild[build.college.name].append(build.name)
-        else:
-            dbuild[build.college.name] = [build.name]
-        list_build.append((build.name,build.name))
-
-    colleges = [str(college) for college in College.objects.all()]
-
-    college_select = forms.ChoiceField(choices=([(college, college) for college in colleges]))
-    build_select = forms.ChoiceField(choices=(list_build))
-
-    colleges = json.dumps(colleges)
-    build = json.dumps(dbuild)
-
     class Meta:
         model = Room
-        fields = ('college','building','name','capacity')
+        fields = ('college','building','name','capacity','room_type')
 
 class UploadForm(ModelForm):
 

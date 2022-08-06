@@ -1,0 +1,19 @@
+
+<form method="post" action="">
+{% csrf_token %}
+
+    <div class="modal-header">
+        <h5>Delete User</h5>
+        <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+    </div>
+
+    <div class="modal-body">
+        <p class="delete-text" >Are you sure you want to delete user <strong>{{ object }}</strong>?</p>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" id="delete-btn" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
+    </div>
+    
+</form>

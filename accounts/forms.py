@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from .models import *
 
+from bootstrap_modal_forms.forms import PopRequestMixin,CreateUpdateAjaxMixin
+
 class CreateUserForm(UserCreationForm):
     
     email = EmailField()
@@ -19,3 +21,9 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = AuthUser
         fields = ['first_name','last_name','username', 'email', 'password1', 'password2','college','department']
+
+class EditUserForm(UserChangeForm):
+
+    class Meta:
+        model= AuthUser
+        fields = ['first_name','last_name','username','password','college','department']

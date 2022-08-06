@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+<style>
+    #hide{
+        display: none;
+    }
+</style>
+{% endblock extracss %}
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mt-3 ms-4 bg-body">
+    <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
+{% block content %}
+<!--Modals-->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+      
+      </div>
+    </div>
+  </div>
+
+<div class = "container w-70">
+    
+    <div class= "row px-4 pb-3 shadow-sm border">
+        <h2 class="py-4">Profile {{booking.id}}</h2>
+        <div class="col-4">
+            <div class="mb-3">
+                <strong><label class='form-label'>Name:</label></strong>
+                {{user.first_name}} {{user.last_name}}
+                
+            </div>
+            <div class="mb-3">
+                <strong><label class='form-label'>Username:</label></strong>
+                {{user.username}}  
+            </div>
+            <div class="mb-3">
+                <strong><label class='form-label'>Email:</label></strong>
+                {{user.email}}  
+            </div>
+        </div>
+        <div class="col-4 pe-4">
+            <div class="mb-3">
+                <strong> <label class='form-label'>College:</label></strong>
+                {{user.college}}  
+            </div>
+            <div class="mb-3">
+                <strong> <label class='form-label'>Department:</label></strong>
+                {{user.department}}  
+            </div>
+            <div class="mb-3">
+                <strong><label class='form-label'>User Type:</label></strong>
+                {% if user.user_type != None %}
+                {{user.get_user_type_display}} 
+                {% else %}
+                Administrator
+                {% endif %}
+            </div>
+           
+        </div>
+        <div class="col-4 pe-4 text-center">
+            <button type="button" class="editp bs-modal btn btn-warning mt-4"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</button>
+            <button type="button" class="pass bs-modal btn btn-secondary mt-4"><i class="fa-solid fa-key"></i> Change Password </button>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock content %}
+
+{% block extrascripts %}
+<script>
+$(function() {
+
+    function updateUserModalForm() {
+        $('.editp').modalForm({
+            formURL:"{% url 'editProfile' %}",
+        });
+    } 
+    updateUserModalForm();
+
+    function updateUserPassModalForm() {
+        $('.pass').modalForm({
+            formURL:"{% url 'changePass' user.id %}",
+        });
+    } 
+    updateUserPassModalForm();
+    
+})
+</script>
+{% endblock extrascripts %}

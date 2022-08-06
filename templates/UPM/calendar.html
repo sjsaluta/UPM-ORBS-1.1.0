@@ -25,25 +25,34 @@
       <h4 class="pb-4">A.Y. {{term.academicyear}}</h5>
     </div>  
     <div class = "col-2 ms-4">
+      {%if request.user.user_type == 1 or request.user.user_type == 2%}
       <a class='btn btn-warning mb-2' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book"><i class="fa-solid fa-calendar"></i> Book Now</a>
+      {% else %}
+      <a class='btn btn-warning mb-2 disabled' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book" aria-disabled="true"><i class="fa-solid fa-calendar"></i> Book Now</a>
+      {%endif%}
     </div> 
+    
   </div>  
   <div class="col-md-11 ms-4 ps-6 ">
       <div class=""id="calendar"></div>
   </div>
+  
   <div class="modal fade" id="exampleModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title ms-1" id="exampleModalLabel">Booking Details</h5>
+          <h5 class="modal-title ms-1" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="container">
             <p id="faculty"></p>
-            <p id="activity"></p>
+            <p id="subject"></p>
+            <p id="section"></p>
+            <p id = "capacity"></p>
             <p id="start"></p>
             <p id="end"></p>
+            <p id="daysofweek"></p>
           </div>
         </div>
         <div class="modal-footer">
@@ -64,13 +73,14 @@
           {% csrf_token %}
           <div class="modal-body">
             {{form.subject | as_crispy_field}}
-            {% if request.user.user_type != 1 %}
-                {{form.faculty | as_crispy_field}}
-            {% endif %}
+            {{form.faculty | as_crispy_field}}
+            {{form.dept_or_office | as_crispy_field}}
+            {{form.organization | as_crispy_field}}
             {{form.start_time | as_crispy_field}}
             {{form.end_time | as_crispy_field}}
             {{form.numofstudents | as_crispy_field}}
             {{form.activity | as_crispy_field}}
+            {{form.equipments | as_crispy_field}}
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -133,22 +143,18 @@
       themeSystem: 'standard',
       
       initialDate: today,
-      navLinks: true, // can click day/week names to navigate views
+      navLinks: true, // can click day/week names to navigate views  
+     
       selectable: true,
       selectMirror: true,
+    
       select: function(arg) {
         console.log('clicked')
+        
         $("#book").modal("show")
         calendar.unselect()
+        
       },
-      // THIS KEY WON'T WORK IN PRODUCTION!!!
-      // To make your own Google API key, follow the directions here:
-      // http://fullcalendar.io/docs/google_calendar/
-      // googleCalendarApiKey: 'AIzaSyCqCxjjLtjbtkX37aOtWB8OfwBLy_6QuYk',
-
-      // bangladesh Holidays
-      // events: 'bn.bd#holiday@group.v.calendar.google.com',
-      
       
       dayMaxEvents: false, // allow "more" link when too many events
       events: [
@@ -170,7 +176,14 @@
             "startTime": '{{s.time_start|date:"H:i"}}',
             "endTime": '{{s.time_end|date:"H:i"}}',
             "daysOfWeek":'{{s.getDays}}',
-            "color":"brown"
+            "color":"brown",
+            "extendedProps":{
+              "type" :'schedule',
+              "faculty": '{{s.faculty}}',
+              "subject": '{{s.subject}}',
+              "section": '{{s.section}}',
+              "capacity": '{{s.capacity}}',
+            },
           },
         {% endfor %}
       ],
@@ -180,22 +193,22 @@
         if(info.event.extendedProps.type == 'booking'){
           {% for book in booking %}
 
-            if ({{book.id}}== info.event.id){
+            if ('{{book.id}}'== info.event.id){
               location.href = "{% url 'bookingDetails' book.id %}"
             }
 
           {% endfor %}
         }
         else{
-          $('#exampleModalLabel').text('Subject: ' + info.event.title)
-        /* $('#faculty').text('Faculty: ' + info.event.extendedProps.faculty)
-          $('#activity').text('Activity: ' + info.event.extendedProps.activity)
-          $('#start').text('Start: ' + formatAMPM(info.event.start) )
-          $('#end').text('End: ' + formatAMPM(info.event.end))*/
+          $('#exampleModalLabel').text(info.event.title)
+          $('#faculty').text('Faculty: ' + info.event.extendedProps.faculty)
+          $('#subject').text('Subject: ' + info.event.extendedProps.subject)
+          $('#start').text('Start: ' + formatAMPM(info.event.start))
+          $('#end').text('End: ' + formatAMPM(info.event.end))
+          $('#section').text('Section: ' + info.event.extendedProps.section)
+          $('#capacity').text('Capacity: ' + info.event.extendedProps.capacity)
           $('#exampleModal').modal('show')
-          $('#edit').click(function(){
-            location.href = "{% url 'dashBoardPage' %}"
-          }) 
+         
         }
 
                       
@@ -204,16 +217,6 @@
 
     calendar.render();
   });
-  /* const closeBtn1 = document.getElementById('modalClose1');
-  const closeBtn2 = document.getElementById('modalClose2');
-  closeBtn1.addEventListener('click',()=>{
-    const eventModal = document.getElementById('eventModal')
-    eventModal.style.display = 'none';
-  });
-  closeBtn2.addEventListener('click',()=>{
-    const eventModal = document.getElementById('eventModal')
-    eventModal.style.display = 'none';
-  });*/
 </script>
 
 {% endblock extrascripts %}

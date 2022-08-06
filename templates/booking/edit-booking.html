@@ -1,0 +1,26 @@
+{% load crispy_forms_tags %}
+
+<div class="modal-header">
+    <h5 class="modal-title" id="approveModalLabel">Booking Edit</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="modal-body">
+        {{form.subject | as_crispy_field}}
+        {{form.faculty | as_crispy_field}}
+        {{form.dept_or_office | as_crispy_field}}
+        {{form.organization | as_crispy_field}}
+        {{form.start_time | as_crispy_field}}
+        {{form.end_time | as_crispy_field}}
+        {{form.numofstudents | as_crispy_field}}
+        {{form.activity | as_crispy_field}}
+        {{form.equipments | as_crispy_field}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success" data-bs-dismiss="modal" id="edit"> <i class="fa-solid fa-pen-to-square"></i> Edit</button>
+      </div>
+    </form>
+  </div>

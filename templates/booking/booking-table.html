@@ -1,0 +1,40 @@
+<table id ='booking-table' class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">Room</th>
+        <th scope="col">Activity</th>
+        <th scope="col">Equipments Needed</th>
+        <th scope="col">No. of Participants</th>
+        <th scope="col">Remarks/Changes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class = "py-5">{{date}}</td>
+        <td class = "py-5">{{time}}</td>
+        <td class = "py-5">{{booking.room}}</td>
+        <td class = "py-5">{{booking.activity}}</td>
+        <td class = "py-5">{{booking.equipments}}</td>
+        <td class = "py-5">{{booking.numofstudents}}</td>
+        <td class = "py-5">
+          {% if request.user.user_type == 4 %} 
+            {% if booking.remarks or booking.isApproved%}
+                {{booking.remarks}}
+
+            {% else %}
+            <form method="POST">
+                {%csrf_token%}
+                <textarea class='form-control' name='remarks'></textarea>
+                <button class='btn btn-success' type='submit'> Enter </button>
+            </form>
+            
+            {% endif %}
+          {% else %}
+          {{booking.remarks}}
+          {%endif%}
+        </td>
+      </tr>
+    </tbody>
+  </table>

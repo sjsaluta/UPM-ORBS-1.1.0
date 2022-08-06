@@ -28,6 +28,7 @@
             <th scope="col">Requested by</th>
             <th scope="col">Date Filed</th>
             <th scope="col">Approved</th>
+            <th scope="col">Remarks</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -45,26 +46,9 @@
             {% else %}
                 <td>Not yet approved</td>
             {% endif %}
+            <td>{{booking.remarks}}</td>
             <td><a class='btn btn-warning ' href="{% url 'bookingDetails' booking.id%}"> Details</a></td>
           </tr>
-          <div class="modal" id="deletePopup" tab-index="-1">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                    <h5>Delete User</h5>
-                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete user '{{user.username}}'?</p>
-                </div>
-                <div class="modal-footer">
-                    <!-- link to archive here -->
-                    <a class="btn btn-danger" href="#">Delete</a>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
-                </div>
-              </div>
-            </div>
-          </div>
           {% endfor %}
         </tbody>
       </table>

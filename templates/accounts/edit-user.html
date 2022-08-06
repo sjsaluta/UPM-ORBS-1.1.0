@@ -4,7 +4,7 @@
 {% csrf_token %}       
 
     <div class="modal-header">
-        <h5 class="modal-title ms-1" id="exampleModalLabel">Edit Profile</h5>
+        <h5 class="modal-title ms-1" id="exampleModalLabel">Edit User</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
 
@@ -12,10 +12,9 @@
         {{form.first_name | as_crispy_field}} 
         {{form.last_name | as_crispy_field}}
         {{form.username| as_crispy_field}}
-        <div id='hide'>
+
         {{form.college | as_crispy_field}}  
         {{form.department | as_crispy_field}}
-        </div>
     </div>
 
     <div class="modal-footer">
@@ -24,3 +23,5 @@
     </div>
 
 </form>
+
+

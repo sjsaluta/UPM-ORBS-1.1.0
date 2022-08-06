@@ -22,7 +22,6 @@ from django.conf import settings
 
 urlpatterns = [
     path('', views.indexPage, name='indexPage'),
-    path('home/',views.dashBoardPage, name='dashBoardPage'),
 
     #admin pages
     path('manage-term/',views.manageTerm, name='manageTerm'),
@@ -36,7 +35,9 @@ urlpatterns = [
     path('manage-college/<slug:c>/<slug:b>/',views.buildingView,name='adminBuildingView'),
     path('manage-college/<slug:c>/<slug:b>/add-room/',views.addBuildRoom, name='addBuildRoom'),
     path('manage-room/',views.manageRooms, name='manageRooms'), 
+    path('manage-room/rooms/',views.rooms, name='rooms'), 
     path('manage-room/add-room/',views.addRoom, name='addRoom'),
+    path('manage-room/edit-room/<slug:slug>/',views.editRoom, name='editRoom'),
     path('manage-room/delete/<int:pk>/',views.deleteRoom,name='deleteRoom'),
    
     path('rooms/',views.roomView,name='roomView'),

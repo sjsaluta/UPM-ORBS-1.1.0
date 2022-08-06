@@ -1,16 +1,22 @@
 from asyncio.windows_events import NULL
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
+from django.http import HttpResponseRedirect, JsonResponse
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout ,update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from . forms import *
+
+from bootstrap_modal_forms.generic import BSModalUpdateView,BSModalDeleteView
+
 # Create your views here.
 def loginPage(request):
     iserror = False
     error=''
     if request.user.is_authenticated:
-        return redirect('dashBoardPage')
+        return redirect('indexPage')
     else:
         if request.method == 'POST':
             username = request.POST.get('username')
@@ -20,7 +26,7 @@ def loginPage(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('dashBoardPage')
+                return redirect('indexPage')
             else:
                 iserror = True
                 error = "There is no such user '" + username + "'."   
@@ -30,6 +36,25 @@ def loginPage(request):
 def logOutPage(request):
     logout(request)
     return redirect('loginPage')
+
+def viewProfile(request):
+    user = request.user
+    context = {'user':user}
+    return render(request,'accounts/profile.html', context)
+
+def editProfile(request):
+    user= request.user
+    form = EditUserForm(instance=user)
+
+    if request.method == "POST":
+        form = EditUserForm(request.POST, instance=user)
+
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(reverse_lazy('profile'))
+
+    context={'form':form}
+    return render(request,'accounts/edit-profile.html',context)
 
 @login_required(login_url='loginPage')
 def AddUserPage(request):
@@ -69,6 +94,7 @@ def AddUserPage(request):
                 ADPD.objects.create(user=user)
             else:
                 AO.objects.create(user=user)
+            return redirect('manageUsers')
 
     context = {'form': form,'add':add,'ut':ut}  
     
@@ -78,6 +104,7 @@ def AddUserPage(request):
 @login_required(login_url='loginPage')
 def manageUsers(request):
     users = AuthUser.objects.exclude(username='admin')
+    
     if request.method =="POST":
         role = request.POST.get('role')
         if role == 'faculty':
@@ -93,7 +120,46 @@ def manageUsers(request):
     context={'users':users}
     return render(request,"accounts/users.html",context)
 
-def deleteUser(request,pk):
+def users(request):
+    data = dict()
+    if request.method == 'GET':
+        users = AuthUser.objects.exclude(username='admin')
+        data['table'] = render_to_string(
+            'accounts/user-table.html',
+            {'users': users},
+            request=request
+        )
+        return JsonResponse(data)
+
+def editUser(request,pk):
     user = AuthUser.objects.get(id=pk)
-    user.delete()
-    return redirect('manageUsers')
+    if request.method == "POST":
+        form= EditUserForm(request.POST, instance=user)
+
+        if form.is_valid():
+            form.save()
+            
+        return HttpResponseRedirect(reverse_lazy('manageUsers'))
+
+    else:
+        form = EditUserForm(instance=user)
+
+        context = {'form': form,'u':user}
+        return render(request, 'accounts/edit-user.html', context)
+
+def changePass(request,pk):
+    user = AuthUser.objects.get(id=pk)
+    pw = PasswordChangeForm(user)
+    if request.method == "POST":
+        pw = PasswordChangeForm(data=request.POST, user=user)
+        if pw.is_valid():
+            pw.save()
+            update_session_auth_hash(request, pw.user)
+    context = {'pw': pw}
+    return render(request, 'accounts/change-password.html', context)
+
+class deleteUser(BSModalDeleteView):
+    model = AuthUser
+    template_name = 'accounts/delete-user.html'
+    success_message = 'Success: User was deleted.'
+    success_url = reverse_lazy('manageUsers')

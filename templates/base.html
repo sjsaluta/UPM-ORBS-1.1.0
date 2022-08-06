@@ -18,8 +18,8 @@
                 <h1><a href="{% url 'indexPage' %}" class="logo mt-2 pt-2">UPM</a></h1>
                 <h1 class="name">Room Booking</h1>
                 <ul class="list-unstyled components mb-5">
-                    <li class="active">
-                        <a href="{% url 'dashBoardPage' %}"><i class="fa fa-home"></i> <span class="link_label">Home</span></a>
+                    <li>
+                        <a href="{% url 'viewBookings' %}"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-1"> Bookings</span></a>
                     </li>
                     {% if request.user.user_type == none %}
                     <li>
@@ -32,22 +32,16 @@
                         <div>
                     </li>
                     {% else %}
-                        {% if request.user.user_type != 3 %}
-                        <li>
-                            <a href="{% url 'viewBookings' %}"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-1"> Bookings</span></a>
-                        </li>
-                        {% else %}
+                        {% if request.user.user_type == 3 %}
                         <li>
                             <a href="{% url 'uploadPage' %}"><i class="fa-solid fa-upload"></i><span class="link_label"> Upload</span></a>
                         </li>
                         {%endif%}
-                        {% if request.user.user_type == 1 or request.user.user_type == 2 %}
+                        {% if request.user.user_type != none %}
                         <li>
                             <a href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
                         </li>
                        {% endif %}
-                        
-                        
                         
                     {% endif %}
                 </ul>
@@ -76,7 +70,7 @@
                                       Account
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                                      <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                                       <li><hr class="dropdown-divider"></li>
                                       <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                                     </ul>

@@ -15,6 +15,15 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+<!--Modals-->
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    
+    </div>
+  </div>
+</div>
+
 <div class = "container-fluid">
     <h2 class="py-4 px-4">Manage Users</h2>
       <form method="POST" action="">
@@ -40,48 +49,8 @@
     <div class = 'text-right'>
       <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'AddUserPage' %}"><i class="fa-solid fa-plus"></i> Add User</a>
     </div>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Username</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Role</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for user in users %}
-          <tr>
-            <th scope="row">{{user.id}}</th>
-            <td>{{user.username}}</td>
-            <td>{{user.get_full_name}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.get_user_type_display}}</td>
-            <td><button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup{{user.id}}"> Delete</td>
-          </tr>
-          <div class="modal" id="deletePopup{{user.id}}" tab-index="-1">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                    <h5>Delete User</h5>
-                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete user '{{user.username}}'?</p>
-                </div>
-                <div class="modal-footer">
-                    <!-- link to archive here -->
-                    <a class="btn btn-danger" href="{% url 'deleteUser' user.id %}">Delete</a>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </tbody>
-      </table>
+    {% include "accounts/user-table.html" %}
+    
 </div>
 
 
@@ -89,4 +58,89 @@
 {% endblock content %}
 
 {% block extrascripts %}
+<script type="text/javascript">
+$(function() {
+  var asyncSuccessMessageUpdate = [
+    "<div ",
+    "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+    "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+    "Success: User was updated.",
+    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+    "<span aria-hidden='true'>&times;</span>",
+    "</button>",
+    "</div>",
+    "<script>",
+    "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+    "<\/script>"
+  ].join("");
+  
+  function deleteUserModalForm() {
+    $(".delete").each(function () {
+        $(this).modalForm({formURL: $(this).data("form-url"), isDeleteForm: true});
+    });
+  }
+  deleteUserModalForm();
+
+  function updateUserModalForm() {
+
+    $(".update").each(function () {
+
+      $(this).modalForm({
+        formURL: $(this).data("form-url"),
+        asyncUpdate: true,
+        asyncSettings: {
+          closeOnSubmit: false,
+          successMessage: asyncSuccessMessageUpdate,
+          dataUrl: "users/",
+          dataElementId: "#user-table",
+          dataKey: "table",
+          addModalFormFunction: reinstantiateModalForms
+        }
+      });
+    });
+  }
+  updateUserModalForm();
+
+  var asyncSuccessMessageChange = [
+    "<div ",
+    "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+    "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+    "Success: Password was changed.",
+    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+    "<span aria-hidden='true'>&times;</span>",
+    "</button>",
+    "</div>",
+    "<script>",
+    "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+    "<\/script>"
+  ].join("");
+
+
+  function updateUserPassModalForm() {
+      
+    $('.pass').each(function () {
+      $(this).modalForm({
+        formURL: $(this).data("form-url"),
+        asyncUpdate: true,
+        asyncSettings: {
+          closeOnSubmit: false,
+          successMessage: asyncSuccessMessageUpdate,
+          dataUrl: "users/",
+          dataElementId: "#user-table",
+          dataKey: "table",
+          addModalFormFunction: reinstantiateModalForms
+        }
+      });
+    }); 
+  
+  }
+  updateUserPassModalForm();
+
+  function reinstantiateModalForms(){
+    updateUserModalForm();
+    deleteUserModalForm();
+    updateUserPassModalForm();
+  }
+})
+</script>
 {% endblock extrascripts %}
