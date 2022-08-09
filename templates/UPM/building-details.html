@@ -36,25 +36,23 @@
             <h5>{{room.name}}</h5>
         </div>
             <div class="col-auto align-self-end text-end">
-                <!-- <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deletePopup"><i class="fa-solid fa-trash"></i> Delete</button> -->
-                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#archivePopup"><i class="fa-solid fa-box-archive"></i> Archive</button>
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}{{building.id}}{{room.id}}"><i class="fa-solid fa-close"></i> Remove</button>
             </div>
         </div>
 
-        <!-- popup for archive -->
-        <div class="modal" id="archivePopup" tab-index="-1">
+        <!-- popup for removal -->
+        <div class="modal fade" id="removePopup{{college.id}}{{building.id}}{{room.id}}" tab-index="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5>Archive supplier</h5>
+                        <h5>Remove Room</h5>
                         <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to archive this supplier?</p>
+                        <p>Are you sure you want to remove this room?</p>
                     </div>
                     <div class="modal-footer">
-                        <!-- link to archive here -->
-                        <a class="btn btn-danger" href="#"><i class="fa-solid fa-box-archive"></i> Archive</a>
+                        <a class="btn btn-danger" href="{% url 'removeRoom' college.slug building.slug room.slug %}"><i class="fa-solid fa-close"></i> Remove</a>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
                     </div>
                 </div>

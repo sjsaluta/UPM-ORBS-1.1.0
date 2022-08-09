@@ -71,7 +71,7 @@
                     </div>
                     <div class="modal-footer">
                         <!-- link to archive here -->
-                        <a class="btn btn-danger" href="#">Delete</a>
+                        <a class="btn btn-danger" href="{% url 'deleteRoomTerm' term.slug room.slug%}">Delete</a>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
                     </div>
                   </div>

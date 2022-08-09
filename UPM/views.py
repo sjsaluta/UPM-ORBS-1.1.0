@@ -14,6 +14,7 @@ from bookingapp.views import viewBookings
 from . forms import *
 from bookingapp.forms import *
 from bookingapp.models import *
+from bootstrap_modal_forms.generic import BSModalUpdateView,BSModalDeleteView
 
 import pandas as pd
 import re
@@ -157,12 +158,27 @@ def addTerm(request):
     context={'form':form}
     return render(request,"UPM/add-term.html",context)
 
+def removeTerm(request,slug):
+    Term.objects.get(slug=slug).delete()
+    return redirect(reverse_lazy('manageTerm'))
+
+
+def deleteRoomTerm(request,t,r):
+    room = Room.objects.get(slug=r)
+    term = Term.objects.get(slug=t)
+    term.room.remove(room)
+    return redirect(reverse_lazy('termView',kwargs={'slug':t}))
+
 #manage colleges
 @login_required(login_url='loginPage')
 def manageCollege(request):
     colleges = College.objects.all()
     context={'colleges':colleges}
     return render(request,"UPM/college.html",context)
+
+def removeCollege(request,slug):
+    College.objects.get(slug=slug).delete()
+    return redirect(reverse_lazy('manageCollege'))
 
 @login_required(login_url='loginPage')
 def addCollege(request):
@@ -188,6 +204,9 @@ def addDept(request,slug):
             return redirect(reverse('adminCollegeView',kwargs={'slug':slug}))  
     context={'form':form}
     return render(request,"UPM/add-dept.html",context)
+def removeDept(request,c,d):
+    Department.objects.get(slug=d).delete()
+    return redirect(reverse_lazy('adminCollegeView',kwargs={'slug':c}))
 
 @login_required(login_url='loginPage')
 def addBuild(request,slug):
@@ -204,17 +223,9 @@ def addBuild(request,slug):
     context={'form':form}
     return render(request,"UPM/add-build.html",context)
 
-@login_required(login_url='loginPage')
-def addRoom(request):
-    frbuild=False
-    form = AddRoom()
-    if request.method == "POST":
-        form = AddRoom(request.POST)
-        if form.is_valid():
-            form.save()
-    context={'form':form,'frbuild':frbuild}
-    return render(request,"UPM/add-room.html",context)
-
+def removeBuild(request,c,b):
+    Building.objects.get(slug=b).delete()
+    return redirect(reverse_lazy('adminCollegeView',kwargs={'slug':c}))
 
 
 @login_required(login_url='loginPage')
@@ -233,6 +244,11 @@ def addBuildRoom(request,c,b):
             return redirect(reverse('adminBuildingView',kwargs={"c": c,"b":b}))
     context={'form':form,'frbuild':frbuild}
     return render(request,"UPM/add-room.html",context)
+
+def removeRoom(request,c,b,r):
+    Room.objects.get(slug=r).delete()
+    return redirect(reverse_lazy('adminBuildingView',kwargs={"c": c,"b":b}))
+
     
 #manage rooms
 @login_required(login_url='loginPage')
@@ -294,11 +310,10 @@ def calendarView(request, slug):
     for t in terms:
         if t.isActivated:
             term = t
-            if ScheduleFile.objects.filter(term=term).exists():
-                schedfile = ScheduleFile.objects.get(term=term)
-                schedule = Schedule.objects.filter(room=room,schedfile=schedfile)
             
-
+    if ScheduleFile.objects.filter(term=term).exists():
+        schedfile = ScheduleFile.objects.get(term=term)
+        schedule = Schedule.objects.filter(room=room,schedfile=schedfile)
     schedule = Schedule.objects.filter(room=room)
     form = AddBookFrCal()
     if request.method == "POST":
