@@ -100,7 +100,7 @@ def uploadPage(request):
                     time_end=et,
                     dayofweek=days
                     )
-
+            messages.success(request, 'Schedules have been uploaded.')
             ''' endline '''    
 
     context={'form':form}

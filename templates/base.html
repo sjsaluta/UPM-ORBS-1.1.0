@@ -13,6 +13,7 @@
 
     </head>
     <body>
+        
         <div class="wrapper d-flex align-items-stretch">
             <nav id="sidebar" class="active">
                 <h1><a href="{% url 'indexPage' %}" class="logo mt-2 pt-2">UPM</a></h1>
@@ -47,10 +48,10 @@
                 </ul>
 
             </nav>
-
+            
                 <!-- Page Content  -->
             <div id="content" class="p-4 p-md-5 bg-body">
-
+                {% include 'message.html' %}
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border">
                     <div class="container-fluid">
 
@@ -80,6 +81,7 @@
                     </div>
                 </nav>
                 <main>
+                    
                     <div class="app-title">
                         {% block breadcrumb %}
                         {% endblock breadcrumb %}
@@ -91,6 +93,7 @@
             </div>
 		</div>
         <script>
+            
         </script>
         {% include 'script_modules.html' %}  
         {% block extrascripts %}

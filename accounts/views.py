@@ -26,10 +26,12 @@ def loginPage(request):
 
             if user is not None:
                 login(request, user)
+                
+                messages.success(request, "You are now logged in as " + str(user))
                 return redirect('indexPage')
             else:
                 iserror = True
-                error = "There is no such user '" + username + "'."   
+                error = "Wrong username or password."   
         context = {"error":error,"iserror":iserror}
         return render(request, 'accounts/login.html', context)
 
@@ -95,6 +97,7 @@ def AddUserPage(request):
                 ADPD.objects.create(user=user)
             else:
                 AO.objects.create(user=user)
+            messages.success(request, "User '" + str(user) +"' has been added" )
             return redirect('manageUsers')
 
     context = {'form': form,'add':add,'ut':ut}  
