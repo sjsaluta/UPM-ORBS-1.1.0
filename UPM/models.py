@@ -2,7 +2,6 @@ from django.db import models
 from accounts.models import *
 from django.template.defaultfilters import slugify
 from django.urls import reverse
-# Create your models here.
 
 class College(models.Model):
     name = models.CharField(max_length=300,null=True)
@@ -14,7 +13,8 @@ class College(models.Model):
     def get_absolute_url(self):
         return reverse("collegeView", kwargs={"slug": self.slug})
 
-    def save(self, *args, **kwargs):  # new
+    #auto-add slugs
+    def save(self, *args, **kwargs):  
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
@@ -27,7 +27,8 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):  # new
+    #auto-add slugs
+    def save(self, *args, **kwargs):  
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
@@ -40,11 +41,11 @@ class Building(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):  # new
+    #auto-add slugs
+    def save(self, *args, **kwargs):  
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
-
 
 class Room(models.Model):
     TYPES = (
@@ -62,7 +63,8 @@ class Room(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):  # new
+    #auto-add slugs
+    def save(self, *args, **kwargs):  
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
@@ -78,7 +80,8 @@ class Term(models.Model):
     def __str__(self):
         return self.academicyear
 
-    def save(self, *args, **kwargs):  # new
+    #auto-add slugs
+    def save(self, *args, **kwargs):  
         if not self.slug:
             self.slug = slugify('term ' + self.academicyear)
         return super().save(*args, **kwargs)
@@ -110,6 +113,7 @@ class Schedule(models.Model):
     def __str__(self):
         return self.coursetitle + ' - ' + self.section  + ' - ('+ self.component + ')'
 
+    #returns array of the days for recurrence in the calendar view
     def getDays(self):
         arr=[]
         arr[:0]=self.dayofweek

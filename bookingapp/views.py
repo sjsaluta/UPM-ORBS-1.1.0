@@ -12,28 +12,6 @@ from datetime import date
 
 
 
-# Create your views here.
-
-@login_required(login_url='loginPage')
-def addBooking(request):
-    form = AddBooking()
-    user = request.user
-    if request.method == "POST":
-        form=AddBooking(request.POST)
-
-        if form.is_valid():
-            book=form.save(False)
-            if(user.user_type == 1):
-                book.faculty= Faculty.objects.get(user=user)
-                book.booker= user
-            else:
-                book.booker = user
-            book.save()
-    
-    context={'form':form,'user':user}
-
-    return render(request,'booking/add-booking.html',context)
-
 @login_required(login_url='loginPage')
 def viewBookings(request):
     if request.user.user_type == 1 or request.user.user_type == 2:
@@ -65,6 +43,7 @@ def bookingDetails(request,pk):
     context={'booking':booking,'date':d,'time':time}
     return render(request,'booking/booking-details.html',context)
 
+#edit booking modal
 def editBooking(request,pk):
     booking = Booking.objects.get(id=pk)
     form = AddBookFrCal(instance=booking)
@@ -78,6 +57,7 @@ def editBooking(request,pk):
     context = {'form':form}
     return render(request,'booking/edit-booking.html',context)
 
+#update table asynchronously
 def bookings(request,pk):
     data = dict()
     if request.method == 'GET':

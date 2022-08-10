@@ -3,6 +3,8 @@ import json
 
 from .models import *
 
+
+#Filtering the rooms
 class RoomFilter(django_filters.FilterSet):
 
     capacity = django_filters.RangeFilter()

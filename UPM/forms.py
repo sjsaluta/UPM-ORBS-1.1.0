@@ -22,6 +22,7 @@ class AddTerm(ModelForm):
             'date_start':'Starting Date',
             'date_end':'End Date',
         }
+        
 class AddCollege(ModelForm):
     class Meta:
         model = College
@@ -37,6 +38,7 @@ class AddDept(ModelForm):
         model = Department
         fields = ['name']
 
+#Add room form for the building view page
 class AddRoom(ModelForm):
     class Meta:
         model = Room
@@ -47,6 +49,7 @@ class AddTermRoom(ModelForm):
         model = Term
         fields = ['room']
 
+#Add Room form for the manage room page
 class ColBuildForm(ModelForm):
 
     class Meta:

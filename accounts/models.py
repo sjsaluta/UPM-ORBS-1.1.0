@@ -60,6 +60,7 @@ class OCS(models.Model):
     def __str__(self):
         name = AuthUser.get_full_name(self.user)
         return name + ' <' + self.user.email + '>'
+        
 class Staff(models.Model):
     user = models.OneToOneField(AuthUser,on_delete=models.CASCADE,null=True)
 

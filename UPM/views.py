@@ -19,11 +19,11 @@ from bootstrap_modal_forms.generic import BSModalUpdateView,BSModalDeleteView
 import pandas as pd
 import re
 from datetime import datetime
-# Create your views here.
 
 def indexPage(request):
     return redirect(viewBookings)
 
+#uploads csv file to the Schedule model
 def uploadPage(request):
     form = UploadForm()
     ocs = OCS.objects.get(user=request.user)
@@ -105,7 +105,6 @@ def uploadPage(request):
 
     context={'form':form}
     return render(request,'UPM/upload.html',context)
-
 
 
 #### Admin Views #####
@@ -204,6 +203,7 @@ def addDept(request,slug):
             return redirect(reverse('adminCollegeView',kwargs={'slug':slug}))  
     context={'form':form}
     return render(request,"UPM/add-dept.html",context)
+
 def removeDept(request,c,d):
     Department.objects.get(slug=d).delete()
     return redirect(reverse_lazy('adminCollegeView',kwargs={'slug':c}))
@@ -227,7 +227,6 @@ def removeBuild(request,c,b):
     Building.objects.get(slug=b).delete()
     return redirect(reverse_lazy('adminCollegeView',kwargs={'slug':c}))
 
-
 @login_required(login_url='loginPage')
 def addBuildRoom(request,c,b):
     frbuild = True
@@ -249,7 +248,6 @@ def removeRoom(request,c,b,r):
     Room.objects.get(slug=r).delete()
     return redirect(reverse_lazy('adminBuildingView',kwargs={"c": c,"b":b}))
 
-    
 #manage rooms
 @login_required(login_url='loginPage')
 def manageRooms(request):
@@ -300,7 +298,6 @@ def rooms(request):
         )
         return JsonResponse(data)
 
-
 ##### User Views #####
 @login_required(login_url='loginPage')
 def calendarView(request, slug):
@@ -310,7 +307,7 @@ def calendarView(request, slug):
     for t in terms:
         if t.isActivated:
             term = t
-            
+
     if ScheduleFile.objects.filter(term=term).exists():
         schedfile = ScheduleFile.objects.get(term=term)
         schedule = Schedule.objects.filter(room=room,schedfile=schedfile)

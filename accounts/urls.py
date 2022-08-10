@@ -19,15 +19,16 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
+    
     path('login/',views.loginPage, name='loginPage'),
     path('logout/', views.logOutPage, name="logout"),
 
     path('profile/', views.viewProfile, name="profile"),
     path('profile/edit-profile/',views.editProfile, name='editProfile'),
-
-    path('add-user/', views.AddUserPage, name='AddUserPage'),
     
+    #admin pages
     path('manage/',views.manageUsers,name='manageUsers'),
+    path('manage/add-user/', views.AddUserPage, name='AddUserPage'),
     path('manage/users/',views.users,name='users'),
     path('manage/edit/<int:pk>',views.editUser, name='editUser'),
     path('manage/edit/change-pass/<int:pk>/',views.changePass,name='changePass'),

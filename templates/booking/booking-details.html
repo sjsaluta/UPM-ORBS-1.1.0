@@ -8,8 +8,9 @@
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb mt-3 ms-4 bg-body">
-    <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Bookings</li>
+    <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'viewBookings' %}" class="text-dark">Bookings</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Booking Number {{booking.id}}</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}

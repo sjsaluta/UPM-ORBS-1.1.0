@@ -23,6 +23,7 @@ class Booking(models.Model):
     equipments = models.TextField(null=True, blank=True)
     remarks = models.TextField(null=True, blank=True)
 
+    #Get full name of user with email
     def getFullName(self):
         return self.faculty.user.first_name +' ' + self.faculty.user.last_name + ' (' + self.faculty.user.email + ')'
         

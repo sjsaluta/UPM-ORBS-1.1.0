@@ -11,7 +11,7 @@ from . forms import *
 
 from bootstrap_modal_forms.generic import BSModalUpdateView,BSModalDeleteView
 
-# Create your views here.
+
 def loginPage(request):
     iserror = False
     error=''
@@ -37,6 +37,7 @@ def logOutPage(request):
     logout(request)
     return redirect('loginPage')
 
+@login_required(login_url='loginPage')
 def viewProfile(request):
     user = request.user
     context = {'user':user}
@@ -120,6 +121,7 @@ def manageUsers(request):
     context={'users':users}
     return render(request,"accounts/users.html",context)
 
+#update the table asynchronously
 def users(request):
     data = dict()
     if request.method == 'GET':
@@ -131,6 +133,7 @@ def users(request):
         )
         return JsonResponse(data)
 
+#edit user modal
 def editUser(request,pk):
     user = AuthUser.objects.get(id=pk)
     if request.method == "POST":
@@ -147,6 +150,7 @@ def editUser(request,pk):
         context = {'form': form,'u':user}
         return render(request, 'accounts/edit-user.html', context)
 
+#change password modal
 def changePass(request,pk):
     user = AuthUser.objects.get(id=pk)
     pw = PasswordChangeForm(user)
@@ -158,6 +162,7 @@ def changePass(request,pk):
     context = {'pw': pw}
     return render(request, 'accounts/change-password.html', context)
 
+#delete user modal
 class deleteUser(BSModalDeleteView):
     model = AuthUser
     template_name = 'accounts/delete-user.html'

@@ -9,8 +9,8 @@
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb mt-3 ms-4 bg-body">
-    <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
-    <li class="breadcrumb-item"><a href="#" class="text-dark">Room</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'roomView' %}" class="text-dark">Room</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{room.name}} Calendar</li>
   </ol>
 </nav>

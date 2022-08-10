@@ -8,7 +8,7 @@
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb mt-3 ms-4 bg-body">
-    <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
     <li class="breadcrumb-item"><a href="{% url 'manageCollege' %}" class="text-dark">Manage Colleges</a></li>
     <li class="breadcrumb-item"><a href="{% url 'adminCollegeView' college.slug %}" class="text-dark">{{college.name}}</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{building.name}}</li>

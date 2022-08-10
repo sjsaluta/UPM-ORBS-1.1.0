@@ -12,6 +12,7 @@ class CreateUserForm(UserCreationForm):
     
     email = EmailField()
     
+    #only allow @up.edu.ph emails
     def clean_email(self):
         data = self.cleaned_data['email']
         if "@up.edu.ph" not in data:   # any check you need

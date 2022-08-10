@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 urlpatterns = [
-    path('add-booking/', views.addBooking, name='addBooking'),
     path('', views.viewBookings, name='viewBookings'),
     path('<int:pk>/', views.bookingDetails, name='bookingDetails'),
     path('edit/<int:pk>/',views.editBooking, name='editBooking'),
