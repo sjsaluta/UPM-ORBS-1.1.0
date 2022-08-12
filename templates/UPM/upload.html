@@ -4,6 +4,14 @@
 {% load crispy_forms_tags %}
 
 {% block extracss %}
+<style>
+  .spinner-border{
+    display:none;
+  }
+  #alert{
+    display:none;
+  }
+</style>
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
@@ -16,11 +24,26 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+<div id="alert" class="alert alert-success" role="alert">
+  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+  <span aria-hidden='true'>&times;</span></button>
+</div>
 <div class = "container w-auto">
-    <form method='POST' enctype="multipart/form-data">
+  <h2 class="py-4">Upload Schedule</h2>
+    <form method='POST' enctype="multipart/form-data" id="upload">
         {% csrf_token %}
+
+        <div class ='col'>
         {{ form.as_p }}
-        <button class='btn btn-success' type = 'submit'>Upload</button>
+        </div>
+
+        <div class = 'col'>
+          <button class='btn btn-success' type = 'submit'>Upload</button>
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        
     </form>
 </div>
 
@@ -29,4 +52,54 @@
 {% endblock content %}
 
 {% block extrascripts %}
+<script>
+$(document).ready(function(){
+  $("#upload").submit(function (e) {
+    $('.spinner-border').show();
+    e.preventDefault();
+    var data = new FormData();
+    data.append('term',$('#id_term option:selected').val());
+    data.append('file',$('#id_file').prop('files')[0]);
+    $.ajax({
+      method: 'post',
+      processData: false,
+      contentType: false,
+      cache: false,
+      data: data,
+      enctype: 'multipart/form-data',
+      success: function (response) {
+        $('.spinner-border').fadeOut()
+        if(response.instance){
+            $('#alert').html(
+            response.instance);
+            $('#alert').fadeIn(); //or fadeIn
+            setTimeout(function() {
+            $("#alert").fadeOut(); //or fadeOut
+          }, 5000);
+        }
+        else{
+          $('#alert').html(
+            "Schedules have been uploaded.");
+            $('#alert').fadeIn(); //or fadeIn
+            setTimeout(function() {
+            $("#alert").fadeOut(); //or fadeOut
+          }, 5000);
+        }
+        
+      },
+      error: function (response){
+        $('#alert').html(
+          response["responseJSON"]["error"]);
+        $('#alert').fadeIn();
+        setTimeout(function() {
+          $("#alert").fadeOut(); //or fadeOut
+        }, 10000)
+      }
+    }); 
+    return false; //<---- move it here
+  });
+ 
+})
+
+</script>
 {% endblock extrascripts %}

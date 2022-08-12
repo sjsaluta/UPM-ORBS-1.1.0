@@ -19,10 +19,10 @@
         <td class = "py-5">{{booking.equipments}}</td>
         <td class = "py-5">{{booking.numofstudents}}</td>
         <td class = "py-5">
-          {% if request.user.user_type == 4 %} 
+          {% if request.user.user_type == 5 %} 
             {% if booking.remarks or booking.isApproved%}
                 {{booking.remarks}}
-
+            
             {% else %}
             <form method="POST">
                 {%csrf_token%}

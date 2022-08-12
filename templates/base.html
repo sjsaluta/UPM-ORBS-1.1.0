@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- scripts and css -->
         {% include 'css_modules.html' %}
+        
         {% block extracss %}
         {% endblock extracss %}
 
@@ -92,11 +93,17 @@
                 
             </div>
 		</div>
-        <script>
-            
-        </script>
         {% include 'script_modules.html' %}  
+        
         {% block extrascripts %}
         {% endblock extrascripts %}
+        <script>
+            $(document).ready(function() {
+                $('.msg').fadeTo();
+                setTimeout(function() {
+                    $(".msg").fadeOut(); //or fadeOut
+                  }, 1000);;
+            });
+        </script>
     </body>
 </html>

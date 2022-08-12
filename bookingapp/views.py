@@ -17,27 +17,34 @@ def viewBookings(request):
     if request.user.user_type == 1 or request.user.user_type == 2:
         bookings = Booking.objects.filter(booker=request.user)
     else:
-        bookings = Booking.objects.all()
+        college = request.user.college
+        print(college)
+        bookings = Booking.objects.filter(room__college=college)
+        
     context={'bookings':bookings}
     return render(request, 'booking/booking.html',context)
 
 @login_required(login_url='loginPage')
 def bookingDetails(request,pk):
+    
     booking = Booking.objects.get(id=pk)
     d = booking.start_time.strftime("%Y/%m/%d")
     time = booking.start_time.strftime("%I:%M%p") + '-' + booking.end_time.strftime("%I:%M%p")
+    approve = request.POST.get("approve")
+    reject = request.POST.get("reject")
 
-    if request.POST.get("approve"):
-        booking.isApproved=True
-        booking.date_approved=date.today()
-        if request.user.user_type == 5:
-            booking.approver = AO.objects.get(user=request.user)
+    if request.method == "POST" and not approve and not reject:
+        remarks = request.POST.get('remarks')
+        booking.remarks = remarks
         booking.save()
 
-    if request.method == "POST":
-        remarks = request.POST.get('remarks')
-        
-        booking.remarks = remarks
+    elif approve:
+        booking.isApproved=True
+        booking.date_approved=date.today()
+        booking.approver = ADPD.objects.get(user=request.user)
+        booking.save()
+    elif reject:
+        booking.isApproved=False
         booking.save()
             
     context={'booking':booking,'date':d,'time':time}

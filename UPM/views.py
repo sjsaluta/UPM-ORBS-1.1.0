@@ -15,6 +15,7 @@ from . forms import *
 from bookingapp.forms import *
 from bookingapp.models import *
 from bootstrap_modal_forms.generic import BSModalUpdateView,BSModalDeleteView
+from django.views.decorators.csrf import csrf_exempt
 
 import pandas as pd
 import re
@@ -24,6 +25,7 @@ def indexPage(request):
     return redirect(viewBookings)
 
 #uploads csv file to the Schedule model
+@csrf_exempt
 def uploadPage(request):
     form = UploadForm()
     ocs = OCS.objects.get(user=request.user)
@@ -31,12 +33,14 @@ def uploadPage(request):
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
+            
             f = form.save(False)
             f.ocs=ocs
             f.college=ocs.college
-            f.save()
+            
+            '''f.save()
 
-            ''' The next lines parse the data from csv to Schedule Model'''
+            
 
             file = ScheduleFile.objects.get(file = f.file.name)
             df = pd.read_csv('media/'+f.file.name).iloc[7:,[0,1,2,4,5,6,7,8,9]]
@@ -100,8 +104,8 @@ def uploadPage(request):
                     time_end=et,
                     dayofweek=days
                     )
-            messages.success(request, 'Schedules have been uploaded.')
-            ''' endline '''    
+            
+           '''    
 
     context={'form':form}
     return render(request,'UPM/upload.html',context)
@@ -143,6 +147,7 @@ def termView(request, slug):
             term.isActivated=False
             term.save()
         return redirect(reverse('termView',kwargs={'slug':slug}))   
+        
     context ={'term':term,'rooms':rooms,'rms':room_term}
     return render(request,"UPM/term-details.html",context)
 
@@ -315,18 +320,34 @@ def calendarView(request, slug):
     form = AddBookFrCal()
     if request.method == "POST":
         form = AddBookFrCal(request.POST)
+        iserror = False 
         if form.is_valid():
             book = form.save(False)
             book.room = room
-            if(request.user.user_type == 1):
-                book.faculty= Faculty.objects.get(user=request.user)
-                book.booker=request.user
-            else:
-                book.booker=request.user
-            book.save()
+
+            #Checks if there are any conflicts with blocking schedule and class schedule 
+            for sched in schedule:
+                arr = sched.getDays()
+                if(book.start_time.weekday()+1 == arr[0] or book.start_time.weekday()+1 == arr[1]):
+                    if (book.start_time.hour == sched.time_start.hour or 
+                        book.start_time.hour == sched.time_end.hour or 
+                        book.end_time.hour == sched.time_start.hour or 
+                        book.end_time.hour == sched.time_end.hour):
+                        iserror=True
+                        messages.error(request, "There's a conflict with the class schedule and the blocking schedule.")
+                        return redirect(reverse_lazy("calendarView", kwargs={'slug':slug}))
+
+            #Will save the request to database if there is no error            
+            if iserror == False:
+                if(request.user.user_type == 1):
+                    book.faculty= Faculty.objects.get(user=request.user)
+                    book.booker=request.user
+                else:
+                    book.booker=request.user
+                book.save()
 
     booking = Booking.objects.filter(room_id=room.id)
-
+        
     context={'booking':booking,'room':room,'term':term,'form':form,'sched':schedule}
     return render(request,"UPM/calendar.html",context)
 
@@ -352,7 +373,7 @@ def collegeView(request, slug):
 @login_required(login_url='loginPage')
 def buildingView(request,c,b):
     college = College.objects.get(slug=c)
-    building= Building.objects.get(slug=b)
+    building = Building.objects.get(slug=b)
     room = Room.objects.filter(building=building).order_by('name')
 
     context={'rooms':room,'building':building,'college':college}

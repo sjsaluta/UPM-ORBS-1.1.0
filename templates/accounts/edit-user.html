@@ -13,8 +13,10 @@
         {{form.last_name | as_crispy_field}}
         {{form.username| as_crispy_field}}
 
-        {{form.college | as_crispy_field}}  
+        {{form.college | as_crispy_field}} 
+        {% if u.user_type == 1 or u.user_type == 2 %}
         {{form.department | as_crispy_field}}
+        {% endif %}
     </div>
 
     <div class="modal-footer">

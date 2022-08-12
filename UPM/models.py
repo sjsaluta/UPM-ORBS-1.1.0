@@ -1,3 +1,4 @@
+from time import strptime
 from django.db import models
 from accounts.models import *
 from django.template.defaultfilters import slugify
@@ -71,6 +72,7 @@ class Room(models.Model):
 
 class Term(models.Model):
     academicyear = models.CharField(max_length=10)
+    semester = models.CharField(max_length=30, null=True)
     slug = models.SlugField(null=True)
     room = models.ManyToManyField(Room, related_name="room_term", blank=True)
     date_start = models.DateField(null=True)
@@ -83,7 +85,7 @@ class Term(models.Model):
     #auto-add slugs
     def save(self, *args, **kwargs):  
         if not self.slug:
-            self.slug = slugify('term ' + self.academicyear)
+            self.slug = slugify('term ' + self.academicyear + ' ' + self.semester)
         return super().save(*args, **kwargs)
 
 class ScheduleFile(models.Model):
@@ -119,3 +121,5 @@ class Schedule(models.Model):
         arr[:0]=self.dayofweek
         arr = [int(i) for i in arr]
         return arr
+    
+

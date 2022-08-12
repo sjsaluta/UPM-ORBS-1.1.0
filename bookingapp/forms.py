@@ -12,7 +12,7 @@ from .widgets import *
 class AddBookFrCal(ModelForm):
     class Meta:
         model = Booking
-        fields = ['faculty','subject','start_time','end_time','numofstudents','activity','equipments','dept_or_office','organization']
+        fields = ['faculty','subject','start_time','end_time','numofstudents','activity','equipment','dept_or_office','organization']
 
         labels={
             'numofstudents':'Number of Students',

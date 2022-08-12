@@ -8,19 +8,19 @@ from UPM.models import *
 class Booking(models.Model):
     room = models.ForeignKey(Room,on_delete=models.CASCADE,null=True)
     faculty =  models.ForeignKey(Faculty,on_delete=models.CASCADE,null=True,blank = True)
-    approver =  models.ForeignKey(AO,on_delete=models.CASCADE,null=True,blank=True)
+    approver =  models.ForeignKey(ADPD,on_delete=models.CASCADE,null=True,blank=True)
     booker = models.ForeignKey(AuthUser,on_delete=models.CASCADE,null=True,blank=True)
     dept_or_office = models.CharField(max_length=300,null=True,blank=True)
     organization = models.CharField(max_length=300,null=True,blank=True)
     subject = models.CharField(max_length=300, null=True,blank=True)
     activity = models.CharField(max_length=300,null=True)
-    isApproved = models.BooleanField(default=False)
+    isApproved = models.BooleanField(null=True, blank = True)
     date_approved = models.DateField(null=True,blank=True)
     date_created = models.DateTimeField(auto_now_add=True,blank=True)
     start_time = models.DateTimeField(null=True)
     end_time = models.DateTimeField(null=True)
     numofstudents = models.IntegerField(null=True)
-    equipments = models.TextField(null=True, blank=True)
+    equipment = models.TextField(null=True, blank=True)
     remarks = models.TextField(null=True, blank=True)
 
     #Get full name of user with email
@@ -29,3 +29,4 @@ class Booking(models.Model):
         
     def __str__(self):
         return "booking number " + str(self.id)
+

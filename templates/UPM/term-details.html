@@ -91,14 +91,18 @@
                                 <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
-                                {% for rm in rms %}
+                              <div class= 'col'>
+                                  <input  class="all form-check-input ms-1" type="checkbox" value="">
+                                  <label  class="form-check-label ms-4">Select All</label>
+                              </div>
+                              {% for rm in rms %}
                                 <div class = 'col'>
-                                    <input  class="form-check-input ms-1" type="checkbox" name="rooms" value="{{rm.slug}}">
+                                    <input  class="room form-check-input ms-1" type="checkbox" name="rooms" value="{{rm.slug}}" autocomplete="off">
                                     <label  class="form-check-label ms-4">{{rm}}</label>
                                 </div>
-                                {%empty%}
-                                 <p>There are no more rooms available</p>
-                                {% endfor %}
+                              {%empty%}
+                                 <p class = ms-4>There are no more rooms available</p>
+                              {% endfor %}
                             </div>
                             <div class="modal-footer">
                                 <!-- link to archive here -->
@@ -120,4 +124,11 @@
 {% endblock content %}
 
 {% block extrascripts %}
+<script>
+$('.all').click(function(){
+  $('.room').each(function(){
+    this.checked = !this.checked;
+  })
+});
+</script>
 {% endblock extrascripts %}

@@ -126,19 +126,15 @@
         if (option !== 'none'){
             btn.addEventListener('click', () => {
                 form.style.display = 'block';
-                if (option !== 'adpd' && option !== 'ao'){
-                    college.style.display = 'block';
-                    if(option !== 'ocs'){
-                        dept.style.display = 'block';            
-                    }
-                    else{
-                        dept.style.display = 'none';
-                    }
+
+                college.style.display = 'block';
+                if(option === 'faculty' || option === 'staff'){
+                    dept.style.display = 'block';            
                 }
                 else{
-                    college.style.display = 'none';
                     dept.style.display = 'none';
                 }
+
             });  
         }
     }
