@@ -71,8 +71,10 @@ class Room(models.Model):
         return super().save(*args, **kwargs)
 
 class Term(models.Model):
+    SEM=(("1st SEMESTER",'1st Semester'),("2nd SEMESTER","2nd Semester"))
+
     academicyear = models.CharField(max_length=10)
-    semester = models.CharField(max_length=30, null=True)
+    semester = models.CharField(max_length=50,choices=SEM,null=True)
     slug = models.SlugField(null=True)
     room = models.ManyToManyField(Room, related_name="room_term", blank=True)
     date_start = models.DateField(null=True)
@@ -80,7 +82,7 @@ class Term(models.Model):
     isActivated = models.BooleanField(null=True,default=False)
 
     def __str__(self):
-        return self.academicyear
+        return self.academicyear + ' ' + self.semester
 
     #auto-add slugs
     def save(self, *args, **kwargs):  

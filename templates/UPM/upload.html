@@ -33,16 +33,23 @@
     <form method='POST' enctype="multipart/form-data" id="upload">
         {% csrf_token %}
 
-        <div class ='col'>
-        {{ form.as_p }}
+        <div class ='col-3'>
+        {{ form.term | as_crispy_field }}
+        {{ form.file }}
         </div>
-
-        <div class = 'col'>
-          <button class='btn btn-success' type = 'submit'>Upload</button>
-          <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+        <div class = 'row'>
+          <div class = 'col mt-4 ms-3'>
+            <button class='btn btn-success' type = 'submit'>Upload</button>
           </div>
+          <div class = 'col'>
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <h5 id='error' class='text-danger ms-3'></h5>
         </div>
+        
+        
         
     </form>
 </div>
@@ -69,13 +76,15 @@ $(document).ready(function(){
       enctype: 'multipart/form-data',
       success: function (response) {
         $('.spinner-border').fadeOut()
+        $('#alert').html(
+          "Schedules have been uploaded");
+          $('#alert').fadeIn(); //or fadeIn
+          setTimeout(function() {
+          $("#alert").fadeOut(); //or fadeOut
+        }, 10000);
         if(response.instance){
-            $('#alert').html(
+            $('#error').html(
             response.instance);
-            $('#alert').fadeIn(); //or fadeIn
-            setTimeout(function() {
-            $("#alert").fadeOut(); //or fadeOut
-          }, 5000);
         }
         else{
           $('#alert').html(

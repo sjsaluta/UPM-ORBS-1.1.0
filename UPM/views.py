@@ -37,8 +37,7 @@ def uploadPage(request):
             f = form.save(False)
             f.ocs=ocs
             f.college=ocs.college
-            
-            '''f.save()
+            f.save()
 
             
 
@@ -66,6 +65,7 @@ def uploadPage(request):
                 y=re.findall(r"\bM\w*|\bT\w*|\bW\w*|\bS\w*|\bF\w*",time.to_string())
 
             term = Term.objects.get(slug = '2022-2023')
+            error=''
             for i in range(len(df)):
                 r = rm[i]
                 r=r.replace(" ","")
@@ -89,23 +89,29 @@ def uploadPage(request):
                     days += d
                 st = datetime.strptime(start_time[i],"%I:%M %p").time()
                 et = datetime.strptime(end_time[i],"%I:%M %p").time()
+                arr=[]
+                arr[:0]=days
                 
-                Schedule.objects.create(
-                    schedfile = file,
-                    room=room,
-                    faculty=ins[i],
-                    coursetitle=ct[i],
-                    classnum=cn[i],
-                    component=com[i],
-                    subject=sub[i],
-                    section=sec[i],
-                    capacity=cap[i],
-                    time_start=st,
-                    time_end=et,
-                    dayofweek=days
-                    )
-            
-           '''    
+                if Schedule.objects.filter(room=room, time_start__range=(st,et),time_end__range=(st,et),dayofweek__contains=(arr[0] or arr[1])).exists():
+                    conflict=Schedule.objects.get(room=room, time_start__range=(st,et),time_end__range=(st,et),dayofweek__contains=(arr[0] or arr[1]))
+                    error= ct[i] + ' ' + sec[i] + ' (' + com[i] + ') has conflicts with' + str(conflict)
+                else:
+                    Schedule.objects.create(
+                        schedfile = file,
+                        room=room,
+                        faculty=ins[i],
+                        coursetitle=ct[i],
+                        classnum=cn[i],
+                        component=com[i],
+                        subject=sub[i],
+                        section=sec[i],
+                        capacity=cap[i],
+                        time_start=st,
+                        time_end=et,
+                        dayofweek=days
+                        )
+            return JsonResponse({'instance':error}, status = 200)
+
 
     context={'form':form}
     return render(request,'UPM/upload.html',context)

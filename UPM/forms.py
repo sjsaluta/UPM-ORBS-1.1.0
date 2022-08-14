@@ -15,7 +15,7 @@ class AddTerm(ModelForm):
 
     class Meta:
         model = Term
-        fields = ['academicyear','date_start','date_end']
+        fields = ['academicyear','date_start','date_end','semester']
 
         labels={
             'academicyear':'Academic Year',
