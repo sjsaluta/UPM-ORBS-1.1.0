@@ -16,10 +16,11 @@ from bookingapp.forms import *
 from bookingapp.models import *
 from bootstrap_modal_forms.generic import BSModalUpdateView,BSModalDeleteView
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 
 import pandas as pd
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 
 def indexPage(request):
     return redirect(viewBookings)
@@ -64,7 +65,7 @@ def uploadPage(request):
                 end_time.append(tf[1])
                 y=re.findall(r"\bM\w*|\bT\w*|\bW\w*|\bS\w*|\bF\w*",time.to_string())
 
-            term = Term.objects.get(slug = '2022-2023')
+            
             error=''
             for i in range(len(df)):
                 r = rm[i]
@@ -89,12 +90,13 @@ def uploadPage(request):
                     days += d
                 st = datetime.strptime(start_time[i],"%I:%M %p").time()
                 et = datetime.strptime(end_time[i],"%I:%M %p").time()
+                st_range=(datetime.strptime(start_time[i],"%I:%M %p")+timedelta(minutes=1)).time()
+                et_range=(datetime.strptime(end_time[i],"%I:%M %p")-timedelta(minutes=1)).time()
                 arr=[]
                 arr[:0]=days
                 
-                if Schedule.objects.filter(room=room, time_start__range=(st,et),time_end__range=(st,et),dayofweek__contains=(arr[0] or arr[1])).exists():
-                    conflict=Schedule.objects.get(room=room, time_start__range=(st,et),time_end__range=(st,et),dayofweek__contains=(arr[0] or arr[1]))
-                    error= ct[i] + ' ' + sec[i] + ' (' + com[i] + ') has conflicts with' + str(conflict)
+                if Schedule.objects.filter(Q(room=room), Q(time_start__range=(st_range,et_range))|Q(time_end__range=(st_range,et_range)),Q(dayofweek__contains=(arr[0] or arr[1]))).exists():
+                    error= ct[i] + ' ' + sec[i] + ' (' + com[i] + ') has conflicts with other schedules.'
                 else:
                     Schedule.objects.create(
                         schedfile = file,

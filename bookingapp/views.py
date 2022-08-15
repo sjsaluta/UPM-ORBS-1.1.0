@@ -15,6 +15,8 @@ from datetime import date
 def viewBookings(request):
     if request.user.user_type == 1 or request.user.user_type == 2:
         bookings = Booking.objects.filter(booker=request.user)
+    elif request.user.user_type == None:
+        bookings = Booking.objects.all()
     else:
         college = request.user.college
         print(college)
