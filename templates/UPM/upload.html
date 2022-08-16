@@ -76,15 +76,13 @@ $(document).ready(function(){
       enctype: 'multipart/form-data',
       success: function (response) {
         $('.spinner-border').fadeOut()
-        $('#alert').html(
-          "Schedules have been uploaded");
+        if(response.instance){
+          $('#alert').html(
+            "Schedules have been uploaded except for "response.instance);
           $('#alert').fadeIn(); //or fadeIn
           setTimeout(function() {
           $("#alert").fadeOut(); //or fadeOut
         }, 10000);
-        if(response.instance){
-            $('#error').html(
-            response.instance);
         }
         else{
           $('#alert').html(
@@ -93,6 +91,7 @@ $(document).ready(function(){
             setTimeout(function() {
             $("#alert").fadeOut(); //or fadeOut
           }, 5000);
+          location.href = "{% url 'roomView' %}"
         }
         
       },

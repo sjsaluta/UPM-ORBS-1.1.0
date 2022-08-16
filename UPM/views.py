@@ -96,7 +96,7 @@ def uploadPage(request):
                 arr[:0]=days
                 
                 if Schedule.objects.filter(Q(room=room), Q(time_start__range=(st_range,et_range))|Q(time_end__range=(st_range,et_range)),Q(dayofweek__contains=(arr[0] or arr[1]))).exists():
-                    error= ct[i] + ' ' + sec[i] + ' (' + com[i] + ') has conflicts with other schedules.'
+                    error= '"' + ct[i] + ' ' + sec[i] + ' (' + com[i] + ')" that has conflicts with other schedules.'
                 else:
                     Schedule.objects.create(
                         schedfile = file,
