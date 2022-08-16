@@ -20,5 +20,4 @@ urlpatterns = [
     path('', views.viewBookings, name='viewBookings'),
     path('<int:pk>/', views.bookingDetails, name='bookingDetails'),
     path('edit/<int:pk>/',views.editBooking, name='editBooking'),
-    path('<int:pk>/bookings/',views.bookings)
 ]

@@ -78,7 +78,7 @@ $(document).ready(function(){
         $('.spinner-border').fadeOut()
         if(response.instance){
           $('#alert').html(
-            "Schedules have been uploaded except for "response.instance);
+            "Schedules have been uploaded except for " + response.instance);
           $('#alert').fadeIn(); //or fadeIn
           setTimeout(function() {
           $("#alert").fadeOut(); //or fadeOut
@@ -91,7 +91,6 @@ $(document).ready(function(){
             setTimeout(function() {
             $("#alert").fadeOut(); //or fadeOut
           }, 5000);
-          location.href = "{% url 'roomView' %}"
         }
         
       },

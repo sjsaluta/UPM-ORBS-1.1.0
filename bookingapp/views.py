@@ -25,6 +25,7 @@ def viewBookings(request):
     context={'bookings':bookings}
     return render(request, 'booking/booking.html',context)
 
+#Redirects to the detail page of the clicked booking schedule
 @login_required(login_url='loginPage')
 def bookingDetails(request,pk):
     
@@ -68,14 +69,3 @@ def editBooking(request,pk):
     context = {'form':form}
     return render(request,'booking/edit-booking.html',context)
 
-#update table asynchronously
-def bookings(request,pk):
-    data = dict()
-    if request.method == 'GET':
-        book = Booking.objects.all()
-        data['table'] = render_to_string(
-            'booking/booking-table.html',
-            {'book': book},
-            request=request
-        )
-        return JsonResponse(data)
