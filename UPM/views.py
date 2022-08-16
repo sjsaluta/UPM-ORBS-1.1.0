@@ -336,14 +336,24 @@ def calendarView(request, slug):
             #Checks if there are any conflicts with blocking schedule and class schedule 
             for sched in schedule:
                 arr = sched.getDays()
-                if(book.start_time.weekday()+1 == arr[0] or book.start_time.weekday()+1 == arr[1]):
-                    if (book.start_time.hour == sched.time_start.hour or 
-                        book.start_time.hour == sched.time_end.hour or 
-                        book.end_time.hour == sched.time_start.hour or 
-                        book.end_time.hour == sched.time_end.hour):
-                        iserror=True
-                        messages.error(request, "There's a conflict with the class schedule and the blocking schedule.")
-                        return redirect(reverse_lazy("calendarView", kwargs={'slug':slug}))
+                if len(arr) == 1:
+                    if(book.start_time.weekday()+1 == arr[0]):
+                        if (book.start_time.hour == sched.time_start.hour or 
+                            book.start_time.hour == sched.time_end.hour or 
+                            book.end_time.hour == sched.time_start.hour or 
+                            book.end_time.hour == sched.time_end.hour):
+                            iserror=True
+                            messages.error(request, "There's a conflict with the class schedule and the blocking schedule.")
+                            return redirect(reverse_lazy("calendarView", kwargs={'slug':slug}))
+                else:
+                    if(book.start_time.weekday()+1 == arr[0] or book.start_time.weekday()+1 == arr[1]):
+                        if (book.start_time.hour == sched.time_start.hour or 
+                            book.start_time.hour == sched.time_end.hour or 
+                            book.end_time.hour == sched.time_start.hour or 
+                            book.end_time.hour == sched.time_end.hour):
+                            iserror=True
+                            messages.error(request, "There's a conflict with the class schedule and the blocking schedule.")
+                            return redirect(reverse_lazy("calendarView", kwargs={'slug':slug}))
 
             #Will save the request to database if there is no error            
             if iserror == False:

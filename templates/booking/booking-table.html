@@ -5,7 +5,7 @@
         <th scope="col">Time</th>
         <th scope="col">Room</th>
         <th scope="col">Activity</th>
-        <th scope="col">Equipments Needed</th>
+        <th scope="col">Equipment Needed</th>
         <th scope="col">No. of Participants</th>
         <th scope="col">Remarks/Changes</th>
       </tr>
@@ -21,8 +21,9 @@
         <td class = "py-5">
           {% if request.user.user_type == 5 %} 
             {% if booking.remarks or booking.isApproved%}
+              {% if not booking.isEdited %}
                 {{booking.remarks}}
-            
+              {% endif %}
             {% else %}
             <form method="POST">
                 {%csrf_token%}

@@ -37,6 +37,7 @@ def bookingDetails(request,pk):
     if request.method == "POST" and not approve and not reject:
         remarks = request.POST.get('remarks')
         booking.remarks = remarks
+        booking.isEdited = False
         booking.save()
 
     elif approve:
@@ -54,11 +55,12 @@ def bookingDetails(request,pk):
 #edit booking modal
 def editBooking(request,pk):
     booking = Booking.objects.get(id=pk)
-    form = AddBookFrCal(instance=booking)
+    form = EditBookingForm(instance=booking)
     if request.method =="POST":
-        form = AddBookFrCal(request.POST, instance = booking)
+        form = EditBookingForm(request.POST, instance = booking)
 
         if form.is_valid():
+            booking.isEdited=True
             form.save()
         
         return redirect(reverse('bookingDetails',kwargs={'pk':pk}))
@@ -66,7 +68,7 @@ def editBooking(request,pk):
     return render(request,'booking/edit-booking.html',context)
 
 #update table asynchronously
-def bookings(request,pk):
+def bookings(request):
     data = dict()
     if request.method == 'GET':
         book = Booking.objects.all()

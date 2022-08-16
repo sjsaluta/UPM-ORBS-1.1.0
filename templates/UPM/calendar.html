@@ -21,8 +21,8 @@
   <h2 class="pt-4 px-4 ms-4">{{room.name}}</h2>
   <h5 class="px-4 ms-4">Calendar View</h5>
   <div class = "row justify-content-end">
-    <div class = "col-5">
-      <h4 class="pb-4">A.Y. {{term.academicyear}}</h5>
+    <div class = "col-6 ps-5  ">
+      <h4 class="pb-4">A.Y. {{term.academicyear}} {{term.semester}}</h5>
     </div>  
     <div class = "col-2 ms-4">
       {%if request.user.user_type == 1 or request.user.user_type == 2%}

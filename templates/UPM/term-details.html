@@ -18,7 +18,7 @@
 
 {% block content %}
 <div class = "container w-auto">
-    <h2 class="pt-4">Term {{term.academicyear}}</h2>
+    <h2 class="pt-4">Term {{term.academicyear}} {{term.semester}}</h2>
     <h5 class="pb-1">{{term.date_start}}-{{term.date_end}}</h5>
     {% if term.isActivated %}
     <h6 class="pb-4">Active</h6>

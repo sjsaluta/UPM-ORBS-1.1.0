@@ -15,6 +15,7 @@ class Booking(models.Model):
     subject = models.CharField(max_length=300, null=True,blank=True)
     activity = models.CharField(max_length=300,null=True)
     isApproved = models.BooleanField(null=True, blank = True)
+    isEdited = models.BooleanField(null=True, blank = True)
     date_approved = models.DateField(null=True,blank=True)
     date_created = models.DateTimeField(auto_now_add=True,blank=True)
     start_time = models.DateTimeField(null=True)

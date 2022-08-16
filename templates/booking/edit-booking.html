@@ -8,6 +8,7 @@
     <form method="POST">
       {% csrf_token %}
       <div class="modal-body">
+        {{form.room | as_crispy_field}}
         {{form.subject | as_crispy_field}}
         {{form.faculty | as_crispy_field}}
         {{form.dept_or_office | as_crispy_field}}

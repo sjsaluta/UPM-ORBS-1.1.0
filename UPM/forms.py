@@ -18,7 +18,7 @@ class AddTerm(ModelForm):
         fields = ['academicyear','date_start','date_end','semester']
 
         labels={
-            'academicyear':'Academic Year',
+            'academicyear':'Academic Year (ex. "2019-2020")',
             'date_start':'Starting Date',
             'date_end':'End Date',
         }
