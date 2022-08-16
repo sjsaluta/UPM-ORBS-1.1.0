@@ -23,6 +23,12 @@
             {% if booking.remarks or booking.isApproved%}
               {% if not booking.isEdited %}
                 {{booking.remarks}}
+              {% else %}
+                <form method="POST">
+                  {%csrf_token%}
+                  <textarea class='form-control' name='remarks' placeholder={{booking.remarks}}></textarea>
+                  <button class='btn btn-success' type='submit'> Enter </button>
+                </form>
               {% endif %}
             {% else %}
             <form method="POST">
