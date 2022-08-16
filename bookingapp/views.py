@@ -61,6 +61,7 @@ def editBooking(request,pk):
 
         if form.is_valid():
             booking.isEdited=True
+            booking.remarks = "Edited"
             form.save()
         
         return redirect(reverse('bookingDetails',kwargs={'pk':pk}))
