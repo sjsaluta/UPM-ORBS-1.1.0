@@ -68,7 +68,7 @@ def editBooking(request,pk):
     return render(request,'booking/edit-booking.html',context)
 
 #update table asynchronously
-def bookings(request):
+def bookings(request,pk):
     data = dict()
     if request.method == 'GET':
         book = Booking.objects.all()
