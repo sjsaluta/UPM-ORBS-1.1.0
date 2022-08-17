@@ -48,15 +48,23 @@ class Building(models.Model):
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
 
-class Room(models.Model):
-    TYPES = (
-        (1,"Room"),
-        (2,"Theatre"),
-    )
-
+class RoomType(models.Model):
     name = models.CharField(max_length=300,null=True, unique=True)
     slug = models.SlugField(null=True)
-    room_type =models.PositiveSmallIntegerField(choices=TYPES,null=True)
+
+    def __str__(self):
+        return self.name
+
+    #auto-add slugs
+    def save(self, *args, **kwargs):  
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
+
+class Room(models.Model):
+    name = models.CharField(max_length=300,null=True, unique=True)
+    slug = models.SlugField(null=True)
+    room_type =models.ForeignKey(RoomType,on_delete=models.CASCADE,null=True)
     college = models.ForeignKey(College,on_delete=models.CASCADE,null=True)
     building = models.ForeignKey(Building, on_delete=models.CASCADE, null=True)
     capacity = models.IntegerField()
@@ -104,7 +112,7 @@ class Schedule(models.Model):
     room = models.ForeignKey(Room,on_delete=models.CASCADE,null=True)
     faculty = models.CharField(max_length=200,null=True)
     coursetitle= models.CharField(max_length=200,null=True)
-    classnum = models.IntegerField(null=True)
+    classnum = models.IntegerField(null=True, unique=True)
     component = models.CharField(max_length=10,null=True)
     section = models.CharField(max_length=10,null=True)
     subject = models.CharField(max_length=200,null=True)

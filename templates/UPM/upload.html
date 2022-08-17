@@ -37,6 +37,13 @@
         {{ form.term | as_crispy_field }}
         {{ form.file }}
         </div>
+
+        <div class ='col-8'>
+          <p class = 'text-black-50 mt-2'> *Upload a csv file. 
+          <br>The labels for the columns should start in the 8th row.
+          <br> The columns should be as follows: Class Number, Course Title, Subject, Catalog, Section, Component, Schedule, Room, Class Capacity, and Restrictions*</p>
+        </div>
+
         <div class = 'row'>
           <div class = 'col mt-4 ms-3'>
             <button class='btn btn-success' type = 'submit'>Upload</button>
