@@ -49,8 +49,31 @@
                 <td>Not yet approved</td>
             {% endif %}
             <td>{{booking.remarks}}</td>
-            <td><a class='btn btn-warning ' href="{% url 'bookingDetails' booking.id%}"> Details</a></td>
+            <td>
+              <a class='btn btn-warning ' href="{% url 'bookingDetails' booking.id%}"> Details</a>
+              {% if booking.booker == request.user %}
+              <button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup{{booking.id}}"><i class="fa-solid fa-trash-can"></i></button>
+              {%endif%}
+            </td>
           </tr>
+           <!-- Modal for approval -->
+          <div class="modal fade" id="deletePopup{{booking.id}}" tabindex="-1" aria-labelledby="deletePopupLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="approveModalLabel">Delete Booking</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Delete this booking?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <a class="btn btn-danger" href="{% url 'deleteBooking' booking.id %}">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
           {% endfor %}
         </tbody>
       </table>

@@ -367,6 +367,7 @@ def calendarView(request, slug):
                 else:
                     book.booker=request.user
                 book.save()
+                return redirect(reverse_lazy("calendarView", kwargs={'slug':slug}))
 
     booking = Booking.objects.filter(room_id=room.id)
         

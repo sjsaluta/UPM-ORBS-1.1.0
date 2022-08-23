@@ -69,3 +69,8 @@ def editBooking(request,pk):
     context = {'form':form}
     return render(request,'booking/edit-booking.html',context)
 
+def deleteBooking(request,pk):
+    booking = Booking.objects.get(id=pk)
+    booking.delete()
+    return redirect('viewBookings')
+
