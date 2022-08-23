@@ -17,7 +17,7 @@
         <td>{{room.building}}</td>
         <td>{{room.college}}</td>
         <td>{{room.capacity}}</td>
-        <td>{{room.get_room_type_display}}</td>
+        <td>{{room.room_type}}</td>
         <td>
             <a class='btn btn-secondary btn-sm' href = {% url 'calendarView' room.slug %}><i class="fa-solid fa-calendar-day"></i> Go to Calendar</a>
             <button type="button" class="update bs-modal btn btn-sm btn-warning btn-sm" data-form-url="{% url 'editRoom' room.slug %}"><i class="fa-solid fa-pen-to-square"></i></button>
