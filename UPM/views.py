@@ -115,7 +115,7 @@ def uploadPage(request):
                         time_end=et,
                         dayofweek=days
                         )
-            return JsonResponse({'instance':error}, status = 200)
+        return JsonResponse({'instance':error}, status = 200)
 
 
     context={'form':form}
