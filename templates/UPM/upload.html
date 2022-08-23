@@ -83,23 +83,13 @@ $(document).ready(function(){
       enctype: 'multipart/form-data',
       success: function (response) {
         $('.spinner-border').fadeOut()
-        if(response.instance){
-          $('#alert').html(
-            "Schedules have been uploaded except for " + response.instance);
-          $('#alert').fadeIn(); //or fadeIn
-          setTimeout(function() {
-          $("#alert").fadeOut(); //or fadeOut
-        }, 10000);
-        }
-        else{
+       
           $('#alert').html(
             "Schedules have been uploaded.");
             $('#alert').fadeIn(); //or fadeIn
             setTimeout(function() {
             $("#alert").fadeOut(); //or fadeOut
           }, 10000);
-        }
-        
       },
       error: function (response){
         console.log("error")
