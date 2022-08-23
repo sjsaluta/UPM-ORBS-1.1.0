@@ -20,31 +20,38 @@
                 <h1><a href="{% url 'indexPage' %}" class="logo mt-2 pt-2">UPM</a></h1>
                 <h1 class="name">Room Booking</h1>
                 <ul class="list-unstyled components mb-5">
+                    {% if request.user.is_authenticated %}
                     <li>
                         <a href="{% url 'viewBookings' %}"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-1"> Bookings</span></a>
                     </li>
-                    {% if request.user.user_type == none %}
-                    <li>
-                        <a data-bs-toggle="collapse" href="#collapseOptions" role="button" aria-expanded="false" aria-controls="collapseOptions" id="clps"><i class="fa fa-cogs"></i> <span class="link_label">Administrator</span></a>
-                        <div class="collapse" id="collapseOptions">
-                            <a class='sub ms-4' href="{% url 'manageUsers' %}"><i class="sub fa fa-user"></i><span class="link_label ms-2">Manage Users</span></a>
-                            <a class='sub ms-4' href="{% url 'manageCollege' %}"><i class="sub fa-solid fa-school"></i></i><span class="link_label">Manage Colleges</span></a>
-                            <a class='sub ms-4' href="{% url 'manageRooms' %}"><i class="sub fa-solid fa-door-closed"></i><span class="link_label ms-1">Manage Rooms</span></a>
-                            <a class='sub ms-4' href="{% url 'manageTerm' %}"><i class="sub fa fa-calendar"></i><span class="link_label ms-2">Manage Terms</span></a>
-                        <div>
-                    </li>
+                    
+                        {% if request.user.user_type == none %}
+                        <li>
+                            <a data-bs-toggle="collapse" href="#collapseOptions" role="button" aria-expanded="false" aria-controls="collapseOptions" id="clps"><i class="fa fa-cogs"></i> <span class="link_label">Administrator</span></a>
+                            <div class="collapse" id="collapseOptions">
+                                <a class='sub ms-4' href="{% url 'manageUsers' %}"><i class="sub fa fa-user"></i><span class="link_label ms-2">Manage Users</span></a>
+                                <a class='sub ms-4' href="{% url 'manageCollege' %}"><i class="sub fa-solid fa-school"></i></i><span class="link_label">Manage Colleges</span></a>
+                                <a class='sub ms-4' href="{% url 'manageRooms' %}"><i class="sub fa-solid fa-door-closed"></i><span class="link_label ms-1">Manage Rooms</span></a>
+                                <a class='sub ms-4' href="{% url 'manageTerm' %}"><i class="sub fa fa-calendar"></i><span class="link_label ms-2">Manage Terms</span></a>
+                            <div>
+                        </li>
+                        {% else %}
+                            {% if request.user.user_type == 3 %}
+                            <li>
+                                <a href="{% url 'uploadPage' %}"><i class="fa-solid fa-upload"></i><span class="link_label"> Upload</span></a>
+                            </li>
+                            {%endif%}
+                            {% if request.user.user_type != none %}
+                            <li>
+                                <a href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
+                            </li>
+                        {% endif %}
+                            
+                        {% endif %}
                     {% else %}
-                        {% if request.user.user_type == 3 %}
-                        <li>
-                            <a href="{% url 'uploadPage' %}"><i class="fa-solid fa-upload"></i><span class="link_label"> Upload</span></a>
-                        </li>
-                        {%endif%}
-                        {% if request.user.user_type != none %}
-                        <li>
-                            <a href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
-                        </li>
-                       {% endif %}
-                        
+                    <li>
+                        <a href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label ms-1">View Rooms</span></a>
+                    </li>
                     {% endif %}
                 </ul>
 
@@ -67,16 +74,24 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="nav navbar-nav ml-auto">
                                 <span class="fw-bolder mt-2">User: {{request.user}}</span>
+                                {% if request.user.is_authenticated %}
                                 <li class="nav-item dropdown me-3 pe-3">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                      Account
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Account
+                                        </a>
+                                        
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        
+                                        <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <a class='text-secondary mt-2 ms-2 me-3 pe-3' href="{% url 'loginPage' %}" id="navbarDropdown" >
+                                       <strong>Log In</strong> 
                                     </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                      <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                                      <li><hr class="dropdown-divider"></li>
-                                      <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-                                    </ul>
-                                </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>

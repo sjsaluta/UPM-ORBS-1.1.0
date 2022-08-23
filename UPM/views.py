@@ -23,7 +23,10 @@ import re
 from datetime import datetime, timedelta
 
 def indexPage(request):
-    return redirect(viewBookings)
+    if request.user.is_authenticated:
+        return redirect(viewBookings)
+    else:
+        return redirect(roomView)
 
 #uploads csv file to the Schedule model
 @csrf_exempt
@@ -312,7 +315,7 @@ def rooms(request):
         return JsonResponse(data)
 
 ##### User Views #####
-@login_required(login_url='loginPage')
+
 def calendarView(request, slug):
     room = Room.objects.get(slug=slug)
     terms = Term.objects.filter(room=room)
@@ -397,7 +400,7 @@ def buildingView(request,c,b):
     context={'rooms':room,'building':building,'college':college}
     return render(request,'UPM/building-details.html',context)
 
-@login_required(login_url='loginPage')
+
 def roomView(request):
     rooms = Room.objects.all()
     rfilter= RoomFilter(request.GET,queryset=rooms)

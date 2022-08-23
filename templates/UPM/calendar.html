@@ -25,8 +25,12 @@
       <h4 class="pb-4">A.Y. {{term.academicyear}} {{term.semester}}</h5>
     </div>  
     <div class = "col-2 ms-4">
-      {%if request.user.user_type == 1 or request.user.user_type == 2%}
-      <a class='btn btn-warning mb-2' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book"><i class="fa-solid fa-calendar"></i> Book Now</a>
+      {%if request.user.is_authenticated%}
+        {%if request.user.user_type == 1 or request.user.user_type == 2%}
+        <a class='btn btn-warning mb-2' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book"><i class="fa-solid fa-calendar"></i> Book Now</a>
+        {% else %}
+        <a class='btn btn-warning mb-2 disabled' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book" aria-disabled="true"><i class="fa-solid fa-calendar"></i> Book Now</a>
+        {%endif%}
       {% else %}
       <a class='btn btn-warning mb-2 disabled' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book" aria-disabled="true"><i class="fa-solid fa-calendar"></i> Book Now</a>
       {%endif%}
@@ -145,16 +149,22 @@
       
       initialDate: today,
       navLinks: true, // can click day/week names to navigate views  
-     
-      selectable: true,
+      {% if request.user.is_authenticated %}
+        {%if request.user.user_type == 1 or request.user.user_type == 2%}
+          selectable: true,
+        {% endif %} 
+      {% endif %} 
+       
       selectMirror: true,
     
       select: function(arg) {
         console.log('clicked')
-        
-        $("#book").modal("show")
-        calendar.unselect()
-        
+        {% if request.user.is_authenticated %}
+          {%if request.user.user_type == 1 or request.user.user_type == 2%}
+            $("#book").modal("show")
+            calendar.unselect()
+          {% endif %}
+        {% endif %}    
       },
       
       dayMaxEvents: false, // allow "more" link when too many events
@@ -197,13 +207,15 @@
       eventClick: function(info) {
 
         if(info.event.extendedProps.type == 'booking'){
+          
           {% for book in booking %}
-
-            if ('{{book.id}}'== info.event.id){
-              location.href = "{% url 'bookingDetails' book.id %}"
-            }
-
+              {%if request.user.is_authenticated %}
+              if ('{{book.id}}'== info.event.id){
+                location.href = "{% url 'bookingDetails' book.id %}"
+              }
+             {%endif%}
           {% endfor %}
+          
         }
         else{
           $('#exampleModalLabel').text(info.event.title)
