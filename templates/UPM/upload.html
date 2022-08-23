@@ -97,11 +97,12 @@ $(document).ready(function(){
             $('#alert').fadeIn(); //or fadeIn
             setTimeout(function() {
             $("#alert").fadeOut(); //or fadeOut
-          }, 5000);
+          }, 10000);
         }
         
       },
       error: function (response){
+        console.log("error")
       }
     }); 
     return false; //<---- move it here
