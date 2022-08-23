@@ -102,12 +102,6 @@ $(document).ready(function(){
         
       },
       error: function (response){
-        $('#alert').html(
-          response["responseJSON"]["error"]);
-        $('#alert').fadeIn();
-        setTimeout(function() {
-          $("#alert").fadeOut(); //or fadeOut
-        }, 10000)
       }
     }); 
     return false; //<---- move it here
