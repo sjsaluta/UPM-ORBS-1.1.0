@@ -100,7 +100,7 @@ class Term(models.Model):
 
 class ScheduleFile(models.Model):
     term = models.ForeignKey(Term,on_delete=models.CASCADE,null=True)
-    college = models.OneToOneField(College,on_delete=models.CASCADE,null=True)
+    college = models.ForeignKey(College,on_delete=models.CASCADE,null=True)
     ocs = models.ForeignKey('accounts.OCS', on_delete=models.CASCADE,null=True)
     file = models.FileField()
 
