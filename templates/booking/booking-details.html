@@ -28,7 +28,7 @@
       {% else %}
         <h4>Approved: Not Yet</h4>
       {% endif %}
-      <h4>Date Filed: {{booking.date_created|date:"Y-m-d"}}</h4>
+      <h4>Date Filed: {{booking.date_created|date:"F t Y"}}</h4>
       </div>
       {% if booking.dept_or_office %}
         <div class= 'col-4'>

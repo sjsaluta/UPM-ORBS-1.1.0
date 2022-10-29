@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Bookings{% endblock title %}
 {% load crispy_forms_tags %}
-
+<!-- CONTAINS DATES -->
 {% block extracss %}
 {% endblock extracss %}
 {% block breadcrumb %}
@@ -36,11 +36,11 @@
           {% for booking in bookings %}
           <tr>
             <th scope="row">{{forloop.counter}}</th>
-            <td>{{booking.start_time|date:"m/d/y h:iA"}} - {{booking.end_time|date:"m/d/y h:iA"}}</td>
+            <td>{{booking.start_time|date:"N t Y h:iA"}} - {{booking.end_time|date:"N t Y h:iA"}}</td>
             <td>{{booking.room}}</td>
             <td>{{booking.activity}}</td>
             <td>{{booking.booker}}</td>
-            <td>{{booking.date_created|date:"m/d/y"}}</td>
+            <td>{{booking.date_created|date:"N t Y"}}</td>
             {% if booking.isApproved == True %}
                 <td>Approved</td>
             {% elif booking.isApproved == False %}

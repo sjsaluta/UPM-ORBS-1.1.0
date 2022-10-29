@@ -412,3 +412,4 @@ def roomView(request):
 
     context={'rooms':rooms,'filter':rfilter,'building':build,'colleges':college}
     return render(request,'UPM/room-view.html',context)
+
