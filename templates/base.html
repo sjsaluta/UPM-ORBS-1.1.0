@@ -45,8 +45,15 @@
                             <li>
                                 <a href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
                             </li>
-                        {% endif %}
-                            
+                            {% endif %}
+                            {% if request.user.user_type == 1 or request.user.user_type == 2 %}
+                                    <a href="{% url 'notifications' %}">
+                                        <i class='fa-solid fa-bell' style='margin-top:5%; font-size:33px; color: white'></i> 
+                                        {% if unread_notifications %}
+                                            <span class="badge bg-secondary">{{ unread_notifications }}</span>
+                                        {% endif %}
+                                    </a>
+                            {% endif %}
                         {% endif %}
                     {% else %}
                     <li>
