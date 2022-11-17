@@ -1,14 +1,15 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, JsonResponse
-from django.template.loader import render_to_string
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout ,update_session_auth_hash
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm
-from django.urls import reverse_lazy
-from . forms import *
 from datetime import date
 
+from django.contrib import messages
+from django.contrib.auth import (authenticate, login, logout,
+                                 update_session_auth_hash)
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy
+from .forms import *
 
 
 @login_required(login_url='loginPage')
@@ -24,6 +25,16 @@ def viewBookings(request):
         
     context={'bookings':bookings}
     return render(request, 'booking/booking.html',context)
+
+# Notification
+@login_required(login_url='loginPage')
+def viewNotif(request):
+    if request.user.user_type == 1 or request.user.user_type == 2:
+        list_of_notifications = Notifications.objects.all()
+        unread_notifications = Notifications.objects.filter(user = request.user, is_opened = False).count()
+
+    context={'list_of_notifications':list_of_notifications, 'unread_notifications':unread_notifications}
+    return redirect(request, 'booking/new_notifications.html', context)
 
 #Redirects to the detail page of the clicked booking schedule
 @login_required(login_url='loginPage')
@@ -46,9 +57,11 @@ def bookingDetails(request,pk):
         booking.date_approved=date.today()
         booking.approver = ADPD.objects.get(user=request.user)
         booking.save()
+        Notifications.objects.create(user=booking.booker, text = 'Your booking request for' + str(booking.room) + "is APPROVED!")
     elif reject:
         booking.isApproved=False
         booking.save()
+        Notifications.objects.create(user=booking.booker, text = 'Your booking request for' + str(booking.room) + "is REJECTED!")
             
     context={'booking':booking,'date':d,'time':time}
     return render(request,'booking/booking-details.html',context)
