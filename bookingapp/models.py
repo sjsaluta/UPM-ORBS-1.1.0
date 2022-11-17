@@ -1,4 +1,6 @@
 from django.db import models
+from django.views.generic.list import ListView
+
 
 from accounts.models import *
 from UPM.models import *
@@ -31,3 +33,13 @@ class Booking(models.Model):
     def __str__(self):
         return "booking number " + str(self.id)
 
+class Notifications(models.Model):
+    is_opened = models.BooleanField(default=False)
+    approved_disapproved = models.TextField()
+    time_stamp = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(AuthUser,on_delete=models.CASCADE,null=True)
+
+class NotificationListView(ListView):
+    model = Notifications
+    def get_queryset(self):
+        return Notifications.objects.filter(user=self.request.user).order_by("-timestamp")
