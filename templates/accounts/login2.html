@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	{% load static %}
+    <head>
+        <title>Login | Online Booking System</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        {%include 'css_modules.html'%}
+        <link rel="stylesheet" href="{% static 'css/accounts.css' %}" />
+    </head>
+    <body>
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 bg-dark">
+                        <div class="wrap d-md-flex bg">
+                            <div class="text-wrap pt-4 p-lg-5 pe-5 me-3 d-flex img">
+                                <div class="col ">
+                                    <img src="{{ MEDIA_URL }}University_of_The_Philippines_seal.png" width="340" height="340" />
+                                    <h2 class="text-light ps-5 pb-0"> UPM Online Room </h2>
+                                    <h2 class="text-light pt-0 ps-5 ms-3"> Booking System  </h2>
+                                    <h2 class="text-light pt-0 ps-5 ms-5"> (UPM-ORBS) </h2>
+                                </div>
+                                <div class="col">
+
+                                </div>
+                            </div>
+
+                            <div class="login-wrap p-4 p-md-5">
+                                <div class="row justify-content-center py-md-5">
+                                    <div class="col-lg-9">
+                                        {%if iserror%}
+                                        <div class="alert alert-danger">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                        {%endif%}
+                                        <form action="#" method="post" class="signup-form">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="label" for="email">Username</label>
+                                                        <input type="text" name="username" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="label" for="password">Password</label>
+                                                        <input type="password" name="password" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary">Sign In</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% include 'script_modules.html' %}
+    </body>
+</html>
