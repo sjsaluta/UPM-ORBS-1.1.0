@@ -34,6 +34,7 @@
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
+
 *,
 *::before,
 *::after {
@@ -8225,12 +8226,12 @@ h1, h2, h3, h4, h5,
     max-width: 90px;
     text-align: center; }
     #sidebar.active ul.components {
-      margin-top: 50px; }  
+      margin-top: 50px; }
       #sidebar.active ul.components li {
         margin-top: 20px;
         font-size: 14px; }
         #sidebar.active ul.components li .link_label {
-          display: none; 
+          display: none;
         }
         #sidebar.active ul.components li a {
           padding: 20px 5px; }
@@ -8247,13 +8248,13 @@ h1, h2, h3, h4, h5,
             font-size: 24px; }
     #sidebar.active .logo {
       font-size: 30px;
-      padding: 5px 0; 
+      padding: 5px 0;
       margin-left:1px;
      }
     #sidebar.active .name{
       display: none;
     }
-   
+
     #sidebar.active .footer {
       display: none; }
   #sidebar .logo {
@@ -8286,7 +8287,7 @@ h1, h2, h3, h4, h5,
         -webkit-transition: none;
         -o-transition: none;
         transition: none; } }
-    
+
   }
   #sidebar ul.components {
     margin-top: 50px;
@@ -8314,14 +8315,14 @@ h1, h2, h3, h4, h5,
         margin-top: 10px;
       }
       #sidebar ul li i{
-        margin-right: 15px; 
+        margin-right: 15px;
         font-size: 25px;}
         @media (max-width: 991.98px) {
           #sidebar ul li a span {
             display: block; } }
       #sidebar ul li a:hover {
         color: #fff; }
-    
+
     #sidebar ul li.active > a {
       background: transparent;
       color: #fff; }

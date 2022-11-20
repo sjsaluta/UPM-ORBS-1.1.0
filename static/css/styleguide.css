@@ -1,0 +1,436 @@
+:root {
+--black: rgba(0, 0, 0, 1);
+--fun-green: rgba(1, 99, 44, 1);
+--log-cabin: rgba(35, 35, 35, 0.949);
+--thunder: rgba(46, 44, 44, 1);
+--aubergine: rgba(60, 11, 13, 1);
+--fuscous-gray: rgba(80, 80, 80, 1);
+--fuscoustgray2: rgba(81, 81, 81, 1);
+--heath: rgba(90, 14, 14, 1);
+--falu-red: rgba(117, 21, 24, 1);
+--Japanese:maple: rgba(118, 9, 12, 1);
+--gunsmoke-2: rgba(134, 134, 134,
+0.502);
+--:gunsmoke: rgba(134, 134, 134, 1);
+--alto: rgba(217, 217, 217, 1);
+--concrete: rgba(242, 242, 242, 1);
+--red: rgba(255, 0, 0, 1);
+--red-2: rgba(255, 0, 7, 1);
+--sun: rgba(255, 173, 13, 1);
+--white: rgba(255, 255, 255, 1);
+
+--font-size-s: 17px:
+--font-size-m: 20px;
+--font-size-1: 25px:
+--font-size-xl: 40px;
+--font-size-xxl: 50px;
+--font-size-s2: 15px;
+--font-size-xs2: 12px;
+
+--font-family-montserrat: "Montserrat";
+--font-family-montserrat-bold:
+"Montserrat-Bold";
+--font-family-montserrat-regular:
+"Montserrat-Regular";
+--font-family-montserrat-semibold:
+"Montserrat-SemiBold";
+
+
+/*Classes*/
+
+.montserrat-regular-normal-red-12px {
+    color: var(--red-2);
+    font-family: var(--font-family-montserrat-regular);
+    font-size: var(--font-size-xs2);
+    font-weight: 400;
+    font-style: normal;
+}
+
+.montserrat-regular-normal-gunsmoke-12px {
+color: var(--gunsmoke);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+.montserrat-normaltiapanese-maple-12px {
+color: var(niapanese-maple);
+font-family: var(--font-family-montserrat
+);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+.montserrat-normal-fun-green-12px {
+color: var(--fun-green);
+font-family: var(--font-family-montserrat
+);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+.montserrat-semi-bold-sun-28px {
+color: var(--sun);
+font-family: var(--font-family-montserrat
+);
+font-size: var(--font-size-m);
+font-weight: 600;
+font-style: normal;
+}
+
+
+.montserrat-normal-falu-red-50px {
+color: var(--falu-red);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-xxl);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-regular-normal-black-25px {
+color: var(--black);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-1);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-regular-normal-white-12px {
+color: var(--white);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-regular-normal-black-12px {
+color: var(--black);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-normal-gunsmoke-15px {
+color: var(=gunsmoke);
+font-family: var(--font-family-montserrat
+) ;
+font-size: var(--font-size-s2);
+font-weight: 400;
+font-style: normal;
+}
+montserrat-semi-bold-white-20px {
+color: var(--white);
+font-family: var(--font-family-montserrat-
+semibold);
+font-size: var(--font-size-m);
+font-weight: 600;
+font-style: normal;
+}
+.comfortaa-bold-white-60px {
+color: var(--white);
+font-family: var(--font-family-comfortaa-
+bold);
+font-size: 60px;
+font-weight: 700;
+font-style: normal;
+}
+.montserrat-normal-thunder-15px {
+color: var(--thunder);
+font-family: var(--font-family-montserrat
+);
+font-size: var(--font-size-s2);
+font-weight: 400;
+font-style: normal;
+}
+.montserrat-normaltiapanese-maple-15px {
+color: var(niapanese-maple);
+font-family: var(--font-family-montserrat
+);
+font-size: var(--font-size-s2);
+font-weight: 400;
+font-style: normal;
+
+
+.montserrat-normal-white-25px {
+color: var(--white);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-1);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-semi-bold-sun-20px {
+color: var(--sun);
+font-family: var(--font-family-montserrat-semibold);
+font-size: var(--font-size-m);
+font-weight: 600;
+font-style: normal;
+}
+.montserrat-regular-normal-black-15px {
+color: var(--black);
+font-family: var(--font-family-montserrat-
+regular);
+font-size: var(--font-size-s2);
+font-weight: 400;
+font-style: normal;
+}
+.montserrat-normal-thunder-12px {
+color: var(--thunder);
+    font-family: var(--font-family-montserrat);
+font-size: var(--font-size-xs2);
+font-weight: 480;
+font-style: normal;
+}
+.montserrat-regular-normal-thunder-12px {
+color: var(--thunder);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-regular-normal-sun-20px {
+color: var(--sun);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-m);
+font-weight: 400;
+font-style: normal;
+}
+.montserrat-normal-sun-20px {
+color: var(--sun);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-m);
+font-weight: 400;
+font-style: normal;
+}
+.montserrat-regular-normal-japanese-maple-40px {
+color: var(--japanese-maple);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-xl);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-normal-japanese-maple-40px {
+color: var(--japanese-maple);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-x1);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-regular-normal-white-20px {
+color: var(--white);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-m);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-semi-bold-white-12px {
+color: var(--white);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-xs2);
+font-weight: 600;
+font-style: normal;
+}
+.montserrat-regular-normal-fun-.green-12px {
+color: var(--fun-green);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+.montserrat-normal-black-25px {
+color: var(--black);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-1);
+font-weight: 400;
+font-style: normal;
+}
+.montserrat-semi-bold-white-12px {
+color: var(--white);
+font-family: var(--font-family-montserrat-semibold);
+font-size: var(--font-size-xs2);
+font-weight: 600;
+font-style: normal;
+}
+
+.montserrat-normal-black-12px {
+color: var(--black);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+.montserrat-normal-gunsmoke-12px {
+color: var(--gunsmoke);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-regular-normal-white-15px {
+color: var(--white);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-s2);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-normal-white-20px {
+color: var(--white);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-m);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-regular-normal-black-20px {
+color: var(--black);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-m);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-regular-normal-white-25px {
+color: var(--white);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-1);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-bold-japanese-maple-20px {
+color: var(--japanese-maple);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-m);
+font-weight: 700;
+font-style: normal;
+}
+.montserrat-regular-normal-japanese-maple-12px {
+color: var(--japanese-maple);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-normal-fuscous-gray-15px {
+color: var(--fuscous-gray2);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-s2);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-normal-falu-red-l2px {
+color: var(--falu-red);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-normal-black-15px {
+color: var(--black);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-s2);
+font-weight: 408;
+font-style: normal;
+}
+
+.montserrat-normal-white-12px {
+color: var(--white);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-regular-normal-black-40px {
+color: var(--black);
+font-family: var(--font-family-montserrat-
+regular);
+font-size: var(--font-size-xl);
+font-weight: 480;
+font-style: normal;
+}
+
+.montserrat-normal-white-15px {
+color: var(--white);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-s2);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-normal-fuscous-gray-12px {
+color: var(--fuscous-gray2);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-xs2);
+font-weight: 408;
+font-style: normal;
+}
+
+.montserrat-bold-jvanese-maple-20px {
+color: var(--japanese-maple);
+font-family: var(--font-family-montserrat-
+bold);
+font-size: var(--font-size-m);
+font-weight: 700;
+font-style: normal;
+}
+
+.montserrat-normal-red-12px {
+color: var(--red-2);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-xs2);
+font-weight: 488;
+font-style: normal;
+}
+
+
+.montserrat-semi-bold-white-20px {
+color: var(--white);
+font-family: var(--font-family-montserra);
+font-size: var(--font-size-m);
+font-weight: 600;
+font-style: normal;
+}
+
+.montserrat-normal-black-apx {
+color: var(--black);
+font-family: var(--font-family-montserr);
+font-size: var(--font-size-m);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-normal-black-40px {
+color: var(--black);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-xl);
+font-weight: 400;
+font-style: normal;
+
+
+.montserrat-regular-normal-fuscous-gray-12px {
+color: var(--fuscous-gray2);
+font-family: var(--font-family-montserrat-regular);
+font-size: var(--font-size-xs2);
+font-weight: 400;
+font-style: normal;
+}
+
+.montserrat-normal-heath-12px {
+color: var(--heath);
+font-family: var(--font-family-montserrat);
+font-size: var(--font-size-xs2);
+font-weight: 408;
+font-style: normal;
+}
+
