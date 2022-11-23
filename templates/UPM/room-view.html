@@ -49,7 +49,10 @@
                     <td>{{room.college}}</td>
                     <td>{{room.capacity}}</td>
                     <td>{{room.room_type}}</td>
-                    <td><a class='btn btn-secondary btn-sm' href = {% url 'calendarView' room.slug %}><i class="fa-solid fa-calendar-day"></i> View Schedule</a></td>
+                    {% if request.user.user_type == 5 %}
+                    <td><button type="button" class="update bs-modal btn btn-sm btn-warning" data-bs-form-url="{% url 'aoEditEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button></td>
+                    {% endif %}              
+                    <td><a class='btn btn-secondary btn-sm' href = "{% url 'calendarView' room.slug %}"><i class="fa-solid fa-calendar-day"></i> View Schedule</a></td>
                   </tr>
                 {% endfor %}
                 </tbody>

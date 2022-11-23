@@ -207,6 +207,40 @@ def addCollege(request):
     return render(request,"UPM/add-college.html",context)
 
 @login_required(login_url='loginPage')
+def editEquipment(request, slug):
+    room = Room.objects.get(slug=slug)
+    
+    if request.method == "POST":
+        form = EditEquipment(request.POST, instance=room)
+
+        if form.is_valid():
+            form.save()
+
+        return HttpResponseRedirect(reverse_lazy('manageRooms'))
+    else:
+        form = EditEquipment(instance=room)
+        
+        context = {'form':form}
+        return render(request,'UPM/edit-equipment.html',context)
+
+@login_required(login_url='loginPage')
+def aoEditEquipment(request, slug):
+    room = Room.objects.get(slug=slug)
+    
+    if request.method == "POST":
+        form = AOEditEquipment(request.POST, instance=room)
+
+        if form.is_valid():
+            form.save()
+
+        return HttpResponseRedirect(reverse_lazy('roomView'))
+    else:
+        form = AOEditEquipment(instance=room)
+        
+        context = {'form':form}
+        return render(request,'UPM/edit-equipment-ao.html',context)
+
+@login_required(login_url='loginPage')
 def addDept(request,slug):
     college = College.objects.get(slug=slug)
     form = AddDept()
@@ -406,9 +440,18 @@ def buildingView(request,c,b):
 def roomView(request):
     rooms = Room.objects.all()
     rfilter= RoomFilter(request.GET,queryset=rooms)
+    form = ColBuildForm()
     build = Building.objects.all()
     college = College.objects.all()
     rooms = rfilter.qs
+
+    if request.method == "POST":
+
+        form = ColBuildForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('manageRooms')
 
     context={'rooms':rooms,'filter':rfilter,'building':build,'colleges':college}
     return render(request,'UPM/room-view.html',context)

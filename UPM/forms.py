@@ -61,3 +61,15 @@ class UploadForm(ModelForm):
     class Meta:
         model= ScheduleFile
         fields = ('term','file')
+
+class EditEquipment(ModelForm):
+    class Meta:
+        model = Room
+        fields = ['equipment']
+
+#AO Edit Equipment
+
+class AOEditEquipment(ModelForm):
+    class Meta:
+        model = Room
+        fields = ['equipment']

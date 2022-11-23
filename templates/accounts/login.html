@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load socialaccount %}
 <html lang="en">
 	{% load static %}
     <head>
@@ -60,6 +61,7 @@
                                                 </div>
                                             </div>
                                         </form>
+                                        <form action="{% provider_login_url 'google' %}" method="post">{% csrf_token %}<button type="submit">Sign in With Google Instead</button></form>
                                     </div>
                                 </div>
                             </div>

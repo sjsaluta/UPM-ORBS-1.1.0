@@ -4,18 +4,18 @@ from accounts.models import *
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 
-# class Equipment(models.Model):
-#     name = models.CharField(max_length=300,null=True)
-#     slug = models.SlugField(null=True)
+class Equipment(models.Model):
+    name = models.CharField(max_length=300,null=True)
+    slug = models.SlugField(null=True)
     
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
 
-#     #auto-add slugs
-#     def save(self, *args, **kwargs):  
-#         if not self.slug:
-#             self.slug = slugify(self.name)
-#         return super().save(*args, **kwargs)
+    #auto-add slugs
+    def save(self, *args, **kwargs):  
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
 
 class College(models.Model):
     name = models.CharField(max_length=300,null=True)
@@ -77,7 +77,7 @@ class RoomType(models.Model):
 class Room(models.Model):
     name = models.CharField(max_length=300, null=True, unique=True)
     slug = models.SlugField(null=True)
-    #equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE,null=True)
+    equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE,null=True)
     room_type = models.ForeignKey(RoomType,on_delete=models.CASCADE,null=True)
     college = models.ForeignKey(College,on_delete=models.CASCADE,null=True)
     building = models.ForeignKey(Building, on_delete=models.CASCADE, null=True)
