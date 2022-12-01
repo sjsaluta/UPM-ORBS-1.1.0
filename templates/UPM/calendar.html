@@ -172,7 +172,7 @@
         {% for book in booking %}
           {
             "id":"{{book.id}}",
-            "title": "{{book.subject}}",
+            "title": "{{book.subject}}: {{book.booker.getFullName}}",
             "start": '{{book.start_time|date:"Y-m-d H:i:s"}}',
             "end": '{{book.end_time|date:"Y-m-d H:i:s"}}',
             {% if book.isApproved %}

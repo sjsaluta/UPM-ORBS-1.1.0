@@ -66,11 +66,11 @@ def bookingDetails(request,pk):
         booking.date_approved=date.today()
         booking.approver = ADPD.objects.get(user=request.user)
         booking.save()
-        Notifications.objects.create(user=booking.booker, text = 'Your booking request for' + str(booking.room) + "is APPROVED!")
+        # Notifications.objects.create(user=booking.booker, text = 'Your booking request for' + str(booking.room) + "is APPROVED!")
     elif reject:
         booking.isApproved=False
         booking.save()
-        Notifications.objects.create(user=booking.booker, text = 'Your booking request for' + str(booking.room) + "is REJECTED!")
+        # Notifications.objects.create(user=booking.booker, text = 'Your booking request for' + str(booking.room) + "is REJECTED!")
             
     context={'booking':booking,'date':d,'time':time}
     return render(request,'booking/booking-details.html',context)
