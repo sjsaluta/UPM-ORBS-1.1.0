@@ -19,16 +19,20 @@ def viewBookings(request):
     if request.user.user_type == 1 or request.user.user_type == 2:
         bookings = Booking.objects.filter(booker=request.user)
         bfilter = BookingFilter(request.GET, queryset=bookings)
+        bookings = bfilter.qs
     elif request.user.user_type == None:
         bookings = Booking.objects.all()
         bfilter = BookingFilter(request.GET, queryset=bookings)
+        bookings = bfilter.qs
     else:
         college = request.user.college
         print(college)
         bookings = Booking.objects.filter(room__college=college)
         bfilter = BookingFilter(request.GET, queryset=bookings)
+        bookings = bfilter.qs
+    
         
-    context={'bookings':bookings, 'bfilter': bfilter}
+    context={'bookings':bookings, 'bfilter': bfilter, }
     return render(request, 'booking/booking.html',context)
 
 # Notification

@@ -9,5 +9,5 @@ class BookingFilter(django_filters.FilterSet):
 
     class Meta:
         model = Booking
-        fields = ('room','subject','faculty', 'booker', 'activity')
+        fields = ('room','booker', 'activity', 'remarks')
 
