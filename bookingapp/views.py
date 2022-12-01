@@ -20,7 +20,7 @@ def viewBookings(request):
         bookings = Booking.objects.filter(booker=request.user)
         bfilter = BookingFilter(request.GET, queryset=bookings)
         bookings = bfilter.qs
-    elif request.user.user_type == None:
+    elif request.user.user_type == None or request.user.user_type == 4 or request.user.user_type == 5:
         bookings = Booking.objects.all()
         bfilter = BookingFilter(request.GET, queryset=bookings)
         bookings = bfilter.qs
