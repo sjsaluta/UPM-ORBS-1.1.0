@@ -137,7 +137,7 @@ class Schedule(models.Model):
     
 
     def __str__(self):
-        return self.coursetitle + ' - ' + self.section  + ' - ('+ self.component + ')'
+        return self.subject + ' - ' + self.section  + ' - ('+ self.component + ')'
 
     #returns array of the days for recurrence in the calendar view
     def getDays(self):

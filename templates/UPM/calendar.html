@@ -188,7 +188,7 @@
         {% endfor %}
         {% for s in sched %}
           {
-            "title": "{{s.coursetitle}}({{s.component}}) ",
+            "title": "{{s.subject}}({{s.component}}) ",
             "startTime": '{{s.time_start|date:"H:i"}}',
             "endTime": '{{s.time_end|date:"H:i"}}',
             "daysOfWeek":'{{s.getDays}}',

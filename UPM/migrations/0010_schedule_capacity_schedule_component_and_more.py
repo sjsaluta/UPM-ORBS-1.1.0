@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='schedule',
-            name='coursetitle',
+            name='subject',
             field=models.CharField(max_length=200, null=True),
         ),
         migrations.AddField(
