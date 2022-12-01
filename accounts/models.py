@@ -15,12 +15,14 @@ class AuthUser(AbstractUser):
     OCS = 3
     ADPD = 4
     AO = 5
+    GUEST = 6
     USER_TYPE_CHOICES = (
         (FACULTY, 'Faculty'),
         (STAFF, 'Staff'),
         (OCS, 'OCS'),
         (ADPD, 'ADPD'),
-        (AO,'AO')
+        (AO,'AO'),
+        (GUEST, 'GUEST')
     )
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
@@ -87,6 +89,18 @@ class AO(models.Model):
 
     class Meta:
         verbose_name_plural = "Administrative Officers"
+
+    def __str__(self):
+        name = AuthUser.get_full_name(self.user)
+        return name + ' <' + self.user.email + '>'
+
+#added guest user
+class Guest(models.Model):
+    user = models.OneToOneField(AuthUser,on_delete=models.CASCADE,null=True)
+    # college = models.OneToOneField("UPM.College",on_delete=models.CASCADE,null=True)
+
+    class Meta:
+        verbose_name_plural = "Guests"
 
     def __str__(self):
         name = AuthUser.get_full_name(self.user)

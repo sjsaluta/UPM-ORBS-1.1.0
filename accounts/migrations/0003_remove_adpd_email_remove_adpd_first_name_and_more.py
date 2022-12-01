@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='authuser',
             name='user_type',
-            field=models.PositiveSmallIntegerField(choices=[(1, 'faculty'), (2, 'staff'), (3, 'ocs'), (4, 'adpd'), (5, 'ao')], null=True),
+            field=models.PositiveSmallIntegerField(choices=[(1, 'faculty'), (2, 'staff'), (3, 'ocs'), (4, 'adpd'), (5, 'ao'), (6, 'guest')], null=True), #added guest user
         ),
         migrations.CreateModel(
             name='AO',

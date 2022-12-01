@@ -150,7 +150,7 @@
       initialDate: today,
       navLinks: true, // can click day/week names to navigate views  
       {% if request.user.is_authenticated %}
-        {%if request.user.user_type == 1 or request.user.user_type == 2%}
+        {%if request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 6 %}
           selectable: true,
         {% endif %} 
       {% endif %} 
@@ -160,7 +160,7 @@
       select: function(arg) {
         console.log('clicked')
         {% if request.user.is_authenticated %}
-          {%if request.user.user_type == 1 or request.user.user_type == 2%}
+          {%if request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 6 %}
             $("#book").modal("show")
             calendar.unselect()
           {% endif %}

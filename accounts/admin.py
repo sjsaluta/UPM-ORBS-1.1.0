@@ -8,5 +8,6 @@ admin.site.register(Faculty)
 admin.site.register(Staff)
 admin.site.register(OCS)
 admin.site.register(ADPD)
+admin.site.register(Guest) #added guest user
 
 
