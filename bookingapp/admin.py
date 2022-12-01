@@ -4,4 +4,4 @@ from .models import*
 
 admin.site.register(Booking)
 admin.site.register(Notifications)
-admin.site.register(NotificationListView.as_view)
+# admin.site.register(NotificationListView.as_view)

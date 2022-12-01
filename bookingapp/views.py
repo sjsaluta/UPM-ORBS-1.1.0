@@ -11,19 +11,24 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from .forms import *
 
+from bookingapp.filters import BookingFilter
+
 
 @login_required(login_url='loginPage')
 def viewBookings(request):
     if request.user.user_type == 1 or request.user.user_type == 2:
         bookings = Booking.objects.filter(booker=request.user)
+        bfilter = BookingFilter(request.GET, queryset=bookings)
     elif request.user.user_type == None:
         bookings = Booking.objects.all()
+        bfilter = BookingFilter(request.GET, queryset=bookings)
     else:
         college = request.user.college
         print(college)
         bookings = Booking.objects.filter(room__college=college)
+        bfilter = BookingFilter(request.GET, queryset=bookings)
         
-    context={'bookings':bookings}
+    context={'bookings':bookings, 'bfilter': bfilter}
     return render(request, 'booking/booking.html',context)
 
 # Notification
