@@ -38,6 +38,21 @@ class AddDept(ModelForm):
         model = Department
         fields = ['name']
 
+class AddEquipment(ModelForm):
+    class Meta:
+        model = Equipment
+        fields = ['name']
+
+class ManageEquipment(forms.ModelForm):
+    equipment = forms.ModelMultipleChoiceField(
+        queryset = Equipment.objects.all(),
+        widget = forms.CheckboxSelectMultiple,
+        required=False
+    )
+    class Meta:
+        model = Room
+        fields = ['equipment']
+
 #Add room form for the building view page
 class AddRoom(ModelForm):
     class Meta:
@@ -69,7 +84,7 @@ class EditEquipment(ModelForm):
 
 #AO Edit Equipment
 
-class AOEditEquipment(ModelForm):
-    class Meta:
-        model = Room
-        fields = ['equipment']
+# class AOEditEquipment(ModelForm):
+#     class Meta:
+#         model = Room
+#         fields = ['equipment']

@@ -75,9 +75,10 @@ class RoomType(models.Model):
         return super().save(*args, **kwargs)
 
 class Room(models.Model):
-    name = models.CharField(max_length=300, null=True, unique=True)
+    name = models.CharField(max_length=300, null=True, unique=True) 
     slug = models.SlugField(null=True)
-    equipment = models.ForeignKey(Equipment,on_delete=models.CASCADE,null=True)
+    equipment = models.ManyToManyField(Equipment)
+    #equipment = models.ForeigynKe(Equipment,on_delete=models.CASCADE,null=True)
     room_type = models.ForeignKey(RoomType,on_delete=models.CASCADE,null=True)
     college = models.ForeignKey(College,on_delete=models.CASCADE,null=True)
     building = models.ForeignKey(Building, on_delete=models.CASCADE, null=True)

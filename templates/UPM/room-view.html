@@ -49,9 +49,12 @@
                     <td>{{room.college}}</td>
                     <td>{{room.capacity}}</td>
                     <td>{{room.room_type}}</td>
-                    {% if request.user.user_type == 5 %}
-                    <td><button type="button" class="update bs-modal btn btn-sm btn-warning" data-bs-form-url="{% url 'aoEditEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button></td>
-                    {% endif %}              
+                    {% if request.user.user_type == 5 or request.user.user_type == none %}
+                    <td><a class='btn-success btn-secondary btn-sm' href = "{% url 'manageEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></a></td>
+                    {% endif %}     
+                    {% if request.user.user_type != 5 and request.user.user_type != none %}
+                    <td><button type="button" data-bs-toggle="modal" class="bs-modal btn btn-sm btn-warning btn-sm" data-bs-target="{% url 'viewEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button></td>
+                    {% endif %}         
                     <td><a class='btn btn-secondary btn-sm' href = "{% url 'calendarView' room.slug %}"><i class="fa-solid fa-calendar-day"></i> View Schedule</a></td>
                   </tr>
                 {% endfor %}
@@ -77,7 +80,7 @@
         }
         else{
             col = $("#id_college option:selected").text();
-            {% for college in colleges%}
+            {% for college in colleges %}
                 if ('{{college}}' == col) {
                     //alert(b);
                     console.log('true')

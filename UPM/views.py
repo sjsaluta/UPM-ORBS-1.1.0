@@ -207,6 +207,36 @@ def addCollege(request):
     return render(request,"UPM/add-college.html",context)
 
 @login_required(login_url='loginPage')
+def addEquipment(request, slug):
+    room = Room.objects.get(slug=slug)
+    form = AddEquipment()
+    if request.method == "POST":
+        form = AddEquipment(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('roomView')
+    context={'form':form}
+    return render(request,"UPM/add-equipment.html",context)
+
+@login_required(login_url='loginPage')
+def manageEquipment(request, slug):
+    room = Room.objects.get(slug=slug)
+
+    if request.method == "POST":
+        #form1 = AddEquipment() #adds form
+        form = ManageEquipment(request.POST, instance=room)
+
+        if form.is_valid():
+            form.save()
+
+        return HttpResponseRedirect(reverse_lazy('roomView'))
+    else:
+        form = ManageEquipment(instance=room)
+        
+        context = {'form':form, 'room':room}
+        return render(request,'UPM/manage-equipment.html',context)
+
+@login_required(login_url='loginPage')
 def editEquipment(request, slug):
     room = Room.objects.get(slug=slug)
     
@@ -222,23 +252,6 @@ def editEquipment(request, slug):
         
         context = {'form':form}
         return render(request,'UPM/edit-equipment.html',context)
-
-@login_required(login_url='loginPage')
-def aoEditEquipment(request, slug):
-    room = Room.objects.get(slug=slug)
-    
-    if request.method == "POST":
-        form = AOEditEquipment(request.POST, instance=room)
-
-        if form.is_valid():
-            form.save()
-
-        return HttpResponseRedirect(reverse_lazy('roomView'))
-    else:
-        form = AOEditEquipment(instance=room)
-        
-        context = {'form':form}
-        return render(request,'UPM/edit-equipment-ao.html',context)
 
 @login_required(login_url='loginPage')
 def addDept(request,slug):
@@ -316,6 +329,12 @@ def manageRooms(request):
             
     context={'rooms':rooms,'form':form,'colleges':college,'building':build}
     return render(request,"UPM/room.html",context)
+
+def viewEquipment(request, slug):
+    rooms = Room.objects.get(slug=slug)
+
+    context={'room': rooms}
+    return render(request,"UPM/view-equipment.html",context)
 
 def deleteRoom(request,pk):
     room = Room.objects.get(id=pk)
@@ -436,7 +455,7 @@ def buildingView(request,c,b):
     context={'rooms':room,'building':building,'college':college}
     return render(request,'UPM/building-details.html',context)
 
-
+@login_required(login_url='loginPage')
 def roomView(request):
     rooms = Room.objects.all()
     rfilter= RoomFilter(request.GET,queryset=rooms)
@@ -451,8 +470,8 @@ def roomView(request):
 
         if form.is_valid():
             form.save()
-            return redirect('manageRooms')
+            return redirect('roomView')
 
-    context={'rooms':rooms,'filter':rfilter,'building':build,'colleges':college}
+    context={'filter':rfilter, 'form':form, 'rooms':rooms,'building':build,'colleges':college}
     return render(request,'UPM/room-view.html',context)
 

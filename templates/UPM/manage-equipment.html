@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add form.college{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block extracss %}
+<style>
+    #date{
+        display: none;
+    }
+</style>
+{% endblock extracss %}
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mt-3 ms-4 bg-body">
+    <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'manageCollege' %}" class="text-dark">Manage Colleges</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Add College</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
+{% block content %}
+<a class='btn btn-secondary btn-lg'href="{% url 'roomView' %}">Back</a>
+<h2 class="py-4 px-4">Manage Equipment for {{ room.name }}</h2>
+<a class='btn btn-warning mb-2 mx-4 btn-sm' href = "{% url 'addEquipment' room.slug %}"><i class="fa-solid fa-plus">Add an Equipment</i></a>
+<div class = "container w-50">
+    <div class = "row bg-light shadow-sm border ">
+        <div class = "col my-4 px-5">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-8">
+                        {{form.equipment | as_crispy_field}}
+                        {% for room in rooms %}
+                        {{room.equipment}}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Save changes</button>
+                    </div>
+                </div>
+                    
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
+
+{% block extrascripts %}
+<script>
+    const btn = document.getElementById('show');
+    const form = document.getElementById('date');
+    var txt = document.getElementById('id_academicyear').val;
+
+    
+    btn.addEventListener('click', () => {
+        form.style.display = 'block';
+    });   
+    
+    
+</script>
+
+{% endblock extrascripts %}

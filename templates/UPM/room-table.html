@@ -22,7 +22,8 @@
             <a class='btn btn-secondary btn-sm' href = "{% url 'calendarView' room.slug %}"><i class="fa-solid fa-calendar-day"></i> Go to Calendar</a>
             <button type="button" class="update bs-modal btn btn-sm btn-warning btn-sm" data-form-url="{% url 'editRoom' room.slug %}"><i class="fa-solid fa-pen-to-square"></i></button>
             <button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup{{room.id}}"><i class="fa-solid fa-trash-can"></i></button>
-            <button type="button" data-bs-toggle="modal" class="update btn btn-sm btn-warning" data-form-url="{% url 'editEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button>
+            <a class='btn btn-secondary btn-sm' href = "{% url 'manageEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></a>
+            <button type="button" class="bs-modal btn btn-sm btn-warning btn-sm" data-bs-toggle="modal" data-form-url="{% url 'viewEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button>
         </td>
       </tr>
       <div class="modal fade" id="deletePopup{{room.id}}" tab-index="-1">
