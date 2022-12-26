@@ -328,7 +328,7 @@ def manageRooms(request):
             return redirect('manageRooms')
             
     context={'rooms':rooms,'form':form,'colleges':college,'building':build}
-    return render(request,"UPM/room.html",context)
+    return render(request,'UPM/room.html',context)
 
 def viewEquipment(request, slug):
     rooms = Room.objects.get(slug=slug)
