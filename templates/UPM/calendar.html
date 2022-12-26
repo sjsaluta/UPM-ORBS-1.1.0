@@ -76,18 +76,24 @@
         <form method="POST">
           {% csrf_token %}
           <div class="modal-body">
-            {{form.subject | as_crispy_field}}
-            {{form.faculty | as_crispy_field}}
-            {{form.dept_or_office | as_crispy_field}}
-            {{form.organization | as_crispy_field}}
-            {{form.start_time | as_crispy_field}}
-            {{form.end_time | as_crispy_field}}
-
-            {{form.date_picked | as_crispy_field}}
-            
-            {{form.numofstudents | as_crispy_field}}
-            {{form.activity | as_crispy_field}}
-            {{form.equipment | as_crispy_field}}
+            <div class="row">
+              <div class="col-md-7">
+                {{form.subject | as_crispy_field}}
+                {{form.faculty | as_crispy_field}}
+                {{form.dept_or_office | as_crispy_field}}
+                {{form.organization | as_crispy_field}}
+                {{form.start_time | as_crispy_field}}
+                {{form.end_time | as_crispy_field}}
+    
+                {{form.date_picked | as_crispy_field}}
+                
+                {{form.numofstudents | as_crispy_field}}
+                {{form.activity | as_crispy_field}}
+              </div>
+              <div class="col-md-5">
+                {{form.equipment | as_crispy_field}}
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

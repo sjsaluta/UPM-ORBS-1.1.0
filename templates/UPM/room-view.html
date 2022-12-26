@@ -62,7 +62,7 @@
                     <td><a class='btn-success btn-secondary btn-sm' href = "{% url 'manageEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></a></td>
                     {% endif %}     
                     {% if request.user.user_type != 5 and request.user.user_type != none %}
-                    <td><button type="button" class="update bs-modal btn btn-sm btn-success btn-sm" data-form-url="{% url 'viewEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button></td>
+                    <td><a class='btn-success btn-secondary btn-sm' href = "{% url 'viewEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></a></td>
                     {% endif %}         
                     <td><a class='btn btn-secondary btn-sm' href = "{% url 'calendarView' room.slug %}"><i class="fa-solid fa-calendar-day"></i> View Schedule</a></td>
                   </tr>
