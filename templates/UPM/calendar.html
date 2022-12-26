@@ -77,7 +77,7 @@
           {% csrf_token %}
           <div class="modal-body">
             <div class="row">
-              <div class="col-md-7">
+              {% comment %} <div class="col-md-7"> {% endcomment %}
                 {{form.subject | as_crispy_field}}
                 {{form.faculty | as_crispy_field}}
                 {{form.dept_or_office | as_crispy_field}}
@@ -89,12 +89,10 @@
                 
                 {{form.numofstudents | as_crispy_field}}
                 {{form.activity | as_crispy_field}}
-              </div>
-              <div class="col-md-5">
-                {{form.equipment | as_crispy_field}}
-              </div>
             </div>
-          </div>
+            <div class="row" style="height:200px; width:450px; border:solid 1px gray; overflow:scroll; overflow-x:hidden; overflow-y:scroll; margin:auto;">
+                {{form.equipment | as_crispy_field}}
+            </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-success" data-bs-dismiss="modal" id="edit">Submit</button>
