@@ -4,6 +4,11 @@
 {% load crispy_forms_tags %}
 
 {% block extracss %}
+<style>
+    #name_cap{
+      display: none;
+    }
+ </style>
 {% endblock extracss %}
 
 {% block breadcrumb %}
@@ -79,33 +84,108 @@
 
 {% block extrascripts %}
 <script>
-    var $options=$('#id_building option').clone();
-    $('#id_college').change(function() {console.log('yes');$('#id_building').empty();$('#id_building').html( $options.clone());populateBuild(this);});
-    populateBuild()
-    function populateBuild(event) {
-        if (!$('#id_college').val()){
-            console.log('empty')
-             $('#id_building').html( $options.clone());
-        }
-        else{
-            col = $("#id_college option:selected").text();
-            {% for college in colleges %}
-                if ('{{college}}' == col) {
-                    //alert(b);
-                    console.log('true')
+    // var $options=$('#id_building option').clone();
+    // $('#id_college').change(function() {console.log('yes');$('#id_building').empty();$('#id_building').html( $options.clone());populateBuild(this);});
+    // populateBuild()
+    // function populateBuild(event) {
+    //     if (!$('#id_college').val()){
+    //         console.log('empty')
+    //          $('#id_building').html( $options.clone());
+    //     }
+    //     else{
+    //         col = $("#id_college option:selected").text();
+    //         {% for college in colleges %}
+    //             if ('{{college}}' == col) {
+    //                 //alert(b);
+    //                 console.log('true')
                     
                        
-                        {% for build in college.building_set.all %}   
-                            {% for b in building %}
-                                if('{{b.college}}'!= '{{build.college}}'){                              
-                                    $('#id_building option[value="{{b.id}}"]').remove();
-                                }
-                            {%endfor%}
-                        {% endfor %}
-                }
-            {% endfor %}    
-        }
+    //                     {% for build in college.building_set.all %}   
+    //                         {% for b in building %}
+    //                             if('{{b.college}}'!= '{{build.college}}'){                              
+    //                                 $('#id_building option[value="{{b.id}}"]').remove();
+    //                             }
+    //                         {%endfor%}
+    //                     {% endfor %}
+    //             }
+    //         {% endfor %}    
+    //     }
         
-    }
+    // }
+    $(function() {
+
+  var $options=$('#id_building option').clone();
+  $('#id_college').change(function() {
+    console.log('yes');$('#id_building').empty();$('#id_building').html( $options.clone());populateBuild(this);
+  });
+  $('#id_building').change(function(){
+    console.log("success")
+    $('#name_cap').css("display","block")
+  });
+  populateBuild()
+  function populateBuild(event) {
+      if (!$('#id_college').val()){
+          console.log('empty')
+           $('#id_building').html( $options.clone());
+      }
+      else{
+          col = $("#id_college option:selected").text();
+          {% for college in colleges%}
+              if ('{{college}}' == col) {
+                  //alert(b);
+                  console.log('true')
+                  
+                     
+                      {% for build in college.building_set.all %}   
+                          {% for b in building %}
+                              if('{{b.college}}'!= '{{build.college}}'){                              
+                                  $('#id_building option[value="{{b.id}}"]').remove();
+                              }
+                          {%endfor%}
+                      {% endfor %}
+              }
+          {% endfor %}    
+      }
+      
+  }
+  var asyncSuccessMessageUpdate = [
+    "<div ",
+    "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+    "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+    "Success: Room details were changed.",
+    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+    "<span aria-hidden='true'>&times;</span>",
+    "</button>",
+    "</div>",
+    "<script>",
+    "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+    "<\/script>"
+  ].join("");
+
+
+  function updateRoomModalForm() {
+      
+    $('.update').each(function () {
+      $(this).modalForm({
+        formURL: $(this).data("form-url"),
+        asyncUpdate: true,
+        asyncSettings: {
+          closeOnSubmit: false,
+          successMessage: asyncSuccessMessageUpdate,
+          dataUrl: "rooms/",
+          //dataElementId: "#room-table",
+          //dataKey: "table",
+          addModalFormFunction: reinstantiateModalForms
+        }
+      });
+    }); 
+  
+  }
+  updateRoomModalForm();
+  
+  function reinstantiateModalForms(){
+    updateRoomModalForm();
+  }
+})
 </script>
 {% endblock extrascripts %}
