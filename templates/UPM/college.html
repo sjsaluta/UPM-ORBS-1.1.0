@@ -20,14 +20,14 @@
     <div class = "container-fluid" style="background: #76090C; border-radius:10px">
       <header  style="font-size: 20px; padding:5px; color: white"><i class="fa-solid fa-rectangle-list"></i> List of Colleges</header>
       {% for college in colleges %}
-      <div class="row border bg-white p-3 ">
+      <div class="row border-bottom bg-white p-3 ">
         
         <div class="col align-self-center">
             <h5>{{college.name}}</h5>
         </div>
   
             <div class="col-auto align-self-end text-end">
-              <a href="{% url 'adminCollegeView' college.slug %}"><button type="button" class="btn btn-success btn-sm" href="{% url 'adminCollegeView' college.slug %}" style=" background-color: #868686; margin-right: 5px"><i class="fa-solid fa-building-columns" ></i>  View Departments & Buildings</button></a>
+              <a href="{% url 'adminCollegeView' college.slug %}"><button type="button" class="btn btn-success btn-sm"style=" background-color: #868686; margin-right: 5px"><i class="fa-solid fa-building-columns" ></i>  View Departments & Buildings</button></a>
               {% comment %} <button type="button" class="update bs-modal btn btn-sm btn-success btn-sm" data-form-url="{% url 'editCollege' college.slug %}" style="background-color: #01632C"><i class="fa-solid fa-pen"></i></button> {% endcomment %}
               <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}" style=" background-color: #76090C;"><i class="fa-regular fa-trash-can" ></i></button>
             </div>
@@ -38,11 +38,11 @@
             <div class="modal-dialog modal-dialog-centered" >
                 <div class="modal-content"  style="border-radius:10px">
                     <div class="modal-header"  style="background: #76090C;">
-                        <h5  style="color:white"><i class="fa-regular fa-square-minus"></i>  Remove College</h5>
-                        <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                        <h5  style="color:white"><i class="fa-regular fa-square-minus"></i>  Remove</h5>
+                        {% comment %} <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button> {% endcomment %}
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to remove this college?</p>
+                        <p>Are you sure you want to remove '{{college.name}}'?</p>
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-danger" href="{% url 'removeCollege' college.slug %}" style=" background-color: #76090C;"><i class="fa-regular fa-trash-can"></i> Remove</a>

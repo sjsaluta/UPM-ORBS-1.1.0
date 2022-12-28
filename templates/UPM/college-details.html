@@ -17,18 +17,15 @@
 
 {% block content %}
 <div class = "container w-auto">
-    <h2 class="py-4">{{college.name}}</h2>
+    <h5 class="" style="text-align:center;">{{college.name}}</h5>
+    <h2 class="py-3" style="text-align:center; color:#76090C">Departments and Buildings</h2>
     <div class = 'row'>
         <div class = 'col align-self-center'>
             <form method='POST'>
                 {%csrf_token%}
-                <input class = "btn btn-success mb-4" type="submit" value="Department" name="dept" id="d"/>
+                <input class = "btn btn-success mb-4" type="submit" value="Department" name="dept" id="d" />
                 <input class = "btn btn-secondary mb-4 ms-2" type="submit" value="Buildings" name="build" id="b" />
             </form>
-        </div>
-        <div class = 'col-auto align-self-end text-end'>
-        <a class='btn btn-warning mb-4' role='button' href = "{% url 'addBuild' college.slug %}"><i class="fa-solid fa-plus"></i> Add Building</a>  
-        <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'addDept' college.slug%}"><i class="fa-solid fa-plus"></i> Add Department</a>
         </div>
 
     </div>
@@ -36,51 +33,63 @@
     
 
     {% for field in fields %}
-    <div class="row border bg-white p-4 mb-3">
+    <div class="row border-bottom bg-white p-4" style="border-radius:10px">
       
       <div class="col align-self-center">
             {% if view == 'build'%}
-            <a href="{% url 'adminBuildingView' college.slug field.slug%}"><h5>{{field.name}}</h5></a>
+            <a><h5>{{field.name}}</h5></a>
             {% else %}
             <h5>{{field.name}}</h5>
             {% endif %}
       </div>
         <div class="col-auto align-self-end text-end">
-           
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}{{field.id}}"><i class="fa-solid fa-close"></i> Remove</button>
+            {% if view == 'build'%}
+            <a href="{% url 'adminBuildingView' college.slug field.slug%}"><button type="button" class="btn btn-success btn-sm"style=" background-color: #868686; margin-right: 5px"><i class="fa-solid fa-door-open"></i>  View Rooms</button></a>
+            {% else %}
+            <a href="{% url 'manageUsers'%}"><button type="button" class="btn btn-success btn-sm"style=" background-color: #868686; margin-right: 5px"><i class="fa-solid fa-users"></i> View Users</button></a>
+            {% endif %}
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}{{field.id}}" style=" background-color: #76090C;"><i class="fa-solid fa-trash-can"></i></button>
+            
         </div>
     </div>
-
+    {% endfor %}
+    {% for field in fields %}
      <!-- popup for removal -->
     <div class="modal fade" id="removePopup{{college.id}}{{field.id}}" tab-index="-1">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content"  style="border-radius:10px">
+                <div class="modal-header"  style="background: #76090C;">
 
                     {% if view == 'build' %}
-                    <h5>Remove Building</h5>
+                    <h5><i class="fa-regular fa-square-minus"></i>  Remove Building</h5>
                     {% else %}
-                    <h5>Remove Department</h5>
+                    <h5><i class="fa-regular fa-square-minus"></i>  Remove Department</h5>
                     {% endif %}
-
-                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+{% comment %} 
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button> {% endcomment %}
                 </div>
                 <div class="modal-body">
                     <p>Are you sure you want to remove '{{field.name}}'?</p>
                 </div>
                 <div class="modal-footer">
                     {% if view == 'build' %}
-                        <a class="btn btn-danger" href="{% url 'removeBuild' college.slug field.slug%}"><i class="fa-solid fa-close"></i> Remove</a>
+                        <a class="btn btn-danger" href="{% url 'removeBuild' college.slug field.slug%}" style=" background-color: #76090C;"><i class="fa-regular fa-trash-can"></i> Remove</a>
                     {% else %}
-                        <a class="btn btn-danger" href="{% url 'removeDept' college.slug field.slug%}"><i class="fa-solid fa-close"></i> Remove</a>
+                        <a class="btn btn-danger" href="{% url 'removeDept' college.slug field.slug%}" style=" background-color: #76090C;"><i class="fa-regular fa-trash-can"></i>    Remove</a>
                     {% endif %}
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"style=" background-color: #868686;"><i class="fa-solid fa-xmark"></i> Cancel</button>
                 </div>
             </div>
         </div>
     </div>
       {% endfor %}
-      
+      <div class = 'text-center' style="margin-top:10px;"z``>
+        {% if view == 'build'%}
+        <a class='btn btn-warning mb-4' role='button' href = "{% url 'addBuild' college.slug %}"><i  class="fa-solid fa-square-plus" style="mbackground-color:#FFAD0D"></i> Add Building</a> 
+        {% else %}
+        <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'addDept' college.slug%}"><i  class="fa-solid fa-square-plus" style="mbackground-color:#FFAD0D"></i> Add Department</a>
+        {% endif %}
+        </div>
 
 </div>
 
@@ -92,13 +101,12 @@
 <script>
     
     if("{{view}}" === 'dept'){
-        console.log('yes')
-        $("#d").css("background-color","#28a745");
-        $("#b").css("background-color","#6c757d");
+        $("#d").css("background-color","#01632C");
+        $("#b").css("background-color","#76090C");
     }
     else{
-        $("#b").css("background-color","#28a745");
-        $("#d").css("background-color","#6c757d");
+        $("#b").css("background-color","#01632C");
+        $("#d").css("background-color","#76090C");
     }
 </script>
 {% endblock extrascripts %}
