@@ -42,7 +42,7 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
 
 .login-button {
   align-items: flex-start;
-  background-color: #76090c;
+  background-color: var(--falu-red);
   border: 1px none;
   border-radius: 20px;
   box-shadow: 0px 4px 4px #00000048;
@@ -205,11 +205,23 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
   width: 220px;
 }
 
-
 .login-as-guest-button {
   align-items: flex-start;
   border: 1px solid;
   border-color: var(--gunsmoke);
+  border-radius: 20px;
+  display: flex;
+  gap: 10px;
+  height: 45px;
+  justify-content: flex-end;
+  min-width: 220px;
+  padding: 9px 39px;
+}
+
+.login-as-guest-button:hover {
+  align-items: flex-start;
+  border: 1px solid;
+  background-color: var(--falu-red);
   border-radius: 20px;
   display: flex;
   gap: 10px;
@@ -242,6 +254,18 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
   align-items: flex-start;
   border: 1px solid;
   border-color: var(--gunsmoke);
+  border-radius: 20px;
+  display: flex;
+  gap: 10px;
+  height: 45px;
+  min-width: 220px;
+  padding: 9px 23px;
+}
+
+.login-with-google-button:hover {
+  align-items: flex-start;
+  border: 1px solid;
+  background-color: var(--falu-red);
   border-radius: 20px;
   display: flex;
   gap: 10px;

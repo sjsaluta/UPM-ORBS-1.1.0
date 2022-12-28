@@ -23,12 +23,7 @@
         alt="Image-Panel"
         />
         <div class="form-panel">
-        <div class="frame-17">
-        <div class="insert-logo-here montserrat-normal-
-        black-15px">
-        <img class="{{MEDIA_URL}}logo.png">insert logo here</span>
-        </div>
-        </div>
+        <img src="{{MEDIA_URL}}Logo_Navbar.png" style="filter: hue-rotate(-48deg) saturate(6) grayscale(65%) drop-shadow(0 0 0 black); height: 190px; width: 190px; margin-bottom:-100px; margin-top:-20px;"></span>
         {%if iserror%}
                 <div class="alert alert-danger">
         <strong>{{ error|escape }}</strong>
@@ -38,12 +33,11 @@
         {% csrf_token %}
         <div class="login-text">
         <h1 class="title montserrat-normal-falu-red-50px">
-        <span class="montserrat-normal-falu-red-50px">Login</span>
+        <span class="montserrat-normal-falu-red-50px" style="color:var(--falu-red)">Login</span>
         </h1>
         <p class="sign-in-to-your-account montserrat-
         normal-black-20px">
-        <span class="montserrat-normal-black-
-        20px">Sign in to your account</span>
+        <span class="montserrat-normal-black-20px">Sign in to your account</span>
         </p>
         </div>
         <div class="form">
@@ -96,10 +90,8 @@
         </div>
         <div class="form-group">
         <button type="submit" class="login-button">
-        <div class="login montserrat-normal-white-
-        15px">
-        <span class="montserrat-normal-white-
-        15px">LOGIN</span>
+        <div class="login montserrat-normal-white-15px">
+        <span class="montserrat-normal-white-15px">LOGIN</span>
         </div>
         </button>
         </div>
@@ -127,10 +119,8 @@
                 src="{{MEDIA_URL}}google-fill.png"
                 alt="google-fill"
         />
-        <div class="login-with-google valign-text-
-        middle montserrat-normal-fuscous-gray-15px">
-                <span><span class="montserrat-normal-
-        fuscous-gray-15px">Login with Google</span> </span>
+        <div class="login-with-google valign-text-middle montserrat-normal-fuscous-gray-15px">
+                <span><span class="montserrat-normal-fuscous-gray-15px">Login with Google</span></span>
         </div></button></a>
         <a href="#" class="guest btn"><button class="login-as-guest-button">
         <img
@@ -138,12 +128,9 @@
                 src="{{MEDIA_URL}}user-search-fill.png"
                 alt="Vector"
         />
-        <div class="login-as-guest valign-text-
-        middle montserrat-normal-fuscous-gray-15px">
-                <span><span class="montserrat-normal-
-        fuscous-gray-15px">Login as Guest</span> </span>
-        </div>
-        </button></a>
+        <div class="login-as-guest valign-text-middle montserrat-normal-fuscous-gray-15px">
+                <span><span class="montserrat-normal-fuscous-gray-15px">Login as Guest</span></span>
+        </div></button></a>
         </div>
         </div>
         </form>
