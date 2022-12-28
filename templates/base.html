@@ -1,3 +1,4 @@
+
 {% load static %}
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
@@ -8,96 +9,112 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- scripts and css -->
         {% include 'css_modules.html' %}
-        
+
         {% block extracss %}
         {% endblock extracss %}
 
     </head>
     <body>
-        
+
         <div class="wrapper d-flex align-items-stretch">
-            <nav id="sidebar" class="active">
-                <h1><a href="{% url 'indexPage' %}" class="logo mt-2 pt-2">UPM</a></h1>
-                <h1 class="name">Room Booking</h1>
-                <ul class="list-unstyled components mb-5">
-                    {% if request.user.is_authenticated %}
-                    <li>
-                        <a href="{% url 'viewBookings' %}"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-1"> Bookings</span></a>
-                    </li>
-                    
-                        {% if request.user.user_type == none %}
-                        <li>
-                            <a data-bs-toggle="collapse" href="#collapseOptions" role="button" aria-expanded="false" aria-controls="collapseOptions" id="clps"><i class="fa fa-cogs"></i> <span class="link_label">Administrator</span></a>
-                            <div class="collapse" id="collapseOptions">
-                                <a class='sub ms-4' href="{% url 'manageUsers' %}"><i class="sub fa fa-user"></i><span class="link_label ms-2">Manage Users</span></a>
-                                <a class='sub ms-4' href="{% url 'manageCollege' %}"><i class="sub fa-solid fa-school"></i></i><span class="link_label">Manage Colleges</span></a>
-                                <a class='sub ms-4' href="{% url 'manageRooms' %}"><i class="sub fa-solid fa-door-closed"></i><span class="link_label ms-1">Manage Rooms</span></a>
-                                <a class='sub ms-4' href="{% url 'manageTerm' %}"><i class="sub fa fa-calendar"></i><span class="link_label ms-2">Manage Terms</span></a>
-                            <div>
-                        </li>
-                        {% else %}
-                            {% if request.user.user_type == 3 %}
-                            <li>
-                                <a href="{% url 'uploadPage' %}"><i class="fa-solid fa-upload"></i><span class="link_label"> Upload</span></a>
+
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <a href="{% url 'indexPage' %}" class="logo mr-3"><img src = "{{ MEDIA_URL }}Logo-nav.png" style="height: 60px; width: 60px;"></a>
+                        <ul class="nav navbar-nav list-unstyled components">
+                            <li class="mr-3">
+                                <a href="{% url 'indexPage' %}"><i class="fa-solid fa-circle-info mr-2"></i><span class="link_label">About</span></a>
                             </li>
-                            {%endif%}
-                            {% if request.user.user_type != none %}
-                            <li>
-                                <a href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
+                            <li class="mr-3">
+                                <a href="{% url 'indexPage' %}"><i class="fa-solid fa-phone mr-2"></i><span class="link_label">Contact Us</span></a>
                             </li>
-                        {% endif %}
-                            
-                        {% endif %}
-                    {% else %}
-                    <li>
-                        <a href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label ms-1">View Rooms</span></a>
-                    </li>
-                    {% endif %}
-                </ul>
+                        </ul>
 
-            </nav>
-            
-                <!-- Page Content  -->
-            <div id="content" class="p-4 p-md-5 bg-body">
-                {% include 'message.html' %}
-                <nav class="navbar navbar-expand-lg navbar-light bg-light border">
-                    <div class="container-fluid">
-
-                        <button type="button" id="sidebarCollapse" class="btn btn-dark">
-                            <i class="fa fa-bars"></i>
-                            <span class="sr-only">Toggle Menu</span>
-                        </button>
-                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="fa fa-bars"></i>
-                        </button>
-
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="nav navbar-nav ml-auto">
-                                <span class="fw-bolder mt-2">User: {{request.user}}</span>
+                        <ul class="nav navbar-nav ml-auto">
+                            <ul class="list-unstyled components m-auto">
                                 {% if request.user.is_authenticated %}
-                                <li class="nav-item dropdown me-3 pe-3">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Account
-                                        </a>
-                                        
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        
-                                        <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-                                        </ul>
+                                    {% if request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 4 or request.user.user_type == 5 %}
+                                        <li>
+                                            <a href="{% url 'viewBookings' %}"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-1">Bookings</span></a>
+                                        </li>
+                                    {% endif %}
+                                    {% if request.user.user_type == none %} <!-- Admin-->
+                                    <li>
+                                            <a class='sub ms-4' href="{% url 'manageCollege' %}"><i class="sub fa-solid fa-school"></i></i><span class="link_label ms-2">Colleges</span></a>
+                                            <a class='sub ms-4' href="{% url 'manageTerm' %}"><i class="sub fa fa-calendar"></i><span class="link_label ms-2">Terms</span></a>
+                                            <a class='sub ms-4' href="{% url 'manageUsers' %}"><i class="sub fa fa-users"></i><span class="link_label ms-2">Users</span></a>
                                     </li>
-                                {% else %}
-                                    <a class='text-secondary mt-2 ms-2 me-3 pe-3' href="{% url 'loginPage' %}" id="navbarDropdown" >
-                                       <strong>Log In</strong> 
-                                    </a>
+                                    {% else %}
+                                        {% if request.user.user_type == 3 %} <!-- OCS-->
+                                        <li>
+                                            <a class="ms-4" href="{% url 'uploadPage' %}"><i class="fa-solid fa-upload"></i><span class="link_label">Upload</span></a>
+                                        </li>
+                                        {%endif%}
+                                        {% if request.user.user_type != none and request.user.user_type != 4 and request.user.user_type != 5 %} <!--OCS, Staff & Faculty -->
+                                        <li>
+                                            <a class="ms-4" href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
+                                        </li>
+                                        {% endif %}
+                                        {% if request.user.user_type == 1 or request.user.user_type == 2 %} <!--Staff/Faculty-->
+                                                <a class="ms-4" href="{% url 'notifications' %}">
+                                                    <i class='fa-solid fa-bell' style='margin-top:30px; font-size:33px; color: white'></i>
+                                                    {% if unread_notifications %}
+                                                        <span class="badge bg-secondary">{{ unread_notifications }}</span>
+                                                    {% endif %}
+                                                </a>
+                                        {% endif %}
+                                    {% endif %}
+                                {% else %} <!--Guest-->
+                                <li>
+                                    <a class="ms-4" href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label ms-1">View Rooms</span></a>
+                                </li>
                                 {% endif %}
                             </ul>
-                        </div>
+                            <span class="mt-2 ml-5">logged in as <span style="text-transform: uppercase; font-weight: bold;">{{request.user}}</span></span>
+                            {% if request.user.is_authenticated %}
+                            <li class="nav-item dropdown me-3 pe-3">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-circle-user"></i>
+                                    </a>
+
+                                    <!--User Profile-->
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><strong style="text-transform:uppercase">{{request.user}}</strong></li>
+                                        <li>{{request.user.email}}</li>
+                                        <li><br></li>
+                                        <div class="pl-3"style="text-align:left">
+                                        <li><strong>User Type:</strong>
+                                            {% if user.user_type != None %}
+                                            {{user.get_user_type_display}}
+                                            {% else %}
+                                            Administrator
+                                            {% endif %}</li>
+                                        <li><strong>Name:</strong> {{request.user.name}}</li>
+                                        <li><strong>College:</strong> {{request.user.college}}</li>
+                                        <li><strong>Department:</strong> {{request.user.department}}</li>
+                                        </div>
+                                        <li><br></li>
+
+                                    <li><a class="dropdown-item pl-3 pb-2 pt-2" href="{% url 'profile' %}"><i class="fa-solid fa-key"></i>Change Password</a></li>
+                                    <li><a class="dropdown-item pl-3 pb-2 pt-2" href="{% url 'logout' %}"><i class="fa-sharp fa-solid fa-right-from-bracket"></i>Logout</a></li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <a class='text-secondary mt-2 ms-2 me-3 pe-3' href="{% url 'loginPage' %}" id="navbarDropdown" >
+                                   <strong>Log In</strong>
+                                </a>
+                            {% endif %}
+                        </ul>
                     </div>
-                </nav>
+                </div>
+            </nav>
+
+            <!-- Page Content  -->
+            <div id="content" class="p-4 p-md-5 bg-body">
+                {% include 'message.html' %}
+
                 <main>
-                    
                     <div class="app-title">
                         {% block breadcrumb %}
                         {% endblock breadcrumb %}
@@ -105,11 +122,11 @@
                     {% block content %}
                     {% endblock content %}
                 </main>
-                
+
             </div>
 		</div>
-        {% include 'script_modules.html' %}  
-        
+        {% include 'script_modules.html' %}
+
         {% block extrascripts %}
         {% endblock extrascripts %}
         <script>

@@ -11,63 +11,144 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         {%include 'css_modules.html'%}
         <link rel="stylesheet" href="{% static 'css/accounts.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/login.css'%}">
+        <link rel="stylesheet" href="{% static 'css/styleguide.css'%}">
     </head>
+
     <body>
-        <section class="ftco-section">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-12 bg-dark">
-                        <div class="wrap d-md-flex bg">
-                            <div class="text-wrap pt-4 p-lg-5 pe-5 me-3 d-flex img">
-                                <div class="col ">
-                                    <img src="{{ MEDIA_URL }}University_of_The_Philippines_seal.png" width="340" height="340" />
-                                    <h2 class="text-light ps-5 pb-0"> UPM Online Room </h2>
-                                    <h2 class="text-light pt-0 ps-5 ms-3"> Booking System  </h2>
-                                    <h2 class="text-light pt-0 ps-5 ms-5"> (UPM-ORBS) </h2>
-                                </div>
-                                <div class="col">
-                                    
-                                </div>
-                            </div>
-                            
-                            <div class="login-wrap p-4 p-md-5">
-                                <div class="row justify-content-center py-md-5">
-                                    <div class="col-lg-9">
-                                        {%if iserror%}
-                                        <div class="alert alert-danger">
-                                            <strong>{{ error|escape }}</strong>
-                                        </div>
-                                        {%endif%}
-                                        <form action="#" method="post" class="signup-form">
-                                            {% csrf_token %}
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label class="label" for="email">Username</label>
-                                                        <input type="text" name="username" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label class="label" for="password">Password</label>
-                                                        <input type="password" name="password" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary">Sign In</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="finalized-login-page screen">
+        <img
+        class="image-panel"
+        src="{{MEDIA_URL}}login-image.png"
+        alt="Image-Panel"
+        />
+        <div class="form-panel">
+        <div class="frame-17">
+        <div class="insert-logo-here montserrat-normal-
+        black-15px">
+        <img class="{{MEDIA_URL}}logo.png">insert logo here</span>
+        </div>
+        </div>
+        {%if iserror%}
+                <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
                 </div>
-            </div>
-        </section>
+        {%endif%}
+        <form action="#" method="post" class="login-form">
+        {% csrf_token %}
+        <div class="login-text">
+        <h1 class="title montserrat-normal-falu-red-50px">
+        <span class="montserrat-normal-falu-red-50px">Login</span>
+        </h1>
+        <p class="sign-in-to-your-account montserrat-
+        normal-black-20px">
+        <span class="montserrat-normal-black-
+        20px">Sign in to your account</span>
+        </p>
+        </div>
+        <div class="form">
+        <div class="input-fields">
+        <div class="username">
+        <img
+                class="user-3-fill"
+                src="{{MEDIA_URL}}user-3-fill.png"
+                alt="user-3-fill"
+        />
+        <div class="username-1 montserrat-normal-
+        gunsmoke-15px"><div class="form-group">
+        <span class="montserrat-normal-gunsmoke-15px">
+        <input type="text" name="username" class="form-control" placeholder="Username">
+        </span>
+        </div>
+        </div>
+        </div>
+        <div class="username-2">
+        <img
+                class="key-2-fill"
+                src="{{MEDIA_URL}}key-2-fill.png"
+                alt="key-2-fill"
+        />
+        <div class="password montserrat-normal-
+        gunsmoke-15px"><div class="form-group">
+        <span class="montserrat-normal-gunsmoke-15px">
+                <input type="password" name="password" class="form-control" placeholder="Password">
+        </span>
+        </div>
+        </div>
+        <img
+                class="eye-close-line"
+                src="{{MEDIA_URL}}eye-close-line.png"                
+                alt="eye-close-line"
+        />
+        </div>
+        </div>
+        <div class="other-options">
+        <div class="stay-signed-in"></div>
+        <div class="forgot-password-button">
+        <div class="forgot-password valign-text-
+        middle montserrat-normal-falu-red-12px">
+        <a href="forgot-password">
+        <span><span class="montserrat-normal-
+        falu-red-l2px">Forgot Password?</span></span></a>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="form-group">
+        <button type="submit" class="login-button">
+        <div class="login montserrat-normal-white-
+        15px">
+        <span class="montserrat-normal-white-
+        15px">LOGIN</span>
+        </div>
+        </button>
+        </div>
+        <div class="frame-16">
+        <div class="divider">
+        <img
+        class="line"
+        src="{{MEDIA_URL}}Line 1.png"
+        alt="Line 1"/>
+        <div class="or valign-text-
+        middle montserrat-normal-fuscous-gray-15px">
+        <span><span class="montserrat-normal-
+        fuscous-gray-15px">or</span></span>
+        </div>
+        <img
+        class="line"
+        src="{{MEDIA_URL}}Line 2.png"
+        alt="Line 2"
+        />
+        </div>
+        <div class="other-buttons">
+        <a href="#" class="google btn"><button class="login-with-google-button">
+        <img
+                class="google-fill"
+                src="{{MEDIA_URL}}google-fill.png"
+                alt="google-fill"
+        />
+        <div class="login-with-google valign-text-
+        middle montserrat-normal-fuscous-gray-15px">
+                <span><span class="montserrat-normal-
+        fuscous-gray-15px">Login with Google</span> </span>
+        </div></button></a>
+        <a href="#" class="guest btn"><button class="login-as-guest-button">
+        <img
+                class="vector"
+                src="{{MEDIA_URL}}user-search-fill.png"
+                alt="Vector"
+        />
+        <div class="login-as-guest valign-text-
+        middle montserrat-normal-fuscous-gray-15px">
+                <span><span class="montserrat-normal-
+        fuscous-gray-15px">Login as Guest</span> </span>
+        </div>
+        </button></a>
+        </div>
+        </div>
+        </form>
+        </div>
+        </div>
         {% include 'script_modules.html' %}
-    </body>
+        </body>
 </html>

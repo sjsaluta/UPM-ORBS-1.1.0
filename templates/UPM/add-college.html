@@ -21,20 +21,20 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<div class = "container w-70">
-    <h2 class="py-4 px-4">Add College</h2>
+<div class = "container w-70" style="background: #76090C; border-radius:10px; ">
+    <h2 class="py-2" style="color:white"><i class="fa-regular fa-square-plus"></i>    Add College</h2>
     <div class = "row bg-light shadow-sm border ">
         <div class = "col my-4 px-5">
             <form method="POST" action="">
                 {% csrf_token %}
                 <div class="row">
-                    <div class="col-8">
+                    <div class="">
                         {{form.name | as_crispy_field}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Save changes</button>
+                        <button class="btn btn-success" type="submit" style="background-color:#01632C"><i class="fa-regular fa-floppy-disk"></i> &nbsp;Save changes</button>
                     </div>
                 </div>
                     

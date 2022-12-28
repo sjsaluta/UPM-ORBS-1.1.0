@@ -29,8 +29,14 @@
       <form method="POST" action="">
         {% csrf_token %}
         <div class="row">
+          <div class="table-title">
+            <div class="add-title">
+              <i class="fa fa-filter"></i>
+              <div class="filter-by montserrat-normal-white-25px">
+                <span class="montserrat-normal-white-25px">FILTER BY</span>
+            </div></div></div>
             <div class="col-md-4 ">
-                <label class="form-label">User Type</label>
+                <label class="form-label">Role</label>
                 <select class="form-select" id="role" name="role">
                     <option value="none">--------</option>
                     <option value="faculty">Faculty</option>
