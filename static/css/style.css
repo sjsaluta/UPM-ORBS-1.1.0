@@ -8530,9 +8530,9 @@ a[data-toggle="collapse"] {
   border: 1px none;
   border-radius: 10px 10px 0px 0px;
   display: flex;
-  height: 58px;
+  height: 50px;
   overflow: hidden;
-  padding: 11px 34px;
+  padding: 6px 10px;
 }
 
 .colleges-title {
@@ -8559,14 +8559,14 @@ a[data-toggle="collapse"] {
 .tr-user {
   align-items: center;
   border: 1px none;
+  font-size: larger;
   gap: 5px;
   min-height: 190px;
-  padding: 20px 0;
 }
 
 .pass {
-  background-color: var(--gunsmoke-2);
-  border-color: var(--gunsmoke-2);
+  background-color: rgba(80, 80, 80, 0.8);
+  border-color: rgba(80, 80, 80, 0.8);
 }
 
 .pass:hover {
@@ -8580,8 +8580,8 @@ a[data-toggle="collapse"] {
 }
 
 .update {
-  background-color: rgba(1, 99, 44, 0.502);
-  border-color: rgba(1, 99, 44, 0.502);
+  background-color: rgba(1, 99, 44, 0.8);
+  border-color: rgba(1, 99, 44, 0.8);
 }
 
 .delete:hover {
@@ -8590,8 +8590,8 @@ a[data-toggle="collapse"] {
 }
 
 .delete {
-  background-color: rgba(90, 14, 14, 0.502);
-  border-color: rgba(90, 14, 14, 0.502);
+  background-color: rgba(90, 14, 14, 0.8);
+  border-color: rgba(90, 14, 14, 0.8);
 }
 
 .add-user-btn {
@@ -8599,7 +8599,6 @@ a[data-toggle="collapse"] {
   background-color: var(--sun);
   border: 1px none;
   border-radius: 5px;
-  border-color: var(--heath);
   display: flex;
   gap: 5px;
   height: 40px;
