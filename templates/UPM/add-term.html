@@ -18,20 +18,20 @@
         <div class = "col my-4 px-5">
             <form method="POST" action="">
                 {% csrf_token %}
-                <div class="row">
+                <div class="row-old">
                     <div class="col-8">
                         {{form.academicyear | as_crispy_field}}
                         {{form.semester | as_crispy_field}}
                     </div>
                 </div>
-                <div class="row">
+                <div class="row-old">
                     <div class="col my-3">
                         <button class="btn btn-success" id="show"> Next </button>
                     </div>
                     
                 </div>
                 <p id='val'></p>
-                <div class="row" id="date">
+                <div class="row-old" id="date">
                     <div class="col-8">
                         {{form.date_start | as_crispy_field}}
                         {{form.date_end | as_crispy_field}}
