@@ -2,10 +2,9 @@
 
 <form method="POST" action="" novalidate>
 {% csrf_token %}       
-
-    <div class="modal-header">
-        <h5 class="modal-title ms-1" id="exampleModalLabel">Edit Room</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal-content"  style="border-radius:10px">
+    <div class="modal-header"  style="background: #76090C;">
+        <h5 class="modal-title ms-1" id="exampleModalLabel" style="color:white"><i class="fa-solid fa-file-pen"></i>  Edit Room</h5>
     </div>
 
     <div class="modal-body">
@@ -18,9 +17,9 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success" data-bs-dismiss="modal" id="edit">Submit</button>
+        <button type="submit" class="btn btn-success" data-bs-dismiss="modal" id="edit" style="background-color:#01632C"><i class="fa-regular fa-floppy-disk"></i>    Save Changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"style=" background-color: #868686;"><i class="fa-solid fa-xmark"></i> Cancel</button>
     </div>
-
+</div>
 </form>
 
