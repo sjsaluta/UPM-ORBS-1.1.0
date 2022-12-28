@@ -21,11 +21,9 @@
 {% endblock breadcrumb %}
 
 {% block content %}
-<a class='btn btn-secondary btn-lg'href="{% url 'roomView' %}">Back</a>
-<h2 class="py-4 px-4">Manage Equipment for {{ room.name }}</h2>
-<a class='btn btn-warning mb-2 mx-4 btn-sm' href = "{% url 'addEquipment' room.slug %}"><i class="fa-solid fa-plus">Add an Equipment</i></a>
+<h2 class="py-4 px-4">Manage Equipments for {{ room.name }}</h2>
 <div class = "container w-50">
-    <div class = "row bg-light shadow-sm border ">
+    <div class = "row bg-light shadow-sm border " style="overflow-y: scroll;overflow-x:hidden; height:325px;">
         <div class = "col my-4 px-5">
             <form method="POST" action="">
                 {% csrf_token %}
@@ -37,13 +35,15 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Save changes</button>
-                    </div>
-                </div>
-                    
             </form>
+        </div>
+        <div class = 'text-center' style="margin-top:10px;">
+            <a class='btn btn-warning mb-2 mx-4' role='button' href = "{% url 'addEquipment' room.slug %}"><i class="fa-solid fa-square-plus" style="mbackground-color:#FFAD0D"></i> Add Equipment</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class = 'text-center' style="margin-top:10px;">
+            <button class="btn btn-success" type="submit" style="background-color:#01632C; margin-top:10px; text-align:center"><i class="fa-regular fa-floppy-disk"></i> &nbsp;Save changes</button>
         </div>
     </div>
 </div>

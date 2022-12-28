@@ -17,6 +17,13 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        
+      </div>
+    </div>
+</div>
 <div class = "container fluid">
     <h5 class="pt-4"  style="text-align:center;">{{building.name}}</h5>
     <h1 class="py-2" style="text-align:center; font-size:50px; color:#76090C">Rooms</h1>
@@ -31,6 +38,7 @@
             </div>
                 <div class="col-auto align-self-end text-end">
                     <a class='btn btn-secondary btn-sm' href = "{% url 'calendarView' room.slug %}" style=" background-color: #868686;"><i class="fa-solid fa-calendar-day"></i>    View in Calendar</a>
+                    <button type="button" class="btn btn-success btn-sm"  data-form-url="{% url 'viewEquipment' room.slug %}" style=" background-color: #01632C"><i class="fa-solid fa fa-tv"></i></button>
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}{{building.id}}{{room.id}}" style=" background-color: #76090C;"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
@@ -67,4 +75,5 @@
 {% endblock content %}
 
 {% block extrascripts %}
+
 {% endblock extrascripts %}
