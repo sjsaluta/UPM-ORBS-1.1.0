@@ -16,9 +16,11 @@
 
 {% block content %}
 <div class = "container-fluid">
+  <h5 class="pt-4"  style="text-align:center;">University of the Philippines Manila</h5>
   <h1 class="py-4 px-4" style="text-align:center; font-size:50px; color:#76090C">Colleges</h1>
     <div class = "container-fluid" style="background: #76090C; border-radius:10px">
       <header  style="font-size: 20px; padding:5px; color: white"><i class="fa-solid fa-rectangle-list"></i> List of Colleges</header>
+      <div style="overflow-y: scroll;overflow-x:hidden; height:325px;">
       {% for college in colleges %}
       <div class="row border-bottom bg-white p-3 ">
         
@@ -38,7 +40,7 @@
             <div class="modal-dialog modal-dialog-centered" >
                 <div class="modal-content"  style="border-radius:10px">
                     <div class="modal-header"  style="background: #76090C;">
-                        <h5  style="color:white"><i class="fa-regular fa-square-minus"></i>  Remove</h5>
+                        <h5  style="color:white"><i class="fa-regular fa-square-minus"></i>  Remove College</h5>
                         {% comment %} <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button> {% endcomment %}
                     </div>
                     <div class="modal-body">
@@ -52,6 +54,7 @@
             </div>
         </div>
         {%endfor%}
+      </div>
         <div class = 'text-center' style="margin-top:10px;">
           <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'addCollege' %}"><i class="fa-solid fa-square-plus" style="mbackground-color:#FFAD0D"></i> Add College</a>
         </div>
