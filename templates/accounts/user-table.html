@@ -1,18 +1,23 @@
 <table id='user-table' class="table">
-    <thead>
-      <tr>
-        <th scope="col">No.</th>
-        <th scope="col">Username</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Role</th>
-        <th scope="col"></th>
+    <thead><div class="table-title-1">
+      <div class="colleges-title">
+        <div class="list-of-users montserrat-normal-white-25px"
+        style="font-size: 20px; color: white;">
+      <i class="fa fa-user"></i> LIST OF USERS
+    </div></div></div>
+      <tr class="tr-user">
+        <th scope="col" class="th-title">ID</th>
+        <th scope="col" class="th-title">Username</th>
+        <th scope="col" class="th-title">Name</th>
+        <th scope="col" class="th-title">Email</th>
+        <th scope="col" class="th-title">Role</th>
+        <th scope="col" class="th-title"></th>
       </tr>
     </thead>
     <tbody>
       {% for u in users %}
       <tr>
-        <th scope="row">{{forloop.counter}}</th>
+        <th scope="row" class="tr-user">{{forloop.counter}}</th>
         <td>{{u.username}}</td>
         <td>{{u.get_full_name}}</td>
         <td>{{u.email}}</td>
@@ -26,3 +31,6 @@
       {% endfor %}
     </tbody>
   </table>
+  <div class = 'text-right'>
+    <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'AddUserPage' %}"><i class="fa-solid fa-plus"></i> Add User</a>
+  </div>

@@ -8,10 +8,9 @@
     --fuscoustgray2: rgba(81, 81, 81, 1);
     --heath: rgba(90, 14, 14, 1);
     --falu-red: rgba(117, 21, 24, 1);
-    --Japanese:maple: rgba(118, 9, 12, 1);
-    --gunsmoke-2: rgba(134, 134, 134,
-    0.502);
-    --:gunsmoke: rgba(134, 134, 134, 1);
+    --japanese-maple: rgba(118, 9, 12, 1);
+    --gunsmoke-2: rgba(134, 134, 134, 0.502);
+    --gunsmoke: rgba(134, 134, 134, 1);
     --alto: rgba(217, 217, 217, 1);
     --concrete: rgba(242, 242, 242, 1);
     --red: rgba(255, 0, 0, 1);
@@ -19,9 +18,9 @@
     --sun: rgba(255, 173, 13, 1);
     --white: rgba(255, 255, 255, 1);
     
-    --font-size-s: 17px:
+    --font-size-s: 17px;
     --font-size-m: 20px;
-    --font-size-1: 25px:
+    --font-size-1: 25px;
     --font-size-xl: 40px;
     --font-size-xxl: 50px;
     --font-size-s2: 15px;
