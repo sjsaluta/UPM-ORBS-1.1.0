@@ -82,6 +82,11 @@ class EditEquipment(ModelForm):
         model = Room
         fields = ['equipment']
 
+# class EditCollege(ModelForm):
+#     class Meta:
+#         model = College
+#         fields = ('name')
+
 #AO Edit Equipment
 
 # class AOEditEquipment(ModelForm):

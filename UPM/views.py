@@ -311,6 +311,24 @@ def removeRoom(request,c,b,r):
     Room.objects.get(slug=r).delete()
     return redirect(reverse_lazy('adminBuildingView',kwargs={"c": c,"b":b}))
 
+# def editCollege(request, slug):
+#     college = College.objects.get(slug=slug)
+#     form = EditCollege(instance=college)
+
+#     if request.method == "POST":
+#         form = EditCollege(request.POST, instance=college)
+
+#         if form.is_valid():
+#             form.save()
+#         return HttpResponseRedirect(reverse_lazy('manageCollege'))
+
+#     else:
+#         form = EditCollege(instance=college)
+        
+#         context = {'form':form, 'college':college}
+#         return render(request,'UPM/edit-college.html',context)
+
+
 #manage rooms
 @login_required(login_url='loginPage')
 def manageRooms(request):
@@ -475,3 +493,19 @@ def roomView(request):
     context={'filter':rfilter, 'form':form, 'rooms':rooms,'building':build,'colleges':college}
     return render(request,'UPM/room-view.html',context)
 
+#edit room modal
+# def editUser(request,pk):
+#     user = AuthUser.objects.get(id=pk)
+#     if request.method == "POST":
+#         form= EditUserForm(request.POST, instance=user)
+
+#         if form.is_valid():
+#             form.save()
+            
+#         return HttpResponseRedirect(reverse_lazy('manageUsers'))
+
+#     else:
+#         form = EditUserForm(instance=user)
+
+#         context = {'form': form,'u':user}
+#         return render(request, 'accounts/edit-user.html', context)

@@ -33,6 +33,7 @@ urlpatterns = [
     path('manage-college/',views.manageCollege, name='manageCollege'),
     path('manage-college/add-college/',views.addCollege, name='addCollege'),
     path('manage-college/remove/<slug:slug>/',views.removeCollege, name='removeCollege'),
+    # path('manage-college/edit-college/<int:pk>/',views.editCollege, name='editCollege'),
     path('manage-college/<slug:slug>/',views.collegeView, name='adminCollegeView'), 
     path('manage-college/<slug:slug>/add-dept/',views.addDept, name='addDept'),
     path('manage-college/<slug:slug>/add-build/',views.addBuild, name='addBuild'),

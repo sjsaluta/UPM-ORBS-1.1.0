@@ -27,7 +27,6 @@ def viewBookings(request):
         bookings = Booking.objects.filter(room__college=college)
         bfilter = BookingFilter(request.GET, queryset=bookings)
 
-    context={'bookings':bookings}
     context={'bookings':bookings, 'bfilter': bfilter}
     return render(request, 'booking/booking.html',context)
 
@@ -80,3 +79,25 @@ def deleteBooking(request,pk):
     booking.delete()
     return redirect('viewBookings')
 
+# Notification
+@login_required(login_url='loginPage')
+def viewNotif(request):
+    booking = Booking.objects.filter(booker=request.user)
+    approve = request.POST.get("approve")
+    reject = request.POST.get("reject")
+
+    user = request.user
+    list_of_notifications = Notifications.objects.all()
+    # unread_notifications = Notifications.objects.filter(user = request.user, is_opened = False).count()
+
+    if approve:
+        booking.isApproved=True
+        booking.date_approved=date.today()
+        booking.approver = ADPD.objects.get(user=request.user)
+
+    elif reject:
+        booking.isApproved=False
+        
+
+    context={'list_of_notifications':list_of_notifications, 'user':user} # 'unread_notifications':unread_notifications,
+    return redirect(request, context)
