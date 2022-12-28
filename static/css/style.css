@@ -8564,11 +8564,66 @@ a[data-toggle="collapse"] {
   padding: 20px 0;
 }
 
-.update {
+.pass {
   background-color: var(--gunsmoke-2);
   border-color: var(--gunsmoke-2);
 }
 
+.pass:hover {
+  background-color: var(--fuscous-gray);
+  border-color: var(--fuscous-gray);
+}
+
 .update:hover {
-  background-color: darkgray;
+  background-color: var(--fun-green);
+  border-color: var(--fun-green);
+}
+
+.update {
+  background-color: rgba(1, 99, 44, 0.502);
+  border-color: rgba(1, 99, 44, 0.502);
+}
+
+.delete:hover {
+  background-color: var(--heath);
+  border-color: var(--heath);
+}
+
+.delete {
+  background-color: rgba(90, 14, 14, 0.502);
+  border-color: rgba(90, 14, 14, 0.502);
+}
+
+.add-user-btn {
+  align-items: center;
+  background-color: var(--sun);
+  border: 1px none;
+  border-radius: 5px;
+  border-color: var(--heath);
+  display: flex;
+  gap: 5px;
+  height: 40px;
+  width: 185px;
+  padding: 0 50px;
+}
+
+.add-user {
+  letter-spacing: 0;
+  line-height: 25px;
+  min-width: 71px;
+  text-align: center;
+  white-space: nowrap;
+  color: white;
+}
+
+.table-bottom {
+  align-items: flex-start;
+  background-color: var(--white);
+  border-bottom-style: solid;
+  border-bottom-width: 10px;
+  border-color: var(--heath);
+  border-radius: 0px 0px 10px 10px;
+  display: flex;
+  margin-left: 0.5px;
+  min-width: 1330px;
 }
