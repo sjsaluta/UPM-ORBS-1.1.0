@@ -11,12 +11,16 @@ from .widgets import *
 from UPM.models import *
 
 
-class AddBookFrCal(ModelForm):
-    equipment = forms.ModelMultipleChoiceField(
-        queryset = Equipment.objects.all(),
-        widget = forms.CheckboxSelectMultiple,
-        required=False
-    )
+class AddBookFrCal(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        room_id = kwargs.pop('room_id')
+        super(AddBookFrCal, self).__init__(*args, **kwargs)
+        room = Room.objects.get(pk=room_id)
+        self.fields['equipment'] = forms.ModelMultipleChoiceField(
+            queryset = room.equipment.all(),
+            widget = forms.CheckboxSelectMultiple,
+            required=False,
+        )
     class Meta:
         model = Booking
         fields = ['faculty','subject','start_time','end_time','date_picked','numofstudents','activity','equipment','dept_or_office','organization']
@@ -29,23 +33,32 @@ class AddBookFrCal(ModelForm):
             'dept_or_office':'Dept/Office'
         }
         widgets={
-            "start_time": TimeInput(#DateTimeInput
-                attrs={"type": "time", "class": "form-control"},#"type": "datetime-local"
-                #format="%Y-%m-%dT%H:%M",
-                format="T%H:%M",
+            "start_time": DateInput(#DateTimeInput
+                attrs={"type": "datetime-local", "class": "form-control"},#"type": "datetime-local"
+                format="%Y-%m-%dT%H:%M",
+                #format="T%H:%M",
             ),
-            "end_time": TimeInput(#DateTimeInput
-                attrs={"type": "time", "class": "form-control"},#"type": "datetime-local"
-                #format="%Y-%m-%dT%H:%M",
-                format="T%H:%M",
+            "end_time": DateInput(#DateTimeInput
+                attrs={"type": "datetime-local", "class": "form-control"},#"type": "datetime-local"
+                format="%Y-%m-%dT%H:%M",
+                #format="T%H:%M",
             ), 
-            "date_picked": DateInput(#New widget
-                attrs={"type": "date", "class": "form-control"},
-                format="%Y-%m-%d"
-            )
+            # "date_picked": DateInput(#New widget
+            #     attrs={"type": "date", "class": "form-control"},
+            #     format="%Y-%m-%d"
+            # )
         }
 
 class EditBookingForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        room_id = kwargs.pop('room_id')
+        super(AddBookFrCal, self).__init__(*args, **kwargs)
+        room = Room.objects.get(pk=room_id)
+        self.fields['equipment'] = forms.ModelMultipleChoiceField(
+            queryset = room.equipment.all(),
+            widget = forms.CheckboxSelectMultiple,
+            required=False,
+        )
     class Meta:
         model = Booking
         fields = ['faculty','subject','start_time','end_time','numofstudents','activity','equipment','dept_or_office','organization','room']

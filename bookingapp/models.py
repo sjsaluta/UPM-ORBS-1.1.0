@@ -26,7 +26,7 @@ class Booking(models.Model):
     numofstudents = models.IntegerField(null=True)
     equipment = models.ManyToManyField(Equipment) #Room.equipment
     remarks = models.TextField(null=True, blank=True)
-
+ 
     #Get full name of user with email
     def getFullName(self):
         return self.faculty.user.first_name +' ' + self.faculty.user.last_name + ' (' + self.faculty.user.email + ')'

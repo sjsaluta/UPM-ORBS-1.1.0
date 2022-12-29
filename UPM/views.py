@@ -382,9 +382,9 @@ def calendarView(request, slug):
         schedfile = ScheduleFile.objects.get(term=term)
         schedule = Schedule.objects.filter(room=room,schedfile=schedfile)
     schedule = Schedule.objects.filter(room=room)
-    form = AddBookFrCal()
+    form = AddBookFrCal(room_id=room.id)
     if request.method == "POST":
-        form = AddBookFrCal(request.POST)
+        form = AddBookFrCal(request.POST, room_id=room.id)
         iserror = False 
         if form.is_valid():
             book = form.save(False)
