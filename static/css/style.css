@@ -8628,6 +8628,18 @@ a[data-toggle="collapse"] {
   margin-left: 0.5px;
 }
 
+.table-bottom-green {
+  align-items: flex-start;
+  background-color: var(--white);
+  border-bottom-style: solid;
+  border-bottom-width: 10px;
+  border-color: var(--fun-green);
+  border-radius: 0px 0px 10px 10px;
+  display: flex;
+  padding: 10px 10px 0px 0px;
+  margin-left: 0.5px;
+}
+
 .table-title-2 {
   align-items: flex-end;
   background-color: var(--japanese-maple);

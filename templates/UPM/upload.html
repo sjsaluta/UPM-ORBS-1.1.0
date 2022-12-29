@@ -29,24 +29,18 @@
   <span aria-hidden='true'>&times;</span></button>
 </div>
 <div class = "container w-auto">
-  <h2 class="py-4">Upload Schedule</h2>
+  <h2 class="py-4 px-4" style="text-align:center; font-size:35px; color:#76090C">Upload Schedule</h2>
+  <div class="table-title" style="width:auto">
+    <div class="add-title"></div></div>
     <form method='POST' enctype="multipart/form-data" id="upload">
         {% csrf_token %}
 
-        <div class ='col-3'>
+        <div class ='row-new'>
         {{ form.term | as_crispy_field }}
         {{ form.file }}
-        </div>
-
-        <div class ='col-8'>
-          <p class = 'text-black-50 mt-2'> *Upload a csv file. 
-          <br>The labels for the columns should start in the 8th row.
-          <br> The columns should be as follows: Class Number, Course Title, Subject, Catalog, Section, Component, Schedule, Room, Class Capacity, and Restrictions*</p>
-        </div>
-
         <div class = 'row'>
-          <div class = 'col mt-4 ms-3'>
-            <button class='btn btn-success' type = 'submit'>Upload</button>
+          <div class = 'row'>
+            <button class='btn btn-success' type = 'submit'><i class="fa fa-upload"></i> Upload</button>
           </div>
           <div class = 'col'>
             <div class="spinner-border" role="status">
@@ -55,7 +49,15 @@
           </div>
           <p id='error' class='text-danger ms-3'></p>
         </div>
-        
+        </div>
+
+        <div class ='col-8'>
+          <p class = 'text-black-50 mt-2'> *Upload a csv file. 
+          <br>The labels for the columns should start in the 8th row.
+          <br> The columns should be as follows: Class Number, Course Title, Subject, Catalog, Section, Component, Schedule, Room, Class Capacity, and Restrictions*</p>
+        </div>
+
+    <div class="table-bottom-green"></div>
         
         
     </form>
