@@ -7,36 +7,31 @@
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb mt-3 ms-4 bg-body">
+  <ol class="breadcrumb bg-primary">
     <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Manage Terms</li>
+    <li class="breadcrumb-item active" aria-current="page">Terms</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}
 
 {% block content %}
 <div class = "container-fluid">
-    <h2 class="py-4 px-4">Manage Term</h2>
-    <div class = 'text-right'>
-      <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'addTerm' %}"><i class="fa-solid fa-plus"></i> Add Term</a>
-    </div>
-
+    <h1 class="subTitle">University of the Philippines Manila</h1>
+    <h1 class="title">Terms</h1>
+    <div class = "container-fluid mt-4 table-container">
+    <header class="table-header p-2"><i class="fa-solid fa-rectangle-list mr-2"></i>List of Terms</header>
     {% for term in terms %}
-    <div class="row border bg-white p-3 mb-3">
+    <div class="row border bg-white p-3">
 
         <div class="col align-self-center">
-            <a href="{% url 'termView' term.slug %}"><h5>Term {{term.academicyear}} {{term.semester}}</h5></a>
+            <a href="{% url 'termView' term.slug %}"><h6>Term {{term.academicyear}} {{term.semester}}</h6></a>
         </div>
 
         <div class="col-auto align-self-center text-end ">
             {%if term.isActivated %}
-            <h5><span class="badge bg-primary text-wrap">
-                Active
-            </span></h5>
+            <h6><span class="badge badge-success text-wrap">Active</span></h6>
             {%else%}
-            <h5><span class="badge bg-secondary text-wrap">
-                Inactive
-            </span></h5>
+            <h6><span class="badge badge-light text-wrap">Inactive</span></h6>
             {%endif%}
         </div>
 
@@ -64,6 +59,10 @@
           </div>
       </div>
       {%endfor%}
+      <div class = "row bg-white p-3">
+        <a class='btn btn-warning mb-3 mt-3 mr-auto ml-auto' role='button' href = "{% url 'addTerm' %}"><i class="fa-solid fa-plus mr-2"></i>Add Term</a>
+      </div>
+    </div>
 
 </div>
 
