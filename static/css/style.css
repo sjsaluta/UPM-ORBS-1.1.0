@@ -476,7 +476,7 @@ pre {
   margin-right: auto;
   margin-left: auto; }
 
-.row-old {
+.row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8484,7 +8484,7 @@ a[data-toggle="collapse"] {
   padding: 0 37.5px;
 }
 
-.row {
+.row-new {
   align-items: center;
   border-style: none;
   display: flex;
