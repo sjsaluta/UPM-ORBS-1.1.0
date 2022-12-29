@@ -18,28 +18,51 @@
 
 {% block content %}
 <div class = "container-xl px-4 pb-2">
-    <h2 class="py-4">View Rooms</h2>
+    <h2 class="py-4 px-4" style="text-align:center; font-size:35px; color:#76090C">View Rooms</h2>
     <div class = 'row h-100 '>
         <div class = "col-sm-3 vh-75 " >
-            <div class = 'p-3 vh-75 shadow-sm border bg-light'>
-                <h5 class='mb-5'>Filter by:</h5>
-                <form method = "GET">
-                    {{filter.form | crispy}}
-                    <button class = "btn btn-info w-100 mt-3" type = 'submit'>Filter</button>
-                </form>
+                <div class="table-title">
+                    <div class="add-title">
+                      <i class="fa fa-filter" style="color:white; font-size:20px; padding-top: 10px;"></i>
+                      <div class="filter-by montserrat-normal-white-25px">
+                        <span class="montserrat-normal-white-25px" style="font-size:20px;">FILTER BY</span>
+                    </div></div></div>
+                    <div class="table-content" style="margin-top:100px;">
+                                <form method = "GET">
+                                    <div class="content-list">
+                                    <div class="row">
+                                        <div class="text-1">
+                                    <tr>
+                                        <div class="col">
+                                        <td>{{filter.form.college | as_crispy_field}}</td>
+                                        </div>
+                                        <div class="col">
+                                        <td>{{filter.form.building | as_crispy_field}}</td>
+                                        </div>
+                                        <div class="col">
+                                        <td>{{filter.form.room_type | as_crispy_field}}</td>
+                                        </div>
+                                        <div class="col">
+                                        <td>{{filter.form.capacity | as_crispy_field}}</td></div>
+                                    </tr></div>
+                                    <div class="row">
+                                        <div class="add-user">
+                                    <button class = "btn btn-success" type = 'submit'>Filter</button>
+                                </div></div></div></div></div></div>
+                                </form>
+                    
             </div>
         </div>
-        <div class = "col-sm-9 h-100 ">
             <table class="table">
-                <thead>
-                  <tr>
+                <thead style="background-color:#76090C; height: 25px;">
+                    <tr style="color:white; font-size: 13px;">
                     <th scope="col">Room</th>
                     <th scope="col">Building</th>
                     <th scope="col">College</th>
                     <th scope="col">Capacity</th>
                     <th scope="col">Room Type</th>
                     <th scope="col"></th>
-                  </tr>
+                    </tr>
                 </thead>
                 <tbody>
                 {% for room in rooms %}
@@ -49,14 +72,13 @@
                     <td>{{room.college}}</td>
                     <td>{{room.capacity}}</td>
                     <td>{{room.room_type}}</td>
-                    <td><a class='btn btn-secondary btn-sm' href = {% url 'calendarView' room.slug %}><i class="fa-solid fa-calendar-day"></i> View Schedule</a></td>
+                    <td><a class='btn btn-secondary btn-sm' href = {% url 'calendarView' room.slug %}><i class="fa fa-calendar-day"></i> View Schedule</a></td>
                   </tr>
                 {% endfor %}
                 </tbody>
               </table>
         </div>
     </div>
-</div>
 
 
 

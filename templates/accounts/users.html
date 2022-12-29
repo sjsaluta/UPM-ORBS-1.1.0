@@ -25,12 +25,23 @@
 </div>
 
 <div class = "container-fluid">
-    <h2 class="py-4 px-4">Manage Users</h2>
+  <h2 class="py-4 px-4" style="text-align:center; font-size:35px; color:#76090C">Manage Users</h2>
       <form method="POST" action="">
         {% csrf_token %}
-        <div class="row">
-            <div class="col-md-4 ">
-                <label class="form-label">User Type</label>
+        <div class="row" style="margin-bottom: 150px;">
+          <div class="table-title">
+            <div class="add-title">
+              <i class="fa fa-filter" style="color:white; font-size:20px; padding-top: 10px;"></i>
+              <div class="filter-by montserrat-normal-white-25px">
+                <span class="montserrat-normal-white-25px" style="font-size:20px;">FILTER BY</span>
+            </div></div></div>
+            <div class="table-content">
+              <div class="content-list">
+                <div class="row-new">
+                  <div class="text-1">
+                    <div class="input-container">
+            <div class="col-md-4">
+                <label class="form-label">Role</label>
                 <select class="form-select" id="role" name="role">
                     <option value="none">--------</option>
                     <option value="faculty">Faculty</option>
@@ -39,18 +50,15 @@
                     <option value="adpd">ADPD</option>
                     <option value="ao">AO</option>
                 </select>
-                
+            </div>    
             </div>
             <div class="col-md-4 mt-4 pt-2">
-              <button type="submit" class='btn btn-success'> Filter</button>
-            </div>
+              <button type="submit" class='btn btn-success' style="background-color:rgba(1, 99, 44, 1)"> Filter</button>
+            </div></div>
         </div>
-    </div>
-    <div class = 'text-right'>
-      <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'AddUserPage' %}"><i class="fa-solid fa-plus"></i> Add User</a>
-    </div>
+    </div></div></div>
+    </form>
     {% include "accounts/user-table.html" %}
-    
 </div>
 
 

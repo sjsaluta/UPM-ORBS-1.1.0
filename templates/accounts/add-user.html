@@ -26,21 +26,25 @@
 </nav>
 {% endblock breadcrumb %}
 {% block content %}
-
+<div class="table-title-2">
+    <div class="add-title">
+        <div class="add-title-1">
 <div class = "container w-70">
-    <h2 class="py-4 px-4">Add User</h2>
+    <h2 class="title"><i class="fa fa-user-plus" style="color:white;"></i>  Add User</h2>
+</div></div></div></div>
     <div class = "row bg-light shadow-sm border ">
-        <div class = "col my-4 px-5">
+        <div class = "row-new bg-light shadow-sm border ">
+        <div class = "content-list">
             {% if form.errors %}
                 
             {% endif %}
             <form method="POST" action="">
                 {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-4">
-                        <label class="form-label">User Type</label>
+                <div class="row-new">
+                    <div class="col-md-4" style="position: absolute; margin-left: -500px; margin-bottom: 50px">
+                        <label class="form-label">Role</label>
                         <select class="form-select" id="role" name="role" onChange="update()">
-                            <option value="none" selected disabled hidden>Select an Role</option>
+                            <option value="none" selected disabled hidden>Select a Role</option>
                             <option value="faculty">Faculty</option>
                             <option value="staff">Staff</option>
                             <option value="ocs">OCS</option>
@@ -48,18 +52,16 @@
                             <option value="ao">AO</option>
                         </select>
                     </div>
-                    
-                    
-                </div>
-                <div class="row">
-                    <div class="col my-3">
-                        <button class="btn btn-success" id="show">Next</button>
-                    </div>
-                </div>
+                    <div class="row-new">
+                        <div class="col my-3">
+                            <button class="btn btn-success" id="show">Next</button>
+                        </div>
+                    </div></div>
+                </div></div>
             {% if form.errors %}
                 <div class ="row" > 
             {% else %}
-                <div class ="row" id="f" > 
+                <div class ="row" id="f" style="background-color:white;"> 
             {% endif %}
                     <div class="row">
                         <div class="col-4 pe-4">
@@ -81,30 +83,26 @@
                             <div class="mb-3">
                                 {{form.password1 | as_crispy_field}}
                             </div>
-                            <div class="mb-3">
-                                {{form.password2 | as_crispy_field}}
-                            </div> 
                         </div>
                         <div class="col-4 pe-4">
+                            <div class="mb-3">
+                                {{form.password2 | as_crispy_field}}
+                            </div>
                             <div class="mb-3" id="college">
                                 {{form.college | as_crispy_field}}   
                             </div>
                             <div class="mb-3" id="dept">
                                 {{form.department | as_crispy_field}}
                             </div>
+                            <div style="align-self: center;">
+                                <button class="btn btn-success" type="submit"><i class="fa-regular fa-floppy-disk"></i> &nbsp;Save changes</button>
+                            </div>
                         </div>
                     </div> 
-                    <div class="row justify-content-center mt-3 ms-15">
-                        <div class="col col-sm-auto">
-                            <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Save changes</button>
-                        </div>
-                    </div>
+                    <div class="table-bottom"></div>
                 </div>   
             </form>
         </div>
-    </div>
-    
-    
 </div>
 
 {% endblock content %}
