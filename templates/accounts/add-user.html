@@ -33,13 +33,14 @@
     <h2 class="title"><i class="fa fa-user-plus" style="color:white;"></i>  Add User</h2>
 </div></div></div></div>
     <div class = "row bg-light shadow-sm border ">
+        <div class = "row-new bg-light shadow-sm border ">
         <div class = "content-list">
             {% if form.errors %}
                 
             {% endif %}
             <form method="POST" action="">
                 {% csrf_token %}
-                <div class="row">
+                <div class="row-new">
                     <div class="col-md-4" style="position: absolute; margin-left: -500px; margin-bottom: 50px">
                         <label class="form-label">Role</label>
                         <select class="form-select" id="role" name="role" onChange="update()">
@@ -51,11 +52,11 @@
                             <option value="ao">AO</option>
                         </select>
                     </div>
-                    <div class="row">
+                    <div class="row-new">
                         <div class="col my-3">
                             <button class="btn btn-success" id="show">Next</button>
                         </div>
-                    </div>
+                    </div></div>
                 </div></div>
             {% if form.errors %}
                 <div class ="row" > 
