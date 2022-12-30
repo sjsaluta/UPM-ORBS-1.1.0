@@ -39,7 +39,11 @@
                                 <a href="{% url 'uploadPage' %}"><i class="fa-solid fa-upload"></i><span class="link_label"> Upload</span></a>
                             </li>
                             {%endif%}
+<<<<<<< HEAD
                             {% if request.user.user_type != none and request.user.user_type != 4 and request.user.user_type != 5 and request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 6 %} {% comment %} added guest user {% endcomment %}
+=======
+                            {% if request.user.user_type == none and request.user.user_type != 4 and request.user.user_type != 5 and request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 6 %} {% comment %} added guest user {% endcomment %}
+>>>>>>> dbf9786c2bf5c19a28793c787e64774238ce4f6a
                             <li>
                                 <a href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
                             </li>
