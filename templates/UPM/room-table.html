@@ -1,6 +1,6 @@
-<div style="overflow-y: scroll;overflow-x:hidden; height:400px; background-color:white; margin-top:10px">
+<div style="overflow:auto; height:400px; background-color:white; margin-top:10px">
   <table id='room-table' class="table">
-      <thead style="text-align:center">
+      <thead style="text-align:center; position: sticky; top: 0; z-index: 1;  background:#eee;">
         <tr>
           <th scope="col">Room</th>
           <th scope="col">Building</th>
@@ -11,7 +11,7 @@
   
         </tr>
       </thead>
-      <tbody style="text-align:center">
+      <tbody style="text-align:center;">
       {% for room in rooms %}
         <tr>
           <td>{{room.name}}</td>
