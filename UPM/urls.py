@@ -43,6 +43,10 @@ urlpatterns = [
     path('manage-college/<slug:c>/<slug:b>/remove/<slug:r>',views.removeRoom,name='removeRoom'),
     path('manage-college/<slug:c>/<slug:b>/add-room/',views.addBuildRoom, name='addBuildRoom'),
 
+
+    path('manage-college/<slug:c>/<slug:d>/users',views.deptUsersView,name='deptUsersView'), #users per department
+
+
     #path('manage-room/edit-equipment/<slug:slug>/',views.editEquipment, name='editEquipment'),
     
 

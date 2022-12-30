@@ -473,6 +473,18 @@ def buildingView(request,c,b):
     context={'rooms':room,'building':building,'college':college}
     return render(request,'UPM/building-details.html',context)
 
+
+# users per department
+@login_required(login_url='loginPage')
+def deptUsersView(request,c,d):
+    college = College.objects.get(slug=c)
+    department = Department.objects.filter(slug=d)
+    deptUsers = AuthUser.objects.filter(department=department).order_by('last_name')
+
+    context={'department':department,'college':college, 'deptUsers':deptUsers}
+    return render(request,'UPM/department-users.html',context)
+# users per department
+
 @login_required(login_url='loginPage')
 def roomView(request):
     rooms = Room.objects.all()

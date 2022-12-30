@@ -45,7 +45,8 @@
                 {% if view == 'build'%}
                 <a href="{% url 'adminBuildingView' college.slug field.slug%}"><button type="button" class="btn btn-success btn-sm"style=" background-color: #868686; margin-right: 5px"><i class="fa-solid fa-door-open"></i>  View Rooms</button></a>
                 {% else %}
-                <a href="{% url 'manageUsers'%}"><button type="button" class="btn btn-success btn-sm"style=" background-color: #868686; margin-right: 5px"><i class="fa-solid fa-users"></i> View Users</button></a>
+                {% comment %} users per department {% endcomment %}
+                <a href="{% url 'deptUsersView' college.slug field.slug%}"><button type="button" class="btn btn-success btn-sm"style=" background-color: #868686; margin-right: 5px"><i class="fa-solid fa-users"></i> View Users</button></a>
                 {% endif %}
                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}{{field.id}}" style=" background-color: #76090C;"><i class="fa-solid fa-trash-can"></i></button>
                 
