@@ -18,29 +18,27 @@
 
 {% block content %}
 <div class = "container-fluid">
-  <h2 class="pt-4 px-4 ms-4">{{room.name}}</h2>
-  <h5 class="px-4 ms-4">Calendar View</h5>
-  <div class = "row justify-content-end">
-    <div class = "col-6 ps-5  ">
-      <h4 class="pb-4">A.Y. {{term.academicyear}} {{term.semester}}</h5>
-    </div>  
-    <div class = "col-2 ms-4">
+  <h5 class="pt-2"  style="text-align:center;">{{room.name}}</h5>
+  <h1 class="py-2 " style="text-align:center; font-size:50px; color:#76090C">Calendar</h1>
+
+  {% comment %} <div class = "col-6 ps-5  ">
+    <h4 class="pb-4">A.Y. {{term.academicyear}} {{term.semester}}</h5>
+  </div>   {% endcomment %}
+  <div class = "container-fluid" style="border-radius:10px">
+    <header  style="background: #76090C;font-size: 20px; padding-top:10px; color: white;border-top-left-radius:10px; border-top-right-radius:10px; padding-left:37px; height:50px"><i class="fa-solid fa-solid fa-calendar"></i> A.Y. {{term.academicyear}} {{term.semester}}
       {%if request.user.is_authenticated%}
-        {%if request.user.user_type == 1 or request.user.user_type == 2%}
-        <a class='btn btn-warning mb-2' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book"><i class="fa-solid fa-calendar"></i> Book Now</a>
-        {% else %}
-        <a class='btn btn-warning mb-2 disabled' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book" aria-disabled="true"><i class="fa-solid fa-calendar"></i> Book Now</a>
-        {%endif%}
+      {%if request.user.user_type == 1 or request.user.user_type == 2%}
+      <a class='btn btn-warning mb-2 ' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book" style="float:right;  margin-top:-3px;margin-right:20px; background-color:#FFAD0D"><i class="fa-solid fa-calendar"></i> Book Now</a>
       {% else %}
-      <a class='btn btn-warning mb-2 disabled' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book" aria-disabled="true"><i class="fa-solid fa-calendar"></i> Book Now</a>
+      <a class='btn btn-warning mb-2 disabled' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book" aria-disabled="true" style="float:right;  margin-top:-3px;margin-right:20px; background-color:#FFAD0D"><i class="fa-solid fa-calendar"></i> Book Now</a>
       {%endif%}
-    </div> 
-    
-  </div>  
-  <div class="col-md-11 ms-4 ps-6 ">
-      <div class=""id="calendar"></div>
+    {% else %}
+    <a class='btn btn-warning mb-2 disabled' role='button' href = "#book" data-bs-toggle="modal" data-bs-target="#book" aria-disabled="true"style="float:right;  margin-top:-3px;margin-right:20px; background-color:#FFAD0D"><i class="fa-solid fa-calendar"></i> Book Now</a>
+    {%endif%}</header>
+
+      <div class = "container-fluid bg-white "id="calendar" style="border: solid black 1px"></div>
+      <footer style="background: #76090C;font-size: 20px; padding:5px; color: white;border-bottom-left-radius:10px; border-bottom-right-radius:10px"></footer>
   </div>
-  
   <div class="modal fade" id="exampleModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
