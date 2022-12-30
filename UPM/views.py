@@ -335,7 +335,7 @@ def manageRooms(request):
     rooms=Room.objects.all()
     form = ColBuildForm()
     build = Building.objects.all()
-    college = College.objects.all()
+    college = College.objects.all().order_by('name')
 
     if request.method == "POST":
 
