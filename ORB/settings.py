@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'bookingapp',
+    'bootstrap3',
     'accounts',
     'UPM',
     'crispy_forms',
@@ -47,11 +49,19 @@ INSTALLED_APPS = [
     'django_extensions',
     'bootstrap_modal_forms',
     'widget_tweaks',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 AUTH_USER_MODEL = 'accounts.AuthUser'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+BOOTSTRAP3 = {
+  'javascript_in_head': True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -135,6 +145,27 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+SITE_ID = 0
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

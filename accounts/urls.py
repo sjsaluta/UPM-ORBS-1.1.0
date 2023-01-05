@@ -23,6 +23,7 @@ from django.conf import settings
 urlpatterns = [
     
     path('login/',views.loginPage, name='loginPage'),
+    path('google_login/', include('allauth.urls')),
     path('logout/', views.logOutPage, name="logout"),
 
     path('profile/', views.viewProfile, name="profile"),

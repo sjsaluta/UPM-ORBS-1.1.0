@@ -207,6 +207,53 @@ def addCollege(request):
     return render(request,"UPM/add-college.html",context)
 
 @login_required(login_url='loginPage')
+def addEquipment(request, slug):
+    room = Room.objects.get(slug=slug)
+    form = AddEquipment()
+    if request.method == "POST":
+        form = AddEquipment(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('roomView')
+    context={'form':form}
+    return render(request,"UPM/add-equipment.html",context)
+
+@login_required(login_url='loginPage')
+def manageEquipment(request, slug):
+    room = Room.objects.get(slug=slug)
+
+    if request.method == "POST":
+        #form1 = AddEquipment() #adds form
+        form = ManageEquipment(request.POST, instance=room)
+
+        if form.is_valid():
+            form.save()
+
+        return HttpResponseRedirect(reverse_lazy('roomView'))
+    else:
+        form = ManageEquipment(instance=room)
+        
+        context = {'form':form, 'room':room}
+        return render(request,'UPM/manage-equipment.html',context)
+
+@login_required(login_url='loginPage')
+def editEquipment(request, slug):
+    room = Room.objects.get(slug=slug)
+    
+    if request.method == "POST":
+        form = EditEquipment(request.POST, instance=room)
+
+        if form.is_valid():
+            form.save()
+
+        return HttpResponseRedirect(reverse_lazy('manageRooms'))
+    else:
+        form = EditEquipment(instance=room)
+        
+        context = {'form':form}
+        return render(request,'UPM/edit-equipment.html',context)
+
+@login_required(login_url='loginPage')
 def addDept(request,slug):
     college = College.objects.get(slug=slug)
     form = AddDept()
@@ -283,6 +330,12 @@ def manageRooms(request):
     context={'rooms':rooms,'form':form,'colleges':college,'building':build}
     return render(request,"UPM/room.html",context)
 
+def viewEquipment(request, slug):
+    rooms = Room.objects.get(slug=slug)
+
+    context={'room': rooms}
+    return render(request,"UPM/view-equipment.html",context)
+
 def deleteRoom(request,pk):
     room = Room.objects.get(id=pk)
     room.delete()
@@ -329,14 +382,14 @@ def calendarView(request, slug):
         schedfile = ScheduleFile.objects.get(term=term)
         schedule = Schedule.objects.filter(room=room,schedfile=schedfile)
     schedule = Schedule.objects.filter(room=room)
-    form = AddBookFrCal()
+    form = AddBookFrCal(room_id=room.id)
     if request.method == "POST":
-        form = AddBookFrCal(request.POST)
+        form = AddBookFrCal(request.POST, room_id=room.id)
         iserror = False 
         if form.is_valid():
-            book = form.save(False)
+            book = form.save()
             book.room = room
-
+            #book.equipment.set([request.user])
             #Checks if there are any conflicts with blocking schedule and class schedule 
             for sched in schedule:
                 arr = sched.getDays()
@@ -402,14 +455,23 @@ def buildingView(request,c,b):
     context={'rooms':room,'building':building,'college':college}
     return render(request,'UPM/building-details.html',context)
 
-
+@login_required(login_url='loginPage')
 def roomView(request):
     rooms = Room.objects.all()
     rfilter= RoomFilter(request.GET,queryset=rooms)
+    form = ColBuildForm()
     build = Building.objects.all()
     college = College.objects.all()
     rooms = rfilter.qs
 
-    context={'rooms':rooms,'filter':rfilter,'building':build,'colleges':college}
+    if request.method == "POST":
+
+        form = ColBuildForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('roomView')
+
+    context={'filter':rfilter, 'form':form, 'rooms':rooms,'building':build,'colleges':college}
     return render(request,'UPM/room-view.html',context)
 

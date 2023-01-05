@@ -42,6 +42,9 @@ urlpatterns = [
     path('manage-college/<slug:c>/<slug:b>/remove/<slug:r>',views.removeRoom,name='removeRoom'),
     path('manage-college/<slug:c>/<slug:b>/add-room/',views.addBuildRoom, name='addBuildRoom'),
 
+    #path('manage-room/edit-equipment/<slug:slug>/',views.editEquipment, name='editEquipment'),
+    
+
     path('manage-room/',views.manageRooms, name='manageRooms'), 
     path('manage-room/rooms/',views.rooms, name='rooms'), 
     path('manage-room/edit-room/<slug:slug>/',views.editRoom, name='editRoom'),
@@ -49,6 +52,9 @@ urlpatterns = [
     
     #non-admin pages
     path('rooms/',views.roomView,name='roomView'),
+    path('rooms/view-equipment/<slug:slug>/',views.viewEquipment,name='viewEquipment'),
+    path('rooms/manage-equipment/<slug:slug>/add-equipment',views.addEquipment, name='addEquipment'),
+    path('rooms/manage-equipment/<slug:slug>/',views.manageEquipment, name='manageEquipment'),
     path('rooms/<slug:slug>/calendar-view',views.calendarView, name='calendarView'),
 
     path('upload/',views.uploadPage,name='uploadPage')
