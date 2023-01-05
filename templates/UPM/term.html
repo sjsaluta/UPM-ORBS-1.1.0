@@ -36,24 +36,24 @@
         </div>
 
         <div class="col-auto align-self-end text-end pe-5 pb-1">
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{term.id}}"><i class="fa-solid fa-trash-can"></i> </button>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{term.id}}"><i class="fa-regular fa-trash-can"></i></button>
         </div>
     </div>
 
       <!-- popup for removal -->
-      <div class="modal fade" id="removePopup{{term.id}}" tab-index="-1">
+      <div class="modal" id="removePopup{{term.id}}" tab-index="-1">
           <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                   <div class="modal-header">
-                      <h5>Remove Term</h5>
-                      <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                      <h5 class="modal-title"><i class="fa-regular fa-trash-can mr-2"></i>Remove Term</h5>
+                      <button type="button" class="btn btn-close m-0" data-bs-dismiss="modal"></button>
                   </div>
                   <div class="modal-body">
-                      <p>Are you sure you want to remove this term?</p>
+                      <p class="mt-auto mb-auto">Are you sure you want to remove <strong>Term {{term.academicyear}} {{term.semester}}</strong>?</p>
                   </div>
                   <div class="modal-footer">
-                      <a class="btn btn-danger" href="{% url 'removeTerm' term.slug %}"><i class="fa-solid fa-close"></i> Remove</a>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
+                      <a class="btn btn-danger" href="{% url 'removeTerm' term.slug %}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
                   </div>
               </div>
           </div>

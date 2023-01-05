@@ -7,6 +7,8 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- scripts and css -->
+        <link rel="stylesheet" href="{% static 'css/styleguide.css'%}">
+
         {% include 'css_modules.html' %}
 
         {% block extracss %}
@@ -42,11 +44,14 @@
                                     <li>
                                             <a class='sub ms-4' href="{% url 'manageCollege' %}"><i class="sub fa-solid fa-school"></i></i><span class="link_label ms-2">Colleges</span></a>
                                             <a class='sub ms-4' href="{% url 'manageTerm' %}"><i class="sub fa fa-calendar"></i><span class="link_label ms-2">Terms</span></a>
+                                            <a class='sub ms-4' href="{% url 'manageUsers' %}"><i class="sub fa fa-users"></i><span class="link_label ms-2">Users</span></a>
+                                            <a class='sub ms-4' href="{% url 'manageRooms' %}"><i class="sub fa-solid fa-door-closed"></i><span class="link_label ms-2">Rooms</span></a>
+
                                     </li>
                                     {% else %}
                                         {% if request.user.user_type == 3 %} <!-- OCS-->
                                         <li>
-                                            <a class="ms-4" href="{% url 'uploadPage' %}"><i class="fa-solid fa-upload"></i><span class="link_label">Upload</span></a>
+                                            <a class="sub ms-4" href="{% url 'uploadPage' %}"><i class="fa-solid fa-upload"></i><span class="link_label ms-2">Upload</span></a>
                                         </li>
                                         {%endif%}
                                         {% if request.user.user_type != none and request.user.user_type != 4 and request.user.user_type != 5 %} <!--OCS, Staff & Faculty -->
@@ -54,6 +59,7 @@
                                             <a class="ms-4" href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
                                         </li>
                                         {% endif %}
+                                        {%comment %}
                                         {% if request.user.user_type == 1 or request.user.user_type == 2 %} <!--Staff/Faculty-->
                                                 <a class="ms-4" href="{% url 'notifications' %}">
                                                     <i class='fa-solid fa-bell'></i>
@@ -62,6 +68,7 @@
                                                     {% endif %}
                                                 </a>
                                         {% endif %}
+                                        {% endcomment %}
                                     {% endif %}
                                 {% else %} <!--Guest-->
                                 <li>
@@ -94,10 +101,13 @@
                                         </div>
                                         <li><br></li>
 
+                                    {% if request.user.user_type == none %} <!-- Admin-->
+                                    <li><a class="dropdown-item pl-3 pb-2 pt-2" href="{% url 'profile' %}"><i class="fa-solid fa-pen-to-square"></i>Edit Profile</a></li>
+                                    {% endif %}
                                     <li><a class="dropdown-item pl-3 pb-2 pt-2" href="{% url 'profile' %}"><i class="fa-solid fa-key"></i>Change Password</a></li>
                                     <li><a class="dropdown-item pl-3 pb-2 pt-2" href="{% url 'logout' %}"><i class="fa-sharp fa-solid fa-right-from-bracket"></i>Logout</a></li>
                                     </ul>
-                                </li>
+                            </li>
                             {% else %}
                                 <a class='text-secondary mt-2 ms-2 me-3 pe-3' href="{% url 'loginPage' %}" id="navbarDropdown" >
                                    <strong>Log In</strong>

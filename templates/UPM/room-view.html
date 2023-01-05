@@ -8,9 +8,9 @@
 
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb mt-3 ms-4 bg-body">
+  <ol class="breadcrumb bg-primary">
     <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
-   
+
     <li class="breadcrumb-item active" aria-current="page">Rooms</li>
   </ol>
 </nav>
@@ -51,10 +51,10 @@
                     <td>{{room.room_type}}</td>
                     {% if request.user.user_type == 5 or request.user.user_type == none %}
                     <td><a class='btn-success btn-secondary btn-sm' href = "{% url 'manageEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></a></td>
-                    {% endif %}     
+                    {% endif %}
                     {% if request.user.user_type != 5 and request.user.user_type != none %}
                     <td><button type="button" data-bs-toggle="modal" class="bs-modal btn btn-sm btn-warning btn-sm" data-bs-target="{% url 'viewEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button></td>
-                    {% endif %}         
+                    {% endif %}
                     <td><a class='btn btn-secondary btn-sm' href = "{% url 'calendarView' room.slug %}"><i class="fa-solid fa-calendar-day"></i> View Schedule</a></td>
                   </tr>
                 {% endfor %}
@@ -84,19 +84,19 @@
                 if ('{{college}}' == col) {
                     //alert(b);
                     console.log('true')
-                    
-                       
-                        {% for build in college.building_set.all %}   
+
+
+                        {% for build in college.building_set.all %}
                             {% for b in building %}
-                                if('{{b.college}}'!= '{{build.college}}'){                              
+                                if('{{b.college}}'!= '{{build.college}}'){
                                     $('#id_building option[value="{{b.id}}"]').remove();
                                 }
                             {%endfor%}
                         {% endfor %}
                 }
-            {% endfor %}    
+            {% endfor %}
         }
-        
+
     }
 </script>
 {% endblock extrascripts %}

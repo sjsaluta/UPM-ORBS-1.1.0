@@ -28,7 +28,7 @@ class AddBookFrCal(ModelForm):
             "end_time": DateInput(
                 attrs={"type": "datetime-local", "class": "form-control"},
                 format="%Y-%m-%dT%H:%M",
-            ), 
+            ),
         }
 
 class EditBookingForm(ModelForm):
@@ -50,7 +50,7 @@ class EditBookingForm(ModelForm):
             "end_time": DateInput(
                 attrs={"type": "datetime-local", "class": "form-control"},
                 format="%Y-%m-%dT%H:%M",
-            ), 
+            ),
         }
 class RemarksForm(ModelForm):
     class Meta:

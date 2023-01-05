@@ -27,11 +27,11 @@
             <h6>{{college.name}}</h6>
         </div>
 
-            <div class="col-auto align-self-end text-end">
-              <a href="{% url 'adminCollegeView' college.slug %}" class="mr-2"><button type="button" class="btn btn-secondary btn-sm" href="{% url 'adminCollegeView' college.slug %}"><i class="fa-solid fa-building-columns mr-2"></i>View Departments & Buildings</button></a>
-              {% comment %} <button type="button" class="update bs-modal btn btn-sm btn-success btn-sm mr-2" data-form-url="{% url 'editCollege' college.slug %}"><i class="fa-solid fa-pen"></i></button> {% endcomment %}
-              <button type="button" class="btn btn-danger btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}"><i class="fa-regular fa-trash-can" ></i></button>
-            </div>
+        <div class="col-auto align-self-end text-end">
+            <a href="{% url 'adminCollegeView' college.slug %}" class="mr-1"><button type="button" class="btn btn-secondary btn-sm" href="{% url 'adminCollegeView' college.slug %}"><i class="fa-solid fa-building-columns mr-2"></i>View Departments & Buildings</button></a>
+            {% comment %} <button type="button" class="update bs-modal btn btn-sm btn-success btn-sm mr-1" data-form-url="{% url 'editCollege' college.slug %}"><i class="fa-solid fa-pen"></i></button> {% endcomment %}
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}"><i class="fa-regular fa-trash-can" ></i></button>
+        </div>
         </div>
 
         <!-- popup for removal -->
@@ -39,25 +39,22 @@
             <div class="modal-dialog modal-dialog-centered" >
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title"><i class="fa-regular fa-trash-can mr-2"></i>Remove College</h5>
+                        <h5 class="modal-title"><i class="fa-regular fa-square-minus"></i>Remove College</h5>
                         <button type="button" class="btn btn-close m-0" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <p class="mt-auto mb-auto">Are you sure you want to remove this college?</p>
-                        <div class="ml-auto">
-                            <a class="btn btn-danger mr-2" href="{% url 'removeCollege' college.slug %}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
-                        </div>
+                        <p class="mt-auto mb-auto">Are you sure you want to remove <strong>{{college.name}}</strong>?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal"><i class="fa-solid fa-floppy-disk mr-2"></i>Save Changes</button>
+                        <a class="btn btn-danger mr-2" href="{% url 'removeCollege' college.slug %}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
                     </div>
                 </div>
             </div>
         </div>
         {%endfor%}
         <div class="row bg-white p-3">
-            <a class='btn btn-warning mb-3 mt-3 mr-auto ml-auto' role='button' href = "{% url 'addCollege' %}"><i class="fa-regular fa-square-plus mr-2"></i> Add College</a>
+            <a class='btn btn-warning mr-auto ml-auto' role='button' href = "{% url 'addCollege' %}"><i class="fa-regular fa-square-plus mr-2"></i>Add College</a>
         </div>
     </div>
 

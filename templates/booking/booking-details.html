@@ -7,7 +7,7 @@
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb mt-3 ms-4 bg-body">
+  <ol class="breadcrumb bg-primary">
     <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
     <li class="breadcrumb-item"><a href="{% url 'viewBookings' %}" class="text-dark">Bookings</a></li>
     <li class="breadcrumb-item active" aria-current="page">Booking Details</li>
@@ -34,7 +34,7 @@
         <div class= 'col-4'>
           <h4>Dept/Office: {{booking.dept_or_office}}</h4>
           <h4>Subject: {{booking.subject}}</h4>
-         
+
         </div>
       {% else %}
         <div class= 'col-4'>
@@ -77,13 +77,13 @@
         {% if booking.isApproved %}
         <button type="button" class="btn btn-success" disabled>
           <i class="fa-solid fa-pen-to-square"></i> Edit
-        </button> 
+        </button>
         <p>Already approved. Unable to edit.</p>
         <h6 class='px-4 pt-2'>Approved by: {{booking.approver}}</h6>
         <h6 class='px-4'>Date approved: {{booking.date_approved}}</h6>
         {% else %}
         <button type="button" class="update bs-modal btn btn-sm btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i> Edit </button>
-        {%endif%}  
+        {%endif%}
       </div>
 
       {% endif %}
@@ -136,7 +136,7 @@
         <div class="modal fade" tabindex="-1" role="dialog" id="modal">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-            
+
             </div>
           </div>
         </div>
@@ -156,7 +156,7 @@ $(function(){
       $('.update').modalForm({
         formURL: "{% url 'editBooking' booking.id%}",
       })
-    }; 
+    };
     updateBookingModalForm();
 
     function reinstantiateModalForms(){

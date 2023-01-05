@@ -20,79 +20,85 @@
     <h1 class="subTitle">{{college.name}}</h1>
     <h1 class="title">Departments and Buildings</h1>
 
-        <div class = 'row'>
-            <div class = 'col align-self-center'>
-                <form method='POST'>
-                    {%csrf_token%}
-                    <input class = "btn btn-success mb-4" type="submit" value="Department" name="dept" id="d" />
-                    <input class = "btn btn-secondary mb-4 ms-2" type="submit" value="Buildings" name="build" id="b" />
-                </form>
-            </div>
-
+    <div class = 'row mt-4 text-center'>
+        <div class = 'col align-self-center'>
+            <form method='POST'>
+                {%csrf_token%}
+                <input class = "btn btn-success mb-4" type="submit" value="Departments" name="dept" id="d" />
+                <input class = "btn btn-secondary mb-4 ms-2" type="submit" value="Buildings" name="build" id="b" />
+            </form>
         </div>
+    </div>
 
-        <div>
-            {% for field in fields %}
-            <div class="row border-bottom bg-white p-4">
+    <div class = "container-fluid table-container">
+        <header class="table-header p-2"><i class="fa-solid fa-rectangle-list mr-2"></i>List of
+            {% if view == 'build'%}
+            Buildings
+            {% else %}
+            Departments
+            {% endif %}
+        </header>
+        {% for field in fields %}
+            <div class="row border-bottom bg-white p-3">
 
                 <div class="col align-self-center">
                     {% if view == 'build'%}
-                    <a><h5>{{field.name}}</h5></a>
+                    <a><h6>{{field.name}}</h6></a>
                     {% else %}
-                    <h5>{{field.name}}</h5>
+                    <h6>{{field.name}}</h6>
                     {% endif %}
                 </div>
+
                 <div class="col-auto align-self-end text-end">
                     {% if view == 'build'%}
-                    <a href="{% url 'adminBuildingView' college.slug field.slug%}"><button type="button" class="btn btn-success btn-sm"style=" background-color: #868686; margin-right: 5px"><i class="fa-solid fa-door-open"></i>  View Rooms</button></a>
+                    <a href="{% url 'adminBuildingView' college.slug field.slug%}"><button type="button" class="btn btn-secondary btn-sm mr-2"><i class="fa-solid fa-door-open mr-2"></i>View Rooms</button></a>
                     {% else %}
-                    <a href="{% url 'manageUsers'%}"><button type="button" class="btn btn-success btn-sm"style=" background-color: #868686; margin-right: 5px"><i class="fa-solid fa-users"></i> View Users</button></a>
+                    <a href="{% url 'manageUsers'%}"><button type="button" class="btn btn-secondary btn-sm mr-2"><i class="fa-solid fa-users mr-2"></i>View Users</button></a>
                     {% endif %}
-                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}{{field.id}}" style=" background-color: #76090C;"><i class="fa-solid fa-trash-can"></i></button>
+                    <button type="button" class="btn btn-danger btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}{{field.id}}"><i class="fa-solid fa-trash-can"></i></button>
 
                 </div>
             </div>
             {% endfor %}
             {% for field in fields %}
-                <!-- popup for removal -->
+
+            <!-- popup for removal -->
             <div class="modal fade" id="removePopup{{college.id}}{{field.id}}" tab-index="-1">
                 <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content"  style="border-radius:10px">
-                        <div class="modal-header"  style="background: #76090C;">
+                    <div class="modal-content">
+                        <div class="modal-header">
 
                             {% if view == 'build' %}
-                            <h5 style="color:white"><i class="fa-regular fa-square-minus"></i>  Remove Building</h5>
+                            <h5 class="modal-title"><i class="fa-regular fa-trash-can mr-2"></i>Remove Building</h5>
                             {% else %}
-                            <h5 style="color:white"><i class="fa-regular fa-square-minus"></i>  Remove Department</h5>
+                            <h5 class="modal-title"><i class="fa-regular fa-trash-can mr-2"></i>Remove Department</h5>
                             {% endif %}
-        {% comment %}
-                            <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button> {% endcomment %}
+
+                            {% comment %} <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button> {% endcomment %}
                         </div>
                         <div class="modal-body">
-                            <p>Are you sure you want to remove '{{field.name}}'?</p>
+                            <p class="mt-auto mb-auto">Are you sure you want to remove <strong>{{field.name}}</strong>?</p>
                         </div>
                         <div class="modal-footer">
                             {% if view == 'build' %}
-                                <a class="btn btn-danger" href="{% url 'removeBuild' college.slug field.slug%}" style=" background-color: #76090C;"><i class="fa-regular fa-trash-can"></i> Remove</a>
+                                <a class="btn btn-danger mr-2" href="{% url 'removeBuild' college.slug field.slug%}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
                             {% else %}
-                                <a class="btn btn-danger" href="{% url 'removeDept' college.slug field.slug%}" style=" background-color: #76090C;"><i class="fa-regular fa-trash-can"></i>    Remove</a>
+                                <a class="btn btn-danger mr-2" href="{% url 'removeDept' college.slug field.slug%}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
                             {% endif %}
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"style=" background-color: #868686;"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
-                {% endfor %}
-        </div>
-
-        <div class="col text-center p-3">
+            {% endfor %}
+        <div class="row bg-white p-3">
             {% if view == 'build'%}
-            <a class='btn btn-warning mb-4' role='button' href = "{% url 'addBuild' college.slug %}"><i  class="fa-solid fa-square-plus mr-2"></i>Add Building</a>
+            <a class='btn btn-warning mr-auto ml-auto' role='button' href = "{% url 'addBuild' college.slug %}"><i  class="fa-solid fa-square-plus mr-2"></i>Add Building</a>
             {% else %}
-            <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'addDept' college.slug%}"><i  class="fa-solid fa-square-plus mr-2"></i>Add Department</a>
+            <a class='btn btn-warning mr-auto ml-auto' role='button' href = "{% url 'addDept' college.slug%}"><i  class="fa-solid fa-square-plus mr-2"></i>Add Department</a>
             {% endif %}
         </div>
-
+    </div>
 </div>
 
 {% endblock content %}
@@ -102,11 +108,16 @@
 
     if("{{view}}" === 'dept'){
         $("#d").css("background-color","#01632C");
-        $("#b").css("background-color","#76090C");
+        $("#b").css("background-color","transparent");
+        $("#b").css("border-color","#01632C");
+        $("#b").css("color","#01632C");
+
     }
     else{
         $("#b").css("background-color","#01632C");
-        $("#d").css("background-color","#76090C");
+        $("#d").css("background-color","transparent");
+        $("#d").css("border-color","#01632C");
+        $("#d").css("color","#01632C");
     }
 </script>
 {% endblock extrascripts %}

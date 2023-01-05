@@ -1,25 +1,25 @@
 {% load crispy_forms_tags %}
 
 <form method="POST" action="" novalidate>
-{% csrf_token %}       
+{% csrf_token %}
 
     <div class="modal-header">
-        <h5 class="modal-title ms-1" id="exampleModalLabel">Edit Room</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title ms-1" id="exampleModalLabel"><i class="fa-solid fa-pen-to-square mr-2"></i>Edit Room</h5>
+        <button type="button" class="btn btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
 
-    <div class="modal-body">
-        {{form.name | as_crispy_field}} 
+    <div class="modal-body flex-column">
+        {{form.name | as_crispy_field}}
         {{form.capacity | as_crispy_field}}
         {{form.room_type| as_crispy_field}}
 
-        {{form.college | as_crispy_field}}  
+        {{form.college | as_crispy_field}}
         {{form.building | as_crispy_field}}
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success" data-bs-dismiss="modal" id="edit">Submit</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
+        <button type="submit" class="btn btn-success" data-bs-dismiss="modal" id="edit"><i class="fa-solid fa-floppy-disk mr-2"></i>Save Changes</button>
     </div>
 
 </form>

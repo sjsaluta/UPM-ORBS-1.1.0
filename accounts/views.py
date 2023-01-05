@@ -25,12 +25,12 @@ def loginPage(request):
 
             if user is not None:
                 login(request, user)
-                
+
                 messages.success(request, "You are now logged in as " + str(user))
                 return redirect('indexPage')
             else:
                 iserror = True
-                error = "Wrong username or password."   
+                error = "Wrong username or password."
         context = {"error":error,"iserror":iserror}
         return render(request, 'accounts/login.html', context)
 
@@ -84,7 +84,7 @@ def AddUserPage(request):
             user = form.save(False)
             user.user_type = ut
             user.save()
-            
+
             #adds user to their respective roles
             if ut == 1:
                 Faculty.objects.create(user=user,college=user.college,dept=user.department)
@@ -99,15 +99,15 @@ def AddUserPage(request):
             messages.success(request, "User '" + str(user) +"' has been added" )
             return redirect('manageUsers')
 
-    context = {'form': form,'add':add,'ut':ut}  
-    
-    
+    context = {'form': form,'add':add,'ut':ut}
+
+
     return render(request,"accounts/add-user.html", context)
 
 @login_required(login_url='loginPage')
 def manageUsers(request):
     users = AuthUser.objects.exclude(username='admin')
-    
+
     if request.method =="POST":
         role = request.POST.get('role')
         if role == 'faculty':
@@ -143,7 +143,7 @@ def editUser(request,pk):
 
         if form.is_valid():
             form.save()
-            
+
         return HttpResponseRedirect(reverse_lazy('manageUsers'))
 
     else:

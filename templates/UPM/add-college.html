@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Add form.college{% endblock title %}
+{% block title %}Add College Form{% endblock title %}
 {% load crispy_forms_tags %}
 
 {% block extracss %}
@@ -24,8 +24,8 @@
 <div class="container-fluid">
     <h1 class="subTitle">Colleges</h1>
     <h1 class="title">Add College</h1>
-    <div class = "container-fluid container table-container mt-4">
-        <h1 class="table-header p-2"><i class="fa-solid fa-plus mr-2"></i></i>Add College</h2>
+    <div class = "container table-container mt-4">
+        <h1 class="table-header p-2"><i class="fa-solid fa-plus mr-2"></i>Add College</h2>
         <div class = "row bg-white ">
             <div class = "col my-4 px-5">
                 <form method="POST" action="">
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="col text-center">
-                        <button class="btn btn-success mt-2" type="submit"><i class="fa-regular fa-floppy-disk mr-2"></i>Save Changes</button>
+                        <button class="btn btn-success" type="submit"><i class="fa-regular fa-floppy-disk mr-2"></i>Save Changes</button>
                     </div>
 
                 </form>

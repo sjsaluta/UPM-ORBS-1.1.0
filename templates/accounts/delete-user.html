@@ -3,17 +3,17 @@
 {% csrf_token %}
 
     <div class="modal-header">
-        <h5>Delete User</h5>
-        <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+        <h5 class="modal-title"><i class="fa-regular fa-trash-can mr-2"></i>Delete User</h5>
+        <button type="button" class="btn btn-close m-0" data-bs-dismiss="modal"></button>
     </div>
 
     <div class="modal-body">
-        <p class="delete-text" >Are you sure you want to delete user <strong>{{ object }}</strong>?</p>
+        <p class="mt-auto mb-auto">Are you sure you want to delete user <strong>{{ object }}</strong>?</p>
     </div>
 
     <div class="modal-footer">
-        <button type="submit" id="delete-btn" class="btn btn-danger">Delete</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
+        <button type="submit" id="delete-btn" class="btn btn-danger"><i class="fa-regular fa-trash-can mr-2"></i>Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
     </div>
-    
+
 </form>

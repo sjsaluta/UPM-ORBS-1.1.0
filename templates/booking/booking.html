@@ -7,7 +7,7 @@
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb mt-3 ms-4 bg-body">
+  <ol class="breadcrumb bg-primary">
     <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">Bookings</li>
   </ol>
@@ -16,67 +16,71 @@
 
 {% block content %}
 <div class = "container-fluid">
-    <h2 class="py-4 px-4">Bookings</h2>
-
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">No.</th>
-            <th scope="col">Date & Time</th>
-            <th scope="col">Room</th>
-            <th scope="col">Activity</th>
-            <th scope="col">Requested by</th>
-            <th scope="col">Date Filed</th>
-            <th scope="col">Approved</th>
-            <th scope="col">Remarks</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for booking in bookings %}
-          <tr>
-            <th scope="row">{{forloop.counter}}</th>
-            <td>{{booking.start_time|date:"N t Y h:iA"}} - {{booking.end_time|date:"N t Y h:iA"}}</td>
-            <td>{{booking.room}}</td>
-            <td>{{booking.activity}}</td>
-            <td>{{booking.booker}}</td>
-            <td>{{booking.date_created|date:"N t Y"}}</td>
-            {% if booking.isApproved == True %}
-                <td>Approved</td>
-            {% elif booking.isApproved == False %}
-                <td>Rejected (see remarks)</td>
-            {% else %}
-                <td>Not yet approved</td>
-            {% endif %}
-            <td>{{booking.remarks}}</td>
-            <td>
-              <a class='btn btn-warning ' href="{% url 'bookingDetails' booking.id%}"> Details</a>
-              {% if booking.booker == request.user or request.user.user_type == 3 or request.user.user_type == None %}
-              <button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup{{booking.id}}"><i class="fa-solid fa-trash-can"></i></button>
-              {%endif%}
-            </td>
-          </tr>
-           <!-- Modal for approval -->
-          <div class="modal fade" id="deletePopup{{booking.id}}" tabindex="-1" aria-labelledby="deletePopupLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="approveModalLabel">Delete Booking</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  Delete this booking?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <a class="btn btn-danger" href="{% url 'deleteBooking' booking.id %}">Delete</a>
+  <h1 class="title">Bookings</h1>
+  <div class = "container-fluid mt-4 table-container">
+    <header class="table-header p-2"><i class="fa-solid fa-rectangle-list mr-2"></i>List of Bookings</header>
+    <div class="row bg-white pt-3 pr-3 pl-3 pb-0">
+      <table class="table">
+          <thead>
+            <tr class="text-center">
+              <th scope="col">No.</th>
+              <th scope="col">Date & Time</th>
+              <th scope="col">Room</th>
+              <th scope="col">Activity</th>
+              <th scope="col">Requested by</th>
+              <th scope="col">Date Filed</th>
+              <th scope="col">Approved</th>
+              <th scope="col">Remarks</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for booking in bookings %}
+            <tr class="text-center">
+              <th scope="row">{{forloop.counter}}</th>
+              <td>{{booking.start_time|date:"N t Y h:iA"}} - {{booking.end_time|date:"N t Y h:iA"}}</td>
+              <td>{{booking.room}}</td>
+              <td>{{booking.activity}}</td>
+              <td>{{booking.booker}}</td>
+              <td>{{booking.date_created|date:"N t Y"}}</td>
+              {% if booking.isApproved == True %}
+                  <td>Approved</td>
+              {% elif booking.isApproved == False %}
+                  <td>Rejected (see remarks)</td>
+              {% else %}
+                  <td>Not yet approved</td>
+              {% endif %}
+              <td>{{booking.remarks}}</td>
+              <td>
+                <a class='btn btn-warning btn-sm' href="{% url 'bookingDetails' booking.id%}">Details</a>
+                {% if booking.booker == request.user or request.user.user_type == 3 or request.user.user_type == None %}
+                <button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup{{booking.id}}"><i class="fa-solid fa-trash-can"></i></button>
+                {%endif%}
+              </td>
+            </tr>
+            <!-- Modal for approval -->
+            <div class="modal fade" id="deletePopup{{booking.id}}" tabindex="-1" aria-labelledby="deletePopupLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="approveModalLabel"><i class="fa-regular fa-square-minus mr-2"></i>Delete Booking</h5>
+                    <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Delete this booking?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
+                    <a class="btn btn-danger" href="{% url 'deleteBooking' booking.id %}"><i class="fa-regular fa-trash-can mr-2"></i>Delete</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          {% endfor %}
-        </tbody>
-      </table>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+  </div>
 </div>
 
 
