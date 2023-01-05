@@ -23,13 +23,12 @@ class AddBookFrCal(forms.ModelForm):
         )
     class Meta:
         model = Booking
-        fields = ['faculty','subject','start_time','end_time','date_picked','numofstudents','activity','equipment','dept_or_office','organization']
+        fields = ['faculty','subject','start_time','end_time','numofstudents','activity','equipment','dept_or_office','organization']
 
         labels={
             'numofstudents':'Number of Students',
             'start_time':'Start Time',
             'end_time':'End Time',
-            'date_picked': 'Date Selected',
             'dept_or_office':'Dept/Office'
         }
         widgets={

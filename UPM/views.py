@@ -387,9 +387,9 @@ def calendarView(request, slug):
         form = AddBookFrCal(request.POST, room_id=room.id)
         iserror = False 
         if form.is_valid():
-            book = form.save(False)
+            book = form.save()
             book.room = room
-
+            #book.equipment.set([request.user])
             #Checks if there are any conflicts with blocking schedule and class schedule 
             for sched in schedule:
                 arr = sched.getDays()

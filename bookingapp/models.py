@@ -18,11 +18,11 @@ class Booking(models.Model):
     isEdited = models.BooleanField(null=True, blank = True)
     date_approved = models.DateField(null=True,blank=True)
     date_created = models.DateTimeField(auto_now_add=True,blank=True)
-    #start_time = models.DateTimeField(null=True)#OLD
-    #end_time = models.DateTimeField(null=True)#OLD
-    start_time = models.TimeField(null=True)
-    end_time = models.TimeField(null=True)
-    date_picked = models.DateField(null=True)
+    start_time = models.DateTimeField(null=True)#OLD
+    end_time = models.DateTimeField(null=True)#OLD
+    #start_time = models.TimeField(null=True)
+    #end_time = models.TimeField(null=True)
+    #date_picked = models.DateField(null=True)
     numofstudents = models.IntegerField(null=True)
     equipment = models.ManyToManyField(Equipment) #Room.equipment
     remarks = models.TextField(null=True, blank=True)
