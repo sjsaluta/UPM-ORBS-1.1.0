@@ -18,12 +18,15 @@ class Booking(models.Model):
     isEdited = models.BooleanField(null=True, blank = True)
     date_approved = models.DateField(null=True,blank=True)
     date_created = models.DateTimeField(auto_now_add=True,blank=True)
-    start_time = models.DateTimeField(null=True)
-    end_time = models.DateTimeField(null=True)
+    start_time = models.DateTimeField(null=True)#OLD
+    end_time = models.DateTimeField(null=True)#OLD
+    #start_time = models.TimeField(null=True)
+    #end_time = models.TimeField(null=True)
+    #date_picked = models.DateField(null=True)
     numofstudents = models.IntegerField(null=True)
-    equipment = models.TextField(null=True, blank=True)
+    equipment = models.ManyToManyField(Equipment) #Room.equipment
     remarks = models.TextField(null=True, blank=True)
-
+ 
     #Get full name of user with email
     def getFullName(self):
         return self.faculty.user.first_name +' ' + self.faculty.user.last_name + ' (' + self.faculty.user.email + ')'

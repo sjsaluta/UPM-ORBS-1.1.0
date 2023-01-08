@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'bookingapp',
+    'bootstrap3',
     'accounts',
     'UPM',
     'crispy_forms',
@@ -47,7 +49,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'bootstrap_modal_forms',
     'widget_tweaks',
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -57,6 +58,10 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'accounts.AuthUser'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+BOOTSTRAP3 = {
+  'javascript_in_head': True,
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

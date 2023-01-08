@@ -400,14 +400,13 @@ def calendarView(request, slug):
         schedfile = ScheduleFile.objects.get(term=term)
         schedule = Schedule.objects.filter(room=room,schedfile=schedfile)
     schedule = Schedule.objects.filter(room=room)
-    form = AddBookFrCal()
+    form = AddBookFrCal(room_id=room.id)
     if request.method == "POST":
         form = AddBookFrCal(request.POST)
         iserror = False
         if form.is_valid():
-            book = form.save(False)
+            book = form.save()
             book.room = room
-
             #Checks if there are any conflicts with blocking schedule and class schedule
             for sched in schedule:
                 arr = sched.getDays()

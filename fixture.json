@@ -82,6 +82,22 @@
             "slug": "university-of-the-philippines"
         }
     },
+    {
+        "model": "UPM.College",
+        "pk": 11,
+        "fields":{
+            "name": "College of Public Health",
+            "slug": "college-of-public-health"
+        }
+    },
+    {
+        "model": "UPM.College",
+        "pk": 12,
+        "fields":{
+            "name": "College of Medicine",
+            "slug": "college-of-medicine"
+        }
+    },
 
     {
         "model": "UPM.RoomType",
@@ -180,6 +196,24 @@
             "name": "Museum of History of Ideas",
             "college": 10,
             "slug": "museum-of-history-of-ideas"
+        }
+    },
+    {
+        "model": "UPM.Building",
+        "pk": 11,
+        "fields":{
+            "name": "Lara Hall",
+            "college": 11,
+            "slug": "lara-hall"
+        }
+    },
+    {
+        "model": "UPM.Building",
+        "pk": 12,
+        "fields":{
+            "name": "Sports of Wellness Center",
+            "college": 2,
+            "slug": "sports-of-wellness-center"
         }
     },
 
@@ -1865,6 +1899,546 @@
             "college": 10,
             "building": 10,
             "capacity": "6"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 141,
+        "fields":{
+            "name": "CPH Computer Room",
+            "slug": "cph-computer-room",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "17"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 142,
+        "fields":{
+            "name": "Room 106",
+            "slug": "room-106",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "17"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 143,
+        "fields":{
+            "name": "Room 104B",
+            "slug": "room-104b",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "11"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 144,
+        "fields":{
+            "name": "Room 104A",
+            "slug": "room-104a",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "24"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 145,
+        "fields":{
+            "name": "Room 102",
+            "slug": "room-102",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "24"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 146,
+        "fields":{
+            "name": "Room 109",
+            "slug": "room-109",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "18"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 147,
+        "fields":{
+            "name": "Lepto Animal Lab",
+            "slug": "lepto-animal-lab",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "19"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 148,
+        "fields":{
+            "name": "Room 213A",
+            "slug": "room-213a",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "19"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 149,
+        "fields":{
+            "name": "Room 213B",
+            "slug": "room-213b",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "19"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 150,
+        "fields":{
+            "name": "Room 211",
+            "slug": "room-211",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "19"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 151,
+        "fields":{
+            "name": "Room 216",
+            "slug": "room-216",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "16"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 152,
+        "fields":{
+            "name": "Room 214",
+            "slug": "room-214",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "17"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 153,
+        "fields":{
+            "name": "Room 212",
+            "slug": "room-212",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "18"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 154,
+        "fields":{
+            "name": "Room 210",
+            "slug": "room-210",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "20"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 155,
+        "fields":{
+            "name": "LH Room 208",
+            "slug": "lh-room-208",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "20"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 156,
+        "fields":{
+            "name": "LH Room 309",
+            "slug": "lh-room-309",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "11"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 157,
+        "fields":{
+            "name": "LH Room 308",
+            "slug": "lh-room-308",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "15"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 158,
+        "fields":{
+            "name": "LH Room 307",
+            "slug": "lh-room-307",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "15"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 159,
+        "fields":{
+            "name": "LH Room 306",
+            "slug": "lh-room-306",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "17"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 160,
+        "fields":{
+            "name": "LH Room 305",
+            "slug": "lh-room-305",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "19"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 161,
+        "fields":{
+            "name": "LH Room 304",
+            "slug": "lh-room-304",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "22"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 162,
+        "fields":{
+            "name": "LH Room 303",
+            "slug": "lh-room-303",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "19"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 163,
+        "fields":{
+            "name": "LH Room 302",
+            "slug": "lh-room-302",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "25"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 164,
+        "fields":{
+            "name": "Laboratory Room 301",
+            "slug": "laboratory-room-301",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "10"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 165,
+        "fields":{
+            "name": "Lepto Conference Room",
+            "slug": "lepto-conference-room",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "18"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 166,
+        "fields":{
+            "name": "LH Room 412",
+            "slug": "lh-room-412",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "22"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 167,
+        "fields":{
+            "name": "LH Room 410",
+            "slug": "lh-room-410",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "15"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 168,
+        "fields":{
+            "name": "LH Room 407",
+            "slug": "lh-room-407",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "54"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 169,
+        "fields":{
+            "name": "Virus Lab",
+            "slug": "virus-lab",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "15"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 170,
+        "fields":{
+            "name": "CPH Parasitology Lab",
+            "slug": "cph-parasitology-lab",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "14"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 171,
+        "fields":{
+            "name": "LH Room 408",
+            "slug": "lh-room-408",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "15"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 172,
+        "fields":{
+            "name": "LH Room 406",
+            "slug": "lh-room-406",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "14"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 173,
+        "fields":{
+            "name": "LH Room 404",
+            "slug": "lh-room-404",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "45"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 174,
+        "fields":{
+            "name": "Autoclave Room",
+            "slug": "autoclave-room",
+            "room_type": 1,
+            "college": 11,
+            "building": 11,
+            "capacity": "34"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 175,
+        "fields":{
+            "name": "Dance Studio A",
+            "slug": "dance-studio-a",
+            "room_type": 1,
+            "college": 2,
+            "building": 12,
+            "capacity": "22"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 176,
+        "fields":{
+            "name": "Dance Studio B",
+            "slug": "dance-studio-b",
+            "room_type": 1,
+            "college": 2,
+            "building": 12,
+            "capacity": "22"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 177,
+        "fields":{
+            "name": "Martial Arts Room",
+            "slug": "martial-arts-room",
+            "room_type": 1,
+            "college": 2,
+            "building": 12,
+            "capacity": "18"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 178,
+        "fields":{
+            "name": "Weights Room",
+            "slug": "weights-room",
+            "room_type": 1,
+            "college": 2,
+            "building": 12,
+            "capacity": "35"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 179,
+        "fields":{
+            "name": "SWC Lecture Room 1",
+            "slug": "swc-lecture-room-1",
+            "room_type": 1,
+            "college": 2,
+            "building": 12,
+            "capacity": "27"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 180,
+        "fields":{
+            "name": "SWC Lecture Room 2",
+            "slug": "swc-lecture-room-2",
+            "room_type": 1,
+            "college": 2,
+            "building": 12,
+            "capacity": "27"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 181,
+        "fields":{
+            "name": "Multi-purpose Room 1",
+            "slug": "multi-purpose-room-1",
+            "room_type": 1,
+            "college": 2,
+            "building": 12,
+            "capacity": "36"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 182,
+        "fields":{
+            "name": "Multi-purpose Room 2",
+            "slug": "multi-purpose-room-2",
+            "room_type": 1,
+            "college": 2,
+            "building": 12,
+            "capacity": "36"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 183,
+        "fields":{
+            "name": "Multi-purpose Room 3",
+            "slug": "multi-purpose-room-3",
+            "room_type": 1,
+            "college": 2,
+            "building": 12,
+            "capacity": "106"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 184,
+        "fields":{
+            "name": "Multi-purpose Room 4",
+            "slug": "multi-purpose-room-4",
+            "room_type": 1,
+            "college": 2,
+            "building": 12,
+            "capacity": "71"
+        }
+    },
+    {
+        "model": "UPM.Room",
+        "pk": 185,
+        "fields":{
+            "name": "SWC Conference Room",
+            "slug": "swc-conference-room",
+            "room_type": 1,
+            "college": 2,
+            "building": 12,
+            "capacity": "30"
         }
     }
 ]
