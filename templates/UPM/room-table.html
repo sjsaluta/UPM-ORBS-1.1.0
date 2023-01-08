@@ -1,49 +1,52 @@
-<table id='room-table' class="table">
-    <thead>
-      <tr>
-        <th scope="col">Room</th>
-        <th scope="col">Building</th>
-        <th scope="col">College</th>
-        <th scope="col">Capacity</th>
-        <th scope='col'>Room Type</th>
-        <th scope="col"></th>
+<div class="p-0 bg-white"style="overflow-y: scroll;overflow-x:hidden; height:300px; width: 100%;">
+  <table id='room-table' class="table">
+      <thead class="bg-white"style="text-align:center; position: sticky; top: 0; z-index: 1">
+        <tr>
+          <th scope="col">Room</th>
+          <th scope="col">Building</th>
+          <th scope="col">College</th>
+          <th scope="col">Capacity</th>
+          <th scope='col'>Type</th>
+          <th scope="col">Actions</th>
 
-      </tr>
-    </thead>
-    <tbody>
-    {% for room in rooms %}
-      <tr>
-        <td>{{room.name}}</td>
-        <td>{{room.building}}</td>
-        <td>{{room.college}}</td>
-        <td>{{room.capacity}}</td>
-        <td>{{room.room_type}}</td>
-        <td>
-            <a class='btn btn-secondary btn-sm' href = "{% url 'calendarView' room.slug %}"><i class="fa-solid fa-calendar-day"></i> Go to Calendar</a>
-            <button type="button" class="update bs-modal btn btn-sm btn-warning btn-sm" data-form-url="{% url 'editRoom' room.slug %}"><i class="fa-solid fa-pen-to-square"></i></button>
-            <button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup{{room.id}}"><i class="fa-solid fa-trash-can"></i></button>
-            <a class='btn btn-secondary btn-sm' href = "{% url 'manageEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></a>
-            <button type="button" class="update bs-modal btn btn-sm btn-success btn-sm" data-form-url="{% url 'viewEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button>
-        </td>
-      </tr>
-      <div class="modal fade" id="deletePopup{{room.id}}" tab-index="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h5>Remove</h5>
-                <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure you want to remove room '{{room.name}}'?</p>
-            </div>
-            <div class="modal-footer">
-                <!-- link to archive here -->
-                <a class="btn btn-danger" href="{% url 'deleteRoom' room.id %}">Delete</a>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
+        </tr>
+      </thead>
+      <tbody style="text-align:center;">
+      {% for room in rooms %}
+        <tr>
+          <td>{{room.name}}</td>
+          <td>{{room.building}}</td>
+          <td>{{room.college}}</td>
+          <td>{{room.capacity}}</td>
+          <td>{{room.room_type}}</td>
+          <td>
+              <a class='btn btn-secondary btn-sm' href = "{% url 'calendarView' room.slug %}"><i class="fa-solid fa-calendar-day"></i></a>
+              <a class='btn btn-success btn-sm' href = "{% url 'manageEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></a>
+              <button type="button" class="update bs-modal btn btn-sm btn-warning btn-sm" data-form-url="{% url 'editRoom' room.slug %}"><i class="fa-solid fa-pen-to-square"></i></button>
+              <button class='btn btn-danger btn-sm' data-bs-toggle="modal" data-bs-target="#deletePopup{{room.id}}"><i class="fa-solid fa-trash-can"></i></button>
+
+           </td>
+        </tr>
+        <div class="modal fade" id="deletePopup{{room.id}}" tab-index="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title"><i class="fa-regular fa-square-minus mr-2"></i>Remove Room</h5>
+                  <button type="button" class="btn btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+
+              </div>
+              <div class="modal-body">
+                  <p>Are you sure you want to remove room <strong>{{room.name}}</strong>?</p>
+              </div>
+              <div class="modal-footer">
+                  <!-- link to archive here -->
+                  <a class="btn btn-danger" href="{% url 'deleteRoom' room.id %}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
+              </div>
             </div>
           </div>
         </div>
-      </div> 
-    {% endfor %}
-    </tbody>
-  </table>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>

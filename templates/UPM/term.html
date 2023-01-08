@@ -7,63 +7,62 @@
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb mt-3 ms-4 bg-body">
+  <ol class="breadcrumb bg-primary">
     <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Manage Terms</li>
+    <li class="breadcrumb-item active" aria-current="page">Terms</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}
 
 {% block content %}
 <div class = "container-fluid">
-    <h2 class="py-4 px-4">Manage Term</h2>
-    <div class = 'text-right'>
-      <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'addTerm' %}"><i class="fa-solid fa-plus"></i> Add Term</a>
-    </div>
-
+    <h1 class="subTitle">University of the Philippines Manila</h1>
+    <h1 class="title">Terms</h1>
+    <div class = "container-fluid mt-4 table-container">
+    <header class="table-header p-2"><i class="fa-solid fa-rectangle-list mr-2"></i>List of Terms</header>
     {% for term in terms %}
-    <div class="row border bg-white p-3 mb-3">
+    <div class="row border bg-white p-3">
 
         <div class="col align-self-center">
-            <a href="{% url 'termView' term.slug %}"><h5>Term {{term.academicyear}} {{term.semester}}</h5></a>
+            <a href="{% url 'termView' term.slug %}"><h6>Term {{term.academicyear}} {{term.semester}}</h6></a>
         </div>
 
         <div class="col-auto align-self-center text-end ">
             {%if term.isActivated %}
-            <h5><span class="badge bg-primary text-wrap">
-                Active
-            </span></h5>
+            <h6><span class="badge badge-success text-wrap">Active</span></h6>
             {%else%}
-            <h5><span class="badge bg-secondary text-wrap">
-                Inactive
-            </span></h5>
+            <h6><span class="badge badge-light text-wrap">Inactive</span></h6>
             {%endif%}
         </div>
 
         <div class="col-auto align-self-end text-end pe-5 pb-1">
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{term.id}}"><i class="fa-solid fa-trash-can"></i> </button>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{term.id}}"><i class="fa-regular fa-trash-can"></i></button>
         </div>
     </div>
 
       <!-- popup for removal -->
-      <div class="modal fade" id="removePopup{{term.id}}" tab-index="-1">
+      <div class="modal" id="removePopup{{term.id}}" tab-index="-1">
           <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                   <div class="modal-header">
-                      <h5>Remove Term</h5>
-                      <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                      <h5 class="modal-title"><i class="fa-regular fa-trash-can mr-2"></i>Remove Term</h5>
+                      <button type="button" class="btn btn-close m-0" data-bs-dismiss="modal"></button>
                   </div>
                   <div class="modal-body">
-                      <p>Are you sure you want to remove this term?</p>
+                      <p class="mt-auto mb-auto">Are you sure you want to remove <strong>Term {{term.academicyear}} {{term.semester}}</strong>?</p>
                   </div>
                   <div class="modal-footer">
-                      <a class="btn btn-danger" href="{% url 'removeTerm' term.slug %}"><i class="fa-solid fa-close"></i> Remove</a>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
+                      <a class="btn btn-danger" href="{% url 'removeTerm' term.slug %}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
                   </div>
               </div>
           </div>
       </div>
       {%endfor%}
+      <div class = "row bg-white p-3">
+        <a class='btn btn-warning mb-3 mt-3 mr-auto ml-auto' role='button' href = "{% url 'addTerm' %}"><i class="fa-solid fa-plus mr-2"></i>Add Term</a>
+      </div>
+    </div>
 
 </div>
 

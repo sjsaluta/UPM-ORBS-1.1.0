@@ -7,9 +7,10 @@
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb mt-3 ms-4 bg-body">
+  <ol class="breadcrumb bg-primary">
     <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Manage Users</li>
+    <li class="breadcrumb-item"><a href="{% url 'manageCollege' %}" class="text-dark">Colleges</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Users</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}
@@ -19,38 +20,54 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="modal">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-    
+
     </div>
   </div>
 </div>
 
 <div class = "container-fluid">
-    <h2 class="py-4 px-4">Manage Users</h2>
-      <form method="POST" action="">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col-md-4 ">
-                <label class="form-label">User Type</label>
-                <select class="form-select" id="role" name="role">
-                    <option value="none">--------</option>
-                    <option value="faculty">Faculty</option>
-                    <option value="staff">Staff</option>
-                    <option value="ocs">OCS</option>
-                    <option value="adpd">ADPD</option>
-                    <option value="ao">AO</option>
-                </select>
-                
-            </div>
-            <div class="col-md-4 mt-4 pt-2">
-              <button type="submit" class='btn btn-success'> Filter</button>
-            </div>
-        </div>
+  <h1 class="subTitle">Building</h1> <!--Get Building Name-->
+  <h1 class="title">Users</h1>
+
+  <div class = "container-fluid mt-4 filter-container">
+    <header class="table-header p-2"><i class="fa-solid fa-filter mr-2"></i>Filter by</header>
+    <div class="row bg-white p-3 ">
+      <div class="col align-self-center">
+        <form method="POST" action="">
+          {% csrf_token %}
+          <div class="row">
+              <div class="col-md-4 ">
+                  <label class="form-label filter-label">User Type</label>
+                  <select class="form-select" id="role" name="role">
+                      <option value="none">--------</option>
+                      <option value="faculty">Faculty</option>
+                      <option value="staff">Staff</option>
+                      <option value="ocs">OCS</option>
+                      <option value="adpd">ADPD</option>
+                      <option value="ao">AO</option>
+                  </select>
+
+              </div>
+              <div class="col-md-4 mt-4 pt-2">
+                <button type="submit" class='btn btn-success'>Filter</button>
+              </div>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class = 'text-right'>
-      <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'AddUserPage' %}"><i class="fa-solid fa-plus"></i> Add User</a>
+  </div>
+
+  <div class = "container-fluid mt-4 table-container">
+    <header class="table-header p-2"><i class="fa-solid fa-rectangle-list mr-2"></i>List of Users</header>
+    <div class="row bg-white pt-3 pr-3 pl-3 pb-0">
+      {% include "accounts/user-table.html" %}
     </div>
-    {% include "accounts/user-table.html" %}
-    
+    <div class = 'row bg-white p-3'>
+      <a class='btn btn-warning mr-auto ml-auto' role='button' href = "{% url 'AddUserPage' %}"><i class="fa-solid fa-plus mr-2"></i>Add User</a>
+    </div>
+  </div>
+
+
 </div>
 
 
@@ -73,7 +90,7 @@ $(function() {
     "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
     "<\/script>"
   ].join("");
-  
+
   function deleteUserModalForm() {
     $(".delete").each(function () {
         $(this).modalForm({formURL: $(this).data("form-url"), isDeleteForm: true});
@@ -117,7 +134,7 @@ $(function() {
 
 
   function updateUserPassModalForm() {
-      
+
     $('.pass').each(function () {
       $(this).modalForm({
         formURL: $(this).data("form-url"),
@@ -131,8 +148,8 @@ $(function() {
           addModalFormFunction: reinstantiateModalForms
         }
       });
-    }); 
-  
+    });
+
   }
   updateUserPassModalForm();
 

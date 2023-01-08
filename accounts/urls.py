@@ -21,14 +21,14 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    
+
     path('login/',views.loginPage, name='loginPage'),
     path('google_login/', include('allauth.urls')),
     path('logout/', views.logOutPage, name="logout"),
 
     path('profile/', views.viewProfile, name="profile"),
     path('profile/edit-profile/',views.editProfile, name='editProfile'),
-    
+
     #admin pages
     path('manage/',views.manageUsers,name='manageUsers'),
     path('manage/add-user/', views.AddUserPage, name='AddUserPage'),
@@ -36,7 +36,7 @@ urlpatterns = [
     path('manage/edit/<int:pk>',views.editUser, name='editUser'),
     path('manage/edit/change-pass/<int:pk>/',views.changePass,name='changePass'),
     path('delete/<int:pk>',views.deleteUser.as_view(), name='deleteUser'),
-   
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

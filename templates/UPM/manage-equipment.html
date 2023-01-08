@@ -12,39 +12,40 @@
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb mt-3 ms-4 bg-body">
+  <ol class="breadcrumb bg-primary">
+    <!--<a class='btn btn-secondary'href="{% url 'manageRooms' %}">Back</a>-->
     <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'manageCollege' %}" class="text-dark">Manage Colleges</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Add College</li>
+    <li class="breadcrumb-item"><a href="{% url 'manageRooms' %}" class="text-dark">Rooms</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Equipment</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}
 
 {% block content %}
-<a class='btn btn-secondary btn-lg'href="{% url 'roomView' %}">Back</a>
-<h2 class="py-4 px-4">Manage Equipment for {{ room.name }}</h2>
-<a class='btn btn-warning mb-2 mx-4 btn-sm' href = "{% url 'addEquipment' room.slug %}"><i class="fa-solid fa-plus">Add an Equipment</i></a>
-<div class = "container w-50">
-    <div class = "row bg-light shadow-sm border ">
-        <div class = "col my-4 px-5">
+<div class="container-fluid">
+    <h1 class="subTitle">{{room.name}}</h1>
+    <h1 class="title">Equipment</h1>
+    <div class = "container-fluid mt-4 table-container">
+        <header class="table-header p-2"><i class="fa-solid fa-rectangle-list mr-2"></i>List of Equipment</header>
             <form method="POST" action="">
                 {% csrf_token %}
-                <div class="row">
-                    <div class="col-8">
+                <div class="row bg-white p-3 ">
+                    <div class = "col my-4 px-5">
                         {{form.equipment | as_crispy_field}}
                         {% for room in rooms %}
-                        {{room.equipment}}
+                        <h6>{{room.equipment}}</h6>
                         {% endfor %}
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Save changes</button>
+                <div class="row bg-white p-3">
+                    <div class = "col px-5">
+                        <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk mr-2"></i>Save Changes</button>
                     </div>
                 </div>
-                    
+                <div class="row bg-white p-3">
+                    <a class='btn btn-warning mr-auto ml-auto' href = "{% url 'addEquipment' room.slug %}"><i class="fa-regular fa-square-plus mr-2"></i>Add an Equipment</a>
+                </div>
             </form>
-        </div>
     </div>
 </div>
 
@@ -58,12 +59,12 @@
     const form = document.getElementById('date');
     var txt = document.getElementById('id_academicyear').val;
 
-    
+
     btn.addEventListener('click', () => {
         form.style.display = 'block';
-    });   
-    
-    
+    });
+
+
 </script>
 
 {% endblock extrascripts %}

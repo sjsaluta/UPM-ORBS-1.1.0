@@ -10,26 +10,37 @@
     }
 </style>
 {% endblock extracss %}
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-primary">
+      <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'manageCollege' %}" class="text-dark">Colleges</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Add Building</li>
+    </ol>
+</nav>
+{% endblock breadcrumb %}
 
 {% block content %}
-<div class = "container w-70">
-    <h2 class="py-4 px-4">Add Building</h2>
-    <div class = "row bg-light shadow-sm border ">
-        <div class = "col my-4 px-5">
-            <form method="POST" action="">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-8">
-                        {{form.name | as_crispy_field}}
-                       
-                    </div> 
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk"></i> &nbsp;Save changes</button>
+<div class = "container-fluid">
+    <h1 class="subTitle">Building</h1>
+    <h1 class="title">Add Building</h1>
+    <div class = "container table-container mt-4">
+        <h1 class="table-header p-2"><i class="fa-solid fa-plus mr-2"></i></i>Add Building</h2>
+        <div class = "row bg-white ">
+            <div class = "col my-4 px-5">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div>
+                            {{form.name | as_crispy_field}}
+
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <div class="col text-center">
+                        <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk mr-2"></i>Save Changes</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -44,12 +55,12 @@
     const form = document.getElementById('date');
     var txt = document.getElementById('id_academicyear').val;
 
-    
+
     btn.addEventListener('click', () => {
         form.style.display = 'block';
-    });   
-    
-    
+    });
+
+
 </script>
 
 {% endblock extrascripts %}

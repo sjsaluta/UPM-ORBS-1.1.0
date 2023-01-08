@@ -7,57 +7,58 @@
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb mt-3 ms-4 bg-body">
+  <ol class="breadcrumb bg-primary">
     <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Manage Colleges</li>
+    <li class="breadcrumb-item active" aria-current="page">Colleges</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}
 
 {% block content %}
 <div class = "container-fluid">
-    <h2 class="py-4 px-4">Manage Colleges</h2>
-    <div class = 'text-right'>
-      <a class='btn btn-warning mb-4 mx-4' role='button' href = "{% url 'addCollege' %}"><i class="fa-solid fa-plus"></i> Add College</a>
+    <h1 class="subTitle">Home</h1>
+    <h1 class="title">Colleges</h1>
+    <div class = "container-fluid mt-4 table-container">
+      <header class="table-header p-2"><i class="fa-solid fa-rectangle-list mr-2"></i>List of Colleges</header>
+      {% for college in colleges %}
+      <div class="row border-bottom bg-white p-3 ">
+
+        <div class="col align-self-center">
+            <h6>{{college.name}}</h6>
+        </div>
+
+        <div class="col-auto align-self-end text-end">
+            <a href="{% url 'adminCollegeView' college.slug %}" class="mr-1"><button type="button" class="btn btn-secondary btn-sm" href="{% url 'adminCollegeView' college.slug %}"><i class="fa-solid fa-building-columns mr-2"></i>View Departments & Buildings</button></a>
+            {% comment %} <button type="button" class="update bs-modal btn btn-sm btn-success btn-sm mr-1" data-form-url="{% url 'editCollege' college.slug %}"><i class="fa-solid fa-pen"></i></button> {% endcomment %}
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}"><i class="fa-regular fa-trash-can" ></i></button>
+        </div>
+        </div>
+
+        <!-- popup for removal -->
+        <div class="modal" id="removePopup{{college.id}}" tab-index="-1">
+            <div class="modal-dialog modal-dialog-centered" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fa-regular fa-square-minus"></i>Remove College</h5>
+                        <button type="button" class="btn btn-close m-0" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="mt-auto mb-auto">Are you sure you want to remove <strong>{{college.name}}</strong>?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-danger mr-2" href="{% url 'removeCollege' college.slug %}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+        <div class="row bg-white p-3">
+            <a class='btn btn-warning mr-auto ml-auto' role='button' href = "{% url 'addCollege' %}"><i class="fa-regular fa-square-plus mr-2"></i>Add College</a>
+        </div>
     </div>
 
-    {% for college in colleges %}
-    <div class="row border bg-white p-3 mb-3">
-      
-      <div class="col align-self-center">
-          <a href="{% url 'adminCollegeView' college.slug %}"><h5>{{college.name}}</h5></a>
-      </div>
-
-          <div class="col-auto align-self-end text-end">
-              
-              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}"><i class="fa-solid fa-close"></i> Remove</button>
-          </div>
-      </div>
-
-      <!-- popup for removal -->
-      <div class="modal" id="removePopup{{college.id}}" tab-index="-1">
-          <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5>Remove College</h5>
-                      <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <div class="modal-body">
-                      <p>Are you sure you want to remove this college?</p>
-                  </div>
-                  <div class="modal-footer">
-                      <a class="btn btn-danger" href="{% url 'removeCollege' college.slug %}"><i class="fa-solid fa-close"></i> Remove</a>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-      {%endfor%}
-
 </div>
-
-
-
 {% endblock content %}
 
 {% block extrascripts %}

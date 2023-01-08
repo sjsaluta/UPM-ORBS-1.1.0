@@ -7,58 +7,66 @@
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb mt-3 ms-4 bg-body">
+  <ol class="breadcrumb bg-primary">
     <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'manageCollege' %}" class="text-dark">Manage Colleges</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'manageCollege' %}" class="text-dark">Colleges</a></li>
     <li class="breadcrumb-item"><a href="{% url 'adminCollegeView' college.slug %}" class="text-dark">{{college.name}}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{building.name}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{building.name}} - Rooms</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}
 
 {% block content %}
-<div class = "container w-auto">
-    <h2 class="pt-4">{{building.name}}</h2>
-    <h5 class="pb-4">{{college.name}}</h5>
-    <div class = 'row'>
-        <div class = 'col align-self-center'>
-            <h5 class='ps-4'>Rooms</h5>
-        </div>
-        <div class = 'col-auto align-self-end text-end'>
-            <a class='btn btn-warning mb-2 mx-4' role='button' href = "{% url 'addBuildRoom' college.slug building.slug%}"><i class="fa-solid fa-plus"></i> Add Room</a>
-        </div>
-    </div>
-    <div class="container-fluid overflow-auto">
-        {% for room in rooms %}
-        <div class="row border bg-white p-4 mb-3">
-        
-        <div class="col align-self-center">
-            <h5>{{room.name}}</h5>
-        </div>
-            <div class="col-auto align-self-end text-end">
-                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}{{building.id}}{{room.id}}"><i class="fa-solid fa-close"></i> Remove</button>
-            </div>
-        </div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
 
-        <!-- popup for removal -->
-        <div class="modal fade" id="removePopup{{college.id}}{{building.id}}{{room.id}}" tab-index="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5>Remove Room</h5>
-                        <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to remove this room?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-danger" href="{% url 'removeRoom' college.slug building.slug room.slug %}"><i class="fa-solid fa-close"></i> Remove</a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
+      </div>
+    </div>
+</div>
+<div class = "container-fluid">
+  <h1 class="subTitle">{{building.name}}</h1>
+  <h1 class="title">Rooms</h1>
+  <div class = "container-fluid mt-4 table-container p-0">
+    <header class="table-header p-2"><i class="fa-solid fa-rectangle-list mr-2 ml-3"></i>List of Colleges</header>
+    <div class="p-0"style="overflow-y: scroll;overflow-x:hidden; height:300px; width: 100%;">
+            {% for room in rooms %}
+            <div class="row border-bottom bg-white p-3">
+
+            <div class="col align-self-center">
+                <h6>{{room.name}}</h6>
+            </div>
+                <div class="col-auto align-self-end text-end">
+                    <a class='btn btn-secondary btn-sm mr-2' href = "{% url 'calendarView' room.slug %}" ><i class="fa-solid fa-calendar-day mr-2"></i>View in Calendar</a>
+                    <button type="button" class="update btn btn-success btn-sm mr-2"  data-form-url="{% url 'viewEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button>
+                    <button type="button" class="btn btn-danger btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}{{building.id}}{{room.id}}"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div>
+
+            <!-- popup for removal -->
+            <div class="modal fade" id="removePopup{{college.id}}{{building.id}}{{room.id}}" tab-index="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><i class="fa-regular fa-square-minus mr-2"></i>Remove Room</h5>
+                            <button type="button" class="btn btn-close m-0" data-bs-dismiss="modal"></button>
+                          </div>
+                        <div class="modal-body">
+                            <p class="mt-auto mb-auto">Are you sure you want to remove <strong>{{room.name}}</strong>?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-danger mr-2" href="{% url 'removeRoom' college.slug building.slug room.slug %}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+
+        <div class = "col text-center bg-white p-3">
+            <a class='btn btn-warning' role='button' href = "{% url 'addBuildRoom' college.slug building.slug%}"><i class="fa-solid fa-square-plus mr-2"></i>Add Room</a>
+        </div>
     </div>
 </div>
 
@@ -67,4 +75,81 @@
 {% endblock content %}
 
 {% block extrascripts %}
+<script>
+    $(function() {
+
+      var $options=$('#id_building option').clone();
+      $('#id_college').change(function() {
+        console.log('yes');$('#id_building').empty();$('#id_building').html( $options.clone());populateBuild(this);
+      });
+      $('#id_building').change(function(){
+        console.log("success")
+        $('#name_cap').css("display","block")
+      });
+      populateBuild()
+      function populateBuild(event) {
+          if (!$('#id_college').val()){
+              console.log('empty')
+               $('#id_building').html( $options.clone());
+          }
+          else{
+              col = $("#id_college option:selected").text();
+              {% for college in colleges%}
+                  if ('{{college}}' == col) {
+                      //alert(b);
+                      console.log('true')
+
+
+                          {% for (build in college.building_set.all %}
+                              {% for b in building %}
+                                  if('{{b.college}}'!= '{{build.college}}'){
+                                      $('#id_building option[value="{{b.id}}"]').remove();
+                                  }
+                              {%endfor%}
+                          {% endfor %}
+                  }
+              {% endfor %}
+          }
+
+      }
+      var asyncSuccessMessageUpdate = [
+        "<div ",
+        "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+        "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+        "Success: Room details were changed.",
+        "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+        "<span aria-hidden='true'>&times;</span>",
+        "</button>",
+        "</div>",
+        "<script>",
+        "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+        "<\/script>"
+      ].join("");
+
+
+      function updateRoomModalForm() {
+
+        $('.update').each(function () {
+          $(this).modalForm({
+            formURL: $(this).data("form-url"),
+            asyncUpdate: true,
+            asyncSettings: {
+              closeOnSubmit: false,
+              successMessage: asyncSuccessMessageUpdate,
+              dataUrl: "rooms/",
+              dataElementId: "#room-table",
+              dataKey: "table",
+              addModalFormFunction: reinstantiateModalForms
+            }
+          });
+        });
+
+      }
+      updateRoomModalForm();
+
+      function reinstantiateModalForms(){
+        updateRoomModalForm();
+      }
+    })
+    </script>
 {% endblock extrascripts %}

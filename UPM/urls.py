@@ -33,7 +33,8 @@ urlpatterns = [
     path('manage-college/',views.manageCollege, name='manageCollege'),
     path('manage-college/add-college/',views.addCollege, name='addCollege'),
     path('manage-college/remove/<slug:slug>/',views.removeCollege, name='removeCollege'),
-    path('manage-college/<slug:slug>/',views.collegeView, name='adminCollegeView'), 
+    # path('manage-college/edit-college/<int:pk>/',views.editCollege, name='editCollege'),
+    path('manage-college/<slug:slug>/',views.collegeView, name='adminCollegeView'),
     path('manage-college/<slug:slug>/add-dept/',views.addDept, name='addDept'),
     path('manage-college/<slug:slug>/add-build/',views.addBuild, name='addBuild'),
     path('manage-college/<slug:c>/remove/<slug:d>/',views.removeDept, name='removeDept'),
@@ -42,14 +43,18 @@ urlpatterns = [
     path('manage-college/<slug:c>/<slug:b>/remove/<slug:r>',views.removeRoom,name='removeRoom'),
     path('manage-college/<slug:c>/<slug:b>/add-room/',views.addBuildRoom, name='addBuildRoom'),
 
-    #path('manage-room/edit-equipment/<slug:slug>/',views.editEquipment, name='editEquipment'),
-    
 
-    path('manage-room/',views.manageRooms, name='manageRooms'), 
-    path('manage-room/rooms/',views.rooms, name='rooms'), 
+    path('manage-college/<slug:c>/<slug:d>/users',views.deptUsersView,name='deptUsersView'), #users per department
+
+
+    #path('manage-room/edit-equipment/<slug:slug>/',views.editEquipment, name='editEquipment'),
+
+
+    path('manage-room/',views.manageRooms, name='manageRooms'),
+    path('manage-room/rooms/',views.rooms, name='rooms'),
     path('manage-room/edit-room/<slug:slug>/',views.editRoom, name='editRoom'),
     path('manage-room/delete/<int:pk>/',views.deleteRoom,name='deleteRoom'),
-    
+
     #non-admin pages
     path('rooms/',views.roomView,name='roomView'),
     path('rooms/view-equipment/<slug:slug>/',views.viewEquipment,name='viewEquipment'),

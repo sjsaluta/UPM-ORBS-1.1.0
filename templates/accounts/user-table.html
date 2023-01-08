@@ -1,6 +1,6 @@
-<table id='user-table' class="table">
+<table id='user-table' class="table m-0">
     <thead>
-      <tr>
+      <tr class="text-center">
         <th scope="col">No.</th>
         <th scope="col">Username</th>
         <th scope="col">Name</th>
@@ -11,16 +11,16 @@
     </thead>
     <tbody>
       {% for u in users %}
-      <tr>
+      <tr class="text-center">
         <th scope="row">{{forloop.counter}}</th>
         <td>{{u.username}}</td>
         <td>{{u.get_full_name}}</td>
         <td>{{u.email}}</td>
         <td>{{u.get_user_type_display}}</td>
         <td>
-            <button type="button" class="update bs-modal btn btn-sm btn-warning btn-sm" data-form-url="{% url 'editUser' u.id %}"><i class="fa-solid fa-pen-to-square"></i></button>
-            <button type="button" class="pass bs-modal btn btn-sm btn-secondary btn-sm" data-form-url="{% url 'changePass' u.id %}"><i class="fa-solid fa-key"></i></button>
-            <button type="button" class="delete bs-modal btn btn-sm btn-danger btn-sm" data-form-url="{% url 'deleteUser' u.id %}"><i class="fa-solid fa-trash-can"></i> </button>
+            <button type="button" class="update bs-modal btn btn-sm btn-success btn-sm mr-1" data-form-url="{% url 'editUser' u.id %}"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button type="button" class="pass bs-modal btn btn-sm btn-secondary btn-sm mr-1" data-form-url="{% url 'changePass' u.id %}"><i class="fa-solid fa-key"></i></button>
+            <button type="button" class="delete bs-modal btn btn-sm btn-danger btn-sm" data-form-url="{% url 'deleteUser' u.id %}"><i class="fa-regular fa-trash-can"></i> </button>
         </td>
       </tr>
       {% endfor %}

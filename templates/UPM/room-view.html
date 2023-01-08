@@ -13,9 +13,9 @@
 
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb mt-3 ms-4 bg-body">
+  <ol class="breadcrumb bg-primary">
     <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
-   
+
     <li class="breadcrumb-item active" aria-current="page">Rooms</li>
   </ol>
 </nav>
@@ -65,10 +65,10 @@
                     <td>{{room.room_type}}</td>
                     {% if request.user.user_type == 5 or request.user.user_type == none %}
                     <td><a class='btn-success btn-secondary btn-sm' href = "{% url 'manageEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></a></td>
-                    {% endif %}     
+                    {% endif %}
                     {% if request.user.user_type != 5 and request.user.user_type != none %}
-                    <td><button type="button" class="update bs-modal btn btn-sm btn-success btn-sm" data-form-url="{% url 'viewEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button></td>
-                    {% endif %}         
+                    <td><button type="button" data-bs-toggle="modal" class="bs-modal btn btn-sm btn-warning btn-sm" data-bs-target="{% url 'viewEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button></td>
+                    {% endif %}
                     <td><a class='btn btn-secondary btn-sm' href = "{% url 'calendarView' room.slug %}"><i class="fa-solid fa-calendar-day"></i> View Schedule</a></td>
                   </tr>
                 {% endfor %}
@@ -84,108 +84,33 @@
 
 {% block extrascripts %}
 <script>
-    // var $options=$('#id_building option').clone();
-    // $('#id_college').change(function() {console.log('yes');$('#id_building').empty();$('#id_building').html( $options.clone());populateBuild(this);});
-    // populateBuild()
-    // function populateBuild(event) {
-    //     if (!$('#id_college').val()){
-    //         console.log('empty')
-    //          $('#id_building').html( $options.clone());
-    //     }
-    //     else{
-    //         col = $("#id_college option:selected").text();
-    //         {% for college in colleges %}
-    //             if ('{{college}}' == col) {
-    //                 //alert(b);
-    //                 console.log('true')
-                    
-                       
-    //                     {% for build in college.building_set.all %}   
-    //                         {% for b in building %}
-    //                             if('{{b.college}}'!= '{{build.college}}'){                              
-    //                                 $('#id_building option[value="{{b.id}}"]').remove();
-    //                             }
-    //                         {%endfor%}
-    //                     {% endfor %}
-    //             }
-    //         {% endfor %}    
-    //     }
-        
-    // }
-    $(function() {
-
-  var $options=$('#id_building option').clone();
-  $('#id_college').change(function() {
-    console.log('yes');$('#id_building').empty();$('#id_building').html( $options.clone());populateBuild(this);
-  });
-  $('#id_building').change(function(){
-    console.log("success")
-    $('#name_cap').css("display","block")
-  });
-  populateBuild()
-  function populateBuild(event) {
-      if (!$('#id_college').val()){
-          console.log('empty')
-           $('#id_building').html( $options.clone());
-      }
-      else{
-          col = $("#id_college option:selected").text();
-          {% for college in colleges%}
-              if ('{{college}}' == col) {
-                  //alert(b);
-                  console.log('true')
-                  
-                     
-                      {% for build in college.building_set.all %}   
-                          {% for b in building %}
-                              if('{{b.college}}'!= '{{build.college}}'){                              
-                                  $('#id_building option[value="{{b.id}}"]').remove();
-                              }
-                          {%endfor%}
-                      {% endfor %}
-              }
-          {% endfor %}    
-      }
-      
-  }
-  var asyncSuccessMessageUpdate = [
-    "<div ",
-    "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
-    "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
-    "Success: Room details were changed.",
-    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
-    "<span aria-hidden='true'>&times;</span>",
-    "</button>",
-    "</div>",
-    "<script>",
-    "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
-    "<\/script>"
-  ].join("");
-
-
-  function updateRoomModalForm() {
-      
-    $('.update').each(function () {
-      $(this).modalForm({
-        formURL: $(this).data("form-url"),
-        asyncUpdate: true,
-        asyncSettings: {
-          closeOnSubmit: false,
-          successMessage: asyncSuccessMessageUpdate,
-          dataUrl: "rooms/",
-          //dataElementId: "#room-table",
-          //dataKey: "table",
-          addModalFormFunction: reinstantiateModalForms
+    var $options=$('#id_building option').clone();
+    $('#id_college').change(function() {console.log('yes');$('#id_building').empty();$('#id_building').html( $options.clone());populateBuild(this);});
+    populateBuild()
+    function populateBuild(event) {
+        if (!$('#id_college').val()){
+            console.log('empty')
+             $('#id_building').html( $options.clone());
         }
-      });
-    }); 
-  
-  }
-  updateRoomModalForm();
-  
-  function reinstantiateModalForms(){
-    updateRoomModalForm();
-  }
-})
+        else{
+            col = $("#id_college option:selected").text();
+            {% for college in colleges %}
+                if ('{{college}}' == col) {
+                    //alert(b);
+                    console.log('true')
+
+
+                        {% for build in college.building_set.all %}
+                            {% for b in building %}
+                                if('{{b.college}}'!= '{{build.college}}'){
+                                    $('#id_building option[value="{{b.id}}"]').remove();
+                                }
+                            {%endfor%}
+                        {% endfor %}
+                }
+            {% endfor %}
+        }
+
+    }
 </script>
 {% endblock extrascripts %}

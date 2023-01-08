@@ -15,10 +15,10 @@
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb mt-3 ms-4 bg-body">
+    <ol class="breadcrumb bg-primary">
       <li class="breadcrumb-item"><a href="#" class="text-dark">Home</a></li>
-     
-      <li class="breadcrumb-item active" aria-current="page">Upload</li>
+
+      <li class="breadcrumb-item active" aria-current="page">Upload Schedule</li>
     </ol>
   </nav>
 {% endblock breadcrumb %}
@@ -28,37 +28,44 @@
   <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
   <span aria-hidden='true'>&times;</span></button>
 </div>
-<div class = "container w-auto">
-  <h2 class="py-4">Upload Schedule</h2>
-    <form method='POST' enctype="multipart/form-data" id="upload">
-        {% csrf_token %}
+<div class = "container-fluid">
+  <h1 class="title">Upload Schedule</h1>
+  <div class = "container-fluid mt-4 table-container">
+    <header class="table-header p-2"><i class="fa-solid fa-upload mr-2"></i>Upload Schedule</header>
+    <div class="row border-bottom bg-white p-3 ">
+      <form method='POST' enctype="multipart/form-data" id="upload">
+          {% csrf_token %}
 
-        <div class ='col-3'>
-        {{ form.term | as_crispy_field }}
-        {{ form.file }}
-        </div>
-
-        <div class ='col-8'>
-          <p class = 'text-black-50 mt-2'> *Upload a csv file. 
-          <br>The labels for the columns should start in the 8th row.
-          <br> The columns should be as follows: Class Number, Course Title, Subject, Catalog, Section, Component, Schedule, Room, Class Capacity, and Restrictions*</p>
-        </div>
-
-        <div class = 'row'>
-          <div class = 'col mt-4 ms-3'>
-            <button class='btn btn-success' type = 'submit'>Upload</button>
-          </div>
-          <div class = 'col'>
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
+          <div class ='row text-center'>
+            <div class="col-md-8 text-left">
+              {{ form.term | as_crispy_field }}
+              {{ form.file }}
+            </div>
+            <div class="col pt-4 mt-2">
+              <button class='btn btn-success' type = 'submit'><i class="fa fa-upload mr-2"></i>Upload</button>
+            </div>
+            <div class="col mt-4 pt-2">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            <p id='error' class='text-danger ms-3'></p>
             </div>
           </div>
-          <p id='error' class='text-danger ms-3'></p>
-        </div>
-        
-        
-        
-    </form>
+
+
+
+          <div class ='col-md'>
+            <p class = 'text-black-50 mt-4'> *Upload a csv file.
+            <br>The labels for the columns should start in the 8th row.
+            <br> The columns should be as follows: Class Number, Course Title, Subject, Catalog, Section, Component, Schedule, Room, Class Capacity, and Restrictions*</p>
+          </div>
+
+      <div class="table-bottom-green"></div>
+
+
+      </form>
+    </div>
+  </div>
 </div>
 
 
@@ -99,15 +106,15 @@ $(document).ready(function(){
             $("#alert").fadeOut(); //or fadeOut
           }, 10000);
         }
-        
+
       },
       error: function (response){
         console.log("error")
       }
-    }); 
+    });
     return false; //<---- move it here
   });
- 
+
 })
 
 </script>

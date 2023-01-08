@@ -9,9 +9,9 @@ from .models import *
 from bootstrap_modal_forms.forms import PopRequestMixin,CreateUpdateAjaxMixin
 
 class CreateUserForm(UserCreationForm):
-    
+
     email = EmailField()
-    
+
     #only allow @up.edu.ph emails
     def clean_email(self):
         data = self.cleaned_data['email']

@@ -33,17 +33,17 @@ def indexPage(request):
 def uploadPage(request):
     form = UploadForm()
     ocs = OCS.objects.get(user=request.user)
-    
+
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
-            
+
             f = form.save(False)
             f.ocs=ocs
             f.college=ocs.college
             f.save()
 
-            
+
 
             file = ScheduleFile.objects.get(file = f.file.name)
             df = pd.read_csv('media/'+f.file.name).iloc[7:,[0,1,2,4,5,6,7,8,9]]
@@ -68,7 +68,7 @@ def uploadPage(request):
                 end_time.append(tf[1])
                 y=re.findall(r"\bM\w*|\bT\w*|\bW\w*|\bS\w*|\bF\w*",time.to_string())
 
-            
+
             error=''
             for i in range(len(df)):
                 r = rm[i]
@@ -97,7 +97,7 @@ def uploadPage(request):
                 et_range=(datetime.strptime(end_time[i],"%I:%M %p")-timedelta(minutes=1)).time()
                 arr=[]
                 arr[:0]=days
-                
+
                 if Schedule.objects.filter(Q(schedfile=file), Q(room=room), Q(time_start__range=(st_range,et_range))|Q(time_end__range=(st_range,et_range)),Q(dayofweek__contains=(arr[0] or arr[1]))).exists():
                     error= '"' + ct[i] + ' ' + sec[i] + ' (' + com[i] + ')" that has conflicts with other schedules.'
                 else:
@@ -150,15 +150,15 @@ def termView(request, slug):
         for rm in room:
             if Room.objects.all().exists():
                 rm = Room.objects.get(slug=rm)
-                term.room.add(rm)      
+                term.room.add(rm)
         if request.POST.get("activate"):
             term.isActivated=True
             term.save()
         elif request.POST.get("deactivate"):
             term.isActivated=False
             term.save()
-        return redirect(reverse('termView',kwargs={'slug':slug}))   
-        
+        return redirect(reverse('termView',kwargs={'slug':slug}))
+
     context ={'term':term,'rooms':rooms,'rms':room_term}
     return render(request,"UPM/term-details.html",context)
 
@@ -232,14 +232,14 @@ def manageEquipment(request, slug):
         return HttpResponseRedirect(reverse_lazy('roomView'))
     else:
         form = ManageEquipment(instance=room)
-        
+
         context = {'form':form, 'room':room}
         return render(request,'UPM/manage-equipment.html',context)
 
 @login_required(login_url='loginPage')
 def editEquipment(request, slug):
     room = Room.objects.get(slug=slug)
-    
+
     if request.method == "POST":
         form = EditEquipment(request.POST, instance=room)
 
@@ -249,7 +249,7 @@ def editEquipment(request, slug):
         return HttpResponseRedirect(reverse_lazy('manageRooms'))
     else:
         form = EditEquipment(instance=room)
-        
+
         context = {'form':form}
         return render(request,'UPM/edit-equipment.html',context)
 
@@ -263,7 +263,7 @@ def addDept(request,slug):
             dept = form.save(False)
             dept.college = college
             dept.save()
-            return redirect(reverse('adminCollegeView',kwargs={'slug':slug}))  
+            return redirect(reverse('adminCollegeView',kwargs={'slug':slug}))
     context={'form':form}
     return render(request,"UPM/add-dept.html",context)
 
@@ -281,7 +281,7 @@ def addBuild(request,slug):
             build = form.save(False)
             build.college = college
             build.save()
-            return redirect(reverse('adminCollegeView',kwargs={'slug':slug}))  
+            return redirect(reverse('adminCollegeView',kwargs={'slug':slug}))
 
     context={'form':form}
     return render(request,"UPM/add-build.html",context)
@@ -311,13 +311,31 @@ def removeRoom(request,c,b,r):
     Room.objects.get(slug=r).delete()
     return redirect(reverse_lazy('adminBuildingView',kwargs={"c": c,"b":b}))
 
+# def editCollege(request, slug):
+#     college = College.objects.get(slug=slug)
+#     form = EditCollege(instance=college)
+
+#     if request.method == "POST":
+#         form = EditCollege(request.POST, instance=college)
+
+#         if form.is_valid():
+#             form.save()
+#         return HttpResponseRedirect(reverse_lazy('manageCollege'))
+
+#     else:
+#         form = EditCollege(instance=college)
+
+#         context = {'form':form, 'college':college}
+#         return render(request,'UPM/edit-college.html',context)
+
+
 #manage rooms
 @login_required(login_url='loginPage')
 def manageRooms(request):
     rooms=Room.objects.all()
     form = ColBuildForm()
     build = Building.objects.all()
-    college = College.objects.all()
+    college = College.objects.all().order_by('name')
 
     if request.method == "POST":
 
@@ -326,9 +344,9 @@ def manageRooms(request):
         if form.is_valid():
             form.save()
             return redirect('manageRooms')
-            
+
     context={'rooms':rooms,'form':form,'colleges':college,'building':build}
-    return render(request,"UPM/room.html",context)
+    return render(request,'UPM/room.html',context)
 
 def viewEquipment(request, slug):
     rooms = Room.objects.get(slug=slug)
@@ -343,7 +361,7 @@ def deleteRoom(request,pk):
 
 def editRoom(request,slug):
     room = Room.objects.get(slug=slug)
-    
+
     if request.method == "POST":
         form = ColBuildForm(request.POST, instance=room)
 
@@ -353,7 +371,7 @@ def editRoom(request,slug):
         return HttpResponseRedirect(reverse_lazy('manageRooms'))
     else:
         form = ColBuildForm(instance=room)
-        
+
         context = {'form':form}
         return render(request,'UPM/edit-room.html',context)
 
@@ -384,35 +402,34 @@ def calendarView(request, slug):
     schedule = Schedule.objects.filter(room=room)
     form = AddBookFrCal(room_id=room.id)
     if request.method == "POST":
-        form = AddBookFrCal(request.POST, room_id=room.id)
-        iserror = False 
+        form = AddBookFrCal(request.POST)
+        iserror = False
         if form.is_valid():
             book = form.save()
             book.room = room
-            #book.equipment.set([request.user])
-            #Checks if there are any conflicts with blocking schedule and class schedule 
+            #Checks if there are any conflicts with blocking schedule and class schedule
             for sched in schedule:
                 arr = sched.getDays()
                 if len(arr) == 1:
                     if(book.start_time.weekday()+1 == arr[0]):
-                        if (book.start_time.hour == sched.time_start.hour or 
-                            book.start_time.hour == sched.time_end.hour or 
-                            book.end_time.hour == sched.time_start.hour or 
+                        if (book.start_time.hour == sched.time_start.hour or
+                            book.start_time.hour == sched.time_end.hour or
+                            book.end_time.hour == sched.time_start.hour or
                             book.end_time.hour == sched.time_end.hour):
                             iserror=True
                             messages.error(request, "There's a conflict with the class schedule and the blocking schedule.")
                             return redirect(reverse_lazy("calendarView", kwargs={'slug':slug}))
                 else:
                     if(book.start_time.weekday()+1 == arr[0] or book.start_time.weekday()+1 == arr[1]):
-                        if (book.start_time.hour == sched.time_start.hour or 
-                            book.start_time.hour == sched.time_end.hour or 
-                            book.end_time.hour == sched.time_start.hour or 
+                        if (book.start_time.hour == sched.time_start.hour or
+                            book.start_time.hour == sched.time_end.hour or
+                            book.end_time.hour == sched.time_start.hour or
                             book.end_time.hour == sched.time_end.hour):
                             iserror=True
                             messages.error(request, "There's a conflict with the class schedule and the blocking schedule.")
                             return redirect(reverse_lazy("calendarView", kwargs={'slug':slug}))
 
-            #Will save the request to database if there is no error            
+            #Will save the request to database if there is no error
             if iserror == False:
                 if(request.user.user_type == 1):
                     book.faculty= Faculty.objects.get(user=request.user)
@@ -423,7 +440,7 @@ def calendarView(request, slug):
                 return redirect(reverse_lazy("calendarView", kwargs={'slug':slug}))
 
     booking = Booking.objects.filter(room_id=room.id)
-        
+
     context={'booking':booking,'room':room,'term':term,'form':form,'sched':schedule}
     return render(request,"UPM/calendar.html",context)
 
@@ -438,12 +455,12 @@ def collegeView(request, slug):
         else:
             field = college.department_set.all()
             view = 'dept'
-        context={'fields':field,'college':college,'view':view}   
+        context={'fields':field,'college':college,'view':view}
     else:
         view = 'dept'
-        field = college.department_set.all()    
-        context={'fields':field,'college':college,'view':view} 
-         
+        field = college.department_set.all()
+        context={'fields':field,'college':college,'view':view}
+
     return render(request,'UPM/college-details.html',context)
 
 @login_required(login_url='loginPage')
@@ -454,6 +471,18 @@ def buildingView(request,c,b):
 
     context={'rooms':room,'building':building,'college':college}
     return render(request,'UPM/building-details.html',context)
+
+
+# users per department
+@login_required(login_url='loginPage')
+def deptUsersView(request,c,d):
+    college = College.objects.get(slug=c)
+    department = Department.objects.filter(slug=d)
+    deptUsers = AuthUser.objects.filter(department=department).order_by('last_name')
+
+    context={'department':department,'college':college, 'deptUsers':deptUsers}
+    return render(request,'UPM/department-users.html',context)
+# users per department
 
 @login_required(login_url='loginPage')
 def roomView(request):
@@ -475,3 +504,19 @@ def roomView(request):
     context={'filter':rfilter, 'form':form, 'rooms':rooms,'building':build,'colleges':college}
     return render(request,'UPM/room-view.html',context)
 
+#edit room modal
+# def editUser(request,pk):
+#     user = AuthUser.objects.get(id=pk)
+#     if request.method == "POST":
+#         form= EditUserForm(request.POST, instance=user)
+
+#         if form.is_valid():
+#             form.save()
+
+#         return HttpResponseRedirect(reverse_lazy('manageUsers'))
+
+#     else:
+#         form = EditUserForm(instance=user)
+
+#         context = {'form': form,'u':user}
+#         return render(request, 'accounts/edit-user.html', context)

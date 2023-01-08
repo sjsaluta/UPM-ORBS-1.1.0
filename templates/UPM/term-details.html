@@ -7,39 +7,35 @@
 {% endblock extracss %}
 {% block breadcrumb %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb mt-3 ms-4 bg-body">
+  <ol class="breadcrumb bg-primary">
     <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'manageTerm' %}" class="text-dark">Manage Term</a></li>
-   
-    <li class="breadcrumb-item active" aria-current="page">Term {{term.academicyear}}</li>
+    <li class="breadcrumb-item"><a href="{% url 'manageTerm' %}" class="text-dark">Terms</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Term Details</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}
 
 {% block content %}
 <div class = "container w-auto">
-    <h2 class="pt-4">Term {{term.academicyear}} {{term.semester}}</h2>
-    <h5 class="pb-1">{{term.date_start}}-{{term.date_end}}</h5>
+    <h1 class="title pt-4">Term {{term.academicyear}} {{term.semester}}</h2>
+    <h5 class="subTitle pb-1">{{term.date_start}}-{{term.date_end}}</h5>
     {% if term.isActivated %}
-    <h6 class="pb-4">Active</h6>
+    <h6 class="text-center pb-4">Active</h6>
     {% else %}
-    <h6 class="pb-4">Inactive</h6>
+    <h6 class="text-center pb-4">Inactive</h6>
     {% endif %}
-    <div class = 'row'>
+    <div class = 'row text-end'>
         <div class ="col">
             <form method='POST'>
                 {% csrf_token %}
                 {% if not term.isActivated %}
-                <input class = "btn btn-success ms-4 mb-2" type="submit" value="Activate" name="activate">
+                <input class = "btn btn-success mb-4 mr-3" type="submit" value="Activate" name="activate">
                 {% elif term.isActivated  %}
-                <input class = "btn btn-outline-success ms-4 mb-2" type="submit" value="Deactivate" name="deactivate">
+                <input class = "btn btn-outline-success mb-4 mr-3" type="submit" value="Deactivate" name="deactivate">
                 {% endif %}
             </form>
         </div>
-        <div class = 'col align-self-end text-end'>
-            
-            <button class='btn btn-warning mb-2 mx-4' data-bs-toggle="modal" data-bs-target="#addTermRoom"><i class="fa-solid fa-plus"></i> Add Room</button>
-        </div>
+
     </div>
     <div class="container-fluid overflow-auto">
         <table class="table">
@@ -63,23 +59,23 @@
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
-                        <h5>Remove room</h5>
-                        <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+                        <h5 class="modal-title"><i class="fa-regular fa-trash-can mr-2"></i>Remove Room</h5>
+                        <button type="button" class="btn btn-close m-0" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
                         <p>Are you sure you want to remove room '{{room.name}}'?</p>
                     </div>
                     <div class="modal-footer">
                         <!-- link to archive here -->
-                        <a class="btn btn-danger" href="{% url 'deleteRoomTerm' term.slug room.slug%}">Remove</a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-x"></i> Cancel</button>
+                        <a class="btn btn-danger" href="{% url 'deleteRoomTerm' term.slug room.slug%}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
                     </div>
                   </div>
                 </div>
-              </div> 
-                
-                
-                
+              </div>
+
+
+
             {% endfor %}
                 <form method = "POST">
                     {% csrf_token %}
@@ -111,12 +107,16 @@
                             </div>
                         </div>
                         </div>
-                    </div> 
+                    </div>
                 </form>
             </tbody>
           </table>
-       
+
     </div>
+
+    <div class = 'col align-self-end text-center'>
+      <button class='btn btn-warning mb-2 mx-4 mt-2' data-bs-toggle="modal" data-bs-target="#addTermRoom"><i class="fa-solid fa-plus"></i> Add Room</button>
+  </div>
 </div>
 
 
