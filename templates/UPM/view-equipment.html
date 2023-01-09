@@ -4,11 +4,17 @@
                 <button type="button" class="btn btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body" style="text-align: center; margin: auto;">
+                {% if room.equipment.all.count == 0 %}
+                    <h4>No equipment available in this room</h4>
+                {% endif %}
+                {% if room.equipment.all.count != 0 %}
                     {% for item in room.equipment.all %}
                     {{item.name}}
                     <br>
-                {% endfor %}
+                    {% endfor %}
+                {% endif %}
+
             </div>
 
             <div class="modal-footer">

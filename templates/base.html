@@ -38,6 +38,9 @@
                                     {% if request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 4 or request.user.user_type == 5 %}
                                         <li>
                                             <a href="{% url 'viewBookings' %}"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-1">Bookings</span></a>
+                                            {% if request.user.user_type != none and request.user.user_type != 4 %} <!--OCS, Staff & Faculty -->
+                                            <a class="ms-4" href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
+                                            {% endif %}
                                         </li>
                                     {% endif %}
                                     {% if request.user.user_type == none %} <!-- Admin-->
@@ -54,11 +57,7 @@
                                             <a class="sub ms-4" href="{% url 'uploadPage' %}"><i class="fa-solid fa-upload"></i><span class="link_label ms-2">Upload</span></a>
                                         </li>
                                         {%endif%}
-                                        {% if request.user.user_type != none and request.user.user_type != 4 and request.user.user_type != 5 %} <!--OCS, Staff & Faculty -->
-                                        <li>
-                                            <a class="ms-4" href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label">View Rooms</span></a>
-                                        </li>
-                                        {% endif %}
+                                        
                                         {%comment %}
                                         {% if request.user.user_type == 1 or request.user.user_type == 2 %} <!--Staff/Faculty-->
                                                 <a class="ms-4" href="{% url 'notifications' %}">
