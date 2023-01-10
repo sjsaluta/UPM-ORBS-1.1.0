@@ -8,6 +8,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.urls import reverse_lazy
 from . forms import *
 from datetime import date
+from UPM.models import *
 
 
 
@@ -30,7 +31,7 @@ def viewBookings(request):
 def bookingDetails(request,pk):
     
     booking = Booking.objects.get(id=pk)
-    d = booking.start_time.strftime("%Y/%m/%d")
+    d = booking.start_time.strftime("%b %d %Y")
     time = booking.start_time.strftime("%I:%M%p") + '-' + booking.end_time.strftime("%I:%M%p")
     approve = request.POST.get("approve")
     reject = request.POST.get("reject")
@@ -54,11 +55,12 @@ def bookingDetails(request,pk):
     return render(request,'booking/booking-details.html',context)
 
 #edit booking modal
-def editBooking(request,pk):
+def editBooking(request,pk, slug):
+    room = Room.objects.get(slug=slug)
     booking = Booking.objects.get(id=pk)
-    form = EditBookingForm(instance=booking)
+    form = EditBookingForm(instance=booking, room_id=room.id)
     if request.method =="POST":
-        form = EditBookingForm(request.POST, instance = booking)
+        form = EditBookingForm(request.POST, instance = booking, room_id=room.id)
 
         if form.is_valid():
             booking.isEdited=True
