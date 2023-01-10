@@ -3624,7 +3624,7 @@ input[type="button"].btn-block {
           flex-direction: row; }
           .navbar-expand-lg .navbar-nav .dropdown-menu {
             position: sticky;
-            margin-top: 400px;
+            margin-left: -225px;
             opacity: 95%;}
           .navbar-expand-lg .navbar-nav .nav-link {
             padding-right: 0.5rem;
