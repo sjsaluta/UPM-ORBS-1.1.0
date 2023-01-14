@@ -16,14 +16,16 @@
     </head>
 
     <body>
-        <div class="finalized-login-page screen">
-        <img
-        class="image-panel"
-        src="{{MEDIA_URL}}login-image.png"
-        alt="Image-Panel"
-        />
-        <div class="form-panel">
-        <img src="{{MEDIA_URL}}Logo_Navbar.png" style="filter: hue-rotate(-48deg) saturate(6) grayscale(65%) drop-shadow(0 0 0 black); height: 190px; width: 190px; margin-bottom:-100px; margin-top:-20px;"></span>
+        <div class="finalized-login-page screen" style="margin-left: 15%">
+        <img class="image-panel" src="{{MEDIA_URL}}login-image.png" alt="Image-Panel"
+                style="width:30%; height: 50%;"/>
+        <div class="form-panel" style="max-width:30%; height: 40%;">
+        <img src="{{MEDIA_URL}}Logo_Navbar.png"
+                style="filter: hue-rotate(-48deg) saturate(6) grayscale(65%) drop-shadow(0 0 0 black);
+                height: 20%;
+                width: 20%;
+                margin-bottom:-28%;
+                margin-top:-15%;"/>
         {%if iserror%}
                 <div class="alert alert-danger">
         <strong>{{ error|escape }}</strong>
@@ -33,27 +35,26 @@
         {% csrf_token %}
         <div class="login-text">
         <h1 class="login-title montserrat-normal-falu-red-50px">
-        <span class="montserrat-normal-falu-red-50px" style="color:var(--falu-red)">Login</span>
+        <span class="montserrat-normal-falu-red-50px" style="color:var(--falu-red); font-size: x-large;">Login</span>
         </h1>
-        <p class="sign-in-to-your-account montserrat-
-        normal-black-20px">
-        <span class="montserrat-normal-black-20px">Sign in to your account</span>
+        <span class="montserrat-normal-black-20px"
+                style="font-size: medium; margin-top: -10%;">
+                Sign in to your account</span>
         </p>
         </div>
         <div class="form">
-        <div class="input-fields">
+        <div class="input-fields" style="margin-top: -10%;">
         <div class="username">
         <img
                 class="user-3-fill"
                 src="{{MEDIA_URL}}user-3-fill.png"
                 alt="user-3-fill"
         />
-        <div class="username-1 montserrat-normal-
-        gunsmoke-15px"><div class="form-group">
+        <div class="username-1 montserrat-normal-gunsmoke-15px"><div class="form-group">
         <span class="montserrat-normal-gunsmoke-15px">
         <input type="text" name="username" class="form-control" placeholder="Username">
         </span>
-        </div>
+                </div>
         </div>
         </div>
         <div class="username-2">
@@ -62,8 +63,8 @@
                 src="{{MEDIA_URL}}key-2-fill.png"
                 alt="key-2-fill"
         />
-        <div class="password montserrat-normal-
-        gunsmoke-15px"><div class="form-group">
+        <div class="password montserrat-normal-gunsmoke-15px">
+        <div class="form-group">
         <span class="montserrat-normal-gunsmoke-15px">
                 <input type="password" name="password" class="form-control" placeholder="Password">
         </span>
@@ -79,24 +80,22 @@
         <div class="other-options">
         <div class="stay-signed-in"></div>
         <div class="forgot-password-button">
-        <div class="forgot-password valign-text-
-        middle montserrat-normal-falu-red-12px">
+        <div class="forgot-password valign-text-middle montserrat-normal-falu-red-12px">
         <a href="forgot-password">
-        <span><span class="montserrat-normal-
-        falu-red-l2px">Forgot Password?</span></span></a>
+        <span><span class="montserrat-normal-falu-red-l2px">Forgot Password?</span></span></a>
         </div>
         </div>
         </div>
         </div>
-        <div class="form-group">
-        <button type="submit" class="login-button">
+        <div class="form-group" style="margin-top: -10%">
+        <button type="submit" class="login-button" style="height:20%; width: 25%; margin-top: -20%;">
         <div class="login montserrat-normal-white-15px">
         <span class="montserrat-normal-white-15px">LOGIN</span>
         </div>
         </button>
         </div>
         <div class="frame-16">
-        <div class="divider">
+        <div class="divider" style="height:20%; margin-top: -10%; margin-bottom: -10%;">
         <img
         class="line"
         src="{{MEDIA_URL}}Line 1.png"
@@ -112,8 +111,9 @@
         alt="Line 2"
         />
         </div>
-        <div class="other-buttons">
-        <a href="#" class="google btn"><button class="login-with-google-button">
+        <div class="other-buttons" style="margin-left: -6%; gap: 5%">
+        <a href="#" class="google btn"><button class="login-with-google-button"
+                style="width:30%; height:10%">
         <img
                 class="google-fill"
                 src="{{MEDIA_URL}}google-fill.png"
@@ -122,7 +122,8 @@
         <div class="login-with-google valign-text-middle montserrat-normal-fuscous-gray-15px">
                 <span><span class="montserrat-normal-fuscous-gray-15px">Login with Google</span></span>
         </div></button></a>
-        <a href="#" class="guest btn"><button class="login-as-guest-button">
+        <a href="#" class="guest btn"><button class="login-as-guest-button"
+                style="width:30%; height:10%">
         <img
                 class="vector"
                 src="{{MEDIA_URL}}user-search-fill.png"
