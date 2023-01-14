@@ -2,12 +2,13 @@
 url("https://fonts.googleapis.com/css-family.Montserrat:400");
 
 .finalized-login-page {
-  align-items: flex-start;
+  align-items: flex-end;
   background-color: var(--white);
   border: 1px none;
   display: flex;
   gap: 20px;
-  min-width: 1504px;
+  min-width: 90%;
+  height:70%;
 }
 
 .hidden,
@@ -22,10 +23,8 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
   border-color: transparent;
   display: flex;
   flex-direction: column;
-  gap: 110px;
-  min-height: 1024px;
+  gap: 10%;
   padding: 88px 0;
-  width: 684px;
 }
 
 
@@ -34,9 +33,7 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
   border: 1px none;
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  min-height: 588px;
-  width: 450px;
+  gap: 40%;
 }
 
 
@@ -47,16 +44,16 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
   border-radius: 20px;
   box-shadow: 0px 4px 4px #00000048;
   display: flex;
-  height: 45px;
-  min-width: 150px;
+  height: 5%;
+  max-width: 10%;
   padding: 9px 50px;
 }
 
 
 .login {
   letter-spacing: 0;
-  line-height: 25px;
-  min-width: 50px;
+  line-height: 2.5%;
+  min-width: 5%;
   text-align: center;
   white-space: nowrap;
 }
@@ -67,9 +64,9 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
   border: 1px none;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  min-height: 168px;
-  width: 450px;
+  gap: 5%;
+  height: 40%;
+  width: 20%;
 }
 
 
@@ -77,10 +74,11 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
   align-items: flex-start;
   border: 1px none;
   display: flex;
+  padding-bottom: 20px;
   flex-direction: column;
-  gap: 30px;
-  min-height: 120px;
-  width: 450px;
+  gap: 10%;
+  height: 12%;
+  width: 20%;
 }
 
 
@@ -91,29 +89,27 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
   border-color: var(--gunsmoke);
   border-radius: 10px;
   display: flex;
-  gap: 15px;
-  height: 45px;
-  min-width: 450px;
+  gap: 10%;
   padding: 9px 15px;
 }
 
 
 .key-2-fill {
-  height: 25px;
-  width: 25px;
+  height: 5%;
+  width: 5%;
 }
 
 
 .eye-close-line {
-  height: 20px;
-  width: 20px;
+  height: 5%;
+  width: 5%;
 }
 .password {
   align-self: flex-start;
   letter-spacing: 0;
-  line-height: 25px;
+  line-height: 20%;
   white-space: nowrap;
-  width: 345px;
+  width: 20%;
 }
 
 
@@ -353,15 +349,4 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
   height: 50px;
   padding: 11.8px 156px;
   width: 450px;
-}
-
-.insert-logo-here {
-  letter-spacing: 0;
-  line-height: 25px;
-  white-space: nowrap;
-}
-
-.image-panel {
-  height: 1024px;
-  width: 800px;
 }
