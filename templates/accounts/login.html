@@ -11,23 +11,23 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
         {%include 'css_modules.html'%}
         <link rel="stylesheet" href="{% static 'css/accounts.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/login.css'%}">
-        <link rel="stylesheet" href="{% static 'css/styleguide.css'%}">
+        <link rel="stylesheet" href="{% static 'css/login.css'%}"/>
+        <link rel="stylesheet" href="{% static 'css/styleguide.css'%}"/>
     </head>
 
     <body>
-        <div class="finalized-login-page screen" style="margin-left: 15%">
+        <div class="finalized-login-page screen">
         <img class="image-panel" src="{{MEDIA_URL}}login-image.png" alt="Image-Panel"
-                style="width:30%; height: 50%;"/>
-        <div class="form-panel" style="max-width:30%; height: 40%;">
+                style="margin-left: 15%; margin-bottom: 5%; width:30%; height: 50%;"/>
+        <div class="form-panel" style="width:30%; height: 40%;">
         <img src="{{MEDIA_URL}}Logo_Navbar.png"
                 style="filter: hue-rotate(-48deg) saturate(6) grayscale(65%) drop-shadow(0 0 0 black);
                 height: 20%;
                 width: 20%;
-                margin-bottom:-28%;
                 margin-top:-15%;"/>
         {%if iserror%}
-                <div class="alert alert-danger">
+                <div class="alert alert-danger"
+                style="font-size: small; padding: 2%; margin: -2%">
         <strong>{{ error|escape }}</strong>
                 </div>
         {%endif%}
@@ -43,7 +43,7 @@
         </p>
         </div>
         <div class="form">
-        <div class="input-fields" style="margin-top: -10%;">
+        <div class="input-fields" style="margin-top: -10%; align-items:center; margin-left:50%">
         <div class="username">
         <img
                 class="user-3-fill"
@@ -57,7 +57,7 @@
                 </div>
         </div>
         </div>
-        <div class="username-2">
+        <div class="username">
         <img
                 class="key-2-fill"
                 src="{{MEDIA_URL}}key-2-fill.png"
@@ -79,31 +79,30 @@
         </div>
         <div class="other-options">
         <div class="stay-signed-in"></div>
-        <div class="forgot-password-button">
-        <div class="forgot-password valign-text-middle montserrat-normal-falu-red-12px">
+            <div class="forgot-password-button" style="margin-right: 20%">
+                <div class="forgot-password valign-text-middle montserrat-normal-falu-red-12px">
         <a href="forgot-password">
-        <span><span class="montserrat-normal-falu-red-l2px">Forgot Password?</span></span></a>
+        <span class="montserrat-normal-falu-red-l2px">Forgot Password?</span>
+        </a>
+                </div>
+            </div>
         </div>
         </div>
-        </div>
-        </div>
-        <div class="form-group" style="margin-top: -10%">
-        <button type="submit" class="login-button" style="height:20%; width: 25%; margin-top: -20%;">
+        <div class="form-group">
+        <button type="submit" class="login-button">
         <div class="login montserrat-normal-white-15px">
         <span class="montserrat-normal-white-15px">LOGIN</span>
         </div>
         </button>
         </div>
         <div class="frame-16">
-        <div class="divider" style="height:20%; margin-top: -10%; margin-bottom: -10%;">
+        <div class="divider" style="width:20%;">
         <img
         class="line"
         src="{{MEDIA_URL}}Line 1.png"
         alt="Line 1"/>
-        <div class="or valign-text-
-        middle montserrat-normal-fuscous-gray-15px">
-        <span><span class="montserrat-normal-
-        fuscous-gray-15px">or</span></span>
+        <div class="or valign-text-middle montserrat-normal-fuscous-gray-15px">
+        <span><span class="montserrat-normal-fuscous-gray-15px">or</span></span>
         </div>
         <img
         class="line"
