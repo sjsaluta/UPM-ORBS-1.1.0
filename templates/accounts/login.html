@@ -32,11 +32,7 @@
                 width: 28%;
                 margin-bottom:-28%;
                 margin-top:-15%;"/>
-        {%if iserror%}
-                <div class="alert alert-danger">
-        <strong>{{ error|escape }}</strong>
-                </div>
-        {%endif%}
+        
         <form action="#" method="post" class="login-form">
         {% csrf_token %}
         <div class="login-text">
@@ -46,10 +42,14 @@
         <span class="montserrat-normal-black-20px"
                 style="font-size: medium; margin-top: -10%;">
                 Sign in to your account</span>
-        </p>
         </div>
+        {%if iserror%}
+                <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                </div>
+        {%endif%}
         <div class="form">
-        <div class="input-fields" style="margin-top: -10%;">
+        <div class="input-fields">
         <div class="username">
         <img
                 class="user-3-fill"
@@ -89,7 +89,7 @@
         </div>
         </div>
         </div>
-        <div class="form-group" style="margin-top: -10%">
+        <div class="form-group">
         <button type="submit" class="login-button" style="height:20%; width: 25%; margin-top: -20%;">
         <div class="login montserrat-normal-white-15px">
         <span class="montserrat-normal-white-15px">LOGIN</span>
@@ -97,7 +97,7 @@
         </button>
         </div>
         <div class="frame-16">
-        <div class="divider" style="height:20%; margin-top: -10%; margin-bottom: -10%;">
+        <div class="divider" style="height:20%; margin-bottom: -10%;">
         <img
         class="line"
         src="{{MEDIA_URL}}Line 1.png"
