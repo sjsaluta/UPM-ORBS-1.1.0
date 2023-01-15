@@ -94,7 +94,7 @@ class Room(models.Model):
         return super().save(*args, **kwargs)
 
 class Term(models.Model):
-    SEM=(("1st SEMESTER",'1st Semester'),("2nd SEMESTER","2nd Semester"))
+    SEM=(("1st SEMESTER",'1st Semester'),("2nd SEMESTER","2nd Semester"),("MIDYEAR","midyear"))
 
     academicyear = models.CharField(max_length=10)
     semester = models.CharField(max_length=50,choices=SEM,null=True)
