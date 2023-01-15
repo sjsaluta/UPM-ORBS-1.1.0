@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-	{% load static %}
+        {% load static %}
+        <style>
+                input:-webkit-autofill {
+                -webkit-box-shadow: 0 0 0px 1000px white inset;
+                -webkit-text-fill-color: rgb(0, 0, 0) !important;
+}
+        </style>
     <head>
         <title>Login | Online Booking System</title>
         <meta charset="utf-8" />
@@ -12,18 +18,18 @@
         {%include 'css_modules.html'%}
         <link rel="stylesheet" href="{% static 'css/accounts.css' %}" />
         <link rel="stylesheet" href="{% static 'css/login.css'%}">
-        <link rel="stylesheet" href="{% static 'css/styleguide.css'%}">
+        <!-- <link rel="stylesheet" href="{% static 'css/styleguide.css'%}"> -->
     </head>
 
     <body>
         <div class="finalized-login-page screen">
         <img class="image-panel" src="{{MEDIA_URL}}login-image.png" alt="Image-Panel"
-                style="width:30%; height: 50%; margin-left: 15%"/>
+                style="width:40%; height: 60%; margin-left: 5%"/>
         <div class="form-panel" style="max-width:30%; height: 40%;">
         <img src="{{MEDIA_URL}}Logo_Navbar.png"
                 style="filter: hue-rotate(-48deg) saturate(6) grayscale(65%) drop-shadow(0 0 0 black);
-                height: 20%;
-                width: 20%;
+                height: 28%;
+                width: 28%;
                 margin-bottom:-28%;
                 margin-top:-15%;"/>
         {%if iserror%}
@@ -50,12 +56,12 @@
                 src="{{MEDIA_URL}}user-3-fill.png"
                 alt="user-3-fill"
         />
-        <div class="username-1 montserrat-normal-gunsmoke-15px"><div class="form-group">
-        <span class="montserrat-normal-gunsmoke-15px">
-        <input type="text" name="username" class="form-control" placeholder="Username">
-        </span>
-                </div>
-        </div>
+        <!-- <div class="username-1 montserrat-normal-gunsmoke-15px"><div class="form-group"> -->
+        <!-- <span class="montserrat-normal-gunsmoke-15px"> -->
+        <input type="text" name="username" class="form-control" placeholder="Username" style="background: white; border: 2px solid; border-color: rgb(99, 99, 99); border-radius: 10px; background: transparent;">
+        <!-- </span> -->
+        <!-- </div>
+        </div> -->
         </div>
         <div class="username-2">
         <img
@@ -63,18 +69,14 @@
                 src="{{MEDIA_URL}}key-2-fill.png"
                 alt="key-2-fill"
         />
-        <div class="password montserrat-normal-gunsmoke-15px">
-        <div class="form-group">
-        <span class="montserrat-normal-gunsmoke-15px">
-                <input type="password" name="password" class="form-control" placeholder="Password">
-        </span>
-        </div>
-        </div>
-        <img
-                class="eye-close-line"
-                src="{{MEDIA_URL}}eye-close-line.png"                
-                alt="eye-close-line"
-        />
+        <!-- <div class="password montserrat-normal-gunsmoke-15px">
+        <div class="form-group"> -->
+        <!-- <span class="montserrat-normal-gunsmoke-15px"> -->
+                <input type="password" name="password" class="form-control" placeholder="Password" style="background: white; border: 2px solid; border-color: rgb(99, 99, 99); border-radius: 10px;">
+        <!-- </span> -->
+        <!-- </div>
+        </div> -->
+        
         </div>
         </div>
         <div class="other-options">
