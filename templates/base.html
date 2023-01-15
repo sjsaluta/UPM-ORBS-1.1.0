@@ -24,10 +24,7 @@
                         <a href="{% url 'indexPage' %}" class="logo mr-3"><img src = "{{ MEDIA_URL }}Logo_Navbar.png" style="height: 60px; width: 60px;"></a>
                         <ul class="nav navbar-nav list-unstyled components">
                             <li class="mr-3">
-                                <a href="{% url 'indexPage' %}"><i class="fa-solid fa-circle-info mr-2"></i><span class="link_label">About</span></a>
-                            </li>
-                            <li class="mr-3">
-                                <a href="{% url 'indexPage' %}"><i class="fa-solid fa-phone mr-2"></i><span class="link_label">Contact Us</span></a>
+                                <a href="{% url 'about' %}"><i class="fa-solid fa-circle-info mr-2"></i><span class="link_label">About ORBS</span></a>
                             </li>
                         </ul>
 
@@ -48,7 +45,7 @@
                                             <a class='sub ms-4' href="{% url 'roomView' %}"><i class="sub fa-solid fa-door-closed"></i> <span class="link_label ms-2">View Rooms</span></a>
                                         </li>
                                         {%endif%}
-                                        {% if request.user.user_type == 1 or request.user.user_type == 2 %} <!--Staff/Faculty-->
+                                        {% if request.user.user_type == 1 or request.user.user_type == 2 or request.user.user_type == 5 or request.user.user_type == 4 %} <!--Staff/Faculty-->
                                         <li>
                                             <a class='sub ms-4' href="{% url 'viewBookings' %}"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-2">Bookings</span></a>
                                             <a class='sub ms-4' href="{% url 'roomView' %}"><i class="sub fa-solid fa-door-closed"></i> <span class="link_label ms-2">View Rooms</span></a>
@@ -81,7 +78,7 @@
                                             {% else %}
                                             Administrator
                                             {% endif %}</li>
-                                        <li><strong>Name:</strong> {{request.user.name}}</li>
+                                        <li><strong>Name:</strong> {{request.user.get_full_name}}</li>
                                         <li><strong>College:</strong> {{request.user.college}}</li>
                                         <li><strong>Department:</strong> {{request.user.department}}</li>
                                         </div>

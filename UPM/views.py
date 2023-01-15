@@ -504,6 +504,8 @@ def roomView(request):
     context={'filter':rfilter, 'form':form, 'rooms':rooms,'building':build,'colleges':college}
     return render(request,'UPM/room-view.html',context)
 
+def about(request):
+    return render(request, 'UPM/about.html')
 #edit room modal
 # def editUser(request,pk):
 #     user = AuthUser.objects.get(id=pk)
