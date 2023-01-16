@@ -8558,7 +8558,7 @@ a[data-toggle="collapse"] {
   gap: 5px;
   height: 42px;
   left: 0;
-  min-width: 460px;
+  /* min-width: 460px; */
   padding: 7.5px 15px;
   position: absolute;
   top: 21px;
