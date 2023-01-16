@@ -18,7 +18,7 @@
 {% block content %}
 <div class = "container w-auto">
     <h1 class="title pt-4">Term {{term.academicyear}} {{term.semester}}</h2>
-    <h5 class="subTitle pb-1">{{term.date_start}}-{{term.date_end}}</h5>
+    <h5 class="subTitle pb-1">{{term.date_start}} - {{term.date_end}}</h5>
     {% if term.isActivated %}
     <h6 class="text-center pb-4">Active</h6>
     {% else %}
@@ -86,16 +86,19 @@
                                 <h5>Add Rooms to Term</h5>
                                 <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body" style="display: initial;">
                               <div class= 'col'>
                                   <input  class="all form-check-input ms-1" type="checkbox" value="">
                                   <label  class="form-check-label ms-4">Select All</label>
                               </div>
                               {% for rm in rms %}
                                 <div class = 'col'>
-                                    <input  class="room form-check-input ms-1" type="checkbox" name="rooms" value="{{rm.slug}}" autocomplete="off">
-                                    <label  class="form-check-label ms-4">{{rm}}</label>
-                                    
+                                  <!-- <tr>
+                                    <td> -->
+                                      <input  class="room form-check-input ms-1" type="checkbox" name="rooms" value="{{rm.slug}}" autocomplete="off">
+                                      <label  class="form-check-label ms-4">{{rm}}</label>
+                                    <!-- </td>
+                                  </tr> -->
                                 </div>
                               {%empty%}
                                  <p class = ms-4>There are no more rooms available</p>

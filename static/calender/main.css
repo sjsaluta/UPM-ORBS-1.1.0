@@ -261,7 +261,7 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 .fc .fc-button-group > .fc-button:focus,
   .fc .fc-button-group > .fc-button:active,
   .fc .fc-button-group > .fc-button.fc-button-active {
-    z-index: 1;
+    /* z-index: 1; */
   }
 .fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {
     margin-left: -1px;
@@ -392,7 +392,7 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
     background: #fff;
     background: var(--fc-page-bg-color, #fff);
     position: sticky;
-    z-index: 3; /* TODO: var */
+    /* z-index: 3; TODO: var */
     /* TODO: box-shadow when sticking */
   }
 .fc .fc-scrollgrid-section-header.fc-scrollgrid-section-sticky > * {
@@ -479,7 +479,7 @@ a.fc-event:hover {
 /* ---------------------------------------------------------------------------------------------------- */
 .fc-event .fc-event-main {
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
   }
 /* dragging */
 /* ---------------------------------------------------------------------------------------------------- */
@@ -708,7 +708,7 @@ A HORIZONTAL event
   display: table; }
 .fc .fc-daygrid-body { /* a <div> that wraps the table */
     position: relative;
-    z-index: 1; /* container inner z-index's because <tr>s can't do it */
+    /* z-index: 1; container inner z-index's because <tr>s can't do it */
   }
 .fc .fc-daygrid-day.fc-day-today {
       background-color: rgba(255, 220, 40, 0.15);
@@ -1048,14 +1048,14 @@ A VERTICAL event
       bottom: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);
     }
 .fc .fc-timegrid .fc-daygrid-body { /* the all-day daygrid within the timegrid view */
-    z-index: 2; /* put above the timegrid-body so that more-popover is above everything. TODO: better solution */
+    /* z-index: 2; put above the timegrid-body so that more-popover is above everything. TODO: better solution */
   }
 .fc .fc-timegrid-divider {
     padding: 0 0 2px; /* browsers get confused when you set height. use padding instead */
   }
 .fc .fc-timegrid-body {
     position: relative;
-    z-index: 1; /* scope the z-indexes of slots and cols */
+    /* z-index: 1; scope the z-indexes of slots and cols */
     min-height: 100%; /* fill height always, even when slat table doesn't grow */
   }
 .fc .fc-timegrid-axis-chunk { /* for advanced ScrollGrid */
@@ -1068,7 +1068,7 @@ A VERTICAL event
     }
 .fc .fc-timegrid-slots {
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
   }
 .fc .fc-timegrid-slot { /* a <td> */
     height: 1.5em;
@@ -1189,7 +1189,7 @@ A VERTICAL event
 
 }
 .fc .fc-timegrid-col-events {
-    z-index: 3;
+    /* z-index: 3; */
     /* child event segs have z-indexes that are scoped within this div */
   }
 .fc {

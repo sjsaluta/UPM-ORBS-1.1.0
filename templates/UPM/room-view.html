@@ -66,10 +66,13 @@
                     {% if request.user.user_type == 5 or request.user.user_type == none %}
                     <td><a class='btn-success btn-secondary btn-sm' href = "{% url 'manageEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></a></td>
                     {% endif %}
-                    {% if request.user.user_type != 5 and request.user.user_type != none %}
-                    <td><button type="button" data-bs-toggle="modal" class="update bs-modal btn btn-sm btn-warning btn-sm" data-form-url="{% url 'viewEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i></button></td>
+                    {% if request.user.user_type != 5 %}
+                    <td><button type="button" data-bs-toggle="modal" style="background-color: rgb(155, 9, 4);"class="update bs-modal btn btn-sm btn-warning btn-sm" data-form-url="{% url 'viewEquipment' room.slug %}"><i class="fa-solid fa fa-tv"></i> Show equipment</button></td>
                     {% endif %}
+                    {% if request.user.user_type != none %}
                     <td><a class='btn btn-secondary btn-sm' href = "{% url 'calendarView' room.slug %}"><i class="fa-solid fa-calendar-day"></i> View Schedule</a></td>
+                    {% endif %}
+                    
                   </tr>
                 {% endfor %}
                 </tbody>

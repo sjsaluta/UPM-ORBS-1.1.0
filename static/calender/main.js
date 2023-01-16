@@ -13848,7 +13848,7 @@ var FullCalendar = (function (exports) {
                 right = 1 - farCoord;
             }
             var props = {
-                zIndex: segHCoords.stackDepth + 1,
+                // zIndex: segHCoords.stackDepth + 1,
                 left: left * 100 + '%',
                 right: right * 100 + '%',
             };

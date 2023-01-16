@@ -31,7 +31,7 @@ def indexPage(request):
 #uploads csv file to the Schedule model
 @csrf_exempt
 def uploadPage(request):
-    form = UploadForm()
+    form = UploadForm() 
     ocs = OCS.objects.get(user=request.user)
 
     if request.method == 'POST':
