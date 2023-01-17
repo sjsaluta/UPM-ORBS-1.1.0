@@ -1,2 +1,1 @@
-release: python manage.py migrate
-web: gunicorn 'ORBS.wsgi'
+web: python manage.py migrate && gunicorn 'ORBS.wsgi'
