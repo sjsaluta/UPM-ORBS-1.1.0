@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn 'ORBS.wsgi'
+web: python manage.py migrate && gunicorn 'ORB.wsgi'
