@@ -29,7 +29,6 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['upm-online-room-booking-system.herokuapp.com']
 ALLOWED_HOSTS = ['upm-orbs-revamp-production.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['https://upm-orbs-revamp-production.up.railway.app/']
 
 # Application definition
 
