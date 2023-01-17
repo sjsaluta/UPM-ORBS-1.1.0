@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-8owjc*_3p%r($gst+_=@xwb+gz1n6^0e=!e)m2$pg+45!mvr(l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['upm-online-room-booking-system.herokuapp.com']
-
+# ALLOWED_HOSTS = ['upm-online-room-booking-system.herokuapp.com']
+ALLOWED_HOST = ['*']
 
 # Application definition
 
