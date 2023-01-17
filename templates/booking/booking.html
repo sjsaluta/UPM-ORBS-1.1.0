@@ -39,7 +39,7 @@
             <td>{{booking.start_time|date:"N t Y h:iA"}} - {{booking.end_time|date:"N t Y h:iA"}}</td>
             <td>{{booking.room}}</td>
             <td>{{booking.activity}}</td>
-            <td>{{booking.booker}}</td>
+            <td>{{booking.booker.getFullName}}</td>
             <td>{{booking.date_created|date:"N t Y"}}</td>
             {% if booking.isApproved == True %}
                 <td>Approved</td>

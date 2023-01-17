@@ -83,8 +83,8 @@
         <div class="stay-signed-in"></div>
         <div class="forgot-password-button">
         <div class="forgot-password valign-text-middle montserrat-normal-falu-red-12px">
-        <a href="forgot-password">
-        <span><span class="montserrat-normal-falu-red-l2px">Forgot Password?</span></span></a>
+        <!-- <a href="forgot-password">
+        <span><span class="montserrat-normal-falu-red-l2px">Forgot Password?</span></span></a> -->
         </div>
         </div>
         </div>
@@ -96,7 +96,7 @@
         </div>
         </button>
         </div>
-        <div class="frame-16">
+        <!-- <div class="frame-16">
         <div class="divider" style="height:20%; margin-bottom: -10%;">
         <img
         class="line"
@@ -110,19 +110,16 @@
         src="{{MEDIA_URL}}Line 2.png"
         alt="Line 2"
         />
-        </div>
-        <div class="other-buttons" style="margin-left: -6%; gap: 5%">
-        <a href="#" class="google btn"><button class="login-with-google-button"
+        </div> -->
+        <div class="other-buttons" style="gap: 5%">
+        <div class="login-with-google-button" id="hover"
                 style="width:30%; height:10%">
-        <img
-                class="google-fill"
-                src="{{MEDIA_URL}}google-fill.png"
-                alt="google-fill"
-        />
+        <i class="fa-xl fa-solid fa fa-question-circle" style="padding-top: 12px; color: gray;"></i>
         <div class="login-with-google valign-text-middle montserrat-normal-fuscous-gray-15px">
-                <span><span class="montserrat-normal-fuscous-gray-15px">Login with Google</span></span>
-        </div></button></a>
-        <a href="#" class="guest btn"><button class="login-as-guest-button"
+                <span><span class="montserrat-normal-fuscous-gray-15px">Forgot Credentials?</span></span>
+        </div></div>
+        
+        <!-- <a href="#" class="guest btn"><button class="login-as-guest-button"
                 style="width:30%; height:10%">
         <img
                 class="vector"
@@ -131,7 +128,12 @@
         />
         <div class="login-as-guest valign-text-middle montserrat-normal-fuscous-gray-15px">
                 <span><span class="montserrat-normal-fuscous-gray-15px">Login as Guest</span></span>
-        </div></button></a>
+        </div></button></a> -->
+        <div id="messageBubble" style="display: none;">To retrieve your account, please contact: <br>
+        <i class="fa-regular fa fa-phone-square" style="display:inline-block"></i> <p style="display:inline-block; font-size: small;">{{contact.mobile_number}}</p><!--ADD MOBILE NUMBER HERE-->
+        &nbsp;
+        <i class="fa-regular fa fa-envelope" style="display:inline-block"></i> <p style="display:inline-block; font-size: small;">{{contact.email}}</p><!--ADD EMAIL ADDRESS HERE-->
+        </div>
         </div>
         </div>
         </form>
@@ -139,4 +141,13 @@
         </div>
         {% include 'script_modules.html' %}
         </body>
+        <script>
+                $("#hover, #messageBubble").hover(function(){
+                        $("#messageBubble").fadeIn(100);
+                }, function(){
+                if (!$("#hover").is(":hover") && !$("#messageBubble").is(":hover")) {
+                        $("#messageBubble").fadeOut(100);
+                }
+                });
+        </script>
 </html>

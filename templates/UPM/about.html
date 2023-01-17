@@ -20,9 +20,9 @@
 
     <h2 class="py-4" style="font-weight: bolder;">Contact Us</h2>
     <p  style="color: black; font-weight: bold;  text-align: justify;">For any questions or inquiries, please contact the following information:</p>
-    <i class="fa-2xl fa fa-phone-square" style="display:inline-block"></i> <p style="display:inline-block">+63 (123) 456 7890</p>
+    <i class="fa-2xl fa fa-phone-square" style="display:inline-block"></i> <p style="display:inline-block">{{contact.mobile_number}}</p> <!--ADD MOBILE NUMBER HERE-->
     <br>
-    <i class="fa-2xl fa fa-envelope" style="display:inline-block"></i> <p style="display:inline-block">xxxxxx@up.edu.ph / yyyyyy@up.edu.ph</p>
+    <i class="fa-2xl fa fa-envelope" style="display:inline-block"></i> <p style="display:inline-block">{{contact.email}}</p> <!--ADD EMAIL ADDRESS HERE-->
 </div>
 
 {% endblock content %}

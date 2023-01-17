@@ -147,4 +147,10 @@ class Schedule(models.Model):
         arr = [int(i) for i in arr]
         return arr
     
-
+class Contact(models.Model):
+    email = models.CharField(max_length=300,null=True)
+    mobile_number = models.CharField(max_length=300,null=True)
+    def save(self, *args, **kwargs):
+        if Contact.objects.count() > 0:
+            raise ValueError("Can't create more than one instance of MyModel")
+        super().save(*args, **kwargs)

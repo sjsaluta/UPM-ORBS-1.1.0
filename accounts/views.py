@@ -7,11 +7,13 @@ from django.contrib.auth import authenticate, login, logout ,update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from . forms import *
+from UPM.models import *
 
 from bootstrap_modal_forms.generic import BSModalUpdateView,BSModalDeleteView
 
 
 def loginPage(request):
+    contact = Contact.objects.first()
     iserror = False
     error=''
     if request.user.is_authenticated:
@@ -31,7 +33,7 @@ def loginPage(request):
             else:
                 iserror = True
                 error = "Wrong username or password."
-        context = {"error":error,"iserror":iserror}
+        context = {"error":error,"iserror":iserror, "contact": contact}
         return render(request, 'accounts/login.html', context)
 
 def logOutPage(request):

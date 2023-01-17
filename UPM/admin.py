@@ -11,4 +11,5 @@ admin.site.register(Term)
 admin.site.register(Schedule)
 admin.site.register(ScheduleFile)
 admin.site.register(Equipment)
+admin.site.register(Contact)
 

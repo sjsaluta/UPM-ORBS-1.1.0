@@ -24,7 +24,7 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
   flex-direction: column;
   gap: 110px;
   margin-top: 60px;
-  /* padding: 88px 0; */
+  padding: 30px 0;
   width: 684px;
 }
 
@@ -258,11 +258,11 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
 .login-with-google-button {
   align-items: flex-start;
   border: 1px solid;
-  border-color: var(--gunsmoke);
+  border-color: gray;
   border-radius: 20px;
   display: flex;
   gap: 10px;
-  height: 45px;
+  height: 45px; 
   min-width: 220px;
   padding: 9px 23px;
 }
@@ -288,6 +288,19 @@ url("https://fonts.googleapis.com/css-family.Montserrat:400");
   width: 24px;
 }
 
+#messageBubble {
+  position: absolute;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 50px;
+  border: 1px solid rgb(194, 194, 194);
+  color: black;
+  /* transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 0;
+  transform: scale(0.5); */
+  margin-left: -70px;
+}
 
 .login-with-google {
   height: 25px;

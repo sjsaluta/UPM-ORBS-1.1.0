@@ -505,7 +505,9 @@ def roomView(request):
     return render(request,'UPM/room-view.html',context)
 
 def about(request):
-    return render(request, 'UPM/about.html')
+    contact = Contact.objects.first()
+    context = {"contact" : contact}
+    return render(request, 'UPM/about.html', context)
 #edit room modal
 # def editUser(request,pk):
 #     user = AuthUser.objects.get(id=pk)

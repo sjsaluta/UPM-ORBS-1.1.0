@@ -55,12 +55,12 @@ def bookingDetails(request,pk):
     return render(request,'booking/booking-details.html',context)
 
 #edit booking modal
-def editBooking(request,pk, slug):
-    room = Room.objects.get(slug=slug)
+def editBooking(request,pk):
+    # room = Room.objects.get(slug=slug)
     booking = Booking.objects.get(id=pk)
-    form = EditBookingForm(instance=booking, room_id=room.id)
+    form = EditBookingForm(instance=booking)
     if request.method =="POST":
-        form = EditBookingForm(request.POST, instance = booking, room_id=room.id)
+        form = EditBookingForm(request.POST, instance = booking)
 
         if form.is_valid():
             booking.isEdited=True

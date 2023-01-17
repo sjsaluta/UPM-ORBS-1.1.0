@@ -44,18 +44,10 @@ class AddBookFrCal(forms.ModelForm):
         }
 
 class EditBookingForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        room_id = kwargs.pop('room_id')
-        super(AddBookFrCal, self).__init__(*args, **kwargs)
-        room = Room.objects.get(pk=room_id)
-        self.fields['equipment'] = forms.ModelMultipleChoiceField(
-            queryset = room.equipment.all(),
-            widget = forms.CheckboxSelectMultiple,
-            required=False,
-        )
+
     class Meta:
         model = Booking
-        fields = ['faculty','subject','start_time','end_time','numofstudents','activity','equipment','dept_or_office','organization','room']
+        fields = ['faculty','subject','start_time','end_time','numofstudents','activity','dept_or_office','organization','room']
 
         labels={
             'numofstudents':'Number of Students',
