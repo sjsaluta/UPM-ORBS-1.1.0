@@ -72,7 +72,7 @@
           {% endif %}
         </div>
 
-      {% elif request.user == booking.booker %}
+      {% elif request.user == booking.booker or request.user.user_type == none %}
       <div class = 'col-4'>
         {% if booking.isApproved %}
         <button type="button" class="btn btn-success" disabled>
