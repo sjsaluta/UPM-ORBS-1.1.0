@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-8owjc*_3p%r($gst+_=@xwb+gz1n6^0e=!e)m2$pg+45!mvr(l
 DEBUG = True
 
 # ALLOWED_HOSTS = ['upm-online-room-booking-system.herokuapp.com']
-ALLOWED_HOST = ['upm-orbs-revamp-production.up.railway.app']
+ALLOWED_HOSTS = ['upm-orbs-revamp-production.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://upm-orbs-revamp-production.up.railway.app/']
 
 # Application definition
