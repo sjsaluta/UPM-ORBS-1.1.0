@@ -427,6 +427,35 @@
             "college": null
         }
         },
+{
+  "model": "accounts.authuser",
+  "pk": 20,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$xJY3fVE6aF4tbyizjYLgUf$Z5RgKmEePrC0CQ+n8trXZ40HrCPqb3lKBuf/THH8SxI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "casocs",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-01-18T14:19:59.524Z",
+    "first_name": "cas",
+    "last_name": "ocs",
+    "email": "casocs@up.edu.ph",
+    "college": 2,
+    "department": null,
+    "user_type": 3,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.ocs",
+  "pk": 1,
+  "fields": {
+    "user": 20,
+    "college": 2
+  }
+}
         
     {
         "model": "UPM.College",
