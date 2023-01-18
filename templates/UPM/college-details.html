@@ -6,13 +6,16 @@
 {% block extracss %}
 {% endblock extracss %}
 {% block breadcrumb %}
+{% if request.user.is_authenticated %}
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb bg-primary">
-    <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
-    <li class="breadcrumb-item"><a href="{% url 'manageCollege' %}" class="text-dark">Colleges</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{college.name}} - Departments and Buildings</li>
-  </ol>
+    <ol class="breadcrumb bg-primary">
+      <li class="breadcrumb-item"><a href="{% url 'indexPage' %}" class="text-dark">Home</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'manageCollege' %}" class="text-dark">Colleges</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{college.name}} - Departments and Buildings</li>
+    </ol>
 </nav>
+{% endif %}
+
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -53,10 +56,13 @@
                     {% if view == 'build'%}
                     <a href="{% url 'adminBuildingView' college.slug field.slug%}"><button type="button" class="btn btn-secondary btn-sm mr-2"><i class="fa-solid fa-door-open mr-2"></i>View Rooms</button></a>
                     {% else %}
-                    <a href="{% url 'manageUsers'%}"><button type="button" class="btn btn-secondary btn-sm mr-2"><i class="fa-solid fa-users mr-2"></i>View Users</button></a>
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'manageUsers'%}"><button type="button" class="btn btn-secondary btn-sm mr-2"><i class="fa-solid fa-users mr-2"></i>View Users</button></a>
                     {% endif %}
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
                     <button type="button" class="btn btn-danger btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}{{field.id}}"><i class="fa-solid fa-trash-can"></i></button>
-
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -80,10 +86,12 @@
                             <p class="mt-auto mb-auto">Are you sure you want to remove <strong>{{field.name}}</strong>?</p>
                         </div>
                         <div class="modal-footer">
+                            {% if request.user.is_authenticated %}
                             {% if view == 'build' %}
                                 <a class="btn btn-danger mr-2" href="{% url 'removeBuild' college.slug field.slug%}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
                             {% else %}
                                 <a class="btn btn-danger mr-2" href="{% url 'removeDept' college.slug field.slug%}"><i class="fa-regular fa-trash-can mr-2"></i>Remove</a>
+                            {% endif %}
                             {% endif %}
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-xmark mr-2"></i>Cancel</button>
                         </div>
@@ -92,10 +100,12 @@
             </div>
             {% endfor %}
         <div class="row bg-white p-3">
+            {% if request.user.is_authenticated %}
             {% if view == 'build'%}
             <a class='btn btn-warning mr-auto ml-auto' role='button' href = "{% url 'addBuild' college.slug %}"><i  class="fa-solid fa-square-plus mr-2"></i>Add Building</a>
             {% else %}
             <a class='btn btn-warning mr-auto ml-auto' role='button' href = "{% url 'addDept' college.slug%}"><i  class="fa-solid fa-square-plus mr-2"></i>Add Department</a>
+            {% endif %}
             {% endif %}
         </div>
     </div>

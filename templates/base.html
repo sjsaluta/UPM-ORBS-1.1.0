@@ -54,7 +54,8 @@
                                     {% endif %}
                                 {% else %} <!--Guest-->
                                 <li>
-                                    <a class="ms-4" href="{% url 'viewBookings' %}"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-1">Bookings</span></a>
+                                    <a class='sub ms-4' href="{% url 'manageCollege' %}"><i class="sub fa-solid fa-school"></i><span class="link_label ms-2">Colleges</span></a>
+                                    <!-- <a class="ms-4" href="{% url 'viewBookings' %}"><i class="fa-solid fa-calendar-day"></i> <span class="link_label ms-1">Bookings</span></a> -->
                                     <a class="ms-4" href="{% url 'roomView' %}"><i class="fa-solid fa-door-closed"></i> <span class="link_label ms-1">View Rooms</span></a>
                                 </li>
                                 {% endif %}

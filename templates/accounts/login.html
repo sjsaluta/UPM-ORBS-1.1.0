@@ -30,8 +30,7 @@
                 style="filter: hue-rotate(-48deg) saturate(6) grayscale(65%) drop-shadow(0 0 0 black);
                 height: 28%;
                 width: 28%;
-                margin-bottom:-28%;
-                margin-top:-15%;"/>
+                "/>
         
         <form action="#" method="post" class="login-form">
         {% csrf_token %}
@@ -113,14 +112,22 @@
         </div> -->
         <div class="other-buttons" style="gap: 5%">
         <div class="login-with-google-button" id="hover"
-                style="width:30%; height:10%">
+                style="width:30%; height:10%;margin-top: 60px;">
         <i class="fa-xl fa-solid fa fa-question-circle" style="padding-top: 12px; color: gray;"></i>
         <div class="login-with-google valign-text-middle montserrat-normal-fuscous-gray-15px">
                 <span><span class="montserrat-normal-fuscous-gray-15px">Forgot Credentials?</span></span>
         </div></div>
         
-        <!-- <a href="#" class="guest btn"><button class="login-as-guest-button"
-                style="width:30%; height:10%">
+       
+        <div id="messageBubble" style="display: none; ">To retrieve your account, please contact: <br>
+        <i class="fa-regular fa fa-phone-square" style="display:inline-block"></i> <p style="display:inline-block; font-size: small;">{{contact.mobile_number}}</p><!--ADD MOBILE NUMBER HERE-->
+        &nbsp;
+        <i class="fa-regular fa fa-envelope" style="display:inline-block"></i> <p style="display:inline-block; font-size: small;">{{contact.email}}</p><!--ADD EMAIL ADDRESS HERE-->
+        </div>
+        </div>
+        </form>
+        <a href="{% url 'roomView' %}" class="guest btn"><button class="login-as-guest-button"
+                style="width:30%; height:10%; margin-top: -120px;">
         <img
                 class="vector"
                 src="{{MEDIA_URL}}user-search-fill.png"
@@ -128,15 +135,8 @@
         />
         <div class="login-as-guest valign-text-middle montserrat-normal-fuscous-gray-15px">
                 <span><span class="montserrat-normal-fuscous-gray-15px">Login as Guest</span></span>
-        </div></button></a> -->
-        <div id="messageBubble" style="display: none;">To retrieve your account, please contact: <br>
-        <i class="fa-regular fa fa-phone-square" style="display:inline-block"></i> <p style="display:inline-block; font-size: small;">{{contact.mobile_number}}</p><!--ADD MOBILE NUMBER HERE-->
-        &nbsp;
-        <i class="fa-regular fa fa-envelope" style="display:inline-block"></i> <p style="display:inline-block; font-size: small;">{{contact.email}}</p><!--ADD EMAIL ADDRESS HERE-->
+        </div></button></a>
         </div>
-        </div>
-        </div>
-        </form>
         </div>
         </div>
         {% include 'script_modules.html' %}

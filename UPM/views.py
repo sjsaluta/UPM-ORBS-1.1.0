@@ -12,6 +12,7 @@ from django.urls import reverse_lazy
 from UPM.filters import RoomFilter
 from bookingapp.views import viewBookings
 from . forms import *
+from accounts.views import loginPage
 from bookingapp.forms import *
 from bookingapp.models import *
 from bootstrap_modal_forms.generic import BSModalUpdateView,BSModalDeleteView
@@ -26,7 +27,7 @@ def indexPage(request):
     if request.user.is_authenticated:
         return redirect(viewBookings)
     else:
-        return redirect(roomView)
+        return redirect(loginPage)
 
 #uploads csv file to the Schedule model
 @csrf_exempt
@@ -185,7 +186,7 @@ def deleteRoomTerm(request,t,r):
     return redirect(reverse_lazy('termView',kwargs={'slug':t}))
 
 #manage colleges
-@login_required(login_url='loginPage')
+# @login_required(login_url='loginPage')
 def manageCollege(request):
     colleges = College.objects.all()
     context={'colleges':colleges}
@@ -444,7 +445,7 @@ def calendarView(request, slug):
     context={'booking':booking,'room':room,'term':term,'form':form,'sched':schedule}
     return render(request,"UPM/calendar.html",context)
 
-@login_required(login_url='loginPage')
+# @login_required(login_url='loginPage')
 def collegeView(request, slug):
     college = College.objects.get(slug= slug)
 
@@ -463,7 +464,7 @@ def collegeView(request, slug):
 
     return render(request,'UPM/college-details.html',context)
 
-@login_required(login_url='loginPage')
+# @login_required(login_url='loginPage')
 def buildingView(request,c,b):
     college = College.objects.get(slug=c)
     building = Building.objects.get(slug=b)
@@ -484,7 +485,7 @@ def deptUsersView(request,c,d):
     return render(request,'UPM/department-users.html',context)
 # users per department
 
-@login_required(login_url='loginPage')
+# @login_required(login_url='loginPage')
 def roomView(request):
     rooms = Room.objects.all()
     rfilter= RoomFilter(request.GET,queryset=rooms)

@@ -30,7 +30,9 @@
         <div class="col-auto align-self-end text-end">
             <a href="{% url 'adminCollegeView' college.slug %}" class="mr-1"><button type="button" class="btn btn-secondary btn-sm" href="{% url 'adminCollegeView' college.slug %}"><i class="fa-solid fa-building-columns mr-2"></i>View Departments & Buildings</button></a>
             {% comment %} <button type="button" class="update bs-modal btn btn-sm btn-success btn-sm mr-1" data-form-url="{% url 'editCollege' college.slug %}"><i class="fa-solid fa-pen"></i></button> {% endcomment %}
+            {% if request.user.is_authenticated %}
             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#removePopup{{college.id}}"><i class="fa-regular fa-trash-can" ></i></button>
+            {% endif %}
         </div>
         </div>
 
@@ -53,9 +55,12 @@
             </div>
         </div>
         {%endfor%}
+        
+        {% if request.user.is_authenticated %}
         <div class="row bg-white p-3">
             <a class='btn btn-warning mr-auto ml-auto' role='button' href = "{% url 'addCollege' %}"><i class="fa-regular fa-square-plus mr-2"></i>Add College</a>
         </div>
+        {% endif %}
     </div>
 
 </div>
