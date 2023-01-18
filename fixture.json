@@ -1,6 +1,433 @@
 
 [
-    
+    {
+        "model": "accounts.authuser",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$xXcJPef7HEX7dRHMDKUmD3$wICYTH0HHj39mhWYwBJflQ+r9GMOcTC2sjs14Dy12xw=",
+            "last_login": "2023-01-17T23:09:39.464Z",
+            "is_superuser": true,
+            "username": "sysadmin",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2023-01-17T14:43:46.086Z",
+            "first_name": "",
+            "last_name": "",
+            "email": "sysadmin@up.edu.ph",
+            "college": null,
+            "department": null,
+            "user_type": null,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 6,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$kgsJCyat2aveijgdcSV3Gu$vOque1U4CtJoQwZ1BAjqg+Sz5aq16bBu37xo1FtaqBU=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "casao",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-17T23:13:25.328Z",
+            "first_name": "cas",
+            "last_name": "ao",
+            "email": "casao@up.edu.ph",
+            "college": 2,
+            "department": null,
+            "user_type": 5,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 7,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$sRl4PmAQw9BefCiLxFADnP$xYbe+hKrh8lpNnfHxbdFWZ56Li6hLWZDkHjZbXqlhes=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "campao",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-17T23:17:20.348Z",
+            "first_name": "camp",
+            "last_name": "ao",
+            "email": "campao@up.edu.ph",
+            "college": 1,
+            "department": null,
+            "user_type": 5,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 8,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$z2knSIfXSUoB0yR1AEXlMo$g8uxsgrXkrqlb+BpGE8dK+4qftvA1ABB/YkU87CnHcY=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "cdao",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-17T23:21:04.936Z",
+            "first_name": "cd",
+            "last_name": "ao",
+            "email": "cdao@up.edu.ph",
+            "college": 4,
+            "department": null,
+            "user_type": 5,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 9,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$g6I2P1Bx9xTW8qb6f5tirY$d92B+D6eU12zEesShp76Zt4+wquTxRqaX0fj3TpbpHo=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "cmao",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-17T23:21:45.699Z",
+            "first_name": "cm",
+            "last_name": "ao",
+            "email": "cmao@up.edu.ph",
+            "college": 11,
+            "department": null,
+            "user_type": 5,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 10,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$gub1luHnIVeR5Rf9XMwG5l$0N1kBHNCBLoLekO5FShpSE9ZDC8/oZPIvtcX3PLqMic=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "cpao",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-17T23:22:32.232Z",
+            "first_name": "cp",
+            "last_name": "ao",
+            "email": "cpao@up.edu.ph",
+            "college": 6,
+            "department": null,
+            "user_type": 5,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 11,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$780wSvnTkdGXNa60ydu86B$Nkrqtio7lkMC/5ky2Dbj0HsLaI1SjC+6Dli7HGtj0E4=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "cphao",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-17T23:24:44.626Z",
+            "first_name": "cph",
+            "last_name": "ao",
+            "email": "cphao@up.edu.ph",
+            "college": 10,
+            "department": null,
+            "user_type": 5,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 12,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$UFXMlNEiOJhoHHiGZle62s$2xfNmglFyQtnea7aiIpPYaQTWMNcF5U2pISQguFdthM=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "casadpd",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-17T23:31:20.287Z",
+            "first_name": "cas",
+            "last_name": "adpd",
+            "email": "casadpd@up.edu.ph",
+            "college": 2,
+            "department": null,
+            "user_type": 4,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 13,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$ITVZIK5zQrujTSQbh79q91$XNHlC7BgVOXlfcLGxKMrtuf4WTGKv7nY3ztq0KtO4bk=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "campadpd",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-18T00:44:08.008Z",
+            "first_name": "camp",
+            "last_name": "adpd",
+            "email": "campadpd@up.edu.ph",
+            "college": 1,
+            "department": null,
+            "user_type": 4,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 14,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$lhM5d7xpEVFYrrywdHWnaW$qkYxTNfvgOrItSlgv+GR9bjg5uCSnaaxmaBiS+fUSas=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "cdadpd",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-18T00:44:52.936Z",
+            "first_name": "cd",
+            "last_name": "adpd",
+            "email": "cdadpd@up.edu.ph",
+            "college": 4,
+            "department": null,
+            "user_type": 4,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 15,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$eJTvMIZBCglV6At2KbqnUu$3cOdPVypK+58xXmfELfbygMPEhKd1T9KgZ7YnkLvY8A=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "cnadpd",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-18T00:45:33.615Z",
+            "first_name": "cn",
+            "last_name": "adpd",
+            "email": "cnadpd@up.edu.ph",
+            "college": 5,
+            "department": null,
+            "user_type": 4,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 16,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$qT0ZQeGALQ0Y8aDbbO29YS$9zMeNJOGHXY34I2XJmKhQSl1oC8iWxGVrzS1ts0KJQs=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "cnao",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-18T00:46:28.390Z",
+            "first_name": "cn",
+            "last_name": "ao",
+            "email": "cnao@up.edu.ph",
+            "college": 5,
+            "department": null,
+            "user_type": 4,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 17,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$W4PKoF9ogJ9WqVdgFCw4ud$vvvAS7+A5EF4cq+RDZbL4mcu2H7vSQoGFB810Q8J2sE=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "cpadpd",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-18T00:47:17.131Z",
+            "first_name": "cp",
+            "last_name": "adpd",
+            "email": "cpadpd@up.edu.ph",
+            "college": 6,
+            "department": null,
+            "user_type": 4,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 18,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$v56cbeiGjr3TCEb5a3erZe$ZOdEdp1PD85zuXYQ7fDZv1glRURgCR9P1QWxer66/AM=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "cphadpd",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-18T00:48:00.569Z",
+            "first_name": "cph",
+            "last_name": "adpd",
+            "email": "cphadpd@up.edu.ph",
+            "college": 10,
+            "department": null,
+            "user_type": 4,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.authuser",
+        "pk": 19,
+        "fields": {
+            "password": "pbkdf2_sha256$320000$GCg5tc6GbzBA5ldIpEr9Hy$pLBrv0IcfMt+c5cBhu+PvhnYPfpfrKJBtmsNEpLlZeM=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "cmadpd",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-01-18T00:48:31.522Z",
+            "first_name": "cm",
+            "last_name": "adpd",
+            "email": "cmadpd@up.edu.ph",
+            "college": 11,
+            "department": null,
+            "user_type": 4,
+            "groups": [],
+            "user_permissions": []
+        }
+        },
+        {
+        "model": "accounts.adpd",
+        "pk": 1,
+        "fields": {
+            "user": 12,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.adpd",
+        "pk": 2,
+        "fields": {
+            "user": 13,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.adpd",
+        "pk": 3,
+        "fields": {
+            "user": 14,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.adpd",
+        "pk": 4,
+        "fields": {
+            "user": 15,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.adpd",
+        "pk": 5,
+        "fields": {
+            "user": 16,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.adpd",
+        "pk": 6,
+        "fields": {
+            "user": 17,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.adpd",
+        "pk": 7,
+        "fields": {
+            "user": 18,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.adpd",
+        "pk": 8,
+        "fields": {
+            "user": 19,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.ao",
+        "pk": 1,
+        "fields": {
+            "user": 6,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.ao",
+        "pk": 2,
+        "fields": {
+            "user": 7,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.ao",
+        "pk": 3,
+        "fields": {
+            "user": 8,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.ao",
+        "pk": 4,
+        "fields": {
+            "user": 9,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.ao",
+        "pk": 5,
+        "fields": {
+            "user": 10,
+            "college": null
+        }
+        },
+        {
+        "model": "accounts.ao",
+        "pk": 6,
+        "fields": {
+            "user": 11,
+            "college": null
+        }
+        },
+        
     {
         "model": "UPM.College",
         "pk": 1,
