@@ -449,6 +449,132 @@
   }
 },
 {
+    "model": "accounts.authuser",
+    "pk": 21,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$ZtFiTtWm7IF4T3Pulz2jbA$hDmZ3SFZ4lV/DFclqPvbzbb15U5GdyTEav1OF3eGfb8=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "campocs",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-01-20T11:14:51.933Z",
+      "first_name": "camp",
+      "last_name": "ocs",
+      "email": "campocs@up.edu.ph",
+      "college": 1,
+      "department": null,
+      "user_type": 3,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.authuser",
+    "pk": 22,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$NXeMbPEso2GYziDA8xDzdA$W14amT1eTllWJqj1KNCXZNwpGo0Sxkycu45cK/ZGGAM=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "cnocs",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-01-20T11:15:33.198Z",
+      "first_name": "cn",
+      "last_name": "ocs",
+      "email": "cnocs@up.edu.ph",
+      "college": 5,
+      "department": null,
+      "user_type": 3,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.authuser",
+    "pk": 23,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$DEkAzSuXqa071AuUDI2Y9q$6gZANtB+W4K8NbAKk9qNKRxsUO1emVxwdTy4hgcVI5w=",
+      "last_login": "2023-01-20T11:22:06.494Z",
+      "is_superuser": false,
+      "username": "cdocs",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-01-20T11:16:57.302Z",
+      "first_name": "cd",
+      "last_name": "ocs",
+      "email": "cdocs@up.edu.ph",
+      "college": 4,
+      "department": null,
+      "user_type": 3,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.authuser",
+    "pk": 24,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$rFRugqS3zRxopl3Mq9QKgz$u0vDfC32PM3PZpQ3+rxzbRqXj/3bnUvo19dekurH4QM=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "cpocs",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-01-20T11:18:59.997Z",
+      "first_name": "cp",
+      "last_name": "ocs",
+      "email": "cpocs@up.edu.ph",
+      "college": 6,
+      "department": null,
+      "user_type": 3,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.authuser",
+    "pk": 25,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$55cBVCUxjI0hogUfZQYQde$H54TV9H7r4pws6Vp3GUBXMqFsVhr+ZPf5FE431gK7lI=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "cphocs",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-01-20T11:19:35.019Z",
+      "first_name": "cph",
+      "last_name": "ocs",
+      "email": "cphocs@up.edu.ph",
+      "college": 10,
+      "department": null,
+      "user_type": 3,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.authuser",
+    "pk": 26,
+    "fields": {
+      "password": "pbkdf2_sha256$320000$dhOKGoJRj3ufEKDUtIw0Fu$f+JersVOif1GaPym2UmKzibTkZFsV6ufOC8aGm5od38=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "cmocs",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2023-01-20T11:20:30.452Z",
+      "first_name": "cm",
+      "last_name": "ocs",
+      "email": "cmocs@up.edu.ph",
+      "college": 11,
+      "department": null,
+      "user_type": 3,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+{
   "model": "accounts.ocs",
   "pk": 1,
   "fields": {
@@ -456,6 +582,54 @@
     "college": 2
   }
 },
+{
+    "model": "accounts.ocs",
+    "pk": 2,
+    "fields": {
+      "user": 21,
+      "college": 1
+    }
+  },
+  {
+    "model": "accounts.ocs",
+    "pk": 3,
+    "fields": {
+      "user": 22,
+      "college": 5
+    }
+  },
+  {
+    "model": "accounts.ocs",
+    "pk": 4,
+    "fields": {
+      "user": 23,
+      "college": 4
+    }
+  },
+  {
+    "model": "accounts.ocs",
+    "pk": 5,
+    "fields": {
+      "user": 24,
+      "college": 6
+    }
+  },
+  {
+    "model": "accounts.ocs",
+    "pk": 6,
+    "fields": {
+      "user": 25,
+      "college": 10
+    }
+  },
+  {
+    "model": "accounts.ocs",
+    "pk": 7,
+    "fields": {
+      "user": 26,
+      "college": 11
+    }
+  },
         
     {
         "model": "UPM.College",
