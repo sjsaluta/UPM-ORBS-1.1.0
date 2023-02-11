@@ -721,16 +721,6 @@
             "slug": "college-of-medicine"
         }
     },
-
-    {
-        "model": "UPM.RoomType",
-        "pk": 1,
-        "fields":{
-            "name": "Main Space",
-            "slug": "main-space"
-        }
-    },
-
     {
         "model": "UPM.Building",
         "pk": 1,
@@ -3062,6 +3052,54 @@
             "college": 2,
             "building": 12,
             "capacity": "30"
+        }
+    },
+    {
+        "model": "UPM.Contact",
+        "pk": 1,
+        "fields":{
+            "email": "pegasmen@up.edu.ph",
+            "mobile_number": "09212026367"
+        }
+    },
+    {
+        "model": "UPM.RoomType",
+        "pk": 1,
+        "fields":{
+            "name": "Main Space",
+            "slug": "main-space"
+        }
+    },
+    {
+        "model": "UPM.RoomType",
+        "pk": 2,
+        "fields":{
+            "name": "Lecture Room",
+            "slug": "lecture-room"
+        }
+    },
+    {
+        "model": "UPM.RoomType",
+        "pk": 3,
+        "fields":{
+            "name": "Auditorium",
+            "slug": "auditorium"
+        }
+    },
+    {
+        "model": "UPM.RoomType",
+        "pk": 4,
+        "fields":{
+            "name": "Computer Lab Room",
+            "slug": "computer-lab-room"
+        }
+    },
+    {
+        "model": "UPM.RoomType",
+        "pk": 5,
+        "fields":{
+            "name": "Wet Lab Room",
+            "slug": "wet-lab-room"
         }
     }
 ]
